@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="Login" Height="450" Width="800">
     <Grid>
-        
+        <Button Content="Button" HorizontalAlignment="Left" Margin="21,310,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="679,310,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="57,202,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="10,69,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="10,35,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
     </Grid>
 </Window>
