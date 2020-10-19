@@ -69,11 +69,11 @@ namespace DrinkWater
                     .IsRequired()
                     .HasColumnType("character varying");
 
-                entity.Property(e => e.Gender)
-                    .IsRequired()
-                    .HasColumnType("character varying");
+                entity.Property(e => e.Gender).HasColumnType("character varying");
 
                 entity.Property(e => e.GoingToBed).HasColumnType("time without time zone");
+
+                entity.Property(e => e.NotitficationsPeriod).HasColumnType("time without time zone");
 
                 entity.Property(e => e.Password)
                     .IsRequired()
