@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DrinkWater.LogReg
+{
+    class SessionUser
+    {
+        private long userId;
+        private string username;
+
+        public SessionUser(long userId, string username)
+        {
+            UserId = userId;
+            Username = username;
+        }
+
+        public long UserId { get => userId; set => userId = value; }
+        public string Username { get => username; set => username = value; }
+    }
+}
