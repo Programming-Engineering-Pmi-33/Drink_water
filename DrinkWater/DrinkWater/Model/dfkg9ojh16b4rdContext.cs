@@ -10,6 +10,7 @@ namespace DrinkWater
         {
         }
 
+
         public dfkg9ojh16b4rdContext(DbContextOptions<dfkg9ojh16b4rdContext> options)
             : base(options)
         {

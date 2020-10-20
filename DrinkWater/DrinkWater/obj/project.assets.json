@@ -908,23 +908,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MSI\\.nuget\\packages\\": {},
+    "C:\\Users\\Sophia Yaropud\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "B:\\Prog\\Git\\Drink_water\\DrinkWater\\DrinkWater\\DrinkWater.csproj",
+      "projectUniqueName": "C:\\Users\\Sophia Yaropud\\Documents\\Drink_water\\DrinkWater\\DrinkWater\\DrinkWater.csproj",
       "projectName": "DrinkWater",
-      "projectPath": "B:\\Prog\\Git\\Drink_water\\DrinkWater\\DrinkWater\\DrinkWater.csproj",
-      "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-      "outputPath": "B:\\Prog\\Git\\Drink_water\\DrinkWater\\DrinkWater\\obj\\",
+      "projectPath": "C:\\Users\\Sophia Yaropud\\Documents\\Drink_water\\DrinkWater\\DrinkWater\\DrinkWater.csproj",
+      "packagesPath": "C:\\Users\\Sophia Yaropud\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Sophia Yaropud\\Documents\\Drink_water\\DrinkWater\\DrinkWater\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Sophia Yaropud\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -977,7 +977,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

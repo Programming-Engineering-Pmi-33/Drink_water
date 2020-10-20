@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-B:\Prog\Git\Drink_water\DrinkWater\DrinkWater\obj\Debug\netcoreapp3.1\
+C:\Users\Sophia Yaropud\Documents\Drink_water\DrinkWater\DrinkWater\obj\Debug\netcoreapp3.1\
 DrinkWater
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-B:\Prog\Git\Drink_water\DrinkWater\DrinkWater\App.xaml
-11151548125
+C:\Users\Sophia Yaropud\Documents\Drink_water\DrinkWater\DrinkWater\App.xaml
+3-301609223
 
-3-917710711
-2102131139923
-MainWindow.xaml;
+1096845822
+210805669205
+LogReg\Login.xaml;LogReg\Registration.xaml;MainWindow.xaml;
 
 False
 

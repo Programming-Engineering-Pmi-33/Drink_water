@@ -1,20 +1,20 @@
 ﻿DrinkWater
-
+1.0.0.0
 
 winexe
 C#
 .cs
-B:\Prog\Git\Drink_water\DrinkWater\DrinkWater\obj\Debug\netcoreapp3.1\
+C:\Users\Sophia Yaropud\Documents\Drink_water\DrinkWater\DrinkWater\obj\Debug\netcoreapp3.1\
 DrinkWater
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-B:\Prog\Git\Drink_water\DrinkWater\DrinkWater\App.xaml
+C:\Users\Sophia Yaropud\Documents\Drink_water\DrinkWater\DrinkWater\App.xaml
 3-301609223
 
-102045741581
-2102131139923
+12-227630372
+210805669205
 LogReg\Login.xaml;LogReg\Registration.xaml;MainWindow.xaml;
 
-False
+True
 
