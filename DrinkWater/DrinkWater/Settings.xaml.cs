@@ -42,9 +42,13 @@ namespace DrinkWater
             WeightTextBox.Text = userData.Weight.ToString();
             HeightTextBox.Text = userData.Height.ToString();
             AgeTextBox.Text = userData.Age.ToString();
-            if (userData.Gender != null)
+            if (userData.Gender != null & userData.Gender=="Male")
             {
-                GenderList.Text = userData.Gender.ToString();
+                GenderList.SelectedIndex = 0;
+            }
+            if (userData.Gender != null & userData.Gender == "Female")
+            {
+                GenderList.SelectedIndex = 1;
             }
             WakeUpTextBox.Text = userData.WakeUp.ToString();
             GoingToBedTextBox.Text = userData.GoingToBed.ToString();

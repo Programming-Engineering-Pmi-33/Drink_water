@@ -40,7 +40,7 @@ namespace DrinkWater.LogReg
             if (password == result)
                 {
                     var id = (from user in db.Users
-                    where user.Password == password
+                    where user.Password == password && user.Username == username
                               select user.UserId).FirstOrDefault();
 
                     SessionUser sessionUser = new SessionUser((long)id, username);

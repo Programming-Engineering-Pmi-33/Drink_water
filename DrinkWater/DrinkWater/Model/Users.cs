@@ -28,7 +28,6 @@ namespace DrinkWater
         public virtual ICollection<Statistics> Statistics { get; set; }
         public Users(string username, string email, string password)
         {
-
             Username = username;
             Email = email;
             Password = password;

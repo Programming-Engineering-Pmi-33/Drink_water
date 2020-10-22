@@ -61,6 +61,8 @@ namespace DrinkWater
 
                 entity.ToTable("monthstatistic");
 
+                entity.Property(e => e.Date).HasColumnType("date");
+
                 entity.Property(e => e.Sum)
                     .HasColumnName("sum")
                     .HasColumnType("numeric");
@@ -118,6 +120,8 @@ namespace DrinkWater
 
                 entity.ToTable("weekstatistic");
 
+                entity.Property(e => e.Date).HasColumnType("date");
+
                 entity.Property(e => e.Sum)
                     .HasColumnName("sum")
                     .HasColumnType("numeric");
@@ -128,6 +132,8 @@ namespace DrinkWater
                 entity.HasNoKey();
 
                 entity.ToTable("yearstatistic");
+
+                entity.Property(e => e.Date).HasColumnType("date");
 
                 entity.Property(e => e.Sum)
                     .HasColumnName("sum")
