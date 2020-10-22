@@ -11,8 +11,11 @@ namespace DrinkWater
         }
 
         public long UserId { get; }
+
         public string Username { get; set; }
+
         public string Email { get; set; }
+
         public string Password { get; set; }
         public long? Weight { get; set; }
         public long? Height { get; set; }
