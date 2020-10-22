@@ -45,6 +45,10 @@ namespace DrinkWater.LogReg
 
                     SessionUser sessionUser = new SessionUser((long)id, username);
                     MessageBox.Show("it works.");
+                    Settings settings = new Settings();
+                    settings.GetSessionUser(sessionUser);
+                    settings.Show();
+                    this.Close();
                 }
                 else
                 {
