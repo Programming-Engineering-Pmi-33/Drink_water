@@ -19,12 +19,6 @@ namespace DrinkWater
                 }
             };
 
-            //adding series will update and animate the chart automatically
-            SeriesCollection.Add(new ColumnSeries
-            {
-                Title = "Vodka",
-                Values = new ChartValues<double> { 11, 56, 42, 15 }
-            });
 
             //also adding values updates and animates the chart automatically
             SeriesCollection[1].Values.Add(48d);
