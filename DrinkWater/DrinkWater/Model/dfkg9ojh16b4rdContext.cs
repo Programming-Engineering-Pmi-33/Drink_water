@@ -15,9 +15,13 @@ namespace DrinkWater
         {
         }
 
+        public virtual DbSet<Dailystatistic> Dailystatistic { get; set; }
         public virtual DbSet<Fluids> Fluids { get; set; }
+        public virtual DbSet<Monthstatistic> Monthstatistic { get; set; }
         public virtual DbSet<Statistics> Statistics { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Weekstatistic> Weekstatistic { get; set; }
+        public virtual DbSet<Yearstatistic> Yearstatistic { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,6 +34,17 @@ namespace DrinkWater
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Dailystatistic>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("dailystatistic");
+
+                entity.Property(e => e.Sum)
+                    .HasColumnName("sum")
+                    .HasColumnType("numeric");
+            });
+
             modelBuilder.Entity<Fluids>(entity =>
             {
                 entity.HasKey(e => e.FluidId)
@@ -38,6 +53,17 @@ namespace DrinkWater
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnType("character varying");
+            });
+
+            modelBuilder.Entity<Monthstatistic>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("monthstatistic");
+
+                entity.Property(e => e.Sum)
+                    .HasColumnName("sum")
+                    .HasColumnType("numeric");
             });
 
             modelBuilder.Entity<Statistics>(entity =>
@@ -84,6 +110,28 @@ namespace DrinkWater
                     .HasColumnType("character varying");
 
                 entity.Property(e => e.WakeUp).HasColumnType("time without time zone");
+            });
+
+            modelBuilder.Entity<Weekstatistic>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("weekstatistic");
+
+                entity.Property(e => e.Sum)
+                    .HasColumnName("sum")
+                    .HasColumnType("numeric");
+            });
+
+            modelBuilder.Entity<Yearstatistic>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("yearstatistic");
+
+                entity.Property(e => e.Sum)
+                    .HasColumnName("sum")
+                    .HasColumnType("numeric");
             });
 
             OnModelCreatingPartial(modelBuilder);
