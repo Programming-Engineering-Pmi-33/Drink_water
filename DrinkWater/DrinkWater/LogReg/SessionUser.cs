@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.RightsManagement;
 using System.Text;
 
 namespace DrinkWater.LogReg
 {
    public class SessionUser
     {
+        
         private long userId;
         private string username;
         public SessionUser() { }

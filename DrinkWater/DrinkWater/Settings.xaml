@@ -7,14 +7,36 @@
         mc:Ignorable="d"
         Title="Settings" Height="450" Width="800">
     <Grid>
-        <ComboBox Name="GenderList" HorizontalAlignment="Left" Margin="182,217,0,0" VerticalAlignment="Top" Width="120">
-            <TextBlock>Male</TextBlock>
-            <TextBlock>Female</TextBlock>
+        <ComboBox Name="GenderList" HorizontalAlignment="Left" Margin="248,258,0,0" VerticalAlignment="Top" Width="120" Visibility="Visible">
+            <ComboBoxItem Name="Male" IsSelected="False">Male</ComboBoxItem>
+            <ComboBoxItem Name="Female" IsSelected="False">Female</ComboBoxItem>
         </ComboBox>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Click="Button_Click" Width="115"/>
-        <Label Name="BB" Content="Label" HorizontalAlignment="Left" Margin="520,242,0,0" VerticalAlignment="Top"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" Click="Button_Click" Width="115"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top" Click="Button_Click" Width="115"/>
+        <Button Name="UserSettingsButton" Content="User Settings" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Click="UserSettings_Click" Width="115"/>
+        <Button Name="UserParametersButton" Content="User Parameters" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Click="UserParameters_Click" Width="115"/>
+        <Button Name="LogOutButton" Content="Log out" HorizontalAlignment="Left" Margin="10,385,0,0" VerticalAlignment="Top" Click="LogOut_Click" Width="115"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="10,22,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox Name ="PasswordTextBox" HorizontalAlignment="Left" Margin="248,187,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="310" Visibility="Hidden"/>
+        <TextBox Name ="UsernameTextBox" HorizontalAlignment="Left" Margin="248,121,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="310" Visibility="Hidden"/>
+        <TextBox Name ="WakeUpTextBox" HorizontalAlignment="Left" Margin="448,262,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Visibility="Visible"/>
+        <TextBox Name="EmailTextBox" HorizontalAlignment="Left" Margin="248,243,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="329" Visibility="Hidden"/>
+        <Label Name ="UsernameLabel" Content="Username" HorizontalAlignment="Left" Margin="248,90,0,0" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
+        <Label Name ="PasswordLabel" Content="Password" HorizontalAlignment="Left" Margin="248,160,0,0" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
+        <Label Name ="ActivityTimeLabel" Content="ActivityTime" HorizontalAlignment="Left" Margin="448,235,0,0" VerticalAlignment="Top" Width="169" Visibility="Visible"/>
+        <Label Name ="EmailLabel" Content="Email" HorizontalAlignment="Left" Margin="248,217,0,0" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
+
+        <ComboBox x:Name="NotificationsSettings" HorizontalAlignment="Left" Margin="10,271,0,0" VerticalAlignment="Top" Width="120" Visibility="Visible">
+            <TextBox>Enter schedule</TextBox>
+        </ComboBox>
+        <Button Name="SaveChangesButton" Content="Save Changes" HorizontalAlignment="Left" Margin="657,385,0,0" VerticalAlignment="Top" Width="100" Click="SaveChangesButton_Click"/>
+        <TextBox Name="WeightTextBox" HorizontalAlignment="Left" Margin="248,90,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
+        <TextBox Name="HeightTextBox" HorizontalAlignment="Left" Margin="248,152,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
+        <TextBox Name="AgeTextBox" HorizontalAlignment="Left" Margin="248,205,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
+        <TextBox Name="GoingToBedTextBox" HorizontalAlignment="Left" Margin="548,262,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
+        <Label Name="WeightLabel" Content="Weight" HorizontalAlignment="Left" Margin="248,64,0,0" VerticalAlignment="Top" Width="152"/>
+        <Label Name="HeightLabel" Content="Height" HorizontalAlignment="Left" Margin="248,126,0,0" VerticalAlignment="Top" Width="152"/>
+        <Label Name="AgeLabel" Content="Age" HorizontalAlignment="Left" Margin="248,179,0,0" VerticalAlignment="Top" Width="152"/>
+        <Label Name="GenderLabel" Content="Gender" HorizontalAlignment="Left" Margin="248,235,0,0" VerticalAlignment="Top" Width="152"/>
+        <Button Name="Gender" Content="Change Avatar" HorizontalAlignment="Left" Margin="25,146,0,0" VerticalAlignment="Top" Width="63"/>
 
     </Grid>
 </Window>
