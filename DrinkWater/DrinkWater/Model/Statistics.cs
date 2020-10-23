@@ -6,7 +6,7 @@ namespace DrinkWater
     public partial class Statistics
     {
         public int StatisticId { get; set; }
-        public long UserIdRef { get; set; }
+        public int UserIdRef { get; set; }
         public long FluidIdRef { get; set; }
         public long FluidAmount { get; set; }
         public DateTime Date { get; set; }
