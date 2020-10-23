@@ -1,0 +1,451 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.4 (Ubuntu 12.4-1.pgdg16.04+1)
+-- Dumped by pg_dump version 12.4
+
+-- Started on 2020-10-23 14:13:43
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 648 (class 1247 OID 8593431)
+-- Name: gendervaluecheck; Type: DOMAIN; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE DOMAIN public.gendervaluecheck AS character varying(32)
+	CONSTRAINT gendervaluecheck_check CHECK ((((VALUE)::text ~ 'Male'::text) OR ((VALUE)::text ~ 'Female'::text)));
+
+
+ALTER DOMAIN public.gendervaluecheck OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 226 (class 1255 OID 8531409)
+-- Name: new_balance_count(integer); Type: FUNCTION; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE FUNCTION public.new_balance_count(uid integer) RETURNS text
+    LANGUAGE plpgsql
+    AS $$declare
+Balance integer;
+TotalBodyWater double precision;
+UserParameters record;
+begin
+select "Age","Weight","Height","Gender","WakeUp","GoingToBed"
+into UserParameters
+from "Users"
+where "Users"."UserId" = "uid";
+if UserParameters."Gender" = 'Male'
+then TotalBodyWater = 2.447 - 0.09156 * UserParameters."Age" + 0.1074 * UserParameters."Height" + 0.3362 * UserParameters."Weight";
+else
+TotalBodyWater = -2.097 + 0.1069 * UserParameters."Height" + 0.2466 * UserParameters."Weight";
+end if;
+Balance = (UserParameters."Weight" * 2.205/(100/TotalBodyWater+0.1)) * 29 + 10 * ABS((Extract(Hour from UserParameters."GoingToBed") - Extract(Hour from UserParameters."WakeUp")));
+return Balance;
+end;
+$$;
+
+
+ALTER FUNCTION public.new_balance_count(uid integer) OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 225 (class 1255 OID 8531236)
+-- Name: test(integer); Type: FUNCTION; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE FUNCTION public.test(uid integer) RETURNS text
+    LANGUAGE plpgsql
+    AS $$declare
+Balance double precision;
+TotalBodyWater double precision;
+UserParameters record;
+begin
+select "Age","Weight","Height","Gender","WakeUp","GoingToBed"
+into UserParameters
+from "Users"
+where "Users"."UserId" = "uid";
+if UserParameters."Gender" = 'Male'
+then TotalBodyWater = 2.447 - 0.09156 * UserParameters."Age" + 0.1074 * UserParameters."Height" + 0.3362 * UserParameters."Weight";
+else
+TotalBodyWater = -2.097 + 0.1069 * UserParameters."Height" + 0.2466 * UserParameters."Weight";
+end if;
+Balance = (UserParameters."Weight" * 2.205/TotalBodyWater);
+return Balance;
+end;
+$$;
+
+
+ALTER FUNCTION public.test(uid integer) OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 224 (class 1255 OID 8531256)
+-- Name: test1(integer); Type: FUNCTION; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE FUNCTION public.test1(uid integer) RETURNS text
+    LANGUAGE plpgsql
+    AS $$
+declare
+Balance double precision;
+TotalBodyWater double precision;
+UserParameters record;
+begin
+select "Age","Weight","Height","Gender","WakeUp","GoingToBed"
+into UserParameters
+from "Users"
+where "Users"."UserId" = "uid";
+if UserParameters."Gender" = 'Male'
+then TotalBodyWater = 2.447 - 0.09156 * UserParameters."Age" + 0.1074 * UserParameters."Height" + 0.3362 * UserParameters."Weight";
+else
+TotalBodyWater = -2.097 + 0.1069 * UserParameters."Height" + 0.2466 * UserParameters."Weight";
+end if;
+Balance = (UserParameters."Weight" * 2.205/TotalBodyWater) + 50 * ABS((Extract(Hour from UserParameters."GoingToBed") - Extract(Hour from UserParameters."WakeUp")));
+return TotalBodyWater;
+end;
+$$;
+
+
+ALTER FUNCTION public.test1(uid integer) OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 227 (class 1255 OID 8535993)
+-- Name: update_calc_column(); Type: FUNCTION; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE FUNCTION public.update_calc_column() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$declare
+Balance integer;
+TotalBodyWater double precision;
+begin
+if new."Gender" = 'Male'
+then TotalBodyWater = 2.447 - 0.09156 * new."Age" + 0.1074 * new."Height" + 0.3362 * new."Weight";
+else
+TotalBodyWater = -2.097 + 0.1069 * new."Height" + 0.2466 * new."Weight";
+end if;
+new."DailyBalance" = (new."Weight" * 2.205/(100/TotalBodyWater+0.1)) * 29 + 10 * ABS((Extract(Hour from new."GoingToBed") - Extract(Hour from new."WakeUp")));
+return new;
+end;
+$$;
+
+
+ALTER FUNCTION public.update_calc_column() OWNER TO txhfeaeowkmudw;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 205 (class 1259 OID 8375628)
+-- Name: Fluids; Type: TABLE; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE TABLE public."Fluids" (
+    "FluidId" bigint NOT NULL,
+    "Name" character varying NOT NULL,
+    "Koeficient" double precision NOT NULL,
+    "FliudImage" bytea
+);
+
+
+ALTER TABLE public."Fluids" OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 204 (class 1259 OID 8375626)
+-- Name: Fluids_FluidId_seq; Type: SEQUENCE; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE SEQUENCE public."Fluids_FluidId_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Fluids_FluidId_seq" OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 3890 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: Fluids_FluidId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: txhfeaeowkmudw
+--
+
+ALTER SEQUENCE public."Fluids_FluidId_seq" OWNED BY public."Fluids"."FluidId";
+
+
+--
+-- TOC entry 207 (class 1259 OID 8375695)
+-- Name: Statistics; Type: TABLE; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE TABLE public."Statistics" (
+    "StatisticId" integer NOT NULL,
+    "UserIdRef" integer NOT NULL,
+    "FluidIdRef" bigint NOT NULL,
+    "FluidAmount" bigint NOT NULL,
+    "Date" date NOT NULL
+);
+
+
+ALTER TABLE public."Statistics" OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 206 (class 1259 OID 8375693)
+-- Name: Statistics_StatisticId_seq; Type: SEQUENCE; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE SEQUENCE public."Statistics_StatisticId_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Statistics_StatisticId_seq" OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 3891 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: Statistics_StatisticId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: txhfeaeowkmudw
+--
+
+ALTER SEQUENCE public."Statistics_StatisticId_seq" OWNED BY public."Statistics"."StatisticId";
+
+
+--
+-- TOC entry 203 (class 1259 OID 8375471)
+-- Name: Users; Type: TABLE; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE TABLE public."Users" (
+    "UserId" integer NOT NULL,
+    "Username" character varying NOT NULL,
+    "Email" character varying NOT NULL,
+    "Password" character varying NOT NULL,
+    "Weight" bigint,
+    "Height" bigint,
+    "Gender" character varying,
+    "Age" bigint,
+    "WakeUp" time without time zone,
+    "GoingToBed" time without time zone,
+    "NotitficationsPeriod" time without time zone,
+    "DisableNotifications" boolean,
+    "DailyBalance" bigint,
+    "Avatar" bytea
+);
+
+
+ALTER TABLE public."Users" OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 202 (class 1259 OID 8375469)
+-- Name: Users_UserId_seq; Type: SEQUENCE; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE SEQUENCE public."Users_UserId_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Users_UserId_seq" OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 3892 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: Users_UserId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: txhfeaeowkmudw
+--
+
+ALTER SEQUENCE public."Users_UserId_seq" OWNED BY public."Users"."UserId";
+
+
+--
+-- TOC entry 211 (class 1259 OID 8593743)
+-- Name: dailystatistic; Type: VIEW; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE VIEW public.dailystatistic AS
+ SELECT "Statistics"."UserIdRef",
+    "Statistics"."FluidIdRef",
+    sum("Statistics"."FluidAmount") AS sum
+   FROM (public."Statistics"
+     JOIN public."Users" ON (("Users"."UserId" = "Statistics"."UserIdRef")))
+  WHERE ("Statistics"."Date" = CURRENT_DATE)
+  GROUP BY "Statistics"."UserIdRef", "Statistics"."FluidIdRef";
+
+
+ALTER TABLE public.dailystatistic OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 209 (class 1259 OID 8593733)
+-- Name: monthstatistic; Type: VIEW; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE VIEW public.monthstatistic WITH (security_barrier='false') AS
+ SELECT "Statistics"."UserIdRef",
+    "Statistics"."FluidIdRef",
+    sum("Statistics"."FluidAmount") AS sum,
+    "Statistics"."Date"
+   FROM (public."Statistics"
+     JOIN public."Users" ON (("Users"."UserId" = "Statistics"."UserIdRef")))
+  WHERE (("Statistics"."Date" > date((CURRENT_DATE - '1 mon'::interval))) AND ("Statistics"."Date" <= CURRENT_DATE))
+  GROUP BY "Statistics"."UserIdRef", "Statistics"."FluidIdRef", "Statistics"."Date";
+
+
+ALTER TABLE public.monthstatistic OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 210 (class 1259 OID 8593738)
+-- Name: weekstatistic; Type: VIEW; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE VIEW public.weekstatistic WITH (security_barrier='false') AS
+ SELECT "Statistics"."UserIdRef",
+    "Statistics"."FluidIdRef",
+    sum("Statistics"."FluidAmount") AS sum,
+    "Statistics"."Date"
+   FROM (public."Statistics"
+     JOIN public."Users" ON (("Users"."UserId" = "Statistics"."UserIdRef")))
+  WHERE (("Statistics"."Date" > (CURRENT_DATE - 7)) AND ("Statistics"."Date" <= CURRENT_DATE))
+  GROUP BY "Statistics"."UserIdRef", "Statistics"."FluidIdRef", "Statistics"."Date";
+
+
+ALTER TABLE public.weekstatistic OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 208 (class 1259 OID 8593710)
+-- Name: yearstatistic; Type: VIEW; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE VIEW public.yearstatistic WITH (security_barrier='false') AS
+ SELECT "Statistics"."UserIdRef",
+    "Statistics"."FluidIdRef",
+    sum("Statistics"."FluidAmount") AS sum,
+    "Statistics"."Date"
+   FROM (public."Statistics"
+     JOIN public."Users" ON (("Users"."UserId" = "Statistics"."UserIdRef")))
+  WHERE (("Statistics"."Date" >= date((CURRENT_DATE - '1 year'::interval))) AND ("Statistics"."Date" <= CURRENT_DATE))
+  GROUP BY "Statistics"."UserIdRef", "Statistics"."FluidIdRef", "Statistics"."Date";
+
+
+ALTER TABLE public.yearstatistic OWNER TO txhfeaeowkmudw;
+
+--
+-- TOC entry 3742 (class 2604 OID 8375631)
+-- Name: Fluids FluidId; Type: DEFAULT; Schema: public; Owner: txhfeaeowkmudw
+--
+
+ALTER TABLE ONLY public."Fluids" ALTER COLUMN "FluidId" SET DEFAULT nextval('public."Fluids_FluidId_seq"'::regclass);
+
+
+--
+-- TOC entry 3743 (class 2604 OID 8375698)
+-- Name: Statistics StatisticId; Type: DEFAULT; Schema: public; Owner: txhfeaeowkmudw
+--
+
+ALTER TABLE ONLY public."Statistics" ALTER COLUMN "StatisticId" SET DEFAULT nextval('public."Statistics_StatisticId_seq"'::regclass);
+
+
+--
+-- TOC entry 3741 (class 2604 OID 8534018)
+-- Name: Users UserId; Type: DEFAULT; Schema: public; Owner: txhfeaeowkmudw
+--
+
+ALTER TABLE ONLY public."Users" ALTER COLUMN "UserId" SET DEFAULT nextval('public."Users_UserId_seq"'::regclass);
+
+
+--
+-- TOC entry 3747 (class 2606 OID 8375636)
+-- Name: Fluids Fluids_pkey; Type: CONSTRAINT; Schema: public; Owner: txhfeaeowkmudw
+--
+
+ALTER TABLE ONLY public."Fluids"
+    ADD CONSTRAINT "Fluids_pkey" PRIMARY KEY ("FluidId");
+
+
+--
+-- TOC entry 3749 (class 2606 OID 8375700)
+-- Name: Statistics Statistics_pkey; Type: CONSTRAINT; Schema: public; Owner: txhfeaeowkmudw
+--
+
+ALTER TABLE ONLY public."Statistics"
+    ADD CONSTRAINT "Statistics_pkey" PRIMARY KEY ("StatisticId");
+
+
+--
+-- TOC entry 3745 (class 2606 OID 8534020)
+-- Name: Users Users_pkey; Type: CONSTRAINT; Schema: public; Owner: txhfeaeowkmudw
+--
+
+ALTER TABLE ONLY public."Users"
+    ADD CONSTRAINT "Users_pkey" PRIMARY KEY ("UserId");
+
+
+--
+-- TOC entry 3752 (class 2620 OID 8537181)
+-- Name: Users addbalance; Type: TRIGGER; Schema: public; Owner: txhfeaeowkmudw
+--
+
+CREATE TRIGGER addbalance BEFORE INSERT OR UPDATE ON public."Users" FOR EACH ROW EXECUTE FUNCTION public.update_calc_column();
+
+
+--
+-- TOC entry 3751 (class 2606 OID 8375701)
+-- Name: Statistics Statistics_FluidIdRef_fkey; Type: FK CONSTRAINT; Schema: public; Owner: txhfeaeowkmudw
+--
+
+ALTER TABLE ONLY public."Statistics"
+    ADD CONSTRAINT "Statistics_FluidIdRef_fkey" FOREIGN KEY ("FluidIdRef") REFERENCES public."Fluids"("FluidId");
+
+
+--
+-- TOC entry 3750 (class 2606 OID 8593701)
+-- Name: Statistics Statistics_UserIdRef_fkey; Type: FK CONSTRAINT; Schema: public; Owner: txhfeaeowkmudw
+--
+
+ALTER TABLE ONLY public."Statistics"
+    ADD CONSTRAINT "Statistics_UserIdRef_fkey" FOREIGN KEY ("UserIdRef") REFERENCES public."Users"("UserId");
+
+
+--
+-- TOC entry 3888 (class 0 OID 0)
+-- Dependencies: 3
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: txhfeaeowkmudw
+--
+
+REVOKE ALL ON SCHEMA public FROM postgres;
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+GRANT ALL ON SCHEMA public TO txhfeaeowkmudw;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- TOC entry 3889 (class 0 OID 0)
+-- Dependencies: 664
+-- Name: LANGUAGE plpgsql; Type: ACL; Schema: -; Owner: postgres
+--
+
+GRANT ALL ON LANGUAGE plpgsql TO txhfeaeowkmudw;
+
+
+-- Completed on 2020-10-23 14:13:52
+
+--
+-- PostgreSQL database dump complete
+--
+
