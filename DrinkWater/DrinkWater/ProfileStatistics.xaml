@@ -25,7 +25,6 @@
         <Label x:Name="HeightInfo" Content="" HorizontalAlignment="Left" Margin="137,279,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23"/>
         <Label x:Name="WeightInfo" Content="" HorizontalAlignment="Left" Margin="137,310,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23"/>
         <Label x:Name="AgeInfo" Content="" HorizontalAlignment="Left" Margin="138,341,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23"/>
-        <Rectangle Name="Score" HorizontalAlignment="Left" Height="33" Margin="271,369,0,0" Stroke="Black" VerticalAlignment="Top" Width="350"/>
         <ComboBox x:Name="Period" HorizontalAlignment="Left" Height="33" Margin="467,85,0,0" VerticalAlignment="Top" Width="154" SelectionChanged="ComboBox_SelectionChanged" FontFamily="Segoe UI" DropDownClosed="Period_DropDownClosed">
             <ComboBoxItem x:Name="PeriodLable1" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="56" >Per week</ComboBoxItem>
             <ComboBoxItem x:Name="PeriodLable2" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="56" >Per month</ComboBoxItem>
@@ -45,5 +44,10 @@
         </Grid>
         <Button Name="BackwardButton" Content="Previous" HorizontalAlignment="Left" Margin="690,118,0,0" VerticalAlignment="Top" Click="BackwardButton_Click"/>
         <Button Name="ForwardButton" Content="Next" HorizontalAlignment="Left" Margin="690,272,0,0" VerticalAlignment="Top" Click="ForwardButton_Click"/>
+        <Label Name="Score1" Content="Balance achieved  " HorizontalAlignment="Left" Margin="286,385,0,0" VerticalAlignment="Top" Width="114"/>
+        <Label x:Name="Score2" Content="" HorizontalAlignment="Left" Margin="395,385,0,0" VerticalAlignment="Top" Width="32"/>
+        <Label x:Name="Score3" Content="out of" HorizontalAlignment="Left" Margin="432,385,0,0" VerticalAlignment="Top" Width="47"/>
+        <Label x:Name="Score4" Content="" HorizontalAlignment="Left" Margin="484,385,0,0" VerticalAlignment="Top" Width="32"/>
+        <Rectangle HorizontalAlignment="Left" Height="26" Margin="260,385,0,0" Stroke="Black" VerticalAlignment="Top" Width="305"/>
     </Grid>
 </Window>

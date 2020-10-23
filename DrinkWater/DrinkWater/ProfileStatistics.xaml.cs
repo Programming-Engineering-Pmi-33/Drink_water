@@ -9,6 +9,8 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using System.IO;
 using System.Windows.Media.Imaging;
+using Windows.System;
+using Windows.System.UserProfile;
 
 namespace DrinkWater
 {
@@ -60,7 +62,8 @@ namespace DrinkWater
             
             fluids = (from fluid in db.Fluids
                       select fluid).ToList();
-           
+            
+
             SortedSet<DateTime> sortedWeek = new SortedSet<DateTime>();
             SortedSet<DateTime> sortedMonth = new SortedSet<DateTime>();
             SortedSet<DateTime> sortedYear = new SortedSet<DateTime>();
@@ -91,6 +94,9 @@ namespace DrinkWater
             ActivityTimeInfo.Content = String.IsNullOrEmpty(userInformatoin.GoingToBed.ToString())
                                         || String.IsNullOrEmpty(userInformatoin.WakeUp.ToString())
                                         ? "NULL" : Math.Abs(userInformatoin.GoingToBed.Value.Hours - userInformatoin.WakeUp.Value.Hours).ToString();
+
+
+          
 
             if (userInformatoin.Avatar != null)
             {
@@ -125,7 +131,7 @@ namespace DrinkWater
                 }
                 weekWaterAmount.Add(temp);
             }
-            //SeriesCollection.Clear();
+            
             SeriesCollection.Add(
             new ColumnSeries
             {
@@ -146,6 +152,21 @@ namespace DrinkWater
             LowerElement1.Content = fluidAmount[index];
             UpperElement2.Content = fluids[index + 1].Name;
             LowerElement2.Content = fluidAmount[index + 1];
+
+
+
+            int m = 0;
+            int n = 7;
+            for (int i = 0; i < weekWaterAmount.Count; i++)
+            {
+                if (userInformatoin.DailyBalance >= weekWaterAmount[i])
+                {
+                    m++;
+                }
+
+            }
+            Score2.Content = m;
+            Score4.Content = n;
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -166,6 +187,11 @@ namespace DrinkWater
 
         private void Period_DropDownClosed(object sender, EventArgs e)
         {
+            Users userInformatoin = (from user in db.Users
+                                     where user.UserId == SessionUser.UserId
+                                     select user).FirstOrDefault();
+
+
             weekWaterAmount.Clear();
            
             if (Period.Text == "Per week")
@@ -206,6 +232,19 @@ namespace DrinkWater
                 }
                 Axisx.Labels = tempList;
 
+                int m = 0;
+                int n = 7;
+                for (int i = 0; i < weekWaterAmount.Count; i++)
+                {
+                    if (userInformatoin.DailyBalance >= weekWaterAmount[i])
+                    {
+                        m++;
+                    }
+
+                }
+                Score2.Content = m;
+                Score4.Content = n;
+
             }
             if (Period.Text == "Per year")
             {
@@ -244,6 +283,19 @@ namespace DrinkWater
                     tempList.Add(month[i].ToString("MMM"));
                 }
                 Axisx.Labels = tempList;
+
+                int m = 0;
+                int n = 12;
+                for (int i = 0; i < yearWaterAmount.Count; i++)
+                {
+                    if (userInformatoin.DailyBalance*12 >= yearWaterAmount[i])
+                    {
+                        m++;
+                    }
+
+                }
+                Score2.Content = m;
+                Score4.Content = n;
 
             }
 
@@ -285,6 +337,18 @@ namespace DrinkWater
                 }
                 Axisx.Labels = tempList;
 
+                int m = 0;
+                int n = 30;
+                for (int i = 0; i < monthWaterAmount.Count; i++)
+                {
+                    if (userInformatoin.DailyBalance >= monthWaterAmount[i])
+                    {
+                        m++;
+                    }
+
+                }
+                Score2.Content = m;
+                Score4.Content = n;
 
             }
             Formatter = value => value.ToString("N");

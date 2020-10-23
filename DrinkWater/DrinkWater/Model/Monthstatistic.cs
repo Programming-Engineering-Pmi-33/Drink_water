@@ -9,5 +9,6 @@ namespace DrinkWater
         public long? FluidIdRef { get; set; }
         public decimal? Sum { get; set; }
         public DateTime? Date { get; set; }
+
     }
 }
