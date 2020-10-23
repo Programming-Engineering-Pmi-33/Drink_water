@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Linq;
 using LiveCharts;
 using LiveCharts.Wpf;
+using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace DrinkWater
 {
@@ -18,9 +20,20 @@ namespace DrinkWater
         public SessionUser SessionUser = new SessionUser();
         static public dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
         static public Users userInformatoin;
-        public SeriesCollection SeriesCollection;
-        public string[] Labels;
-        public Func<double, string> Formatter;
+        List<Weekstatistic> weekstatistics;
+        List<Monthstatistic> monthstatistics;
+        List<Yearstatistic> yearstatistics;
+        List<DateTime> week;
+        List<DateTime> month;
+        List<DateTime> year;
+        List<double> weekWaterAmount;
+        List<double> monthWaterAmount;
+        List<double> yearWaterAmount;
+        List<Fluids> fluids;
+        int[] fluidAmount;
+        int index;
+
+
         public ProfileStatistics()
         {
             InitializeComponent();
@@ -28,10 +41,49 @@ namespace DrinkWater
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            index = 0;
+            
+            weekWaterAmount = new List<double>();
+            monthWaterAmount = new List<double>();
+            yearWaterAmount = new List<double>();
+            SeriesCollection = new SeriesCollection();
+            
+            weekstatistics = (from weekQuery in db.Weekstatistic
+                              where SessionUser.UserId == weekQuery.UserIdRef
+                              select weekQuery).ToList();
+            monthstatistics = (from monthQuery in db.Monthstatistic
+                               where SessionUser.UserId == monthQuery.UserIdRef
+                               select monthQuery).ToList();
+            yearstatistics = (from yearQuery in db.Yearstatistic
+                              where SessionUser.UserId == yearQuery.UserIdRef
+                              select yearQuery).ToList();
+            
+            fluids = (from fluid in db.Fluids
+                      select fluid).ToList();
+           
+            SortedSet<DateTime> sortedWeek = new SortedSet<DateTime>();
+            SortedSet<DateTime> sortedMonth = new SortedSet<DateTime>();
+            SortedSet<DateTime> sortedYear = new SortedSet<DateTime>();
+            for(int i =0; i< weekstatistics.Count;i++)
+            {
+                sortedWeek.Add((DateTime)weekstatistics[i].Date);
+            }
+            for (int i = 0; i < monthstatistics.Count; i++)
+            {
+                sortedMonth.Add((DateTime)monthstatistics[i].Date);
+            }
+            for (int i = 0; i < yearstatistics.Count; i++)
+            {
+                sortedYear.Add((DateTime)yearstatistics[i].Date);
+            }
+            week = new List<DateTime>(sortedWeek);
+            month = new List<DateTime>(sortedMonth);
+            year = new List<DateTime>(sortedYear);
 
             Users userInformatoin = (from user in db.Users
                                      where user.UserId == SessionUser.UserId
                                      select user).FirstOrDefault();
+
             UsernameInfo.Content = userInformatoin.Username;
             WeightInfo.Content = String.IsNullOrEmpty(userInformatoin.Weight.ToString()) ? "NULL" : userInformatoin.Weight.ToString();
             HeightInfo.Content = String.IsNullOrEmpty(userInformatoin.Height.ToString()) ? "NULL" : userInformatoin.Height.ToString();
@@ -40,99 +92,239 @@ namespace DrinkWater
                                         || String.IsNullOrEmpty(userInformatoin.WakeUp.ToString())
                                         ? "NULL" : Math.Abs(userInformatoin.GoingToBed.Value.Hours - userInformatoin.WakeUp.Value.Hours).ToString();
 
-
-
-            SeriesCollection = new SeriesCollection
+            if (userInformatoin.Avatar != null)
             {
-                new ColumnSeries
-                {
-                    Title = "Water",
-                    Values = new ChartValues<double> { 1700, 2000, 1500, 1250, 1700, 2000, 1500, 1250, 1700, 2000, 1500, 1250 }
-                }
-            };
+                var memoryStream = new MemoryStream(userInformatoin.Avatar);
+                var bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = memoryStream;
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+                bitmap.Freeze();
+                Avatar.Source = bitmap;
+            }
 
-            Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+            fluidAmount = new int[fluids.Count];
+            for (int i = 0; i < fluids.Count; i++)
+            {
+                for (int j = 0; j < weekstatistics.Count; j++)
+                {
+                    if (fluids[i].FluidId == weekstatistics[j].FluidIdRef)
+                    {
+                        fluidAmount[i] += (int)weekstatistics[j].Sum;
+                    }
+                }
+            }
+            for (int i = 0; i < week.Count; i++)
+            {
+                double temp = 0;
+                for (int j = 0; j < weekstatistics.Count; j++)
+                {
+                    if (week[i].Day == weekstatistics[j].Date.Value.Day)
+                        temp += (int)weekstatistics[j].Sum * fluids[(int)(weekstatistics[j].FluidIdRef) - 1].Koeficient;
+                }
+                weekWaterAmount.Add(temp);
+            }
+            //SeriesCollection.Clear();
+            SeriesCollection.Add(
+            new ColumnSeries
+            {
+                Title = "Water",
+                Values = new ChartValues<double>(weekWaterAmount)
+            });
+
+            List<string> tempList = new List<string>();
+            for (int i = 0; i < week.Count; i++)
+            {
+                tempList.Add(week[i].DayOfWeek.ToString());
+            }
+            Axisx.Labels = tempList;
             Formatter = value => value.ToString("N");
 
             DataContext = this;
-            ABBA.Series = SeriesCollection;
-            Axisx.Labels = Labels;
-            Axisy.LabelFormatter = Formatter;
+            UpperElement1.Content = fluids[index].Name;
+            LowerElement1.Content = fluidAmount[index];
+            UpperElement2.Content = fluids[index + 1].Name;
+            LowerElement2.Content = fluidAmount[index + 1];
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Labels = null;
-            Formatter = null;
+            
+        }
+        public SeriesCollection SeriesCollection { get; set; }
+        public string[] Labels { get; set; }
+        public Func<double, string> Formatter { get; set; }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            Settings settings = new Settings();
+            settings.GetSessionUser(SessionUser);
+            settings.Show();
+            this.Close();
+
+        }
+
+        private void Period_DropDownClosed(object sender, EventArgs e)
+        {
+            weekWaterAmount.Clear();
+           
             if (Period.Text == "Per week")
             {
-                SeriesCollection.Clear();
-                SeriesCollection = new SeriesCollection
+                fluidAmount = new int[fluids.Count];
+                for (int i = 0; i <fluids.Count;i++)
                 {
+                    for(int j = 0; j<weekstatistics.Count; j++)
+                    {
+                        if(fluids[i].FluidId == weekstatistics[j].FluidIdRef)
+                        {
+                            fluidAmount[i] += (int)weekstatistics[j].Sum;
+                        }
+                    }
+                }
+                for(int i =0; i < week.Count;i++)
+                {
+                    double temp = 0;
+                   for(int j =0; j< weekstatistics.Count;j++)
+                   {
+                        if (week[i].Day == weekstatistics[j].Date.Value.Day)
+                            temp += (int)weekstatistics[j].Sum * fluids[(int)(weekstatistics[j].FluidIdRef)-1].Koeficient;
+                   }
+                    weekWaterAmount.Add(temp);
+                }
+                SeriesCollection.Clear();
+                SeriesCollection.Add(
                 new ColumnSeries
                 {
                     Title = "Water",
-                    Values = new ChartValues<double> { 1700, 2000, 1500, 1250, 1700, 2000, 1500 }
+                    Values = new ChartValues<double>(weekWaterAmount)
+                }) ;
+
+                List<string> tempList = new List<string>();
+                for (int i = 0; i < week.Count; i++)
+                {
+                    tempList.Add(week[i].DayOfWeek.ToString());
                 }
-                };
-                Labels = new[] { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+                Axisx.Labels = tempList;
 
             }
             if (Period.Text == "Per year")
             {
-                SeriesCollection.Clear();
-                SeriesCollection = new SeriesCollection
+                yearWaterAmount.Clear();
+                for (int i = 0; i < year.Count; i++)
                 {
+                    double temp = 0;
+                    for (int j = 0; j < yearstatistics.Count; j++)
+                    {
+                        if (year[i].Day == yearstatistics[j].Date.Value.Day && year[i].Month == yearstatistics[j].Date.Value.Month)
+                            temp += (int)yearstatistics[j].Sum * fluids[(int)(yearstatistics[j].FluidIdRef-1)].Koeficient;
+                    }
+                    yearWaterAmount.Add(temp);
+                }
+                fluidAmount = new int[fluids.Count];
+                for (int i = 0; i < fluids.Count; i++)
+                {
+                    for (int j = 0; j < yearstatistics.Count; j++)
+                    {
+                        if (fluids[i].FluidId == yearstatistics[j].FluidIdRef)
+                        {
+                            fluidAmount[i] += (int)yearstatistics[j].Sum;
+                        }
+                    }
+                }
+                SeriesCollection.Clear();
+                SeriesCollection.Add(
                 new ColumnSeries
                 {
                     Title = "Water",
-                    Values = new ChartValues<double> { 1700, 2000, 1500, 1250, 1700, 2000, 1500, 1250, 1700, 2000, 1500, 1250 }
+                    Values = new ChartValues<double>(yearWaterAmount)
+                }) ;
+                List<string> tempList = new List<string>();
+                for (int i = 0; i < year.Count; i++)
+                {
+                    tempList.Add(month[i].ToString("MMM"));
                 }
-                };
-                Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+                Axisx.Labels = tempList;
 
             }
 
             if (Period.Text == "Per month")
             {
-                SeriesCollection.Clear();
-                SeriesCollection = new SeriesCollection
+                monthWaterAmount.Clear();
+                fluidAmount = new int[fluids.Count];
+                for (int i = 0; i < fluids.Count; i++)
                 {
+                    for (int j = 0; j < monthstatistics.Count; j++)
+                    {
+                        if (fluids[i].FluidId == monthstatistics[j].FluidIdRef)
+                        {
+                            fluidAmount[i] += (int)monthstatistics[j].Sum;
+                        }
+                    }
+                }
+                for(int i = 0; i < month.Count; i++)
+                {
+                    double temp = 0;
+                    for (int j = 0; j < monthstatistics.Count; j++)
+                    {
+                        if (month[i].Day == monthstatistics[j].Date.Value.Day && year[i].Month == monthstatistics[j].Date.Value.Month)
+                            temp += (int)monthstatistics[j].Sum * fluids[(int)(monthstatistics[j].FluidIdRef-1)].Koeficient;
+                    }
+                    monthWaterAmount.Add(temp);
+                }
+                SeriesCollection.Clear();
+                SeriesCollection.Add(
                 new ColumnSeries
                 {
                     Title = "Water",
-                    Values = new ChartValues<double> { 1700, 2000, 1500, 1250, 1700, 2000, 1500, 1250, 1700, 2000, 1500, 1250, 1700, 2000, 1500, 1250, 1700, 2000, 1500, 1250, 1700, 2000, 1500, 1250, 1700, 2000, 1500, 1250, 1700, 2000 }
+                    Values = new ChartValues<double> (monthWaterAmount)
+                });
+                List<string> tempList = new List<string>();
+                for(int i =0; i<month.Count;i++)
+                {
+                    tempList.Add(month[i].Day.ToString());
                 }
-                };
-                Labels = new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" };
+                Axisx.Labels = tempList;
 
 
             }
             Formatter = value => value.ToString("N");
 
             DataContext = this;
-            ABBA.Series = SeriesCollection;
-            Axisx.Labels = Labels;
-            Axisy.LabelFormatter = Formatter;
 
         }
 
-        private void CartesianChart_Loaded(object sender, RoutedEventArgs e)
+        private void BackwardButton_Click(object sender, RoutedEventArgs e)
         {
+            if (index == 0)
+            {
+                index = fluidAmount.Length - 1;
+            }
+            UpperElement1.Content = fluids[index-1].Name;
+            LowerElement1.Content = fluidAmount[index-1];
+            UpperElement2.Content = fluids[index].Name;
+            LowerElement2.Content = fluidAmount[index];
+            index--;
 
         }
 
-
-
-        private void Settings_Click(object sender, RoutedEventArgs e)
+        private void ForwardButton_Click(object sender, RoutedEventArgs e)
         {
-            Settings settings = new Settings();
-            settings.Show();
-            this.Close();
-
+            
+            UpperElement1.Content = fluids[index].Name;
+            LowerElement1.Content = fluidAmount[index];
+            UpperElement2.Content = fluids[index+1].Name;
+            LowerElement2.Content = fluidAmount[index+1];
+            if (index == fluidAmount.Length - 2)
+            {
+                index = 0;
+            }
+            else
+            {
+                index++;
+            }
         }
     }
 }
 
      
     
-

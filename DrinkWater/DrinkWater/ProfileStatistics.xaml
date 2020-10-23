@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ProfileStatistics" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <lvc:CartesianChart Name="ABBA" Series="{Binding SeriesCollection}" LegendLocation="Left" Margin="201,154,86,61">
+        <lvc:CartesianChart Name="ABBA" Series="{Binding SeriesCollection}" LegendLocation="Bottom" Margin="226,145,162,70">
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Name="Axisx" Title="Period" Labels="{Binding Labels}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
@@ -20,28 +20,30 @@
         <Label x:Name="Height" Content="height:" HorizontalAlignment="Left" Margin="56,279,0,0" VerticalAlignment="Top"/>
         <Label x:Name="Age" Content="age:" HorizontalAlignment="Left" Margin="56,341,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.821,1.194"/>
         <Label x:Name="ActivityTime" Content="activity time:" HorizontalAlignment="Left" Margin="56,248,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.821,1.194"/>
-        <Label x:Name="UsernameInfo" Content="" HorizontalAlignment="Left" Margin="137,217,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23"/>
+        <Label x:Name="UsernameInfo" Content="" HorizontalAlignment="Left" Margin="137,217,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="0.526,2.23"/>
         <Label x:Name="ActivityTimeInfo" Content="" HorizontalAlignment="Left" Margin="138,248,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23"/>
         <Label x:Name="HeightInfo" Content="" HorizontalAlignment="Left" Margin="137,279,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23"/>
         <Label x:Name="WeightInfo" Content="" HorizontalAlignment="Left" Margin="137,310,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23"/>
         <Label x:Name="AgeInfo" Content="" HorizontalAlignment="Left" Margin="138,341,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23"/>
-        <Ellipse Name="Avatar" HorizontalAlignment="Left" Height="105" Margin="36,95,0,0" Stroke="Black" VerticalAlignment="Top" Width="105"/>
-        <Rectangle Name="Score" HorizontalAlignment="Left" Height="33" Margin="294,369,0,0" Stroke="Black" VerticalAlignment="Top" Width="350"/>
-        <ComboBox x:Name="Period" HorizontalAlignment="Left" Height="33" Margin="467,85,0,0" VerticalAlignment="Top" Width="154" SelectionChanged="ComboBox_SelectionChanged" FontFamily="Segoe UI">
+        <Rectangle Name="Score" HorizontalAlignment="Left" Height="33" Margin="271,369,0,0" Stroke="Black" VerticalAlignment="Top" Width="350"/>
+        <ComboBox x:Name="Period" HorizontalAlignment="Left" Height="33" Margin="467,85,0,0" VerticalAlignment="Top" Width="154" SelectionChanged="ComboBox_SelectionChanged" FontFamily="Segoe UI" DropDownClosed="Period_DropDownClosed">
             <ComboBoxItem x:Name="PeriodLable1" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="56" >Per week</ComboBoxItem>
             <ComboBoxItem x:Name="PeriodLable2" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="56" >Per month</ComboBoxItem>
             <ComboBoxItem x:Name="PeriodLable3" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="56" >Per year</ComboBoxItem>
         </ComboBox>
-        <Label x:Name="PeriodLable" Content="Period" HorizontalAlignment="Left" Height="27" Margin="476,83,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="0.5,0.5">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="0"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="0"/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
         <Button x:Name="Settings" Content="Settings" HorizontalAlignment="Left" Margin="724,25,0,0" VerticalAlignment="Top" Height="36" Click="Settings_Click"/>
+        <Image Name="Avatar" HorizontalAlignment="Left" Height="100" Margin="32,61,0,0" VerticalAlignment="Top" Width="100"/>
+        <Grid HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="102" Margin="669,145,0,0">
+            <Image  Name="ImageElement1" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="26"/>
+            <Label Name="UpperElement1" Content="Label" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" Width="62"/>
+            <Label Name="LowerElement1" Content="Label" HorizontalAlignment="Left" Margin="40,26,0,0" VerticalAlignment="Top" Width="62"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="102" Margin="669,217,0,0">
+            <Image Name="ImageElement2" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="26"/>
+            <Label Name="UpperElement2" Content="Label" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" Width="62"/>
+            <Label Name="LowerElement2" Content="Label" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" Width="62"/>
+        </Grid>
+        <Button Name="BackwardButton" Content="Previous" HorizontalAlignment="Left" Margin="690,118,0,0" VerticalAlignment="Top" Click="BackwardButton_Click"/>
+        <Button Name="ForwardButton" Content="Next" HorizontalAlignment="Left" Margin="690,272,0,0" VerticalAlignment="Top" Click="ForwardButton_Click"/>
     </Grid>
 </Window>

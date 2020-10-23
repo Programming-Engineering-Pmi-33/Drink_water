@@ -52,7 +52,7 @@ namespace DrinkWater
             }
             else
             {
-                timer.Interval = 300000;
+                timer.Interval = 60000;
             }
             timer.Elapsed += TimerFunction;
             timer.Start();
