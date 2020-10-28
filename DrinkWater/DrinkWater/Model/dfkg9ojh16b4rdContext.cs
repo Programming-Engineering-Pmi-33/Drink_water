@@ -10,15 +10,18 @@ namespace DrinkWater
         {
         }
 
-
         public dfkg9ojh16b4rdContext(DbContextOptions<dfkg9ojh16b4rdContext> options)
             : base(options)
         {
         }
 
+        public virtual DbSet<Dailystatistic> Dailystatistic { get; set; }
         public virtual DbSet<Fluids> Fluids { get; set; }
+        public virtual DbSet<Monthstatistic> Monthstatistic { get; set; }
         public virtual DbSet<Statistics> Statistics { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Weekstatistic> Weekstatistic { get; set; }
+        public virtual DbSet<Yearstatistic> Yearstatistic { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -31,6 +34,17 @@ namespace DrinkWater
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Dailystatistic>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("dailystatistic");
+
+                entity.Property(e => e.Sum)
+                    .HasColumnName("sum")
+                    .HasColumnType("numeric");
+            });
+
             modelBuilder.Entity<Fluids>(entity =>
             {
                 entity.HasKey(e => e.FluidId)
@@ -39,6 +53,19 @@ namespace DrinkWater
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnType("character varying");
+            });
+
+            modelBuilder.Entity<Monthstatistic>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("monthstatistic");
+
+                entity.Property(e => e.Date).HasColumnType("date");
+
+                entity.Property(e => e.Sum)
+                    .HasColumnName("sum")
+                    .HasColumnType("numeric");
             });
 
             modelBuilder.Entity<Statistics>(entity =>
@@ -70,21 +97,49 @@ namespace DrinkWater
                     .IsRequired()
                     .HasColumnType("character varying");
 
-                entity.Property(e => e.Gender)
-                    .IsRequired()
-                    .HasColumnType("character varying");
-
                 entity.Property(e => e.GoingToBed).HasColumnType("time without time zone");
+
+                entity.Property(e => e.NotitficationsPeriod).HasColumnType("time without time zone");
 
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasColumnType("character varying");
+
+                entity.Property(e => e.Salt).HasColumnType("character varying");
+
+                entity.Property(e => e.Sex).HasColumnType("character varying");
 
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasColumnType("character varying");
 
                 entity.Property(e => e.WakeUp).HasColumnType("time without time zone");
+            });
+
+            modelBuilder.Entity<Weekstatistic>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("weekstatistic");
+
+                entity.Property(e => e.Date).HasColumnType("date");
+
+                entity.Property(e => e.Sum)
+                    .HasColumnName("sum")
+                    .HasColumnType("numeric");
+            });
+
+            modelBuilder.Entity<Yearstatistic>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("yearstatistic");
+
+                entity.Property(e => e.Date).HasColumnType("date");
+
+                entity.Property(e => e.Sum)
+                    .HasColumnName("sum")
+                    .HasColumnType("numeric");
             });
 
             OnModelCreatingPartial(modelBuilder);
