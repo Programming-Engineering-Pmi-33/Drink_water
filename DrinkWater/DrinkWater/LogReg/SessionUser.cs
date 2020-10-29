@@ -5,9 +5,9 @@ using System.Text;
 
 namespace DrinkWater.LogReg
 {
-   public class SessionUser
+    public class SessionUser
     {
-        
+     
         private long userId;
         private string username;
         public SessionUser() { }
