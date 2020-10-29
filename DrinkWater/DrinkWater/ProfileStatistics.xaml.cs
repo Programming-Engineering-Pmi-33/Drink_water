@@ -9,8 +9,8 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using System.IO;
 using System.Windows.Media.Imaging;
-using Windows.System;
-using Windows.System.UserProfile;
+using System.Drawing;
+using LiveCharts.Helpers;
 
 namespace DrinkWater
 {
@@ -28,6 +28,7 @@ namespace DrinkWater
         List<DateTime> week;
         List<DateTime> month;
         List<DateTime> year;
+        List<int> yearMonth;
         List<double> weekWaterAmount;
         List<double> monthWaterAmount;
         List<double> yearWaterAmount;
@@ -44,12 +45,12 @@ namespace DrinkWater
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             index = 0;
-            
+
             weekWaterAmount = new List<double>();
             monthWaterAmount = new List<double>();
             yearWaterAmount = new List<double>();
             SeriesCollection = new SeriesCollection();
-            
+
             weekstatistics = (from weekQuery in db.Weekstatistic
                               where SessionUser.UserId == weekQuery.UserIdRef
                               select weekQuery).ToList();
@@ -59,15 +60,16 @@ namespace DrinkWater
             yearstatistics = (from yearQuery in db.Yearstatistic
                               where SessionUser.UserId == yearQuery.UserIdRef
                               select yearQuery).ToList();
-            
+
             fluids = (from fluid in db.Fluids
                       select fluid).ToList();
-            
+
 
             SortedSet<DateTime> sortedWeek = new SortedSet<DateTime>();
             SortedSet<DateTime> sortedMonth = new SortedSet<DateTime>();
             SortedSet<DateTime> sortedYear = new SortedSet<DateTime>();
-            for(int i =0; i< weekstatistics.Count;i++)
+            SortedSet<int> sortedYearMonth = new SortedSet<int>();
+            for (int i = 0; i < weekstatistics.Count; i++)
             {
                 sortedWeek.Add((DateTime)weekstatistics[i].Date);
             }
@@ -79,10 +81,14 @@ namespace DrinkWater
             {
                 sortedYear.Add((DateTime)yearstatistics[i].Date);
             }
+            for (int i = 0; i < yearstatistics.Count; i++)
+            {
+                sortedYearMonth.Add(yearstatistics[i].Date.Value.Month);
+            }
             week = new List<DateTime>(sortedWeek);
             month = new List<DateTime>(sortedMonth);
             year = new List<DateTime>(sortedYear);
-
+            yearMonth = new List<int>(sortedYearMonth);
             Users userInformatoin = (from user in db.Users
                                      where user.UserId == SessionUser.UserId
                                      select user).FirstOrDefault();
@@ -96,7 +102,7 @@ namespace DrinkWater
                                         ? "NULL" : Math.Abs(userInformatoin.GoingToBed.Value.Hours - userInformatoin.WakeUp.Value.Hours).ToString();
 
 
-          
+
 
             if (userInformatoin.Avatar != null)
             {
@@ -131,13 +137,23 @@ namespace DrinkWater
                 }
                 weekWaterAmount.Add(temp);
             }
-            
+
             SeriesCollection.Add(
             new ColumnSeries
             {
                 Title = "Water",
                 Values = new ChartValues<double>(weekWaterAmount)
             });
+
+
+            BalanceLine.Value = (int)userInformatoin.DailyBalance;
+
+            
+
+
+
+
+
 
             List<string> tempList = new List<string>();
             for (int i = 0; i < week.Count; i++)
@@ -159,7 +175,7 @@ namespace DrinkWater
             int n = 7;
             for (int i = 0; i < weekWaterAmount.Count; i++)
             {
-                if (userInformatoin.DailyBalance >= weekWaterAmount[i])
+                if (userInformatoin.DailyBalance <= weekWaterAmount[i])
                 {
                     m++;
                 }
@@ -168,6 +184,8 @@ namespace DrinkWater
             Score2.Content = m;
             Score4.Content = n;
         }
+            
+       
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
@@ -236,7 +254,7 @@ namespace DrinkWater
                 int n = 7;
                 for (int i = 0; i < weekWaterAmount.Count; i++)
                 {
-                    if (userInformatoin.DailyBalance >= weekWaterAmount[i])
+                    if (userInformatoin.DailyBalance <= weekWaterAmount[i])
                     {
                         m++;
                     }
@@ -245,19 +263,29 @@ namespace DrinkWater
                 Score2.Content = m;
                 Score4.Content = n;
 
+                BalanceLine.Value = (int)userInformatoin.DailyBalance;
+
             }
             if (Period.Text == "Per year")
             {
                 yearWaterAmount.Clear();
-                for (int i = 0; i < year.Count; i++)
+                for (int l = 0; l < yearMonth.Count; l++)
                 {
-                    double temp = 0;
-                    for (int j = 0; j < yearstatistics.Count; j++)
+
+                    double rezult = 0;
+                    for (int i = 0; i < year.Count; i++)
                     {
-                        if (year[i].Day == yearstatistics[j].Date.Value.Day && year[i].Month == yearstatistics[j].Date.Value.Month)
-                            temp += (int)yearstatistics[j].Sum * fluids[(int)(yearstatistics[j].FluidIdRef-1)].Koeficient;
+                        double temp = 0;
+                        for (int j = 0; j < yearstatistics.Count; j++)
+                        {
+                            if (year[i].Day == yearstatistics[j].Date.Value.Day && year[i].Month == yearstatistics[j].Date.Value.Month)
+                                temp += (int)yearstatistics[j].Sum * fluids[(int)(yearstatistics[j].FluidIdRef - 1)].Koeficient;
+                        }
+                        if (yearMonth[l] == year[i].Month)
+                            rezult += temp;
+                       
                     }
-                    yearWaterAmount.Add(temp);
+                    yearWaterAmount.Add(rezult);
                 }
                 fluidAmount = new int[fluids.Count];
                 for (int i = 0; i < fluids.Count; i++)
@@ -288,7 +316,7 @@ namespace DrinkWater
                 int n = 12;
                 for (int i = 0; i < yearWaterAmount.Count; i++)
                 {
-                    if (userInformatoin.DailyBalance*12 >= yearWaterAmount[i])
+                    if (userInformatoin.DailyBalance*12 <= yearWaterAmount[i])
                     {
                         m++;
                     }
@@ -296,6 +324,8 @@ namespace DrinkWater
                 }
                 Score2.Content = m;
                 Score4.Content = n;
+
+                BalanceLine.Value = (int)userInformatoin.DailyBalance*30;
 
             }
 
