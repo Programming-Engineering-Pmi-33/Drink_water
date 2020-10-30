@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DrinkWater.LogReg"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="800">
-    <Grid Margin="0,10,0,0">
+        Title="Login" Height="350" Width="500">
+    <Grid Margin="0,10,0,0" RenderTransformOrigin="0.761,0.5">
         <Grid.RowDefinitions>
             <RowDefinition/>
+            <RowDefinition Height="0*"/>
             <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -16,11 +17,14 @@
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="25,46,0,0" Text="Misha" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
-        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Margin="25,93,0,0" Text="mishapassword" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
-        <Button x:Name="button1" Content="create new account" HorizontalAlignment="Left" Margin="25,230,0,0" VerticalAlignment="Top" Height="22" Width="140" Click="Button_Click" RenderTransformOrigin="1.509,0.651"/>
-        <Button x:Name="button2" Content="log in" HorizontalAlignment="Left" Margin="224,230,0,0" VerticalAlignment="Top" Height="22" Width="116" RenderTransformOrigin="-2.009,0.513" Click="button2_Click"/>
+        <TextBox x:Name="textBoxUsername" HorizontalAlignment="Left" Margin="173,63,0,0" Text="Misha" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="20"/>
+        <TextBox x:Name="textBoxPassword" HorizontalAlignment="Left" Margin="173,127,0,0" Text="mishapassword" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="20" RenderTransformOrigin="0.491,0.621"/>
+        <Button x:Name="buttonCreateNewAccount" Content="Create new account" HorizontalAlignment="Left" Margin="51,225,0,0" VerticalAlignment="Top" Height="22" Width="120" Click="Button_Click" RenderTransformOrigin="1.509,0.651"/>
+        <Button x:Name="buttonLogIn" Content="Log in" HorizontalAlignment="Left" Margin="304,225,0,0" VerticalAlignment="Top" Height="22" Width="120" RenderTransformOrigin="-2.009,0.513" Click="button2_Click"/>
+        <Label Content="Username:" HorizontalAlignment="Left" Margin="167,39,0,0" VerticalAlignment="Top" Height="24" RenderTransformOrigin="0.409,0.56"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="169,103,0,0" VerticalAlignment="Top" Height="24"/>
 
     </Grid>
 </Window>

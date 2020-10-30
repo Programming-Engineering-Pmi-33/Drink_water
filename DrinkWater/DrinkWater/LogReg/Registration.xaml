@@ -5,13 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DrinkWater.LogReg"
         mc:Ignorable="d"
-        Title="Registration" Height="450" Width="800">
-    <Grid>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="25,46,0,0" Text="Misha" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
-        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Margin="25,93,0,0" Text="misha@gmail.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
-        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Margin="25,141,0,0" Text="mishapassword" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox  x:Name="textBox4" HorizontalAlignment="Left" Margin="25,194,0,0" Text="mishapassword" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Content="sign up" HorizontalAlignment="Left" Margin="96,288,0,0" VerticalAlignment="Top" Height="22" Width="140" Click="Button_Click"/>
+        Title="Registration" Height="500" Width="800">
+    <Grid RenderTransformOrigin="1.005,0.504">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="textBoxUsername" HorizontalAlignment="Left" Margin="317,74,0,0" Text="Misha" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="20" RenderTransformOrigin="0.538,0.513"/>
+        <TextBox x:Name="textBoxEmail" HorizontalAlignment="Left" Margin="317,139,0,0" Text="misha@gmail.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="20"/>
+        <TextBox x:Name="textBoxPassword" HorizontalAlignment="Left" Margin="317,208,0,0" Text="mishapassword" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+        <TextBox  x:Name="textBoxConfirmPassword" HorizontalAlignment="Left" Margin="317,280,0,0" Text="mishapassword" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
+        <Button x:Name="buttonSignUp" Content="Sign up" HorizontalAlignment="Left" Margin="317,345,0,0" VerticalAlignment="Top" Height="22" Width="120" Click="Button_Click" RenderTransformOrigin="0.494,0.667"/>
+        <Label Content="Username:" HorizontalAlignment="Left" Margin="312,48,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.442,0.67" Width="67"/>
+        <Label Content="Email:" HorizontalAlignment="Left" Margin="312,113,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.442,0.67" Width="67"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="312,182,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.442,0.67" Width="67"/>
+        <Label Content="Confirm password:" HorizontalAlignment="Left" Margin="312,254,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.442,0.67" Width="117"/>
+        <Label x:Name="labelUsername" Content="" HorizontalAlignment="Left" Margin="312,94,0,0" VerticalAlignment="Top" Background="White" Visibility="Hidden" />
+        <Label x:Name="labelEmail" Content="" HorizontalAlignment="Left" Margin="312,159,0,0" VerticalAlignment="Top" Visibility="Hidden"  />
+        <Label x:Name="labelPassword" Content="Label" HorizontalAlignment="Left" Margin="312,226,0,0" VerticalAlignment="Top"  Visibility="Hidden"/>
 
     </Grid>
 </Window>

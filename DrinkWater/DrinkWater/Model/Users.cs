@@ -28,12 +28,12 @@ namespace DrinkWater
 
         public virtual ICollection<Statistics> Statistics { get; set; }
 
-        public Users(string username, string email, string password)
+        public Users(string username,string email, string password,string salt)
         {
-            Username = username;
-            Email = email;
-            Password = password;
+            this.Username = username;
+            this.Email = email;
+            this.Password = password;
+            this.Salt = salt;
         }
-
     }
 }
