@@ -37,6 +37,7 @@ namespace DrinkWater
         public Settings()
         {
             InitializeComponent();
+
         }
 
         public void GetSessionUser(SessionUser user)
@@ -46,19 +47,22 @@ namespace DrinkWater
                         where searchingUser.UserId == sessionUser.UserId
                         select searchingUser).FirstOrDefault();
             timer = new System.Timers.Timer();
+
             if (userData.NotitficationsPeriod != null)
             {
-                timer.Interval = userData.NotitficationsPeriod.Value.TotalMilliseconds;
+                timer.Interval = 100000;
             }
             else
             {
-                timer.Interval = 60000;
+                timer.Interval = 5000;
             }
             timer.Elapsed += TimerFunction;
             timer.Start();
         }
         private void UserParameters_Click(object sender, RoutedEventArgs e)
         {
+            var x = SystemParameters.WorkArea.Width;
+            var y = SystemParameters.WorkArea.Height;
             SetUserParametersVisibility();
             WeightTextBox.Text = userData.Weight.ToString();
             HeightTextBox.Text = userData.Height.ToString();
@@ -140,7 +144,10 @@ namespace DrinkWater
                 userData.Username = UsernameTextBox.Text;
                 userData.Password = PasswordTextBox.Text;
                 userData.Email = EmailTextBox.Text;
-                userData.Avatar = ImageArray;
+                if (ImageArray != null)
+                {
+                    userData.Avatar = ImageArray;
+                }
             }
             string str = NotificationsSettings.Text;
             if(str.Contains("Custom"))

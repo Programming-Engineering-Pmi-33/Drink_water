@@ -5,56 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DrinkWater"
         mc:Ignorable="d"
-        Title="Settings" Height="450" Width="800">
-    <Grid>
-        <Button Name="UserSettingsButton" Content="User Settings" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Click="UserSettings_Click" Width="115"/>
-        <Button Name="UserParametersButton" Content="User Parameters" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Click="UserParameters_Click" Width="115"/>
-        <Button Name="LogOutButton" Content="Log out" HorizontalAlignment="Left" Margin="10,385,0,0" VerticalAlignment="Top" Click="LogOut_Click" Width="115"/>
-        <Image Name="Avatar" HorizontalAlignment="Left" Height="100" Margin="10,22,0,0" VerticalAlignment="Top" Width="100"/>
-        <Grid Name="UserSettingsGrid" HorizontalAlignment="Left" Height="171" Margin="248,90,0,0" VerticalAlignment="Top" Width="329" Visibility="Hidden">
-            <TextBox x:Name ="PasswordTextBox" HorizontalAlignment="Left" Margin="0,97,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="310" Visibility="Visible"/>
-            <TextBox x:Name ="UsernameTextBox" HorizontalAlignment="Left" Margin="0,31,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="310" Visibility="Visible"/>
-            <TextBox x:Name="EmailTextBox" HorizontalAlignment="Center" Margin="0,153,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="329" Visibility="Visible"/>
-            <Label x:Name ="UsernameLabel" Content="Username" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Visibility="Visible"/>
-            <Label x:Name ="PasswordLabel" Content="Password" HorizontalAlignment="Left" Margin="0,70,0,0" VerticalAlignment="Top" Width="120" Visibility="Visible"/>
-            <Label x:Name ="EmailLabel" Content="Email" HorizontalAlignment="Left" Margin="0,127,0,0" VerticalAlignment="Top" Width="120" Visibility="Visible"/>
+        Title="Settings" Height="1050" Width="1876">
+    <Viewbox Stretch="Fill">
+        <Grid Height="1034" Width="1876">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="UserSettingsButton" Content="User Settings" FontSize="24" HorizontalAlignment="Left" Margin="107,406,0,0" VerticalAlignment="Top" Click="UserSettings_Click" Width="320" Height="64" Grid.Column="0" Grid.Row="0"/>
+            <Button x:Name="UserParametersButton" Content="User Parameters" FontSize="24" HorizontalAlignment="Left" Margin="107,494,0,0" VerticalAlignment="Top" Click="UserParameters_Click" Width="320" Height="64"/>
+            <Button x:Name="LogOutButton" Content="Log out" FontSize="24" HorizontalAlignment="Left" Margin="107,892,0,0" VerticalAlignment="Top" Click="LogOut_Click" Width="320" Height="64"/>
+            <Image x:Name="Avatar" HorizontalAlignment="Left" Margin="180,164,0,0" VerticalAlignment="Top" Width="160" Height="160"/>
+            <Grid Name="UserSettingsGrid" HorizontalAlignment="Left" Height="455" Margin="701,228,0,0" VerticalAlignment="Top" Visibility="Hidden">
+                <TextBox x:Name ="PasswordTextBox" Text="TextBox" FontSize="28" TextWrapping="Wrap" Width="711" Height="68" Visibility="Visible" VerticalAlignment="Top" Margin="0,209,0,0" HorizontalAlignment="Left"/>
+                <TextBox x:Name ="UsernameTextBox" Text="TextBox" FontSize="28" TextWrapping="Wrap" Width="711" Height="68" Visibility="Visible" VerticalAlignment="Top" Margin="0,41,0,0" HorizontalAlignment="Left"/>
+                <TextBox x:Name="EmailTextBox" Text="TextBox" FontSize="28" TextWrapping="Wrap" Width="711" Height="68" Visibility="Visible" VerticalAlignment="Top" Margin="0,377,0,0" HorizontalAlignment="Left"/>
+                <Label x:Name ="UsernameLabel" Content="Username:" FontSize="28" Width="164" Height="50" Visibility="Visible" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Label x:Name ="PasswordLabel" Content="Password:" FontSize="28" Width="164" Height="50" Visibility="Visible" VerticalAlignment="Top" Margin="0,168,0,0" HorizontalAlignment="Left"/>
+                <Label x:Name ="EmailLabel" Content="Email:" FontSize="28" Width="164" Height="50" Visibility="Visible" VerticalAlignment="Top" Margin="0,336,0,0" HorizontalAlignment="Left"/>
 
-        </Grid>
+            </Grid>
 
-        <ComboBox x:Name="NotificationsSettings" HorizontalAlignment="Left" Margin="10,271,0,0" VerticalAlignment="Top" Width="120" Visibility="Visible">
-            <ComboBoxItem>Every hour</ComboBoxItem>
-            <ComboBoxItem>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Custom input: " VerticalAlignment="Center"/>
-                    <TextBox Name="CustomPeriodTextBox">///</TextBox>
-                </StackPanel>
-            </ComboBoxItem>
-            <ComboBoxItem>Every day</ComboBoxItem>
-            <ComboBoxItem>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Disabled: " VerticalAlignment="Center"/>
-                    <CheckBox Name="IsDisabled"></CheckBox>
-                </StackPanel>
-            </ComboBoxItem>
-        </ComboBox>
-        <Button Name="SaveChangesButton" Content="Save Changes" HorizontalAlignment="Left" Margin="657,385,0,0" VerticalAlignment="Top" Width="100" Click="SaveChangesButton_Click"/>
-        <Grid Name="UserParametersGrid" HorizontalAlignment="Left" Height="216" Margin="248,64,0,0" VerticalAlignment="Top" Width="369" Visibility="Hidden">
-            <ComboBox x:Name="GenderList" HorizontalAlignment="Left" Margin="0,194,0,0" VerticalAlignment="Top" Width="120" Visibility="Visible">
-                <ComboBoxItem x:Name="Male" IsSelected="False" Content="Male"/>
-                <ComboBoxItem x:Name="Female" IsSelected="False" Content="Female"/>
+            <ComboBox x:Name="NotificationsSettings" Padding="15" HorizontalAlignment="Left" Margin="107,582,0,0" VerticalAlignment="Top" Width="320" Height="64" SelectedIndex="0" FontSize="24" Visibility="Visible">
+                <ComboBoxItem Visibility="Collapsed" FontSize="24" Content="Notitfication schedule"/>
+                <ComboBoxItem Content="Every hour"/>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Custom input: " VerticalAlignment="Center"/>
+                        <TextBox x:Name="CustomPeriodTextBox" Text="///"/>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem Content="Every day"/>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Disabled: " VerticalAlignment="Center"/>
+                        <CheckBox x:Name="IsDisabled"/>
+                    </StackPanel>
+                </ComboBoxItem>
             </ComboBox>
-            <TextBox x:Name ="WakeUpTextBox" HorizontalAlignment="Left" Margin="200,198,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Visibility="Visible"/>
-            <Label x:Name ="ActivityTimeLabel" Content="ActivityTime" HorizontalAlignment="Left" Margin="200,171,0,0" VerticalAlignment="Top" Width="169" Visibility="Visible"/>
-            <TextBox x:Name="WeightTextBox" HorizontalAlignment="Left" Margin="0,26,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
-            <TextBox x:Name="HeightTextBox" HorizontalAlignment="Left" Margin="0,88,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
-            <TextBox x:Name="AgeTextBox" HorizontalAlignment="Left" Margin="0,141,0,0" Text="00:00:00" TextWrapping="Wrap" VerticalAlignment="Top" Width="329"/>
-            <TextBox x:Name="GoingToBedTextBox" HorizontalAlignment="Left" Margin="300,198,0,0" Text="00:00:00" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
-            <Label x:Name="WeightLabel" Content="Weight" HorizontalAlignment="Left" VerticalAlignment="Top" Width="152"/>
-            <Label x:Name="HeightLabel" Content="Height" HorizontalAlignment="Left" Margin="0,62,0,0" VerticalAlignment="Top" Width="152"/>
-            <Label x:Name="AgeLabel" Content="Age" HorizontalAlignment="Left" Margin="0,115,0,0" VerticalAlignment="Top" Width="152"/>
-            <Label x:Name="GenderLabel" Content="Gender" HorizontalAlignment="Left" Margin="0,171,0,0" VerticalAlignment="Top" Width="152"/>
-        </Grid>
-        <Button Name="ChangeAvatar" Content="Change Avatar" HorizontalAlignment="Left" Margin="25,146,0,0" VerticalAlignment="Top" Width="91" Click="ChangeAvatar_Click"/>
+            <Button x:Name="SaveChangesButton" Content="Save Changes" FontSize="24" FontFamily="Roboto" HorizontalAlignment="Left" Margin="1600,892,0,0" VerticalAlignment="Top" Width="202" Height="74" Click="SaveChangesButton_Click"/>
+            <Grid x:Name="UserParametersGrid" HorizontalAlignment="Left" Height="Auto" Margin="701,228,0,0" VerticalAlignment="Top" Width="Auto" Visibility="Hidden">
 
-    </Grid>
+                <ComboBox x:Name="GenderList" FontSize="24" HorizontalAlignment="Left" Margin="9,482,0,0" VerticalAlignment="Top" Width="235" Height="72" SelectedIndex="0" Visibility="Visible" Padding="20">
+                    <ComboBoxItem Visibility="Collapsed" Content="Gender"/>
+                    <ComboBoxItem x:Name="Male" IsSelected="False" Content="Male"/>
+                    <ComboBoxItem x:Name="Female" IsSelected="False" Content="Female"/>
+                </ComboBox>
+                <TextBox x:Name ="WakeUpTextBox" HorizontalAlignment="Left" Margin="380,482,0,0" Text="TextBox" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Height="68" Visibility="Visible"/>
+                <Label x:Name ="ActivityTimeLabel" Content="ActivityTime:" FontSize="28" HorizontalAlignment="Left" Margin="380,432,0,0" VerticalAlignment="Top" Width="169" Visibility="Visible"/>
+                <TextBox x:Name="WeightTextBox" HorizontalAlignment="Left" Margin="0,41,0,0" Text="TextBox" FontSize="28"  TextWrapping="Wrap" VerticalAlignment="Top" Width="711" Height="68"/>
+                <TextBox x:Name="HeightTextBox" HorizontalAlignment="Left" Margin="0,188,0,0" Text="TextBox" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="711" Height="68"/>
+                <TextBox x:Name="AgeTextBox" HorizontalAlignment="Left" Margin="0,335,0,0" Text="TextBox" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="711" Height="68"/>
+                <TextBox x:Name="GoingToBedTextBox" HorizontalAlignment="Left" Margin="649,482,0,0" Text="00:00:00" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Height="68"/>
+                <Label x:Name="WeightLabel" Content="Weight:" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Height="50"/>
+                <Label x:Name="HeightLabel" Content="Height:" FontSize="28" HorizontalAlignment="Left" Margin="0,151,0,0" VerticalAlignment="Top" Width="96" Height="50"/>
+                <Label x:Name="AgeLabel" Content="Age:" FontSize="28" HorizontalAlignment="Left" Margin="0,302,0,0" VerticalAlignment="Top" Width="96" Height="50"/>
+            </Grid>
+            <Button x:Name="ChangeAvatar" Content="Change Avatar" FontSize="24" HorizontalAlignment="Left" Margin="181,343,0,0" VerticalAlignment="Top" Width="158" Height="32" Click="ChangeAvatar_Click"/>
+
+
+        </Grid>
+    </Viewbox>
 </Window>

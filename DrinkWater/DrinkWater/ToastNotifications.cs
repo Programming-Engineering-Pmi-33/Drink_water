@@ -23,11 +23,11 @@ namespace DrinkWater
                         {
                         new AdaptiveText()
                             {
-                            Text = "Matt sent you a friend request"
+                            Text = "Water drink reminder"
                             },
                             new AdaptiveText()
                             {
-                            Text = "Hey, wanna dress up as wizards and ride around on our hoverboards together?"
+                            Text = "Hey, have you drunk enought today?"
                             }
                         },
                     }
