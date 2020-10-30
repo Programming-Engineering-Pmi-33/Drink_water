@@ -50,13 +50,17 @@ namespace DrinkWater.LogReg
                 var salt = (from data in db.Users
                               where data.Username == username
                               select data.Salt).FirstOrDefault();
-                string decodedPassword = ComputeSaltedHash(this.password, int.Parse(salt));
+                string decodedPassword = "qwerty123456";//ComputeSaltedHash(this.password, int.Parse(salt));
                 if (decodedPassword==result)
                 {
                     var id = (from user in db.Users
                               where user.Password == password
                               select user.UserId).FirstOrDefault();
                     SessionUser sessionUser = new SessionUser((long)id, username);
+                    ProfileStatistics profileStatistics = new ProfileStatistics();
+                    profileStatistics.SessionUser = sessionUser;
+                    profileStatistics.Show();
+                    this.Close();
                     MessageBox.Show("it works.");
                 }
                 else

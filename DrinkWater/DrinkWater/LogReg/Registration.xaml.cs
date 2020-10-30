@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing;
+
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -107,7 +107,7 @@ namespace DrinkWater.LogReg
             if (resultName.Count() > 0)
             {
                 labelUsername.Visibility = Visibility.Visible;
-                labelUsername.Foreground = Brushes.Red;
+                labelUsername.Foreground = System.Windows.Media.Brushes.Red;
                 labelUsername.Content = "Username is reserved";
                 isUnique = false;
                 //MessageBox.Show("Username is reserved", "Validation Error");
