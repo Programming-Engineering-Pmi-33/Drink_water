@@ -33,6 +33,7 @@ namespace DrinkWater
         List<double> monthWaterAmount;
         List<double> yearWaterAmount;
         List<Fluids> fluids;
+        List<BitmapImage> Images;
         int[] fluidAmount;
         int index;
 
@@ -63,6 +64,19 @@ namespace DrinkWater
 
             fluids = (from fluid in db.Fluids
                       select fluid).ToList();
+            Images = new List<BitmapImage>();
+            for(int i = 0; i<fluids.Count;i++)
+            {
+                var memoryStream = new MemoryStream(fluids[i].FliudImage);
+                var bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = memoryStream;
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+                bitmap.Freeze();
+                Images.Add(bitmap);
+            }
+           
 
 
             SortedSet<DateTime> sortedWeek = new SortedSet<DateTime>();
@@ -164,8 +178,10 @@ namespace DrinkWater
             Formatter = value => value.ToString("N");
 
             DataContext = this;
+            ImageElement1.Source = Images[index];
             UpperElement1.Content = fluids[index].Name;
             LowerElement1.Content = fluidAmount[index];
+            ImageElement2.Source = Images[index + 1];
             UpperElement2.Content = fluids[index + 1].Name;
             LowerElement2.Content = fluidAmount[index + 1];
 
@@ -214,6 +230,7 @@ namespace DrinkWater
            
             if (Period.Text == "Per week")
             {
+                Axisy.MaxValue = 5000;
                 fluidAmount = new int[fluids.Count];
                 for (int i = 0; i <fluids.Count;i++)
                 {
@@ -268,6 +285,7 @@ namespace DrinkWater
             }
             if (Period.Text == "Per year")
             {
+                Axisy.MaxValue = 150000;
                 yearWaterAmount.Clear();
                 for (int l = 0; l < yearMonth.Count; l++)
                 {
@@ -331,6 +349,7 @@ namespace DrinkWater
 
             if (Period.Text == "Per month")
             {
+                Axisy.MaxValue = 5000;
                 monthWaterAmount.Clear();
                 fluidAmount = new int[fluids.Count];
                 for (int i = 0; i < fluids.Count; i++)
@@ -393,8 +412,10 @@ namespace DrinkWater
             {
                 index = fluidAmount.Length - 1;
             }
+            ImageElement1.Source = Images[index - 1];
             UpperElement1.Content = fluids[index-1].Name;
             LowerElement1.Content = fluidAmount[index-1];
+            ImageElement2.Source = Images[index];
             UpperElement2.Content = fluids[index].Name;
             LowerElement2.Content = fluidAmount[index];
             index--;
@@ -403,9 +424,10 @@ namespace DrinkWater
 
         private void ForwardButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            ImageElement1.Source = Images[index];
             UpperElement1.Content = fluids[index].Name;
             LowerElement1.Content = fluidAmount[index];
+            ImageElement2.Source = Images[index + 1];
             UpperElement2.Content = fluids[index+1].Name;
             LowerElement2.Content = fluidAmount[index+1];
             if (index == fluidAmount.Length - 2)
@@ -417,6 +439,15 @@ namespace DrinkWater
                 index++;
             }
         }
+
+        private void Main_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.GetSessionUser(SessionUser);
+            main.Show();
+            this.Close();
+        }
+
     }
 }
 
