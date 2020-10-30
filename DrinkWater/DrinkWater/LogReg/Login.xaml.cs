@@ -3,6 +3,7 @@ using System.Linq;
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Media;
 
 namespace DrinkWater.LogReg
 {
@@ -43,47 +44,65 @@ namespace DrinkWater.LogReg
 
 
             var result = (from data in db.Users
-                          where data.Username == username
+                          where data.Username!=null && data.Username == username
                           select data.Password).FirstOrDefault();
             if (isInDatabase(result))
             {
+                labelUsername.Content = "";
+                labelUsername.Visibility = Visibility.Hidden;
+               
                 var salt = (from data in db.Users
                               where data.Username == username
                               select data.Salt).FirstOrDefault();
                 string decodedPassword = ComputeSaltedHash(this.password, int.Parse(salt));
                 if (decodedPassword==result)
                 {
+                    labelPassword.Content = "";
+                    labelPassword.Visibility = Visibility.Hidden;
+                   
                     var id = (from user in db.Users
                               where user.Password == password
                               select user.UserId).FirstOrDefault();
                     SessionUser sessionUser = new SessionUser((long)id, username);
                     MessageBox.Show("it works.");
+
+
                 }
                 else
                 {
-                    MessageBox.Show("Incorrect password,try again", "Validation Error");
+                    SetError(labelPassword, "Incorrect password");
+                   
+                    
                 }
             }
             else
             {
-                MessageBox.Show("No such username in database", "Validation Error");
+                SetError(labelUsername, "No such username in database");
+                
+               
             }
         }
 
+        private bool SetError(System.Windows.Controls.Label errorLabel, string message)
+        {
+
+            errorLabel.Visibility = Visibility.Visible;
+            errorLabel.Foreground = Brushes.Red;
+            errorLabel.Content = message;
+
+            return false;
+        }
         public string ComputeSaltedHash(string password, int salt)
         {
-            // Create Byte array of password string
             ASCIIEncoding encoder = new ASCIIEncoding();
             Byte[] _secretBytes = encoder.GetBytes(password);
 
-            // Create a new salt
             Byte[] _saltBytes = new Byte[4];
             _saltBytes[0] = (byte)(salt >> 24);
             _saltBytes[1] = (byte)(salt >> 16);
             _saltBytes[2] = (byte)(salt >> 8);
             _saltBytes[3] = (byte)(salt);
 
-            // append the two arrays
             Byte[] toHash = new Byte[_secretBytes.Length + _saltBytes.Length];
             Array.Copy(_secretBytes, 0, toHash, 0, _secretBytes.Length);
             Array.Copy(_saltBytes, 0, toHash, _secretBytes.Length, _saltBytes.Length);
@@ -93,19 +112,5 @@ namespace DrinkWater.LogReg
 
             return encoder.GetString(computedHash);
         }
-
-        //private string DecodePassword(string encodedPassword)
-        //{
-        //    System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
-        //    System.Text.Decoder utf8Decode = encoder.GetDecoder();
-        //    byte[] decodedBytes = Convert.FromBase64String(encodedPassword);
-        //    int charCount = utf8Decode.GetCharCount(decodedBytes, 0, decodedBytes.Length);
-        //    char[] decodedChar = new char[charCount];
-        //    utf8Decode.GetChars(decodedBytes, 0, decodedBytes.Length, decodedChar, 0);
-        //    string result = new String(decodedChar);
-        //    return result;
-        //}
-
-      
     }
 }
