@@ -35,5 +35,6 @@ namespace DrinkWater
             this.Password = password;
             this.Salt = salt;
         }
+
     }
 }
