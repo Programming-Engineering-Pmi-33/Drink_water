@@ -3,6 +3,7 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,6 @@ namespace DrinkWater
     {
         
         public SeriesCollection SeriesCollection { get; set; }
-        public List<string> Labels { get; set; }
         public Func<string,string> Formatter { get; set; }
 
         static public List<Dailystatistic> Statistic = new List<Dailystatistic>();
@@ -34,14 +34,11 @@ namespace DrinkWater
         static private dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
         public List<Fluids> Fluids=new List<Fluids>();
         public List<KeyValuePair<Label, TextBox>> LabelBox = new List<KeyValuePair<Label, TextBox>>();
+        public List<Image> PictureBox = new List<Image>();
+        public List<Image> Images = new List<Image>();
         public MainWindow()
         {
             InitializeComponent();
-
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-           
         }
        public void GetSessionUser(SessionUser user)
         {
@@ -52,19 +49,42 @@ namespace DrinkWater
             FullStatistics = (from Fullstat in db.Statistics
                               where Fullstat.UserIdRef == sessionUser.UserId
                               select Fullstat).ToList();
+
+            
         }
         private void ListLiquids()
         {
-            LabelBox.Add(new KeyValuePair<Label, TextBox>(Label1, TextBox1));
-            LabelBox.Add(new KeyValuePair<Label, TextBox>(Label2, TextBox2));
-            LabelBox.Add(new KeyValuePair<Label, TextBox>(Label3, TextBox3));
-            LabelBox.Add(new KeyValuePair<Label, TextBox>(Label4, TextBox4));
+            LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid1, Amount1));
+            LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid2, Amount2));
+            LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid3, Amount3));
+            LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid4, Amount4));
+
+            PictureBox.Add(ImageBox1);
+            PictureBox.Add(ImageBox2);
+            PictureBox.Add(ImageBox3);
+            PictureBox.Add(ImageBox4);
 
             Fluids = db.Fluids.ToList();
+            for (int i = 0; i < Fluids.Count; i++)
+            {
+                byte[] img = Fluids[i].FliudImage;
+                if (img != null)
+                {
+                    var memoryStream = new MemoryStream(img);
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.StreamSource = memoryStream;
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.EndInit();
+                    bitmap.Freeze();
+                    Images.Add(new Image { Source = bitmap });
+                }
+            }
 
-            for(int i=0; i<4; i++)
+            for (int i=0; i<4; i++)
             {
                 LabelBox[i].Key.Content = Fluids[i].Name;
+                PictureBox[i].Source = Images[i].Source;
             }
         }
 
@@ -72,22 +92,34 @@ namespace DrinkWater
         {
             SeriesCollection = new SeriesCollection();
             Row.Title = sessionUser.Username.ToString();
+            int balance = (int)db.Users.ToList().First(x => x.UserId == sessionUser.UserId).DailyBalance;
+            BalanceLine.Value = balance;
+            Milliliters.MaxValue = balance + 1000;
+
+
             Row.Width = 100;
-
-            foreach (var item in Statistic)
+            
+            if (Statistic.Count != 0)
             {
-                SeriesCollection.Add(new StackedColumnSeries
+                foreach (var item in Statistic)
                 {
-                    Title = (from f in Fluids
-                                where ((f.FluidId == item.FluidIdRef))
-                                select f.Name).FirstOrDefault().ToString(),
-                    Values = new ChartValues<double> {Double.Parse(item.Sum.ToString())},
-                    StackMode = StackMode.Values,
-                    DataLabels = true
+                    SeriesCollection.Add(new StackedColumnSeries
+                    {
+                        Title = (from f in Fluids
+                                 where ((f.FluidId == item.FluidIdRef))
+                                 select f.Name).FirstOrDefault().ToString(),
+                        
+                        Values = new ChartValues<double> { Double.Parse(item.Sum.ToString()) },
+                        StackMode = StackMode.Values,
+                        DataLabels = true,
+                        MaxColumnWidth =206
 
-                });
+                    }) ;
+                }
+
+                SeriesCollection[0].Values.Add(4d);
+
             }
-            SeriesCollection[0].Values.Add(4d);
 
             Formatter = value => value + "ml";
             DataContext = this;
@@ -157,40 +189,47 @@ namespace DrinkWater
                 if(i-1< 0)
                 {
                     LabelBox[i].Key.Content = Fluids[k].Name;
-                    LabelBox[i].Value.Text = "";
+                    PictureBox[i].Source = Images[k].Source;
                     k--;
                 }
                 else
                 {
                     LabelBox[i].Key.Content = Fluids[i-1].Name;
+                    PictureBox[i].Source = Images[i-1].Source;
                 }
-                
+                LabelBox[i].Value.Text = "";
+
             }
         }
 
         private void Down_Click(object sender, RoutedEventArgs e)
         {
-            int k = 0;
+            int k = Fluids.Count - 1;
             for (int i = 0; i < 4; i++)
             {
-                if (i + 1 >= Fluids.Count - 1)
+                if (i + 1 > Fluids.Count - 1)
                 {
                     LabelBox[i].Key.Content = Fluids[k].Name;
-                    LabelBox[i].Value.Text = "";
-                    k++;
+                    PictureBox[i].Source = Images[k].Source;
+                    k--;
                 }
                 else
                 {
                     LabelBox[i].Key.Content = Fluids[i + 1].Name;
+                    PictureBox[i].Source = Images[i+1].Source;
                 }
+                LabelBox[i].Value.Text = "";
+
 
             }
         }
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
+            GetSessionUser(sessionUser);
             ListLiquids();
             ShowStatistic();
         }
+
     }
 }

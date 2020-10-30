@@ -63,11 +63,11 @@ namespace DrinkWater
             WeightTextBox.Text = userData.Weight.ToString();
             HeightTextBox.Text = userData.Height.ToString();
             AgeTextBox.Text = userData.Age.ToString();
-            if (userData.Gender != null & userData.Gender == "Male")
+            if (userData.Sex != null & userData.Sex == "Male")
             {
                 GenderList.SelectedIndex = 0;
             }
-            if (userData.Gender != null & userData.Gender == "Female")
+            if (userData.Sex != null & userData.Sex == "Female")
             {
                 GenderList.SelectedIndex = 1;
             }
@@ -129,7 +129,7 @@ namespace DrinkWater
                 userData.Weight = (long)Convert.ToInt32(WeightTextBox.Text);
                 userData.Height = (long)Convert.ToInt32(HeightTextBox.Text);
                 userData.Age = (long)Convert.ToInt32(AgeTextBox.Text);
-                userData.Gender = GenderList.Text;
+                userData.Sex = GenderList.Text;
                 var WakeUpString = WakeUpTextBox.Text.Split(":");
                 userData.WakeUp = new TimeSpan(Convert.ToInt32(WakeUpString[0]), Convert.ToInt32(WakeUpString[1]), Convert.ToInt32(WakeUpString[2]));//доробити
                 var GoingToBedString = GoingToBedTextBox.Text.Split(":");
