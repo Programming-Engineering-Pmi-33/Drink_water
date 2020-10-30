@@ -37,6 +37,7 @@ namespace DrinkWater
         public Settings()
         {
             InitializeComponent();
+
         }
 
         public void GetSessionUser(SessionUser user)
@@ -46,28 +47,31 @@ namespace DrinkWater
                         where searchingUser.UserId == sessionUser.UserId
                         select searchingUser).FirstOrDefault();
             timer = new System.Timers.Timer();
+
             if (userData.NotitficationsPeriod != null)
             {
-                timer.Interval = userData.NotitficationsPeriod.Value.TotalMilliseconds;
+                timer.Interval = 100000;
             }
             else
             {
-                timer.Interval = 300000;
+                timer.Interval = 5000;
             }
             timer.Elapsed += TimerFunction;
             timer.Start();
         }
         private void UserParameters_Click(object sender, RoutedEventArgs e)
         {
+            var x = SystemParameters.WorkArea.Width;
+            var y = SystemParameters.WorkArea.Height;
             SetUserParametersVisibility();
             WeightTextBox.Text = userData.Weight.ToString();
             HeightTextBox.Text = userData.Height.ToString();
             AgeTextBox.Text = userData.Age.ToString();
-            if (userData.Gender != null & userData.Gender == "Male")
+            if (userData.Sex != null & userData.Sex == "Male")
             {
                 GenderList.SelectedIndex = 0;
             }
-            if (userData.Gender != null & userData.Gender == "Female")
+            if (userData.Sex != null & userData.Sex == "Female")
             {
                 GenderList.SelectedIndex = 1;
             }
@@ -129,7 +133,7 @@ namespace DrinkWater
                 userData.Weight = (long)Convert.ToInt32(WeightTextBox.Text);
                 userData.Height = (long)Convert.ToInt32(HeightTextBox.Text);
                 userData.Age = (long)Convert.ToInt32(AgeTextBox.Text);
-                userData.Gender = GenderList.Text;
+                userData.Sex = GenderList.Text;
                 var WakeUpString = WakeUpTextBox.Text.Split(":");
                 userData.WakeUp = new TimeSpan(Convert.ToInt32(WakeUpString[0]), Convert.ToInt32(WakeUpString[1]), Convert.ToInt32(WakeUpString[2]));//доробити
                 var GoingToBedString = GoingToBedTextBox.Text.Split(":");
@@ -140,7 +144,10 @@ namespace DrinkWater
                 userData.Username = UsernameTextBox.Text;
                 userData.Password = PasswordTextBox.Text;
                 userData.Email = EmailTextBox.Text;
-                userData.Avatar = ImageArray;
+                if (ImageArray != null)
+                {
+                    userData.Avatar = ImageArray;
+                }
             }
             string str = NotificationsSettings.Text;
             if(str.Contains("Custom"))
