@@ -34,5 +34,6 @@ namespace DrinkWater
             Email = email;
             Password = password;
         }
+
     }
 }
