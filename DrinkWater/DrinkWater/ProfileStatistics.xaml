@@ -6,8 +6,56 @@
         xmlns:local="clr-namespace:DrinkWater" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="ProfileStatistics" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ScrollButton" TargetType="{x:Type Button}">
+
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FontFamily" Value="Marlett"/>
+            <Setter Property="FontSize" Value="25"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}" >
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                            <ContentPresenter  x:Name="contentPresenter" Focusable="False"  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid Margin="0,0,0,-16">
-        <lvc:CartesianChart Name="ABBA" Series="{Binding SeriesCollection}" LegendLocation="Bottom" Margin="226,125,162,90">
+        <lvc:CartesianChart Name="WaterChart" Series="{Binding SeriesCollection}" LegendLocation="Bottom" Margin="226,125,162,90">
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Name="Axisx" Title="Period" Labels="{Binding Labels}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
@@ -40,7 +88,7 @@
             <ComboBoxItem x:Name="PeriodLable2" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="56" >Per month</ComboBoxItem>
             <ComboBoxItem x:Name="PeriodLable3" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="56" >Per year</ComboBoxItem>
         </ComboBox>
-        <Button x:Name="Settings" Content="Settings" HorizontalAlignment="Left" Margin="724,25,0,0" VerticalAlignment="Top" Height="36" Click="Settings_Click" RenderTransformOrigin="0,0" UseLayoutRounding="True">
+        <Button x:Name="SettingsButton" Content="Settings" HorizontalAlignment="Left" Margin="724,25,0,0" VerticalAlignment="Top" Height="36" Click="Settings_Click" RenderTransformOrigin="0,0" UseLayoutRounding="True">
             <Button.LayoutTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -50,7 +98,7 @@
                 </TransformGroup>
             </Button.LayoutTransform>
         </Button>
-        <Image Name="Avatar" HorizontalAlignment="Left" Height="100" Margin="45,85,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image Name="AvatarImage" HorizontalAlignment="Left" Height="100" Margin="45,85,0,0" VerticalAlignment="Top" Width="100"/>
         <Grid HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="102" Margin="676,165,0,0">
             <Image  Name="ImageElement1" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="26"/>
             <Label Name="UpperElement1" Content="Label" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" Width="62"/>
@@ -61,8 +109,8 @@
             <Label Name="UpperElement2" Content="Label" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" Width="62"/>
             <Label Name="LowerElement2" Content="Label" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" Width="62"/>
         </Grid>
-        <Button Name="BackwardButton" Content="Up" HorizontalAlignment="Left" Margin="697,140,0,0" VerticalAlignment="Top" Click="BackwardButton_Click" RenderTransformOrigin="2.477,0.784"/>
-        <Button Name="ForwardButton" Content="Down" HorizontalAlignment="Left" Margin="697,292,0,0" VerticalAlignment="Top" Click="ForwardButton_Click" Width="49"/>
+        <Button Style="{DynamicResource ScrollButton}" Name="BackwardButton" Content="5" HorizontalAlignment="Left" Margin="697,116,0,0" VerticalAlignment="Top" Click="BackwardButton_Click" RenderTransformOrigin="2.477,0.784"/>
+        <Button Style="{DynamicResource ScrollButton}" Name="ForwardButton" Content="6" HorizontalAlignment="Left" Margin="687,309,0,0" VerticalAlignment="Top" Click="ForwardButton_Click" Width="49"/>
         <Label Name="Score1" Content="Balance achieved  " HorizontalAlignment="Left" Margin="327,379,0,0" VerticalAlignment="Top" Width="114"/>
         <Label x:Name="Score2" Content="" HorizontalAlignment="Left" Margin="436,379,0,0" VerticalAlignment="Top" Width="32"/>
         <Label x:Name="Score3" Content="out of" HorizontalAlignment="Left" Margin="473,379,0,0" VerticalAlignment="Top" Width="47"/>
