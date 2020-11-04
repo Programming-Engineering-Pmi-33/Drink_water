@@ -203,5 +203,13 @@ namespace DrinkWater
             ToastNotificationsClass toast = new ToastNotificationsClass();
             toast.ShowNot();
         }
+
+        private void ProfileWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProfileStatistics profileStatistics = new ProfileStatistics();
+            profileStatistics.SessionUser = sessionUser;
+            profileStatistics.Show();
+            this.Close();
+        }
     }
 }
