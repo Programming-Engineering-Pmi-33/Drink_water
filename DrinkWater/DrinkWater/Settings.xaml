@@ -46,7 +46,7 @@
                 </ComboBoxItem>
             </ComboBox>
             <Button x:Name="SaveChangesButton" Content="Save Changes" FontSize="24" FontFamily="Roboto" HorizontalAlignment="Left" Margin="1600,892,0,0" VerticalAlignment="Top" Width="202" Height="74" Click="SaveChangesButton_Click"/>
-            <Grid x:Name="UserParametersGrid" HorizontalAlignment="Left" Height="Auto" Margin="701,228,0,0" VerticalAlignment="Top" Width="Auto" Visibility="Hidden">
+            <Grid x:Name="UserParametersGrid" HorizontalAlignment="Left" Height="Auto" Margin="701,228,0,0" VerticalAlignment="Top" Width="Auto" Visibility="Visible">
 
                 <ComboBox x:Name="GenderList" FontSize="24" HorizontalAlignment="Left" Margin="9,482,0,0" VerticalAlignment="Top" Width="235" Height="72" SelectedIndex="0" Visibility="Visible" Padding="20">
                     <ComboBoxItem Visibility="Collapsed" Content="Gender"/>
@@ -55,15 +55,16 @@
                 </ComboBox>
                 <TextBox x:Name ="WakeUpTextBox" HorizontalAlignment="Left" Margin="380,482,0,0" Text="TextBox" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Height="68" Visibility="Visible"/>
                 <Label x:Name ="ActivityTimeLabel" Content="ActivityTime:" FontSize="28" HorizontalAlignment="Left" Margin="380,432,0,0" VerticalAlignment="Top" Width="169" Visibility="Visible"/>
-                <TextBox x:Name="WeightTextBox" HorizontalAlignment="Left" Margin="0,41,0,0" Text="TextBox" FontSize="28"  TextWrapping="Wrap" VerticalAlignment="Top" Width="711" Height="68"/>
-                <TextBox x:Name="HeightTextBox" HorizontalAlignment="Left" Margin="0,188,0,0" Text="TextBox" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="711" Height="68"/>
-                <TextBox x:Name="AgeTextBox" HorizontalAlignment="Left" Margin="0,335,0,0" Text="TextBox" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="711" Height="68"/>
+                <TextBox x:Name="WeightTextBox" HorizontalAlignment="Center" Margin="0,41,0,0" Text="TextBox" FontSize="28"  TextWrapping="Wrap" VerticalAlignment="Top" Width="813" Height="68"/>
+                <TextBox x:Name="HeightTextBox" HorizontalAlignment="Center" Margin="0,188,0,0" Text="TextBox" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="813" Height="68"/>
+                <TextBox x:Name="AgeTextBox" HorizontalAlignment="Center" Margin="0,335,0,0" Text="TextBox" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="813" Height="68"/>
                 <TextBox x:Name="GoingToBedTextBox" HorizontalAlignment="Left" Margin="649,482,0,0" Text="00:00:00" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Height="68"/>
                 <Label x:Name="WeightLabel" Content="Weight:" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Height="50"/>
                 <Label x:Name="HeightLabel" Content="Height:" FontSize="28" HorizontalAlignment="Left" Margin="0,151,0,0" VerticalAlignment="Top" Width="96" Height="50"/>
                 <Label x:Name="AgeLabel" Content="Age:" FontSize="28" HorizontalAlignment="Left" Margin="0,302,0,0" VerticalAlignment="Top" Width="96" Height="50"/>
             </Grid>
             <Button x:Name="ChangeAvatar" Content="Change Avatar" FontSize="24" HorizontalAlignment="Left" Margin="181,343,0,0" VerticalAlignment="Top" Width="158" Height="32" Click="ChangeAvatar_Click"/>
+            <Button x:Name="ProfileWindowButton" Content="Profile" FontSize="14" HorizontalAlignment="Left" Margin="1739,44,0,0" VerticalAlignment="Top" Height="68" Width="68" Click="ProfileWindowButton_Click"/>
 
 
         </Grid>

@@ -5,6 +5,7 @@ namespace DrinkWater.LogReg
     {
         private long userId;
         private string username;
+
         public SessionUser() { }
         public SessionUser(long userId, string username)
         {
