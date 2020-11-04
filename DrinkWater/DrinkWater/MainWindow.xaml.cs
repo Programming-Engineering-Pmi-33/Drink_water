@@ -49,7 +49,6 @@ namespace DrinkWater
             FullStatistics = (from Fullstat in db.Statistics
                               where Fullstat.UserIdRef == sessionUser.UserId
                               select Fullstat).ToList();
-
             
         }
         private void ListLiquids()
@@ -94,7 +93,6 @@ namespace DrinkWater
             Row.Title = sessionUser.Username.ToString();
             int balance = (int)db.Users.ToList().First(x => x.UserId == sessionUser.UserId).DailyBalance;
             BalanceLine.Value = balance;
-            Milliliters.MaxValue = balance + 1000;
 
 
             Row.Width = 100;
@@ -112,12 +110,12 @@ namespace DrinkWater
                         Values = new ChartValues<double> { Double.Parse(item.Sum.ToString()) },
                         StackMode = StackMode.Values,
                         DataLabels = true,
-                        MaxColumnWidth =206
+                        MaxColumnWidth=206
 
                     }) ;
                 }
 
-                SeriesCollection[0].Values.Add(4d);
+               // SeriesCollection[0].Values.Add(4d);
 
             }
 
@@ -160,11 +158,11 @@ namespace DrinkWater
                         
                     }
                     db.SaveChanges();
-                    List<Dailystatistic> temp = (from US in db.Dailystatistic
+                    List<Dailystatistic> daily_statisticList = (from US in db.Dailystatistic
                                                  where US.UserIdRef == sessionUser.UserId
                                                  select US).ToList();
                     SeriesCollection.Clear();
-                    foreach (Dailystatistic dailystatistic in temp)
+                    foreach (Dailystatistic dailystatistic in daily_statisticList)
                     {
                         SeriesCollection.Add(new StackedColumnSeries
                         {
@@ -173,12 +171,12 @@ namespace DrinkWater
                                      select f.Name).FirstOrDefault().ToString(),
                             Values = new ChartValues<double> { Double.Parse(dailystatistic.Sum.ToString()) },
                             StackMode = StackMode.Values,
-                            DataLabels = true
+                            DataLabels = true,
+                            MaxColumnWidth = 206
                         });
                     }
                 }
             }
-            //ShowStatistic();
         }
 
         private void Up_Click(object sender, RoutedEventArgs e)
@@ -207,7 +205,7 @@ namespace DrinkWater
             int k = Fluids.Count - 1;
             for (int i = 0; i < 4; i++)
             {
-                if (i + 1 > Fluids.Count - 1)
+                if (i + 1 > Fluids.Count )
                 {
                     LabelBox[i].Key.Content = Fluids[k].Name;
                     PictureBox[i].Source = Images[k].Source;

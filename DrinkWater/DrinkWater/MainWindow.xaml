@@ -274,13 +274,13 @@
 
     </Window.Resources>
     <Grid Height="810" Width="1440">
-        <Rectangle HorizontalAlignment="Left" Margin="61,210,0,10" Stroke="Black" Fill="#FFDDDDDD" Width="659"/>
-        <lvc:CartesianChart x:Name="Chart" Series="{Binding SeriesCollection}" LegendLocation="Right" Margin="94,296,752,45" Background="White">
-            <lvc:CartesianChart.AxisX >
-                <lvc:Axis x:Name="Row"  MinValue="0" MaxValue="1" MinWidth="206" Visibility="Hidden"/>
+        <Rectangle HorizontalAlignment="Left" Margin="60,155,0,65" Stroke="Black" Fill="#FFDDDDDD" Width="659"/>
+        <lvc:CartesianChart x:Name="Chart" Series="{Binding SeriesCollection}" LegendLocation="Right"  Margin="93,241,753,100" Background="White">
+            <lvc:CartesianChart.AxisX  >
+                <lvc:Axis x:Name="Row" Visibility="Hidden" MinValue="0" MaxValue="1"  />
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY >
-                <lvc:Axis x:Name="Milliliters" Title="Milliliters" MinValue="0">
+                <lvc:Axis x:Name="Milliliters" Title="Milliliters" MinValue="0" >
                     <lvc:Axis.Sections>
                         <lvc:AxisSection Name="BalanceLine" Value="2000" StrokeThickness="3" Stroke="#F9D648">
                             <lvc:AxisSection.Fill>
@@ -292,26 +292,28 @@
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
 
-        <Button Style="{DynamicResource AddButton}" Content="Add" Height="46" Margin="0,0,29,10" VerticalAlignment="Bottom" Click="Add" FontSize="18" Visibility="Visible" HorizontalAlignment="Right" Width="113" />
-        <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid1"  Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Margin="1196,252,0,0" Height="26"/>
-        <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount1" HorizontalAlignment="Left" Margin="1196,283,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="242" Height="26"/>
-        <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid2"  Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Margin="1196,360,0,0" Height="26"/>
-        <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount2" HorizontalAlignment="Left" Margin="1196,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="242" Height="26"/>
-        <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid3" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Margin="1196,474,0,0" Height="27"/>
-        <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount3" HorizontalAlignment="Left" Margin="1196,505,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="242" Height="26"/>
-        <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid4" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Margin="1196,582,0,0" Height="26"/>
-        <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount4" HorizontalAlignment="Left" Margin="1196,613,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="242" Height="26"/>
-        <Button Style="{DynamicResource ScrollButton}" Content="5" HorizontalAlignment="Left" Margin="1162,228,0,0" VerticalAlignment="Top" Height="25" Width="25" Click="Up_Click" />
-        <Button Style="{DynamicResource ScrollButton}" Content="6" HorizontalAlignment="Left" Margin="1162,646,0,0" VerticalAlignment="Top" Height="25" Width="25" Click="Down_Click" />
-        <Button Style="{DynamicResource ProfileButton}" Content="Profile" HorizontalAlignment="Right" Margin="0,10,112,0" VerticalAlignment="Top" Width="68" Height="68"/>
-        <Button Style="{DynamicResource ProfileButton}" Content="Settings" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="68" Height="68"/>
+        <Button Style="{DynamicResource AddButton}" Content="Add" Height="46" Margin="0,0,68,65" VerticalAlignment="Bottom" Click="Add" FontSize="18" Visibility="Visible" HorizontalAlignment="Right" Width="113" />
+        <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid1"  Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Margin="972,194,0,0" Height="35"/>
+        <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount1" HorizontalAlignment="Left" Margin="972,235,0,0" Text="100" TextWrapping="Wrap" VerticalAlignment="Top" Width="242" Height="26"/>
+        <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid2"  Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Margin="972,336,0,0" Height="34"/>
+        <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount2" HorizontalAlignment="Left" Margin="972,378,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="242" Height="34"/>
+        <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid3" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Margin="972,485,0,0" Height="36"/>
+        <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount3" HorizontalAlignment="Left" Margin="972,526,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="242" Height="34"/>
+        <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid4" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Margin="972,627,0,0" Height="34"/>
+        <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount4" HorizontalAlignment="Left" Margin="972,667,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="242" Height="43"/>
+        <Button Style="{DynamicResource ScrollButton}" Content="5" HorizontalAlignment="Left" Margin="938,155,0,0" VerticalAlignment="Top" Height="35" Width="25" Click="Up_Click" RenderTransformOrigin="0.64,1.378" />
+        <Button Style="{DynamicResource ScrollButton}" Content="6" HorizontalAlignment="Left" Margin="938,711,0,0" VerticalAlignment="Top" Height="34" Width="25" Click="Down_Click" RenderTransformOrigin="0.64,1.365" />
+        <Button Style="{DynamicResource ProfileButton}" Content="Profile" HorizontalAlignment="Right" Margin="0,10,150,0" VerticalAlignment="Top" Width="68" Height="68"/>
+        <Button Style="{DynamicResource ProfileButton}" Content="Settings" HorizontalAlignment="Right" Margin="0,10,48,0" VerticalAlignment="Top" Width="68" Height="68"/>
 
 
-        <Image x:Name="ImageBox1" Width="54"  Margin="1050,251,336,457"  Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" />
-        <Image x:Name="ImageBox2" Width="54" Margin="1050,353,336,357" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" />
-        <Image x:Name="ImageBox3" Width="54" Margin="1050,459,336,250" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" />
-        <Image x:Name="ImageBox4" Width="54" Margin="1050,560,336,149" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" />
-        <Label Content="Statistics of drinking water per day" HorizontalAlignment="Left" Height="49" Margin="93,228,0,0" VerticalAlignment="Top" Width="594" FontSize="28" RenderTransformOrigin="0.532,0.535"/>
+        <Image x:Name="ImageBox1" Width="54"  Margin="826,193,560,483"  Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" />
+        <Image x:Name="ImageBox2" Width="54" Margin="826,327,560,352" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" />
+        <Image x:Name="ImageBox3" Width="54" Margin="826,466,560,212" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" />
+        <Image x:Name="ImageBox4" Width="54" Margin="826,598,560,80" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" />
+        <Label Content="Statistics of drinking water per day" HorizontalAlignment="Left" Height="49" Margin="92,173,0,0" VerticalAlignment="Top" Width="594" FontSize="28" RenderTransformOrigin="0.532,0.535"/>
+        <Rectangle HorizontalAlignment="Left" Height="61" Margin="61,17,0,0" Stroke="Black" VerticalAlignment="Top" Width="61" Fill="#FFDDDDDD" AutomationProperties.Name="Logo"/>
+        <Label Content="Logo" HorizontalAlignment="Left" Height="33" Margin="70,31,0,0" VerticalAlignment="Top" Width="44" FontSize="14" RenderTransformOrigin="0.532,0.535"/>
 
 
     </Grid>
