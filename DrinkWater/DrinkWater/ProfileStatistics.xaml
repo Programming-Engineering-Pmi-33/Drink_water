@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="ProfileStatistics" Height="900" Width="1600" Loaded="Window_Loaded">
     <Window.Resources>
+        
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -153,9 +154,15 @@
         <Label x:Name="HeightInfo" Content="" HorizontalAlignment="Left" Margin="236,522,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
         <Label x:Name="WeightInfo" Content="" HorizontalAlignment="Left" Margin="237,561,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
         <Label x:Name="AgeInfo" Content="" HorizontalAlignment="Left" Margin="235,600,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
-        <ComboBox x:Name="Period" HorizontalAlignment="Left" Height="31" Margin="1028,158,0,0" VerticalAlignment="Top" Width="178" SelectionChanged="ComboBox_SelectionChanged" DropDownClosed="Period_DropDownClosed" SelectedIndex="0" Background="#6983D9" Foreground="#FF200E0E" BorderBrush="#FF6983D9" FontSize="14">
+        <ComboBox x:Name="Period" HorizontalAlignment="Left" Height="31" Margin="1028,158,0,0" VerticalAlignment="Top" Width="178" SelectionChanged="ComboBox_SelectionChanged" DropDownClosed="Period_DropDownClosed" SelectedIndex="0" Foreground="#FF200E0E" BorderBrush="#FF6983D9" FontSize="14">
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Background" Value="#E1EDFD"/>
+                    <Setter Property="BorderBrush" Value="#E1EDFD"/>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+            
 
-            <ComboBoxItem Visibility="Collapsed" Content="Period" Background="#FFE1EDFD" BorderBrush="Black" Foreground="Black"/>
             <ComboBoxItem x:Name="PeriodLable1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per week" Background="#E1EDFD" />
             <ComboBoxItem x:Name="PeriodLable2" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per month" Background="#E1EDFD"/>
             <ComboBoxItem x:Name="PeriodLable3" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per year" Background="#E1EDFD" />
@@ -200,5 +207,23 @@
         <Button Style="{DynamicResource ScrollButton}" x:Name="Main" FontFamily="Segoe MDL2 Assets" Content="&#xE76B;" HorizontalAlignment="Left" Height="36" Margin="45,33,0,0" VerticalAlignment="Top" Width="50" Click="Main_Click" RenderTransformOrigin="0.487,0.482" FontSize="30" Foreground="#FFEB5757"/>
         <ComboBox HorizontalAlignment="Left" Height="8" Margin="301,85,0,0" VerticalAlignment="Top" Width="0"/>
         <Label Content="Profile and Statistics" HorizontalAlignment="Left" Height="40" Margin="100,31,0,0" VerticalAlignment="Top" Width="230" FontSize="24" Foreground="#FF0A2140"/>
+        <Grid HorizontalAlignment="Left" Height="88" VerticalAlignment="Top" Width="133" Margin="1315,482,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="51*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="ImageElement3" HorizontalAlignment="Left" Height="72" VerticalAlignment="Top" Width="72" Margin="0,5,0,0"/>
+            <Label x:Name="UpperElement3" Content="Label" HorizontalAlignment="Left" Margin="86,12,0,0" VerticalAlignment="Top" Width="46" FontSize="14" Grid.ColumnSpan="2"/>
+            <Label x:Name="LowerElement3" Content="Label" HorizontalAlignment="Left" Margin="86,42,0,0" VerticalAlignment="Top" Width="47" RenderTransformOrigin="1.555,5.943" FontSize="14" Height="26" Grid.ColumnSpan="2"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="88" VerticalAlignment="Top" Width="133" Margin="1315,578,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="51*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="ImageElement4" HorizontalAlignment="Left" Height="72" VerticalAlignment="Top" Width="72" Margin="0,5,0,0"/>
+            <Label x:Name="UpperElement4" Content="Label" HorizontalAlignment="Left" Margin="86,12,0,0" VerticalAlignment="Top" Width="46" FontSize="14" Grid.ColumnSpan="2"/>
+            <Label x:Name="LowerElement4" Content="Label" HorizontalAlignment="Left" Margin="86,42,0,0" VerticalAlignment="Top" Width="47" RenderTransformOrigin="1.555,5.943" FontSize="14" Height="26" Grid.ColumnSpan="2"/>
+        </Grid>
     </Grid>
 </Window>

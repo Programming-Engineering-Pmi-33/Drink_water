@@ -211,5 +211,20 @@ namespace DrinkWater
             profileStatistics.Show();
             this.Close();
         }
+
+        private void AgeTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void WeightTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Main_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

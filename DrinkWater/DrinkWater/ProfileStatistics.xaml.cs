@@ -269,6 +269,12 @@ namespace DrinkWater
             ImageElement2.Source = Images[index + 1];
             UpperElement2.Content = fluids[index + 1].Name;
             LowerElement2.Content = fluidAmount[index + 1];
+            ImageElement3.Source = Images[index + 2];
+            UpperElement3.Content = fluids[index + 2].Name;
+            LowerElement3.Content = fluidAmount[index + 2];
+            ImageElement4.Source = Images[index + 3];
+            UpperElement4.Content = fluids[index + 3].Name;
+            LowerElement4.Content = fluidAmount[index + 3];
         }
         private void ShowScore(int m, int n, int koef, List<double> items)
         {
@@ -374,36 +380,46 @@ namespace DrinkWater
 
         private void BackwardButton_Click(object sender, RoutedEventArgs e)
         {
-            if (index == 0)
+            if (index <= 2 || index == 0)
             {
                 index = fluidAmount.Length - 1;
             }
-            ImageElement1.Source = Images[index - 1];
-            UpperElement1.Content = fluids[index-1].Name;
-            LowerElement1.Content = fluidAmount[index-1];
-            ImageElement2.Source = Images[index];
-            UpperElement2.Content = fluids[index].Name;
-            LowerElement2.Content = fluidAmount[index];
+            ImageElement1.Source = Images[index - 3];
+            UpperElement1.Content = fluids[index-3].Name;
+            LowerElement1.Content = fluidAmount[index-3];
+            ImageElement2.Source = Images[index-2];
+            UpperElement2.Content = fluids[index-2].Name;
+            LowerElement2.Content = fluidAmount[index -2];
+            ImageElement3.Source = Images[index - 1];
+            UpperElement3.Content = fluids[index - 1].Name;
+            LowerElement3.Content = fluidAmount[index - 1];
+            ImageElement4.Source = Images[index];
+            UpperElement4.Content = fluids[index].Name;
+            LowerElement4.Content = fluidAmount[index];
             index--;
 
         }
 
         private void ForwardButton_Click(object sender, RoutedEventArgs e)
         {
-            ImageElement1.Source = Images[index];
-            UpperElement1.Content = fluids[index].Name;
-            LowerElement1.Content = fluidAmount[index];
-            ImageElement2.Source = Images[index + 1];
-            UpperElement2.Content = fluids[index+1].Name;
-            LowerElement2.Content = fluidAmount[index+1];
-            if (index == fluidAmount.Length - 2)
+            if (index >= 2)
             {
                 index = 0;
             }
-            else
-            {
-                index++;
-            }
+            ImageElement1.Source = Images[index];
+            UpperElement1.Content = fluids[index].Name;
+            LowerElement1.Content = fluidAmount[index];
+            ImageElement2.Source = Images[index+1];
+            UpperElement2.Content = fluids[index+1].Name;
+            LowerElement2.Content = fluidAmount[index+1];
+            ImageElement3.Source = Images[index+2];
+            UpperElement3.Content = fluids[index + 2].Name;
+            LowerElement3.Content = fluidAmount[index + 2];
+            ImageElement4.Source = Images[index + 3];
+            UpperElement4.Content = fluids[index + 3].Name;
+            LowerElement4.Content = fluidAmount[index + 3];
+            index++;
+            
         }
 
         private void Main_Click(object sender, RoutedEventArgs e)
