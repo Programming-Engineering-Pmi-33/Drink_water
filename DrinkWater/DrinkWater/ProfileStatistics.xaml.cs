@@ -42,6 +42,19 @@ namespace DrinkWater
             InitializeComponent();
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            SeriesCollection = new SeriesCollection();
+            GetStatistics();
+            GetFluids();
+            SortPeriod();
+            ShowUserInfo();
+            ShowFluidFPhotos();
+            GetConsumedWaterPerWeek();
+            DrawWeekChart();
+            ShowScore(0, 7, 1, weekWaterAmount);
+            Scroll();
+        }
         private void GetStatistics()
         {
             weekstatistics = (from weekQuery in db.Weekstatistic
@@ -179,7 +192,7 @@ namespace DrinkWater
             for (int l = 0; l < yearMonth.Count; l++)
             {
 
-                double rezult = 0;
+                double result = 0;
                 for (int i = 0; i < year.Count; i++)
                 {
                     double temp = 0;
@@ -189,10 +202,10 @@ namespace DrinkWater
                             temp += (int)yearstatistics[j].Sum * fluids[(int)(yearstatistics[j].FluidIdRef - 1)].Koeficient;
                     }
                     if (yearMonth[l] == year[i].Month)
-                        rezult += temp;
+                        result += temp;
 
                 }
-                yearWaterAmount.Add(rezult);
+                yearWaterAmount.Add(result);
             }
             fluidAmount = new int[fluids.Count];
             for (int i = 0; i < fluids.Count; i++)
@@ -240,25 +253,14 @@ namespace DrinkWater
             UsernameInfo.Content = userInformation.Username;
             WeightInfo.Content = String.IsNullOrEmpty(userInformation.Weight.ToString()) ? "NULL" : userInformation.Weight.ToString();
             HeightInfo.Content = String.IsNullOrEmpty(userInformation.Height.ToString()) ? "NULL" : userInformation.Height.ToString();
-            AgeInfo.Content = String.IsNullOrEmpty(userInformation.Age.ToString()) ? "NULL" : userInformation.Age.ToString();
+            AgeInfo.Content = userInformation.Age.ToString();
+            //AgeInfo.Content = String.IsNullOrEmpty(userInformation.Age.ToString()) ? "NULL" : userInformation.Age.ToString();
             ActivityTimeInfo.Content = String.IsNullOrEmpty(userInformation.GoingToBed.ToString())
                                         || String.IsNullOrEmpty(userInformation.WakeUp.ToString())
                                         ? "NULL" : Math.Abs(userInformation.GoingToBed.Value.Hours - userInformation.WakeUp.Value.Hours).ToString();
             ShowAvatar();
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            SeriesCollection = new SeriesCollection();
-            GetStatistics();
-            GetFluids();
-            SortPeriod();
-            ShowUserInfo();
-            ShowFluidFPhotos();
-            GetConsumedWaterPerWeek();
-            DrawWeekChart();
-            ShowScore(0, 7, 1, weekWaterAmount);
-            Scroll();
-        }
+       
         private void Scroll()
         {
             ImageElement1.Source = Images[index];
