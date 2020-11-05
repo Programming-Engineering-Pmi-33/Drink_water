@@ -20,9 +20,9 @@ using System.Windows.Shapes;
 namespace DrinkWater
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Main.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Main : Window
     {
         
         public SeriesCollection SeriesCollection { get; set; }
@@ -36,7 +36,7 @@ namespace DrinkWater
         public List<KeyValuePair<Label, TextBox>> LabelBox = new List<KeyValuePair<Label, TextBox>>();
         public List<Image> PictureBox = new List<Image>();
         public List<Image> Images = new List<Image>();
-        public MainWindow()
+        public Main()
         {
             InitializeComponent();
         }
@@ -229,5 +229,14 @@ namespace DrinkWater
             ShowStatistic();
         }
 
+        private void ProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Setting_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
