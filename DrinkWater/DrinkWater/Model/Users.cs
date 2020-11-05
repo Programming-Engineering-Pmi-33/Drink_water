@@ -27,12 +27,13 @@ namespace DrinkWater
         public string Salt { get; set; }
 
         public virtual ICollection<Statistics> Statistics { get; set; }
-        public Users(string username, string email, string password)
-        {
-            Username = username;
-            Email = email;
-            Password = password;
-        }
 
+        public Users(string username,string email, string password,string salt)
+        {
+            this.Username = username;
+            this.Email = email;
+            this.Password = password;
+            this.Salt = salt;
+        }
     }
 }
