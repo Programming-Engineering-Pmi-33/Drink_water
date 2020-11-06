@@ -424,7 +424,7 @@ namespace DrinkWater
 
         private void Main_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new MainWindow();
+            Main main= new Main();
             main.GetSessionUser(SessionUser);
             main.Show();
             this.Close();

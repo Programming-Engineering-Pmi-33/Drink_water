@@ -90,7 +90,6 @@ namespace DrinkWater
         public void ShowStatistic()
         {
             SeriesCollection = new SeriesCollection();
-            Row.Title = sessionUser.Username.ToString();
             int balance = (int)db.Users.ToList().First(x => x.UserId == sessionUser.UserId).DailyBalance;
             BalanceLine.Value = balance;
 
@@ -106,76 +105,82 @@ namespace DrinkWater
                         Title = (from f in Fluids
                                  where ((f.FluidId == item.FluidIdRef))
                                  select f.Name).FirstOrDefault().ToString(),
-                        
                         Values = new ChartValues<double> { Double.Parse(item.Sum.ToString()) },
                         StackMode = StackMode.Values,
                         DataLabels = true,
                         MaxColumnWidth=206
 
-                    }) ;
+                    }); ;
                 }
 
-               // SeriesCollection[0].Values.Add(4d);
-
             }
-
-            Formatter = value => value + "ml";
             DataContext = this;
 
         }
         private void Add(object sender, RoutedEventArgs e)
         {
-
             foreach (var item in LabelBox)
             {
+                item.Value.BorderBrush = Brushes.LightGray;
                 string text = item.Value.Text;
-                long fluidId= (from fl in Fluids
-                              where fl.Name == item.Key.Content.ToString()
-                              select fl).First().FluidId;
-                if (!string.IsNullOrEmpty(item.Value.Text))
+                if (IsValidAmount(text))
                 {
-                    Statistics find = FullStatistics.Find(s => (s.FluidIdRef == fluidId & s.UserIdRef == sessionUser.UserId & s.Date.Day == DateTime.Now.Day));
+                    long fluidId = (from fl in Fluids
+                                    where fl.Name == item.Key.Content.ToString()
+                                    select fl).First().FluidId;
+                    if (!string.IsNullOrEmpty(item.Value.Text))
+                    {
+                        Statistics find = FullStatistics.Find(s => (s.FluidIdRef == fluidId & s.UserIdRef == sessionUser.UserId & s.Date.Day == DateTime.Now.Day));
 
-                    if (find != null)
-                    {
-                        FullStatistics.Find(s=>s.StatisticId==find.StatisticId).FluidAmount += long.Parse(text);
-                        db.Statistics.Update(find);
-                      
-                    }
-                    else
-                    {
-                        Statistics statistics = new Statistics
+                        if (find != null)
                         {
-                            UserIdRef = (int)sessionUser.UserId,
-                            FluidIdRef = fluidId,
-                            FluidAmount = long.Parse(text),
-                            Date = DateTime.Now,
+                            FullStatistics.Find(s => s.StatisticId == find.StatisticId).FluidAmount += long.Parse(text);
+                            db.Statistics.Update(find);
 
-                        };
-                        FullStatistics.Add(statistics);
-                     
-                        db.Statistics.Add(statistics);
-                        
-                    }
-                    db.SaveChanges();
-                    List<Dailystatistic> daily_statisticList = (from US in db.Dailystatistic
-                                                 where US.UserIdRef == sessionUser.UserId
-                                                 select US).ToList();
-                    SeriesCollection.Clear();
-                    foreach (Dailystatistic dailystatistic in daily_statisticList)
-                    {
-                        SeriesCollection.Add(new StackedColumnSeries
+                        }
+                        else
                         {
-                            Title = (from f in Fluids
-                                     where ((f.FluidId == dailystatistic.FluidIdRef))
-                                     select f.Name).FirstOrDefault().ToString(),
-                            Values = new ChartValues<double> { Double.Parse(dailystatistic.Sum.ToString()) },
-                            StackMode = StackMode.Values,
-                            DataLabels = true,
-                            MaxColumnWidth = 206
-                        });
+                            Statistics statistics = new Statistics
+                            {
+                                UserIdRef = (int)sessionUser.UserId,
+                                FluidIdRef = fluidId,
+                                FluidAmount = long.Parse(text),
+                                Date = DateTime.Now,
+
+                            };
+                            FullStatistics.Add(statistics);
+
+                            db.Statistics.Add(statistics);
+
+                        }
+                        db.SaveChanges();
+                        List<Dailystatistic> daily_statisticList = (from US in db.Dailystatistic
+                                                                    where US.UserIdRef == sessionUser.UserId
+                                                                    select US).ToList();
+                        SeriesCollection.Clear();
+                        foreach (Dailystatistic dailystatistic in daily_statisticList)
+                        {
+                            SeriesCollection.Add(new StackedColumnSeries
+                            {
+                                Title = (from f in Fluids
+                                         where ((f.FluidId == dailystatistic.FluidIdRef))
+                                         select f.Name).FirstOrDefault().ToString(),
+                                Values = new ChartValues<double> { Double.Parse(dailystatistic.Sum.ToString()) },
+                                StackMode = StackMode.Values,
+                                DataLabels = true,
+                                MaxColumnWidth = 206
+                            });
+                        }
                     }
                 }
+                else if(!IsValidAmount(text)&&text != "")
+                {
+                    item.Value.BorderBrush = Brushes.Red;
+                }
+            }
+            foreach (var item in LabelBox)
+            {
+                item.Value.Text = "";
             }
         }
 
@@ -231,12 +236,30 @@ namespace DrinkWater
 
         private void ProfileButton_Click(object sender, RoutedEventArgs e)
         {
+            ProfileStatistics profile = new ProfileStatistics();
+            profile.SessionUser = sessionUser;
+            profile.Show();
+            this.Close();
 
+           
         }
 
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
-
+            Settings settings = new Settings();
+            settings.GetSessionUser(sessionUser);
+            settings.Show();
+            this.Close();
+        }
+        
+        public bool IsValidAmount(string text)
+        {
+            bool IsValid = false;
+            long test;
+            if (long.TryParse(text, out test)&& test>0 && test<6000){
+                IsValid = true;
+            }
+            return IsValid;
         }
     }
 }

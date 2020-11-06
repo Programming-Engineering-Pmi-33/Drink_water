@@ -31,8 +31,8 @@ namespace DrinkWater.LogReg
         {
             try
             {
-                this.username = textBox1.Text;
-                this.password = textBox2.Text;
+                this.username = textBoxUsername.Text;
+                this.password = textBoxPassword.Text;
                 var result = (from data in db.Users
                               where data.Username == username
                               select data.Password).FirstOrDefault();
