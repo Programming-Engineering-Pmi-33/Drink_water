@@ -12,6 +12,11 @@ namespace DrinkWater.LogReg
             Username = username;
         }
 
+        public SessionUser()
+        {
+           
+        }
+
         public long UserId { get => userId; set => userId = value; }
         public string Username { get => username; set => username = value; }
     }
