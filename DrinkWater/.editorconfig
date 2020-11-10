@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# SA1001: Commas should be spaced correctly
+dotnet_diagnostic.SA1001.severity = warning

@@ -1,46 +1,40 @@
-﻿using DrinkWater.LogReg;
-using LiveCharts;
-using LiveCharts.Wpf;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace DrinkWater
+﻿namespace DrinkWater
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media.Imaging;
+    using DrinkWater.LogReg;
+    using LiveCharts;
+    using LiveCharts.Wpf;
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        
         public SeriesCollection SeriesCollection { get; set; }
-        public Func<string,string> Formatter { get; set; }
 
-        static public List<Dailystatistic> Statistic = new List<Dailystatistic>();
+        public Func<string, string> Formatter { get; set; }
+
+        public static List<Dailystatistic> Statistic = new List<Dailystatistic>();
         static public List<Statistics> FullStatistics = new List<Statistics>();
         static private SessionUser sessionUser = new SessionUser();
         static private dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
-        public List<Fluids> Fluids=new List<Fluids>();
+        public List<Fluids> Fluids = new List<Fluids>();
         public List<KeyValuePair<Label, TextBox>> LabelBox = new List<KeyValuePair<Label, TextBox>>();
         public List<Image> PictureBox = new List<Image>();
-        public List<Image> Images = new List<Image>();
+        private List<Image> Images = new List<Image>();
+
         public MainWindow()
         {
             InitializeComponent();
         }
-       public void GetSessionUser(SessionUser user)
+
+        public void GetSessionUser(SessionUser user)
         {
             sessionUser = user;
             Statistic = (from US in db.Dailystatistic
@@ -49,9 +43,8 @@ namespace DrinkWater
             FullStatistics = (from Fullstat in db.Statistics
                               where Fullstat.UserIdRef == sessionUser.UserId
                               select Fullstat).ToList();
-
-            
         }
+
         private void ListLiquids()
         {
             LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid1, Amount1));
@@ -81,7 +74,7 @@ namespace DrinkWater
                 }
             }
 
-            for (int i=0; i<4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 LabelBox[i].Key.Content = Fluids[i].Name;
                 PictureBox[i].Source = Images[i].Source;
@@ -95,10 +88,8 @@ namespace DrinkWater
             int balance = (int)db.Users.ToList().First(x => x.UserId == sessionUser.UserId).DailyBalance;
             BalanceLine.Value = balance;
             Milliliters.MaxValue = balance + 1000;
-
-
             Row.Width = 100;
-            
+
             if (Statistic.Count != 0)
             {
                 foreach (var item in Statistic)
@@ -106,43 +97,39 @@ namespace DrinkWater
                     SeriesCollection.Add(new StackedColumnSeries
                     {
                         Title = (from f in Fluids
-                                 where ((f.FluidId == item.FluidIdRef))
+                                 where f.FluidId == item.FluidIdRef
                                  select f.Name).FirstOrDefault().ToString(),
-                        
-                        Values = new ChartValues<double> { Double.Parse(item.Sum.ToString()) },
+
+                        Values = new ChartValues<double> { double.Parse(item.Sum.ToString()) },
                         StackMode = StackMode.Values,
                         DataLabels = true,
-                        MaxColumnWidth =206
-
-                    }) ;
+                        MaxColumnWidth = 206,
+                    });
                 }
 
                 SeriesCollection[0].Values.Add(4d);
-
             }
 
             Formatter = value => value + "ml";
             DataContext = this;
-
         }
+
         private void Add(object sender, RoutedEventArgs e)
         {
-
             foreach (var item in LabelBox)
             {
                 string text = item.Value.Text;
-                long fluidId= (from fl in Fluids
-                              where fl.Name == item.Key.Content.ToString()
-                              select fl).First().FluidId;
+                long fluidId = (from fl in Fluids
+                                where fl.Name == item.Key.Content.ToString()
+                                select fl).First().FluidId;
                 if (!string.IsNullOrEmpty(item.Value.Text))
                 {
                     Statistics find = FullStatistics.Find(s => (s.FluidIdRef == fluidId & s.UserIdRef == sessionUser.UserId & s.Date.Day == DateTime.Now.Day));
 
                     if (find != null)
                     {
-                        FullStatistics.Find(s=>s.StatisticId==find.StatisticId).FluidAmount += long.Parse(text);
+                        FullStatistics.Find(s => s.StatisticId == find.StatisticId).FluidAmount += long.Parse(text);
                         db.Statistics.Update(find);
-                      
                     }
                     else
                     {
@@ -152,13 +139,13 @@ namespace DrinkWater
                             FluidIdRef = fluidId,
                             FluidAmount = long.Parse(text),
                             Date = DateTime.Now,
-
                         };
+
                         FullStatistics.Add(statistics);
-                     
+
                         db.Statistics.Add(statistics);
-                        
                     }
+
                     db.SaveChanges();
                     List<Dailystatistic> temp = (from US in db.Dailystatistic
                                                  where US.UserIdRef == sessionUser.UserId
@@ -169,24 +156,25 @@ namespace DrinkWater
                         SeriesCollection.Add(new StackedColumnSeries
                         {
                             Title = (from f in Fluids
-                                     where ((f.FluidId == dailystatistic.FluidIdRef))
+                                     where f.FluidId == dailystatistic.FluidIdRef
                                      select f.Name).FirstOrDefault().ToString(),
-                            Values = new ChartValues<double> { Double.Parse(dailystatistic.Sum.ToString()) },
+                            Values = new ChartValues<double> { double.Parse(dailystatistic.Sum.ToString()) },
                             StackMode = StackMode.Values,
-                            DataLabels = true
+                            DataLabels = true,
                         });
                     }
                 }
             }
+
             //ShowStatistic();
         }
 
         private void Up_Click(object sender, RoutedEventArgs e)
         {
-            int k = Fluids.Count-1;
-            for (int i = 3; i >=0; i--)
+            int k = Fluids.Count - 1;
+            for (int i = 3; i >= 0; i--)
             {
-                if(i-1< 0)
+                if (i - 1 < 0)
                 {
                     LabelBox[i].Key.Content = Fluids[k].Name;
                     PictureBox[i].Source = Images[k].Source;
@@ -194,11 +182,11 @@ namespace DrinkWater
                 }
                 else
                 {
-                    LabelBox[i].Key.Content = Fluids[i-1].Name;
-                    PictureBox[i].Source = Images[i-1].Source;
+                    LabelBox[i].Key.Content = Fluids[i - 1].Name;
+                    PictureBox[i].Source = Images[i - 1].Source;
                 }
-                LabelBox[i].Value.Text = "";
 
+                LabelBox[i].Value.Text = string.Empty;
             }
         }
 
@@ -216,11 +204,10 @@ namespace DrinkWater
                 else
                 {
                     LabelBox[i].Key.Content = Fluids[i + 1].Name;
-                    PictureBox[i].Source = Images[i+1].Source;
+                    PictureBox[i].Source = Images[i + 1].Source;
                 }
-                LabelBox[i].Value.Text = "";
 
-
+                LabelBox[i].Value.Text = string.Empty;
             }
         }
 
@@ -230,6 +217,5 @@ namespace DrinkWater
             ListLiquids();
             ShowStatistic();
         }
-
     }
 }

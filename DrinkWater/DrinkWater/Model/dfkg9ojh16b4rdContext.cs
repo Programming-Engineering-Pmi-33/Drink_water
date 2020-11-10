@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace DrinkWater
 {
@@ -16,11 +14,17 @@ namespace DrinkWater
         }
 
         public virtual DbSet<Dailystatistic> Dailystatistic { get; set; }
+
         public virtual DbSet<Fluids> Fluids { get; set; }
+
         public virtual DbSet<Monthstatistic> Monthstatistic { get; set; }
+
         public virtual DbSet<Statistics> Statistics { get; set; }
+
         public virtual DbSet<Users> Users { get; set; }
+
         public virtual DbSet<Weekstatistic> Weekstatistic { get; set; }
+
         public virtual DbSet<Yearstatistic> Yearstatistic { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

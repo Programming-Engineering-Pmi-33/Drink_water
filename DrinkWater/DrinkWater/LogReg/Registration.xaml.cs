@@ -49,6 +49,5 @@ namespace DrinkWater.LogReg
                 }
             }
         }
-
     }
 }

@@ -16,7 +16,8 @@ namespace DrinkWater.Services
             _db = db;
         }
 
-        public bool IsValid(Label labelUsername, string username,
+        public bool IsValid(
+            Label labelUsername, string username,
             Label labelEmail, string email,
             Label labelPassword, string password)
         {
@@ -96,7 +97,7 @@ namespace DrinkWater.Services
 
             if (string.IsNullOrWhiteSpace(password))
             {
-                SetError(labelPassword, "Password is required");//function void
+                SetError(labelPassword, "Password is required"); //function void
             }
             else if (password.ToString().Length < 8)
             {

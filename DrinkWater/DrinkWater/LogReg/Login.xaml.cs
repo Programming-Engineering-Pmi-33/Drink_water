@@ -1,15 +1,15 @@
-﻿using System.Windows;
-using System.Linq;
-using DrinkWater.Services;
-
-namespace DrinkWater.LogReg
+﻿namespace DrinkWater.LogReg
 {
+    using System.Linq;
+    using System.Windows;
+    using DrinkWater.Services;
+
     /// <summary>
     /// Interaction logic for Login.xaml
     /// </summary>
     public partial class Login : Window
     {
-        public dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
+        private dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
         private string username;
         private string password;
 
@@ -41,8 +41,8 @@ namespace DrinkWater.LogReg
             this.password = textBoxPassword.Text;
 
             var salt = (from data in db.Users
-                        where data.Username != null && data.Username == username//хешований пароль не витягувати перевіряти відразу через лінкю витягувати тільки солт.
-                        select data.Salt).FirstOrDefault();//хешування паролю і сет ерор винести в окремий клас.
+                        where data.Username != null && data.Username == username // хешований пароль не витягувати перевіряти відразу через лінкю витягувати тільки солт.
+                        select data.Salt).FirstOrDefault(); // хешування паролю і сет ерор винести в окремий клас.
 
             if (salt != null)
             {
