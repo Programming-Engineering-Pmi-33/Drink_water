@@ -47,10 +47,9 @@ namespace DrinkWater
                         where searchingUser.UserId == sessionUser.UserId
                         select searchingUser).FirstOrDefault();
             timer = new System.Timers.Timer();
-
             if (userData.NotitficationsPeriod != null)
             {
-                timer.Interval = 100000;
+                timer.Interval = 1000;
             }
             else
             {

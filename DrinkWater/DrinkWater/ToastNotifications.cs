@@ -39,7 +39,7 @@ namespace DrinkWater
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(toastContent.GetContent());
             var toast = new ToastNotification(xmlDoc);
-            ToastNotificationManager.CreateToastNotifier("Drink Water").Show(toast); // Display 
+            ToastNotificationManager.CreateToastNotifier(@"{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe").Show(toast); // Display 
         }
     }
 }
