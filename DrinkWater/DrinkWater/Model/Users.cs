@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DrinkWater
+﻿namespace DrinkWater
 {
+    using System;
+    using System.Collections.Generic;
+
     public partial class Users
     {
         public Users()

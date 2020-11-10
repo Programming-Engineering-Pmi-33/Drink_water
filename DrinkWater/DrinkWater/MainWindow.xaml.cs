@@ -12,7 +12,7 @@
     using LiveCharts.Wpf;
 
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainWindow.xaml.
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -21,9 +21,9 @@
         public Func<string, string> Formatter { get; set; }
 
         public static List<Dailystatistic> Statistic = new List<Dailystatistic>();
-        static public List<Statistics> FullStatistics = new List<Statistics>();
-        static private SessionUser sessionUser = new SessionUser();
-        static private dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
+        public static List<Statistics> FullStatistics = new List<Statistics>();
+        private static SessionUser sessionUser = new SessionUser();
+        private static dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
         public List<Fluids> Fluids = new List<Fluids>();
         public List<KeyValuePair<Label, TextBox>> LabelBox = new List<KeyValuePair<Label, TextBox>>();
         public List<Image> PictureBox = new List<Image>();
@@ -166,7 +166,7 @@
                 }
             }
 
-            //ShowStatistic();
+            // ShowStatistic();
         }
 
         private void Up_Click(object sender, RoutedEventArgs e)

@@ -1,17 +1,17 @@
-﻿using DrinkWater.LogReg;
-using Microsoft.Win32;
-using System;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-
-namespace DrinkWater
+﻿namespace DrinkWater
 {
+    using System;
+    using System.Drawing;
+    using System.IO;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media.Imaging;
+    using DrinkWater.LogReg;
+    using Microsoft.Win32;
+
     /// <summary>
-    /// Interaction logic for Settings.xaml
+    /// Interaction logic for Settings.xaml.
     /// </summary>
     public partial class Settings : Window
     {

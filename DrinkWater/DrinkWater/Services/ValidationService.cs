@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-
-namespace DrinkWater.Services
+﻿namespace DrinkWater.Services
 {
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+
     public class ValidationService
     {
         private const string EMAIL_REGEX = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
@@ -17,9 +17,12 @@ namespace DrinkWater.Services
         }
 
         public bool IsValid(
-            Label labelUsername, string username,
-            Label labelEmail, string email,
-            Label labelPassword, string password)
+            Label labelUsername,
+            string username,
+            Label labelEmail,
+            string email,
+            Label labelPassword,
+            string password)
         {
             bool isCorrectUsername = isValidUsername(labelUsername, username);
             bool isCorrectEmail = isValidEmail(labelEmail, email);
@@ -97,7 +100,7 @@ namespace DrinkWater.Services
 
             if (string.IsNullOrWhiteSpace(password))
             {
-                SetError(labelPassword, "Password is required"); //function void
+                SetError(labelPassword, "Password is required"); // function void
             }
             else if (password.ToString().Length < 8)
             {

@@ -1,10 +1,10 @@
-﻿using DrinkWater.Services;
-using System.Windows;
-
-namespace DrinkWater.LogReg
+﻿namespace DrinkWater.LogReg
 {
+    using System.Windows;
+    using DrinkWater.Services;
+
     /// <summary>
-    /// Interaction logic for Registration.xaml
+    /// Interaction logic for Registration.xaml.
     /// </summary>
     public partial class Registration : Window
     {
@@ -23,7 +23,7 @@ namespace DrinkWater.LogReg
 
         private void buttonSignUp_Click(object sender, RoutedEventArgs e)
         {
-            //зробити дизайн під ваерфрейми.
+            // зробити дизайн під ваерфрейми.
             this.username = textBoxUsername.Text;
             this.email = textBoxEmail.Text;
             this.password = textBoxPassword.Text;

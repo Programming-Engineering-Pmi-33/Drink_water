@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace DrinkWater
+﻿namespace DrinkWater
 {
+    using System;
+
     public partial class Yearstatistic
     {
         public int? UserIdRef { get; set; }

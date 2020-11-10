@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace DrinkWater
+﻿namespace DrinkWater
 {
+    using System.Collections.Generic;
+
     public partial class Fluids
     {
         public Fluids()

@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace DrinkWater
+﻿namespace DrinkWater
 {
+    using Microsoft.EntityFrameworkCore;
+
     public partial class dfkg9ojh16b4rdContext : DbContext
     {
         public dfkg9ojh16b4rdContext()

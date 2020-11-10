@@ -12,7 +12,7 @@
     using LiveCharts.Wpf;
 
     /// <summary>
-    /// Interaction logic for ProfileStatistics.xaml
+    /// Interaction logic for ProfileStatistics.xaml.
     /// </summary>
     ///
     public partial class ProfileStatistics : Window

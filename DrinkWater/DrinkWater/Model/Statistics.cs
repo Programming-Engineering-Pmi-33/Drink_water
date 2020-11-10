@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace DrinkWater
+﻿namespace DrinkWater
 {
+    using System;
+
     public partial class Statistics
     {
         public int StatisticId { get; set; }

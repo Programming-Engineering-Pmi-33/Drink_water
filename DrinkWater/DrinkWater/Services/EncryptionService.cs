@@ -1,9 +1,9 @@
-﻿using System;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace DrinkWater.Services
+﻿namespace DrinkWater.Services
 {
+    using System;
+    using System.Security.Cryptography;
+    using System.Text;
+
     public class EncryptionService
     {
         public static int CreateRandomSalt()

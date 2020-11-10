@@ -5,7 +5,7 @@
     using DrinkWater.Services;
 
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for Login.xaml.
     /// </summary>
     public partial class Login : Window
     {
