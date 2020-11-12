@@ -8,17 +8,17 @@ namespace DrinkWater.LogReg
     /// </summary>
     public partial class Registration : Window
     {
-        public dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
-
         private string username;
         private string email;
         private string password;
+        private UsersService _usersService;
         private ValidationService _validationService;
 
         public Registration()
         {
             InitializeComponent();
-            _validationService = new ValidationService(db);
+            _usersService = UsersService.GetService;
+            _validationService = new ValidationService(_usersService);
         }
 
         private void buttonSignUp_Click(object sender, RoutedEventArgs e)
@@ -37,8 +37,9 @@ namespace DrinkWater.LogReg
 
                     string hashedPassword = EncryptionService.ComputeSaltedHash(this.password, salt);
                     Users user = new Users(username, email, hashedPassword, salt.ToString());
-                    db.Users.Add(user);
-                    db.SaveChanges();
+
+                    _usersService.RegisterUser(user);
+
                     Login login = new Login();
                     login.Show();
                     this.Close();

@@ -9,13 +9,14 @@ namespace DrinkWater.LogReg
     /// </summary>
     public partial class Login : Window
     {
-        public dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
         private string username;
         private string password;
+        private UsersService _usersService;
 
         public Login()
         {
             InitializeComponent();
+            _usersService = UsersService.GetService;
         }
 
         private void buttonCreateNewAccount_Click(object sender, RoutedEventArgs e)
@@ -40,18 +41,13 @@ namespace DrinkWater.LogReg
             this.username = textBoxUsername.Text;
             this.password = textBoxPassword.Text;
 
-            var salt = (from data in db.Users
-                        where data.Username != null && data.Username == username//хешований пароль не витягувати перевіряти відразу через лінкю витягувати тільки солт.
-                        select data.Salt).FirstOrDefault();//хешування паролю і сет ерор винести в окремий клас.
+            var salt = _usersService.GetUserSalt(username);
 
             if (salt != null)
             {
                 labelUsername.Visibility = Visibility.Hidden;
-                string hashedPassword = EncryptionService.ComputeSaltedHash(this.password, int.Parse(salt));
 
-                var userId = (from data in db.Users
-                              where data.Username != null && data.Username == username && data.Password == hashedPassword
-                              select data.UserId).FirstOrDefault();
+                var userId = _usersService.GetUserId(username, password, salt);
 
                 if (userId > 0)
                 {
