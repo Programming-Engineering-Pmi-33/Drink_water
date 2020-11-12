@@ -1,43 +1,29 @@
-﻿using DrinkWater.LogReg;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Linq;
-using System.Xml.Serialization;
-using Microsoft.EntityFrameworkCore;
-using System.Drawing;
-using Microsoft.Win32;
-using System.IO;
-using Microsoft.Toolkit.Uwp.Notifications;
-using Windows.Data.Xml.Dom;
-using Windows.UI.Notifications;
-using System.Threading;
-using Windows.System;
-
-namespace DrinkWater
+﻿namespace DrinkWater
 {
+    using System;
+    using System.Drawing;
+    using System.IO;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media.Imaging;
+    using DrinkWater.LogReg;
+    using Microsoft.Win32;
+
     /// <summary>
-    /// Interaction logic for Settings.xaml
+    /// Interaction logic for Settings.xaml.
     /// </summary>
     public partial class Settings : Window
     {
-        static private SessionUser sessionUser = new SessionUser();
-        static private dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
-        static byte[] ImageArray;
-        System.Timers.Timer timer;
-        static Users userData;
+        private static SessionUser sessionUser = new SessionUser();
+        private static dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
+        public static byte[] ImageArray;
+        public System.Timers.Timer timer;
+        public static Users userData;
+
         public Settings()
         {
             InitializeComponent();
-
         }
 
         public void GetSessionUser(SessionUser user)
@@ -47,18 +33,19 @@ namespace DrinkWater
                         where searchingUser.UserId == sessionUser.UserId
                         select searchingUser).FirstOrDefault();
             timer = new System.Timers.Timer();
-
             if (userData.NotitficationsPeriod != null)
             {
-                timer.Interval = 100000;
+                timer.Interval = 1000;
             }
             else
             {
                 timer.Interval = 5000;
             }
+
             timer.Elapsed += TimerFunction;
             timer.Start();
         }
+
         private void UserParameters_Click(object sender, RoutedEventArgs e)
         {
             var x = SystemParameters.WorkArea.Width;
@@ -71,10 +58,12 @@ namespace DrinkWater
             {
                 GenderList.SelectedIndex = 0;
             }
+
             if (userData.Sex != null & userData.Sex == "Female")
             {
                 GenderList.SelectedIndex = 1;
             }
+
             WakeUpTextBox.Text = userData.WakeUp.ToString();
             GoingToBedTextBox.Text = userData.GoingToBed.ToString();
         }
@@ -96,8 +85,6 @@ namespace DrinkWater
                 bitmap.Freeze();
                 Avatar.Source = bitmap;
             }
-            
-
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
@@ -108,15 +95,16 @@ namespace DrinkWater
             loginWindow.Show();
             this.Close();
         }
+
         protected void SetUserSettingsVisibility()
         {
-
             UserSettingsGrid.Visibility = Visibility.Visible;
             if (UserParametersGrid.Visibility == Visibility.Visible)
             {
                 UserParametersGrid.Visibility = Visibility.Hidden;
             }
         }
+
         protected void SetUserParametersVisibility()
         {
             UserParametersGrid.Visibility = Visibility.Visible;
@@ -135,10 +123,11 @@ namespace DrinkWater
                 userData.Age = (long)Convert.ToInt32(AgeTextBox.Text);
                 userData.Sex = GenderList.Text;
                 var WakeUpString = WakeUpTextBox.Text.Split(":");
-                userData.WakeUp = new TimeSpan(Convert.ToInt32(WakeUpString[0]), Convert.ToInt32(WakeUpString[1]), Convert.ToInt32(WakeUpString[2]));//доробити
+                userData.WakeUp = new TimeSpan(Convert.ToInt32(WakeUpString[0]), Convert.ToInt32(WakeUpString[1]), Convert.ToInt32(WakeUpString[2])); // доробити
                 var GoingToBedString = GoingToBedTextBox.Text.Split(":");
                 userData.GoingToBed = new TimeSpan(Convert.ToInt32(GoingToBedString[0]), Convert.ToInt32(GoingToBedString[1]), Convert.ToInt32(GoingToBedString[2]));
             }
+
             if (UserSettingsGrid.Visibility == Visibility.Visible)
             {
                 userData.Username = UsernameTextBox.Text;
@@ -149,15 +138,17 @@ namespace DrinkWater
                     userData.Avatar = ImageArray;
                 }
             }
+
             string str = NotificationsSettings.Text;
-            if(str.Contains("Custom"))
+            if (str.Contains("Custom"))
             {
                 userData.NotitficationsPeriod = new TimeSpan(Convert.ToInt32(CustomPeriodTextBox.Text), 0, 0);
             }
-            switch(NotificationsSettings.Text)
+
+            switch (NotificationsSettings.Text)
             {
                 case "Every hour":
-                    userData.NotitficationsPeriod = new TimeSpan(1,0,0);
+                    userData.NotitficationsPeriod = new TimeSpan(1, 0, 0);
                     break;
 
                 case "Every day":
@@ -166,8 +157,8 @@ namespace DrinkWater
 
                 default:
                     break;
-
             }
+
             userData.DisableNotifications = Convert.ToBoolean(IsDisabled.Content);
             db.SaveChanges();
         }
@@ -182,8 +173,8 @@ namespace DrinkWater
                 Bitmap bitmap = new Bitmap(dlg.FileName);
                 Avatar.Source = ConvertBitmap(bitmap);
             }
-
         }
+
         public BitmapImage ConvertBitmap(Bitmap bitmap)
         {
             MemoryStream ms = new MemoryStream();
@@ -214,17 +205,14 @@ namespace DrinkWater
 
         private void AgeTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
         }
 
         private void WeightTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
         }
 
         private void Main_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }
