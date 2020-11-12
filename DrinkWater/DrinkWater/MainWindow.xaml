@@ -7,7 +7,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
-        Title="Main"  Height="900" Width="1600" Loaded="Window_Loaded_1" WindowStartupLocation="CenterScreen" WindowState="Minimized">
+        Title="Drink Water"  Height="900" Width="1600" Loaded="Window_Loaded_1" WindowStartupLocation="CenterScreen" WindowState="Minimized">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">

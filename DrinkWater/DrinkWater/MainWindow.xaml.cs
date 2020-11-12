@@ -26,6 +26,7 @@ namespace DrinkWater
     {
         
         public SeriesCollection SeriesCollection { get; set; }
+       
         public Func<string,string> Formatter { get; set; }
 
         static public List<Dailystatistic> Statistic = new List<Dailystatistic>();
@@ -114,6 +115,8 @@ namespace DrinkWater
                 }
 
             }
+            SeriesCollection.Reverse();
+
             DataContext = this;
 
         }
@@ -157,7 +160,10 @@ namespace DrinkWater
                         List<Dailystatistic> daily_statisticList = (from US in db.Dailystatistic
                                                                     where US.UserIdRef == sessionUser.UserId
                                                                     select US).ToList();
-                        SeriesCollection.Clear();
+                        if (SeriesCollection.Count() != 0)
+                        {
+                            SeriesCollection.Clear();
+                        }
                         foreach (Dailystatistic dailystatistic in daily_statisticList)
                         {
                             SeriesCollection.Add(new StackedColumnSeries
@@ -172,15 +178,16 @@ namespace DrinkWater
                             });
                         }
                     }
+                    foreach (var item1 in LabelBox)
+                    {
+                        item1.Value.Text = "";
+                    }
                 }
-                else if(!IsValidAmount(text)&&text != "")
+                else if (!IsValidAmount(text) && text != "")
                 {
                     item.Value.BorderBrush = Brushes.Red;
                 }
-            }
-            foreach (var item in LabelBox)
-            {
-                item.Value.Text = "";
+                SeriesCollection.Reverse();
             }
         }
 
