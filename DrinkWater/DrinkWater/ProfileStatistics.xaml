@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DrinkWater" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="ProfileStatistics" Height="900" Width="1600" Loaded="Window_Loaded"
+        Title="Profile and Statistics" Height="900" Width="1600" Loaded="Window_Loaded"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.Resources>
 
@@ -363,7 +363,7 @@
             <ComboBoxItem x:Name="PeriodLable2" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per month" Background="#E1EDFD"/>
             <ComboBoxItem x:Name="PeriodLable3" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per year" Background="#E1EDFD" />
         </ComboBox>
-        <Button Style="{DynamicResource SettingsButton}" x:Name="SettingsButton" FontFamily="Segoe MDL2 Assets" Content="&#xE115;" HorizontalAlignment="Left" Margin="1414,22,0,0" VerticalAlignment="Top" Height="68" Click="Settings_Click" RenderTransformOrigin="0,0" UseLayoutRounding="True" Width="68" Background="#FFF39A9A" BorderBrush="#FFF39A9A" FontSize="30" FontWeight="Bold">
+        <Button Style="{DynamicResource SettingsButton}" x:Name="SettingsButton" FontFamily="Segoe MDL2 Assets" Content="&#xE115;" HorizontalAlignment="Left" Margin="1414,22,0,0" VerticalAlignment="Top" Height="68" Click="Settings_Click" RenderTransformOrigin="0,0" UseLayoutRounding="True" Width="68" Background="#FF0A2140" BorderBrush="#FF0A2140" FontSize="30" FontWeight="Bold" Foreground="#FFD4D3D3">
             <Button.LayoutTransform>
                 <TransformGroup>
 
@@ -380,7 +380,7 @@
                   Center="100,100" RadiusX="75" RadiusY="75"/>
             </Image.Clip>
         </Image>
-        <Grid HorizontalAlignment="Left" Height="79" VerticalAlignment="Top" Width="133" Margin="1313,247,0,0">
+        <Grid HorizontalAlignment="Left" Height="79" VerticalAlignment="Top" Width="133" Margin="1313,273,0,0">
             <Image  x:Name="ImageElement1" HorizontalAlignment="Left" Height="71" VerticalAlignment="Top" Width="72" Margin="0,6,0,0"/>
             <Label x:Name="UpperElement1" Content="Label" HorizontalAlignment="Left" Margin="85,10,0,0" VerticalAlignment="Top" Width="48" FontSize="14"/>
             <Label x:Name="LowerElement1" Content="Label" Margin="85,40,1,0" VerticalAlignment="Top" FontSize="14"/>
@@ -394,13 +394,13 @@
             <Label x:Name="UpperElement2" Content="Label" HorizontalAlignment="Left" Margin="86,12,0,0" VerticalAlignment="Top" Width="46" FontSize="14" Grid.ColumnSpan="2"/>
             <Label x:Name="LowerElement2" Content="Label" HorizontalAlignment="Left" Margin="86,42,0,0" VerticalAlignment="Top" Width="47" RenderTransformOrigin="1.555,5.943" FontSize="14" Height="26" Grid.ColumnSpan="2"/>
         </Grid>
-        <Button Style="{DynamicResource ScrollButton}" x:Name="BackwardButton" Content="5" HorizontalAlignment="Left" Margin="1356,191,0,0" VerticalAlignment="Top" Click="BackwardButton_Click" RenderTransformOrigin="2.477,0.784" Foreground="#FF0A2140" FontSize="36"/>
+        <Button Style="{DynamicResource ScrollButton}" x:Name="BackwardButton" Content="5" HorizontalAlignment="Left" Margin="1356,217,0,0" VerticalAlignment="Top" Click="BackwardButton_Click" RenderTransformOrigin="2.477,0.784" Foreground="#FF0A2140" FontSize="36"/>
         <Button Style="{DynamicResource ScrollButton}" x:Name="ForwardButton" Content="6" HorizontalAlignment="Left" Margin="1352,691,0,0" VerticalAlignment="Top" Click="ForwardButton_Click" Width="48" Foreground="#FF0A2140" FontSize="36"/>
         <Label x:Name="Score1" Content="Balance achieved  " HorizontalAlignment="Left" Margin="636,702,0,0" VerticalAlignment="Top" Width="278" FontSize="30" Foreground="#FF0A2140"/>
         <Label x:Name="Score2" Content="" HorizontalAlignment="Left" Margin="870,703,0,0" VerticalAlignment="Top" Width="69" FontSize="30" Foreground="#FFEB5757"/>
         <Label x:Name="Score3" Content="out of" HorizontalAlignment="Left" Margin="895,702,0,0" VerticalAlignment="Top" Width="104" FontSize="30" Foreground="#FF0A2140"/>
         <Label x:Name="Score4" Content="" HorizontalAlignment="Left" Margin="984,702,0,0" VerticalAlignment="Top" Width="59" FontSize="30" Foreground="#FFEB5757"/>
-        <Button Style="{DynamicResource ScrollButton}" x:Name="Main" FontFamily="Segoe MDL2 Assets" Content="&#xE76B;" HorizontalAlignment="Left" Height="36" Margin="45,33,0,0" VerticalAlignment="Top" Width="50" Click="Main_Click" RenderTransformOrigin="0.487,0.482" FontSize="30" Foreground="#FFEB5757"/>
+        <Button Style="{DynamicResource ScrollButton}" x:Name="Main" FontFamily="Segoe MDL2 Assets" Content="&#xE76B;" HorizontalAlignment="Left" Height="36" Margin="45,33,0,0" VerticalAlignment="Top" Width="50" Click="Main_Click" RenderTransformOrigin="0.487,0.482" FontSize="30" Foreground="#FF0A2140"/>
         <ComboBox HorizontalAlignment="Left" Height="8" Margin="301,85,0,0" VerticalAlignment="Top" Width="0"/>
         <Label Content="Profile and Statistics" HorizontalAlignment="Left" Height="40" Margin="100,31,0,0" VerticalAlignment="Top" Width="230" FontSize="24" Foreground="#FF0A2140"/>
         <Grid HorizontalAlignment="Left" Height="88" VerticalAlignment="Top" Width="133" Margin="1315,482,0,0">
@@ -421,5 +421,6 @@
             <Label x:Name="UpperElement4" Content="Label" HorizontalAlignment="Left" Margin="86,12,0,0" VerticalAlignment="Top" Width="46" FontSize="14" Grid.ColumnSpan="2"/>
             <Label x:Name="LowerElement4" Content="Label" HorizontalAlignment="Left" Margin="86,42,0,0" VerticalAlignment="Top" Width="47" RenderTransformOrigin="1.555,5.943" FontSize="14" Height="26" Grid.ColumnSpan="2"/>
         </Grid>
+        <Label Content="Total" HorizontalAlignment="Left" Margin="1347,165,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#FF0A2140"/>
     </Grid>
 </Window>
