@@ -24,7 +24,7 @@
         public static List<Statistics> FullStatistics = new List<Statistics>();
         private static SessionUser sessionUser = new SessionUser();
         private static dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
-        public List<Fluids> Fluids = new List<Fluids>();
+        private List<Fluids> Fluids = new List<Fluids>();
         public List<KeyValuePair<Label, TextBox>> LabelBox = new List<KeyValuePair<Label, TextBox>>();
         public List<Image> PictureBox = new List<Image>();
         private List<Image> Images = new List<Image>();

@@ -44,11 +44,10 @@
                         where data.Username != null && data.Username == username // хешований пароль не витягувати перевіряти відразу через лінкю витягувати тільки солт.
                         select data.Salt).FirstOrDefault(); // хешування паролю і сет ерор винести в окремий клас.
 
-            //if (salt != null)
-            //{
+            // if (salt != null)
+            // {
             //    labelUsername.Visibility = Visibility.Hidden;
-            //    string hashedPassword = EncryptionService.ComputeSaltedHash(this.password, int.Parse(salt));
-
+            // string hashedPassword = EncryptionService.ComputeSaltedHash(this.password, int.Parse(salt));
             var userId = (from data in db.Users
                           where data.Username != null && data.Username == username && data.Password == "qwerty123456"
                           select data.UserId).FirstOrDefault();
@@ -64,6 +63,7 @@
                 this.Close();
                 MessageBox.Show("it works.");
             }
+
             //    else
             //    {
             //        ValidationService.SetError(labelPassword, "Incorrect password");

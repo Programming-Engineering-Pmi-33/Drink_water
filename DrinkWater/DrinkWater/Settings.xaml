@@ -171,14 +171,14 @@
             </Rectangle>
             <Button Style="{DynamicResource Buttons}" x:Name="UserSettingsButton" Content="User Settings" FontSize="24" HorizontalAlignment="Left" Margin="107,481,0,0" VerticalAlignment="Top" Click="UserSettings_Click" Width="320" Height="64" Grid.Column="0" Grid.Row="0" Background="#FFE1EDFD" BorderBrush="#FFE1EDFD" Foreground="#FF0A2140"/>
             <Button  Style="{DynamicResource Buttons}" x:Name="UserParametersButton" Content="User Parameters" FontSize="24" HorizontalAlignment="Left" Margin="107,569,0,0" VerticalAlignment="Top" Click="UserParameters_Click" Width="320" Height="64" Background="#FFE1EDFD" BorderBrush="#FFE1EDFD" Foreground="#FF0A2140"/>
-            <Button  x:Name="LogOutButton" Content="Log out" FontSize="24" HorizontalAlignment="Left" Margin="107,877,0,0" VerticalAlignment="Top" Click="LogOut_Click" Width="320" Height="64" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold" Foreground="#FF0A2140"/>
+            <Button  x:Name="LogOutButton" Content="Log out" FontSize="24" HorizontalAlignment="Left" Margin="108,813,0,0" VerticalAlignment="Top" Click="LogOut_Click" Width="320" Height="64" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold" Foreground="#FF0A2140"/>
             <Image  x:Name="Avatar" HorizontalAlignment="Left" Height="230" Margin="170,162,0,0" VerticalAlignment="Top" Width="261">
                 <Image.Clip>
                     <EllipseGeometry
                   Center="100,100" RadiusX="73" RadiusY="73"/>
                 </Image.Clip>
             </Image>
-            <Grid x:Name="UserSettingsGrid" HorizontalAlignment="Left" Height="455" Margin="701,270,0,0" VerticalAlignment="Top" Visibility="Visible">
+            <Grid x:Name="UserSettingsGrid" HorizontalAlignment="Left" Height="455" Margin="701,270,0,0" VerticalAlignment="Top" Visibility="Hidden">
                 <TextBox x:Name ="PasswordTextBox" Text="********" Padding="10" FontSize="28" TextWrapping="Wrap" Width="711" Height="68" Visibility="Visible" BorderThickness="2" VerticalAlignment="Top" Margin="0,204,0,0" HorizontalAlignment="Center" BorderBrush="#FF3C3D3F" Foreground="#FF6E6C6C">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -223,9 +223,9 @@
                     </StackPanel>
                 </ComboBoxItem>
             </ComboBox>
-            <Grid x:Name="UserParametersGrid" HorizontalAlignment="Left" Height="Auto" Margin="701,290,0,0" VerticalAlignment="Top" Width="Auto" Visibility="Hidden">
+            <Grid x:Name="UserParametersGrid" HorizontalAlignment="Left" Height="Auto" Margin="701,290,0,0" VerticalAlignment="Top" Width="Auto" Visibility="Visible">
 
-                <ComboBox x:Name="GenderList" FontSize="24" HorizontalAlignment="Left" Margin="9,424,0,0" VerticalAlignment="Top" Width="235" Height="68" SelectedIndex="0" Visibility="Visible" Padding="20">
+                <ComboBox x:Name="GenderList" FontSize="24" HorizontalAlignment="Left" Margin="10,454,0,0" VerticalAlignment="Top" Width="235" Height="68" SelectedIndex="0" Visibility="Visible" Padding="20">
                     <ComboBoxItem Visibility="Collapsed" Content="Gender"/>
                     <ComboBoxItem x:Name="Male" IsSelected="False" Content="Male"/>
                     <ComboBoxItem x:Name="Female" IsSelected="False" Content="Female"/>
@@ -238,21 +238,21 @@
                     </TextBox.Resources>
                 </TextBox>
                 <Label x:Name ="ActivityTimeLabel" Content="Wake up:" FontSize="28" HorizontalAlignment="Left" Margin="380,416,0,0" VerticalAlignment="Top" Width="198" Visibility="Visible" FontWeight="Bold"/>
-                <TextBox x:Name="WeightTextBox"  HorizontalAlignment="Center" Padding="10" Margin="0,43,0,0" Text="Weigh" FontSize="28"  TextWrapping="Wrap" VerticalAlignment="Top" Width="813" Height="68" BorderBrush="#FF3C3D3F" BorderThickness="2" Foreground="#FF6E6C6C">
+                <TextBox x:Name="WeightTextBox"  HorizontalAlignment="Center" Padding="10" Margin="0,43,0,0" Text="Weigh" FontSize="28"  TextWrapping="Wrap" VerticalAlignment="Top" Width="1044" Height="68" BorderBrush="#FF3C3D3F" BorderThickness="2" Foreground="#FF6E6C6C">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
-                <TextBox x:Name="HeightTextBox" HorizontalAlignment="Center" Margin="0,178,0,0" Padding="10" Text="Height" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="813" Height="68" BorderBrush="#FF3C3D3F" BorderThickness="2" Foreground="#FF6E6C6C">
+                <TextBox x:Name="HeightTextBox" HorizontalAlignment="Center" Margin="0,178,0,0" Padding="10" Text="Height" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="1044" Height="68" BorderBrush="#FF3C3D3F" BorderThickness="2" Foreground="#FF6E6C6C">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
-                <TextBox x:Name="AgeTextBox" HorizontalAlignment="Center" Padding="10" Margin="0,310,0,0" Text="Age" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="813" Height="68"  BorderBrush="#FF3C3D3F" BorderThickness="2" Foreground="#FF6E6C6C">
+                <TextBox x:Name="AgeTextBox" HorizontalAlignment="Center" Padding="10" Margin="0,310,0,0" Text="Age" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="1044" Height="68"  BorderBrush="#FF3C3D3F" BorderThickness="2" Foreground="#FF6E6C6C">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>

@@ -11,7 +11,9 @@ namespace DrinkWater.SettingServices
     {
         private static byte[] ImageArray { get; set; }
 
-        public ImageHandler() { }
+        public ImageHandler()
+        {
+        }
 
         public byte[] GetImage()
         {
@@ -45,6 +47,5 @@ namespace DrinkWater.SettingServices
 
             return image;
         }
-
     }
 }

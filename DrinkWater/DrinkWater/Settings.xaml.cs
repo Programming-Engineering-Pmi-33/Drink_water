@@ -16,7 +16,7 @@
     /// </summary>
     public partial class Settings : Window
     {
-        private static readonly SessionUser sessionUser = new SessionUser();
+        private static SessionUser sessionUser = new SessionUser();
         private static ImageHandler image = new ImageHandler();
         private static Users userData;
         private static UserData user;
@@ -30,6 +30,7 @@
         public void GetSessionUser(SessionUser userInfo)
         {
             user = new UserData(userInfo);
+            sessionUser = userInfo;
             userData = user.GetData();
             timer = new System.Timers.Timer();
             if (userData.NotitficationsPeriod != null)

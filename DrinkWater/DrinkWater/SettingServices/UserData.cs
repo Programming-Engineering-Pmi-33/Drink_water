@@ -12,7 +12,9 @@ namespace DrinkWater.SettingServices
 
         private Users User { get; set; }
 
-        public UserData() { }
+        public UserData()
+        {
+        }
 
         public UserData(SessionUser sessionUser)
         {
@@ -50,7 +52,7 @@ namespace DrinkWater.SettingServices
             db.SaveChanges();
         }
 
-        public void SetUserNotitfications(string choosenText, int customPeriod, bool IsDisabled)
+        public void SetUserNotitfications(string choosenText, int customPeriod, bool isDisabled)
         {
             if (choosenText.Contains("Custom"))
             {
@@ -71,7 +73,7 @@ namespace DrinkWater.SettingServices
                     break;
             }
 
-            User.DisableNotifications = Convert.ToBoolean(IsDisabled);
+            User.DisableNotifications = Convert.ToBoolean(isDisabled);
             db.SaveChanges();
         }
     }
