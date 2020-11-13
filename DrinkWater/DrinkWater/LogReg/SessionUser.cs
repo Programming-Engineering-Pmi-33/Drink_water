@@ -1,12 +1,14 @@
-﻿
-namespace DrinkWater.LogReg
+﻿namespace DrinkWater.LogReg
 {
     public class SessionUser
     {
         private long userId;
         private string username;
 
-        public SessionUser() { }
+        public SessionUser()
+        {
+        }
+
         public SessionUser(long userId, string username)
         {
             UserId = userId;
@@ -14,6 +16,7 @@ namespace DrinkWater.LogReg
         }
 
         public long UserId { get => userId; set => userId = value; }
+
         public string Username { get => username; set => username = value; }
     }
 }
