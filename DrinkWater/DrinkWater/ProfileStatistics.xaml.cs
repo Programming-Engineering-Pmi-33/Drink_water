@@ -251,13 +251,10 @@ namespace DrinkWater
                                select user).FirstOrDefault();
 
             UsernameInfo.Content = userInformation.Username;
-            WeightInfo.Content = String.IsNullOrEmpty(userInformation.Weight.ToString()) ? "NULL" : userInformation.Weight.ToString();
-            HeightInfo.Content = String.IsNullOrEmpty(userInformation.Height.ToString()) ? "NULL" : userInformation.Height.ToString();
+            WeightInfo.Content = userInformation.Weight.ToString();
+            HeightInfo.Content = userInformation.Height.ToString();
             AgeInfo.Content = userInformation.Age.ToString();
-            //AgeInfo.Content = String.IsNullOrEmpty(userInformation.Age.ToString()) ? "NULL" : userInformation.Age.ToString();
-            ActivityTimeInfo.Content = String.IsNullOrEmpty(userInformation.GoingToBed.ToString())
-                                        || String.IsNullOrEmpty(userInformation.WakeUp.ToString())
-                                        ? "NULL" : Math.Abs(userInformation.GoingToBed.Value.Hours - userInformation.WakeUp.Value.Hours).ToString();
+            ActivityTimeInfo.Content = Math.Abs(userInformation.GoingToBed.Value.Hours - userInformation.WakeUp.Value.Hours).ToString();
             ShowAvatar();
         }
        
