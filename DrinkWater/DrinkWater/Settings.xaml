@@ -194,7 +194,7 @@
                 <ComboBoxItem>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Custom input: " VerticalAlignment="Center"/>
-                        <TextBox x:Name="CustomPeriodTextBox" Text="///"/>
+                        <TextBox x:Name="CustomPeriodTextBox" Text="0"/>
                     </StackPanel>
                 </ComboBoxItem>
                 <ComboBoxItem Content="Every day"/>
@@ -234,7 +234,7 @@
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
-                <TextBox x:Name="AgeTextBox" HorizontalAlignment="Center" Padding="10" Margin="0,310,0,0" Text="Age" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="813" Height="68" TextChanged="AgeTextBox_TextChanged" BorderBrush="#FF3C3D3F" BorderThickness="2" Foreground="#FF6E6C6C">
+                <TextBox x:Name="AgeTextBox" HorizontalAlignment="Center" Padding="10" Margin="0,310,0,0" Text="Age" FontSize="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="813" Height="68"  BorderBrush="#FF3C3D3F" BorderThickness="2" Foreground="#FF6E6C6C">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>

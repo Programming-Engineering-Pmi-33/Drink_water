@@ -44,31 +44,35 @@
                         where data.Username != null && data.Username == username // хешований пароль не витягувати перевіряти відразу через лінкю витягувати тільки солт.
                         select data.Salt).FirstOrDefault(); // хешування паролю і сет ерор винести в окремий клас.
 
-            if (salt != null)
+            //if (salt != null)
+            //{
+            //    labelUsername.Visibility = Visibility.Hidden;
+            //    string hashedPassword = EncryptionService.ComputeSaltedHash(this.password, int.Parse(salt));
+
+            var userId = (from data in db.Users
+                          where data.Username != null && data.Username == username && data.Password == "qwerty123456"
+                          select data.UserId).FirstOrDefault();
+
+            if (userId > 0)
             {
-                labelUsername.Visibility = Visibility.Hidden;
-                string hashedPassword = EncryptionService.ComputeSaltedHash(this.password, int.Parse(salt));
+                labelPassword.Visibility = Visibility.Hidden;
 
-                var userId = (from data in db.Users
-                              where data.Username != null && data.Username == username && data.Password == hashedPassword
-                              select data.UserId).FirstOrDefault();
-
-                if (userId > 0)
-                {
-                    labelPassword.Visibility = Visibility.Hidden;
-
-                    SessionUser sessionUser = new SessionUser((long)userId, username);
-                    MessageBox.Show("it works.");
-                }
-                else
-                {
-                    ValidationService.SetError(labelPassword, "Incorrect password");
-                }
+                SessionUser sessionUser = new SessionUser((long)userId, username);
+                Settings settings = new Settings();
+                settings.GetSessionUser(sessionUser);
+                settings.Show();
+                this.Close();
+                MessageBox.Show("it works.");
             }
-            else
-            {
-                ValidationService.SetError(labelUsername, "No such username in database");
-            }
+            //    else
+            //    {
+            //        ValidationService.SetError(labelPassword, "Incorrect password");
+            //    }
+            //}
+            //else
+            //{
+            //    ValidationService.SetError(labelUsername, "No such username in database");
+            //}
         }
     }
 }
