@@ -19,16 +19,9 @@ namespace DrinkWater.LogReg
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void buttonLogIn_Click(object sender, RoutedEventArgs e)
         {
-            Registration registration=new Registration();
-            registration.Show();
-            this.Close();
 
-        }
-
-        private void button2_Click(object sender, RoutedEventArgs e)
-        {
             try
             {
                 this.username = textBoxUsername.Text;
@@ -37,16 +30,16 @@ namespace DrinkWater.LogReg
                               where data.Username == username
                               select data.Password).FirstOrDefault();
 
-            if (password == result)
+                if (password == result)
                 {
                     var id = (from user in db.Users
-                    where user.Password == password && user.Username == username
+                              where user.Password == password && user.Username == username
                               select user.UserId).FirstOrDefault();
 
                     SessionUser sessionUser = new SessionUser((long)id, username);
                     MessageBox.Show("it works.");
-                    Main Main = new Main();
-                    Main.GetSessionUser(sessionUser);
+                    MainWindow Main = new MainWindow();
+                    Main.main.GetSessionUser(sessionUser);
                     Main.Show();
                     this.Close();
                 }
@@ -59,9 +52,15 @@ namespace DrinkWater.LogReg
             {
                 MessageBox.Show("incorrect data of user,try again.");
             }
-
         }
 
-       
+        private void buttonCreateNewAccount_Click(object sender, RoutedEventArgs e)
+        {
+
+            Registration registration = new Registration();
+            registration.Show();
+            this.Close();
+
+        }
     }
 }

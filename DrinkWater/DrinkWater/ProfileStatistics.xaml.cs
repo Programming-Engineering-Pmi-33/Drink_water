@@ -448,9 +448,9 @@
 
         private void Main_Click(object sender, RoutedEventArgs e)
         {
-            Main main= new Main();
-            main.GetSessionUser(SessionUser);
-            main.Show();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.main.GetSessionUser(SessionUser);
+            mainWindow.Show();
             this.Close();
         }
     }
