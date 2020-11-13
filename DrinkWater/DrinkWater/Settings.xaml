@@ -171,20 +171,38 @@
             </Rectangle>
             <Button Style="{DynamicResource Buttons}" x:Name="UserSettingsButton" Content="User Settings" FontSize="24" HorizontalAlignment="Left" Margin="107,481,0,0" VerticalAlignment="Top" Click="UserSettings_Click" Width="320" Height="64" Grid.Column="0" Grid.Row="0" Background="#FFE1EDFD" BorderBrush="#FFE1EDFD" Foreground="#FF0A2140"/>
             <Button  Style="{DynamicResource Buttons}" x:Name="UserParametersButton" Content="User Parameters" FontSize="24" HorizontalAlignment="Left" Margin="107,569,0,0" VerticalAlignment="Top" Click="UserParameters_Click" Width="320" Height="64" Background="#FFE1EDFD" BorderBrush="#FFE1EDFD" Foreground="#FF0A2140"/>
-            <Button  x:Name="LogOutButton" Content="Log out" FontSize="24" HorizontalAlignment="Left" Margin="107,874,0,0" VerticalAlignment="Top" Click="LogOut_Click" Width="320" Height="64" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold" Foreground="#FF0A2140"/>
+            <Button  x:Name="LogOutButton" Content="Log out" FontSize="24" HorizontalAlignment="Left" Margin="107,877,0,0" VerticalAlignment="Top" Click="LogOut_Click" Width="320" Height="64" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold" Foreground="#FF0A2140"/>
             <Image  x:Name="Avatar" HorizontalAlignment="Left" Height="230" Margin="170,162,0,0" VerticalAlignment="Top" Width="261">
                 <Image.Clip>
                     <EllipseGeometry
-                  Center="100,100" RadiusX="74" RadiusY="74"/>
+                  Center="100,100" RadiusX="73" RadiusY="73"/>
                 </Image.Clip>
             </Image>
-            <Grid x:Name="UserSettingsGrid" HorizontalAlignment="Left" Height="455" Margin="701,228,0,0" VerticalAlignment="Top" Visibility="Hidden">
-                <TextBox x:Name ="PasswordTextBox" Text="TextBox" FontSize="28" TextWrapping="Wrap" Width="711" Height="68" Visibility="Visible" VerticalAlignment="Top" Margin="0,209,0,0" HorizontalAlignment="Left"/>
-                <TextBox x:Name ="UsernameTextBox" Text="TextBox" FontSize="28" TextWrapping="Wrap" Width="711" Height="68" Visibility="Visible" VerticalAlignment="Top" Margin="0,41,0,0" HorizontalAlignment="Left"/>
-                <TextBox x:Name="EmailTextBox" Text="TextBox" FontSize="28" TextWrapping="Wrap" Width="711" Height="68" Visibility="Visible" VerticalAlignment="Top" Margin="0,377,0,0" HorizontalAlignment="Left"/>
-                <Label x:Name ="UsernameLabel" Content="Username:" FontSize="28" Width="164" Height="50" Visibility="Visible" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <Label x:Name ="PasswordLabel" Content="Password:" FontSize="28" Width="164" Height="50" Visibility="Visible" VerticalAlignment="Top" Margin="0,168,0,0" HorizontalAlignment="Left"/>
-                <Label x:Name ="EmailLabel" Content="Email:" FontSize="28" Width="164" Height="50" Visibility="Visible" VerticalAlignment="Top" Margin="0,336,0,0" HorizontalAlignment="Left"/>
+            <Grid x:Name="UserSettingsGrid" HorizontalAlignment="Left" Height="455" Margin="701,270,0,0" VerticalAlignment="Top" Visibility="Visible">
+                <TextBox x:Name ="PasswordTextBox" Text="********" Padding="10" FontSize="28" TextWrapping="Wrap" Width="711" Height="68" Visibility="Visible" BorderThickness="2" VerticalAlignment="Top" Margin="0,204,0,0" HorizontalAlignment="Center" BorderBrush="#FF3C3D3F" Foreground="#FF6E6C6C">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <TextBox x:Name ="UsernameTextBox" Text="Username" Padding="10" FontSize="28" TextWrapping="Wrap" Width="711" Height="68" Visibility="Visible" BorderThickness="2" VerticalAlignment="Top" Margin="0,57,0,0" HorizontalAlignment="Center" BorderBrush="#FF3C3D3F" Foreground="#FF6E6C6C">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <TextBox x:Name="EmailTextBox" Text="Email" Padding="10" FontSize="28" TextWrapping="Wrap" Width="711" Height="68" Visibility="Visible" BorderThickness="2" VerticalAlignment="Top" Margin="0,354,0,0" HorizontalAlignment="Center" BorderBrush="#FF3C3D3F" Foreground="#FF6E6C6C">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Label x:Name ="UsernameLabel" Content="Username:" FontSize="28" Width="164" Height="50" Visibility="Visible" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,10,0,0" FontWeight="Bold"/>
+                <Label x:Name ="PasswordLabel" Content="Password:" FontSize="28" Width="164" Height="50" Visibility="Visible" VerticalAlignment="Top" Margin="0,160,0,0" HorizontalAlignment="Left" FontWeight="Bold"/>
+                <Label x:Name ="EmailLabel" Content="Email:" FontSize="28" Width="164" Height="50" Visibility="Visible" VerticalAlignment="Top" Margin="0,310,0,0" HorizontalAlignment="Left" FontWeight="Bold"/>
 
             </Grid>
 
@@ -205,7 +223,7 @@
                     </StackPanel>
                 </ComboBoxItem>
             </ComboBox>
-            <Grid x:Name="UserParametersGrid" HorizontalAlignment="Left" Height="Auto" Margin="701,290,0,0" VerticalAlignment="Top" Width="Auto" Visibility="Visible">
+            <Grid x:Name="UserParametersGrid" HorizontalAlignment="Left" Height="Auto" Margin="701,290,0,0" VerticalAlignment="Top" Width="Auto" Visibility="Hidden">
 
                 <ComboBox x:Name="GenderList" FontSize="24" HorizontalAlignment="Left" Margin="9,424,0,0" VerticalAlignment="Top" Width="235" Height="68" SelectedIndex="0" Visibility="Visible" Padding="20">
                     <ComboBoxItem Visibility="Collapsed" Content="Gender"/>
@@ -253,9 +271,9 @@
                 <Label x:Name="AgeLabel" Content="Age:" FontSize="28" HorizontalAlignment="Left" Margin="0,267,0,0" VerticalAlignment="Top" Width="96" Height="50" FontWeight="Bold"/>
                 <Label x:Name ="ActivityTimeLabel2" Content="Going to bed:" FontSize="28" HorizontalAlignment="Left" Margin="568,416,0,0" VerticalAlignment="Top" Width="198" Visibility="Visible" FontWeight="Bold"/>
             </Grid>
-            <Button x:Name="ChangeAvatar" Content="Change Avatar" FontSize="24" HorizontalAlignment="Left" Margin="178,412,0,0" VerticalAlignment="Top" Width="179" Height="32" Click="ChangeAvatar_Click" Background="Transparent" BorderBrush="Transparent" Foreground="#FFEB5757" FontWeight="Bold"/>
+            <Button x:Name="ChangeAvatar" Content="Change Avatar" FontSize="24" HorizontalAlignment="Left" Margin="178,412,0,0" VerticalAlignment="Top" Width="179" Height="45" Click="ChangeAvatar_Click" Background="Transparent" BorderBrush="Transparent" Foreground="#FFEB5757" FontWeight="Bold"/>
             <Button Style="{DynamicResource ProfileButton}"  FontFamily="Segoe MDL2 Assets" Content="&#xE77B;" x:Name="ProfileWindowButton" FontSize="36" HorizontalAlignment="Left" Margin="1715,44,0,0" VerticalAlignment="Top" Height="68" Width="68" Click="ProfileWindowButton_Click" FontWeight="Bold" BorderBrush="#FFF18989" Background="#FFF18989"/>
-            <Button Style="{DynamicResource ScrollButton}" x:Name="Main" FontFamily="Segoe MDL2 Assets" Content="&#xE76B;" HorizontalAlignment="Left" Height="36" Margin="45,33,0,0" VerticalAlignment="Top" Width="50" Click="Main_Click" RenderTransformOrigin="0.487,0.482" FontSize="30" Foreground="#FFEB5757"/>
+            <Button Style="{DynamicResource ScrollButton}" x:Name="Main" FontFamily="Segoe MDL2 Assets" Content="&#xE76B;" HorizontalAlignment="Left" Height="36" Margin="45,33,0,0" VerticalAlignment="Top" Width="50" Click="Main_Click" RenderTransformOrigin="0.487,0.482" FontSize="36" Foreground="#FFEB5757"/>
             <ComboBox HorizontalAlignment="Left" Height="8" Margin="301,85,0,0" VerticalAlignment="Top" Width="0"/>
             <Label Content="Settings" HorizontalAlignment="Left" Height="47" Margin="104,31,0,0" VerticalAlignment="Top" Width="102" FontSize="24" Foreground="#FF0A2140"/>
             <Label Content="Parameters" HorizontalAlignment="Left" Margin="701,177,0,0" VerticalAlignment="Top" FontSize="48" Foreground="#FF0A2140"/>
