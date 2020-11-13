@@ -54,7 +54,6 @@ namespace DrinkWater.LogReg
                     labelPassword.Visibility = Visibility.Hidden;
 
                     SessionUser sessionUser = new SessionUser((long)userId, username);
-                    MessageBox.Show("it works.");
                 }
                 else
                 {
