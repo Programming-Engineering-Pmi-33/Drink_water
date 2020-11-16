@@ -8,6 +8,8 @@
     using System.Windows.Controls;
     using System.Windows.Media.Imaging;
     using DrinkWater.LogReg;
+    using DrinkWater.ProfileStatisticsServices;
+    using DrinkWater.SettingServices;
     using LiveCharts;
     using LiveCharts.Wpf;
 
@@ -19,9 +21,9 @@
     {
         public SessionUser SessionUser = new SessionUser();
 
-        private static dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
+        
 
-        public static Users userInformation;
+        private static Users userInformation;
 
         public SeriesCollection SeriesCollection { get; set; }
 
@@ -29,20 +31,20 @@
 
         public Func<double, string> Formatter { get; set; }
 
-        public List<Weekstatistic> weekstatistics;
-        public List<Monthstatistic> monthstatistics;
-        public List<Yearstatistic> yearstatistics;
-        public List<DateTime> week;
-        public List<DateTime> month;
-        public List<DateTime> year;
-        public List<int> yearMonth;
-        public List<double> weekWaterAmount = new List<double>();
-        public List<double> monthWaterAmount = new List<double>();
-        public List<double> yearWaterAmount = new List<double>();
-        public List<Fluids> fluids;
-        public List<BitmapImage> Images;
-        public int[] fluidAmount;
-        public int index;
+        private List<Weekstatistic> weekstatistics;
+        private List<Monthstatistic> monthstatistics;
+        private List<Yearstatistic> yearstatistics;
+        private List<DateTime> week;
+        private List<DateTime> month;
+        private List<DateTime> year;
+        private List<int> yearMonth;
+        private List<double> weekWaterAmount = new List<double>();
+        private List<double> monthWaterAmount = new List<double>();
+        private List<double> yearWaterAmount = new List<double>();
+        private List<Fluids> fluids;
+        private List<BitmapImage> Images;
+        private int[] fluidAmount;
+        private int index;
 
         public ProfileStatistics()
         {
@@ -65,21 +67,15 @@
 
         private void GetStatistics()
         {
-            weekstatistics = (from weekQuery in db.Weekstatistic
-                              where SessionUser.UserId == weekQuery.UserIdRef
-                              select weekQuery).ToList();
-            monthstatistics = (from monthQuery in db.Monthstatistic
-                               where SessionUser.UserId == monthQuery.UserIdRef
-                               select monthQuery).ToList();
-            yearstatistics = (from yearQuery in db.Yearstatistic
-                              where SessionUser.UserId == yearQuery.UserIdRef
-                              select yearQuery).ToList();
+            StatisticInfo statisticInfo = new StatisticInfo(SessionUser.UserId);
+            weekstatistics = statisticInfo.GetWeekStatistic();
+            monthstatistics = statisticInfo.GetMonthStatistics();
+            yearstatistics = statisticInfo.GetYearStatistics();
         }
 
         private void GetFluids()
         {
-            fluids = (from fluid in db.Fluids
-                      select fluid).ToList();
+            fluids = new FliudInfo().GetFluids();
         }
 
         private void SortPeriod()
@@ -276,19 +272,13 @@
 
         private void ShowUserInfo()
         {
-            userInformation = (from user in db.Users
-                               where user.UserId == SessionUser.UserId
-                               select user).FirstOrDefault();
-
+            UserData userData = new UserData(SessionUser);
+            userInformation = userData.GetData();
             UsernameInfo.Content = userInformation.Username;
-            WeightInfo.Content = string.IsNullOrEmpty(userInformation.Weight.ToString()) ? "NULL" : userInformation.Weight.ToString();
-            HeightInfo.Content = string.IsNullOrEmpty(userInformation.Height.ToString()) ? "NULL" : userInformation.Height.ToString();
+            WeightInfo.Content = userInformation.Weight.ToString();
+            HeightInfo.Content = userInformation.Height.ToString();
             AgeInfo.Content = userInformation.Age.ToString();
-
-            // AgeInfo.Content = String.IsNullOrEmpty(userInformation.Age.ToString()) ? "NULL" : userInformation.Age.ToString();
-            ActivityTimeInfo.Content = string.IsNullOrEmpty(userInformation.GoingToBed.ToString())
-                                        || string.IsNullOrEmpty(userInformation.WakeUp.ToString())
-                                        ? "NULL" : Math.Abs(userInformation.GoingToBed.Value.Hours - userInformation.WakeUp.Value.Hours).ToString();
+            ActivityTimeInfo.Content = Math.Abs(userInformation.GoingToBed.Value.Hours - userInformation.WakeUp.Value.Hours).ToString();
             ShowAvatar();
         }
 
@@ -327,14 +317,7 @@
             Images = new List<BitmapImage>();
             for (int i = 0; i < fluids.Count; i++)
             {
-                var memoryStream = new MemoryStream(fluids[i].FliudImage);
-                var bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.StreamSource = memoryStream;
-                bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
-                bitmap.Freeze();
-                Images.Add(bitmap);
+                Images.Add(new ImageHandler().GetImagefromDB(fluids[i].FliudImage));
             }
         }
 
