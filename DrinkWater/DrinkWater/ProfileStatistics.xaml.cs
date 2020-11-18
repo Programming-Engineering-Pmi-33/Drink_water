@@ -51,9 +51,8 @@
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SeriesCollection = new SeriesCollection();
-            GetFluids();
             ShowUserInfo();
-            ShowFluidFPhotos();
+            GetFluids();
             GetConsumedWaterPerWeek();
             DrawChart(weekWaterAmount, week, (int)userInformation.DailyBalance);
             ShowScore(0, 7, 1, weekWaterAmount);
@@ -63,8 +62,9 @@
         private void GetFluids()
         {
             ScrollClass scrollClass = new ScrollClass("week", userInformation.UserId);
-            
+            fluids = scrollClass.Fluids;
             fluidAmount = scrollClass.FluidsAmount;
+            images = scrollClass.Images;
         }
 
         private void DrawChart(List<double> waterAmount, List<string> period, int userWaterBalance)
@@ -170,15 +170,6 @@
 
             Score2.Content = m;
             Score4.Content = n;
-        }
-
-        private void ShowFluidFPhotos()
-        {
-            images = new List<BitmapImage>();
-            for (int i = 0; i < fluids.Count; i++)
-            {
-                images.Add(new ImageHandler().GetImagefromDB(fluids[i].FliudImage));
-            }
         }
 
         private void ShowAvatar()
