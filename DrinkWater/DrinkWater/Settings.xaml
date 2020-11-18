@@ -223,22 +223,22 @@
                   Center="100,100" RadiusX="73" RadiusY="73"/>
                 </Image.Clip>
             </Image>
-            <Grid x:Name="UserSettingsGrid" HorizontalAlignment="Left" Height="455" Margin="701,270,0,0" VerticalAlignment="Top" Visibility="Hidden">
-                <TextBox x:Name ="PasswordTextBox" Text="********" Padding="10" FontSize="28" TextWrapping="Wrap" Width="711" Height="68" Visibility="Visible" BorderThickness="2" VerticalAlignment="Top" Margin="0,204,0,0" HorizontalAlignment="Center" BorderBrush="#FF3C3D3F" Foreground="#FF6E6C6C">
+            <Grid x:Name="UserSettingsGrid" HorizontalAlignment="Left" Height="455" Margin="701,270,0,0" VerticalAlignment="Top" Visibility="Visible">
+                <TextBox x:Name ="PasswordTextBox" Text="********" Padding="10" FontSize="28" TextWrapping="Wrap" Width="1053" Height="68" Visibility="Visible" BorderThickness="2" VerticalAlignment="Top" Margin="0,204,0,0" HorizontalAlignment="Center" BorderBrush="#FF3C3D3F" Foreground="#FF6E6C6C">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
-                <TextBox x:Name ="UsernameTextBox" Text="Username" Padding="10" FontSize="28" TextWrapping="Wrap" Width="711" Height="68" Visibility="Visible" BorderThickness="2" VerticalAlignment="Top" Margin="0,57,0,0" HorizontalAlignment="Center" BorderBrush="#FF3C3D3F" Foreground="#FF6E6C6C">
+                <TextBox x:Name ="UsernameTextBox" Text="Username" Padding="10" FontSize="28" TextWrapping="Wrap" Width="1053" Height="68" Visibility="Visible" BorderThickness="2" VerticalAlignment="Top" Margin="0,57,0,0" HorizontalAlignment="Center" BorderBrush="#FF3C3D3F" Foreground="#FF6E6C6C">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
-                <TextBox x:Name="EmailTextBox" Text="Email" Padding="10" FontSize="28" TextWrapping="Wrap" Width="711" Height="68" Visibility="Visible" BorderThickness="2" VerticalAlignment="Top" Margin="0,354,0,0" HorizontalAlignment="Center" BorderBrush="#FF3C3D3F" Foreground="#FF6E6C6C">
+                <TextBox x:Name="EmailTextBox" Text="Email" Padding="10" FontSize="28" TextWrapping="Wrap" Width="1053" Height="68" Visibility="Visible" BorderThickness="2" VerticalAlignment="Top" Margin="0,354,0,0" HorizontalAlignment="Center" BorderBrush="#FF3C3D3F" Foreground="#FF6E6C6C">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -273,7 +273,7 @@
                     </StackPanel>
                 </ComboBoxItem>
             </ComboBox>
-            <Grid x:Name="UserParametersGrid" HorizontalAlignment="Left" Height="Auto" Margin="701,290,0,0" VerticalAlignment="Top" Width="Auto" Visibility="Visible">
+            <Grid x:Name="UserParametersGrid" HorizontalAlignment="Left" Height="Auto" Margin="701,290,0,0" VerticalAlignment="Top" Width="Auto" Visibility="Hidden">
 
                 <ComboBox x:Name="GenderList" FontSize="24" HorizontalAlignment="Left" Margin="10,454,0,0" VerticalAlignment="Top" Width="235" Height="68" SelectedIndex="0" Visibility="Visible" Padding="20" Style="{StaticResource Combobox}" Foreground="#F2F2F2" SelectionChanged="GenderList_SelectionChanged">
                     <ComboBoxItem Visibility="Collapsed" Content="Gender" Foreground="Black"/>

@@ -1,15 +1,16 @@
-﻿namespace DrinkWater
+﻿#nullable disable
+
+namespace DrinkWater
 {
     using System;
+    using System.Collections.Generic;
 
-    public partial class Monthstatistic
+    public partial class Totalmonthstatistic
     {
         public int? UserIdRef { get; set; }
 
         public long? FluidIdRef { get; set; }
 
         public decimal? Sum { get; set; }
-
-        public DateTime? Date { get; set; }
     }
 }
