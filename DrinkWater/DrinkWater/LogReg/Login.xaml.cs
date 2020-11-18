@@ -1,67 +1,78 @@
-﻿using System;
-using System.Windows;
-using System.Linq;
-
-namespace DrinkWater.LogReg
+﻿namespace DrinkWater.LogReg
 {
-    /// <summary>
-    /// Interaction logic for Login.xaml
-    /// </summary>
-    public partial class Login :Window
-    {
+    using System.Linq;
+    using System.Windows;
+    using DrinkWater.Services;
 
-        public dfkg9ojh16b4rdContext db=new dfkg9ojh16b4rdContext();
+    /// <summary>
+    /// Interaction logic for Login.xaml.
+    /// </summary>
+    public partial class Login : Window
+    {
+        private dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
         private string username;
         private string password;
+
         public Login()
         {
-            
             InitializeComponent();
-        }
-
-        private void buttonLogIn_Click(object sender, RoutedEventArgs e)
-        {
-
-            //try
-            //{
-                this.username = textBoxUsername.Text;
-                this.password = textBoxPassword.Text;
-                var result = (from data in db.Users
-                              where data.Username == username
-                              select data.Password).FirstOrDefault();
-
-            if (password == result)
-            {
-                var id = (from user in db.Users
-                          where user.Password == password && user.Username == username
-                          select user.UserId).FirstOrDefault();
-
-                SessionUser sessionUser = new SessionUser((long)id, username);
-                MessageBox.Show("it works.");
-                MainWindow Main = new MainWindow();
-                Main.GetSessionUser(sessionUser);
-                Main.Show();
-                this.Close();
-                //    }
-                //    else
-                //    {
-                //        MessageBox.Show("incorrect data of user,try again.");
-                //    }
-                //}
-                //catch (Exception)
-                //{
-                //    MessageBox.Show("incorrect data of user,try again.");
-                //}
-            }
         }
 
         private void buttonCreateNewAccount_Click(object sender, RoutedEventArgs e)
         {
-
             Registration registration = new Registration();
             registration.Show();
             this.Close();
+        }
 
+        private bool isInDatabase(string item)
+        {
+            if (item == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void buttonLogIn_Click(object sender, RoutedEventArgs e)
+        {
+            this.username = textBoxUsername.Text;
+            this.password = textBoxPassword.Text;
+
+            var salt = (from data in db.Users
+                        where data.Username != null && data.Username == username // хешований пароль не витягувати перевіряти відразу через лінкю витягувати тільки солт.
+                        select data.Salt).FirstOrDefault(); // хешування паролю і сет ерор винести в окремий клас.
+
+            // if (salt != null)
+            // {
+            //    labelUsername.Visibility = Visibility.Hidden;
+            // string hashedPassword = EncryptionService.ComputeSaltedHash(this.password, int.Parse(salt));
+            var userId = (from data in db.Users
+                          where data.Username != null && data.Username == username && data.Password == "qwerty123456"
+                          select data.UserId).FirstOrDefault();
+
+            if (userId > 0)
+            {
+                labelPassword.Visibility = Visibility.Hidden;
+
+                SessionUser sessionUser = new SessionUser((long)userId, username);
+                Settings settings = new Settings();
+                settings.GetSessionUser(sessionUser);
+                settings.Show();
+                this.Close();
+                MessageBox.Show("it works.");
+            }
+
+            // else
+            //    {
+            //        ValidationService.SetError(labelPassword, "Incorrect password");
+            //    }
+            // }
+            // else
+            // {
+            //    ValidationService.SetError(labelUsername, "No such username in database");
+            // }
         }
     }
 }

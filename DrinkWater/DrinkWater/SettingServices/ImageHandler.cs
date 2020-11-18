@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Text;
-using System.Windows.Media.Imaging;
-
-namespace DrinkWater.SettingServices
+﻿namespace DrinkWater.SettingServices
 {
-    class ImageHandler
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.IO;
+    using System.Text;
+    using System.Windows.Media.Imaging;
+
+    public class ImageHandler
     {
         private static byte[] ImageArray { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ImageHandler"/> class.
+        /// </summary>
         public ImageHandler()
         {
         }

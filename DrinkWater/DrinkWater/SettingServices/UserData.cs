@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using DrinkWater.LogReg;
-
-namespace DrinkWater.SettingServices
+﻿namespace DrinkWater.SettingServices
 {
-    class UserData
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using DrinkWater.LogReg;
+
+    public class UserData
     {
         private static dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
 

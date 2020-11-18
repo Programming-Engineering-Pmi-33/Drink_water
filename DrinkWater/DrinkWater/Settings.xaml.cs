@@ -18,7 +18,7 @@
     {
         private static SessionUser sessionUser = new SessionUser();
         private static ImageHandler image = new ImageHandler();
-        private static Users userData;
+        private static User userData;
         private static UserData user;
         private System.Timers.Timer timer;
 
@@ -87,7 +87,7 @@
             this.Close();
         }
 
-        protected void SetUserSettingsVisibility()
+        private void SetUserSettingsVisibility()
         {
             UserSettingsGrid.Visibility = Visibility.Visible;
             if (UserParametersGrid.Visibility == Visibility.Visible)
@@ -96,7 +96,7 @@
             }
         }
 
-        protected void SetUserParametersVisibility()
+        private void SetUserParametersVisibility()
         {
             UserParametersGrid.Visibility = Visibility.Visible;
             if (UserSettingsGrid.Visibility == Visibility.Visible)
@@ -143,7 +143,7 @@
             }
         }
 
-        public void TimerFunction(object e, EventArgs x)
+        private void TimerFunction(object e, EventArgs x)
         {
             ToastNotificationsClass toast = new ToastNotificationsClass();
             toast.ShowNot();
@@ -152,7 +152,7 @@
         private void ProfileWindowButton_Click(object sender, RoutedEventArgs e)
         {
             ProfileStatistics profileStatistics = new ProfileStatistics();
-            profileStatistics.SessionUser = sessionUser;
+            profileStatistics.GetSessionUser(sessionUser);
             profileStatistics.Show();
             this.Close();
         }

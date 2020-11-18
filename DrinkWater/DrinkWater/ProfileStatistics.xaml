@@ -349,7 +349,7 @@
         <Label x:Name="HeightInfo" Content="" HorizontalAlignment="Left" Margin="236,522,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
         <Label x:Name="WeightInfo" Content="" HorizontalAlignment="Left" Margin="237,561,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
         <Label x:Name="AgeInfo" Content="" HorizontalAlignment="Left" Margin="235,600,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
-        <ComboBox x:Name="Period" HorizontalAlignment="Left" Height="31" Margin="1028,158,0,0" VerticalAlignment="Top" Width="178" SelectionChanged="ComboBox_SelectionChanged" DropDownClosed="Period_DropDownClosed" SelectedIndex="0" Foreground="#FF200E0E" BorderBrush="#FF6983D9" FontSize="14" Background="#FF6983D9">
+        <ComboBox x:Name="Period" HorizontalAlignment="Left" Height="31" Margin="1028,158,0,0" VerticalAlignment="Top" Width="178" DropDownClosed="Period_DropDownClosed" SelectedIndex="0" Foreground="#FF200E0E" BorderBrush="#FF6983D9" FontSize="14" Background="#FF6983D9">
             <ComboBox.ItemContainerStyle>
 
                 <Style TargetType="ComboBoxItem">

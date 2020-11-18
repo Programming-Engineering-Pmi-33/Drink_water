@@ -1,0 +1,9 @@
+﻿using System.Diagnostics.CodeAnalysis;
+
+[assembly: SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101:Prefix local calls with this", Justification = "<Pending>")]
+[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1115:Parameter should follow comma", Justification = "<Pending>")]
+[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1404", Justification = "<Pending>")]
+[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1633:File shoud have header", Justification = "<Pending>")]
+[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1201", Justification = "<Pending>")]
+[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1204", Justification = "<Pending>")]
+[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1600", Justification = "<Pending>")]
