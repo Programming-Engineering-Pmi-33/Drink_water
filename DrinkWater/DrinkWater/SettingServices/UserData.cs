@@ -10,7 +10,7 @@ namespace DrinkWater.SettingServices
     {
         private static dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
 
-        private Users User { get; set; }
+        private User User { get; set; }
 
         public UserData()
         {
@@ -23,10 +23,14 @@ namespace DrinkWater.SettingServices
                         select searchingUser).FirstOrDefault();
         }
 
-        public Users GetData()
+        public User GetData()
         {
             return User;
         }
+        public long GetDailyBalnace() 
+        {
+            return User.DailyBalance.Value;
+        } 
 
         public void SetUserParameters(long weight, long height, long age, string sex, TimeSpan wakeUp, TimeSpan goingToBed)
         {

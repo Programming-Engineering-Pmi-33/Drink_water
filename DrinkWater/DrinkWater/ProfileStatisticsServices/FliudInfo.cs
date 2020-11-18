@@ -13,7 +13,7 @@ namespace DrinkWater.ProfileStatisticsServices
         {
         }
 
-        public List<Fluids> GetFluids()
+        public List<Fluid> GetFluids()
         {
             return (from fluid in db.Fluids
                     select fluid).ToList();

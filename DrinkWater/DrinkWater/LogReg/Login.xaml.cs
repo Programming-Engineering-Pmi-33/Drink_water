@@ -22,35 +22,36 @@ namespace DrinkWater.LogReg
         private void buttonLogIn_Click(object sender, RoutedEventArgs e)
         {
 
-            try
-            {
+            //try
+            //{
                 this.username = textBoxUsername.Text;
                 this.password = textBoxPassword.Text;
                 var result = (from data in db.Users
                               where data.Username == username
                               select data.Password).FirstOrDefault();
 
-                if (password == result)
-                {
-                    var id = (from user in db.Users
-                              where user.Password == password && user.Username == username
-                              select user.UserId).FirstOrDefault();
-
-                    SessionUser sessionUser = new SessionUser((long)id, username);
-                    MessageBox.Show("it works.");
-                    MainWindow Main = new MainWindow();
-                    Main.main.GetSessionUser(sessionUser);
-                    Main.Show();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("incorrect data of user,try again.");
-                }
-            }
-            catch (Exception)
+            if (password == result)
             {
-                MessageBox.Show("incorrect data of user,try again.");
+                var id = (from user in db.Users
+                          where user.Password == password && user.Username == username
+                          select user.UserId).FirstOrDefault();
+
+                SessionUser sessionUser = new SessionUser((long)id, username);
+                MessageBox.Show("it works.");
+                MainWindow Main = new MainWindow();
+                Main.GetSessionUser(sessionUser);
+                Main.Show();
+                this.Close();
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show("incorrect data of user,try again.");
+                //    }
+                //}
+                //catch (Exception)
+                //{
+                //    MessageBox.Show("incorrect data of user,try again.");
+                //}
             }
         }
 

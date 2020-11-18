@@ -1,4 +1,6 @@
 ﻿using DrinkWater.LogReg;
+using DrinkWater.ProfileStatisticsServices;
+using DrinkWater.SettingServices;
 using LiveCharts;
 using LiveCharts.Wpf;
 using System;
@@ -24,16 +26,62 @@ namespace DrinkWater
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainService main=new MainService();
-        public SeriesCollection SeriesCollection { get; set; }
+        static public MainService main = new MainService();
+        static public SeriesCollection SeriesCollection = new SeriesCollection();
+
+        public List<KeyValuePair<Label, TextBox>> LabelBox = new List<KeyValuePair<Label, TextBox>>();
+        public List<Image> PictureBox = new List<Image>();
         public MainWindow()
         {
             InitializeComponent();
         }
-       
+        public void GetSessionUser(SessionUser user)
+        {
+            main.GetSessionUser(user);
+            SetChart();
+        }
+        public bool IsValidAmount(string text)
+        {
+            bool IsValid = false;
+            long test;
+            if (long.TryParse(text, out test) && test > 0 && test < 6000)
+            {
+                IsValid = true;
+            }
+            return IsValid;
+        }
+
+        public void SetChart()
+        {
+            StatisticInfo statistic = new StatisticInfo(main.GetUser().UserId);
+            if (statistic.GetDailyStatistics().Count != 0)
+            {
+                foreach (var item in statistic.GetDailyStatistics())
+                {
+                    SeriesCollection.Add(new StackedColumnSeries
+                    {
+                        Title = (from f in main.Fluids
+                                 where f.FluidId == item.FluidIdRef
+                                 select f.Name).FirstOrDefault().ToString(),
+                        Values = new ChartValues<double> { Double.Parse(item.Sum.ToString()) },
+                        StackMode = StackMode.Values,
+                        DataLabels = true,
+                        MaxColumnWidth = 206,
+                    });
+                }
+            }
+        }
         private void Add(object sender, RoutedEventArgs e)
         {
-            main.Add();
+            foreach (var item in LabelBox)
+            {
+                if(!string.IsNullOrEmpty(item.Value.ToString()) & IsValidAmount(item.Value.ToString()))
+                {
+                    main.Add(item.Key.ToString(), int.Parse(item.Value.ToString()));
+                }
+            }
+            SeriesCollection.Clear();
+            SetChart();
         }
 
         private void Up_Click(object sender, RoutedEventArgs e)
@@ -43,16 +91,16 @@ namespace DrinkWater
             {
                 if(i-1< 0)
                 {
-                    main.LabelBox[i].Key.Content = main.Fluids[k].Name;
-                    main.PictureBox[i].Source = main.Images[k].Source;
+                    LabelBox[i].Key.Content = main.Fluids[k].Name;
+                    PictureBox[i].Source = main.Images[k].Source;
                     k--;
                 }
                 else
                 {
-                    main.LabelBox[i].Key.Content = main.Fluids[i-1].Name;
-                    main.PictureBox[i].Source = main.Images[i-1].Source;
+                    LabelBox[i].Key.Content = main.Fluids[i-1].Name;
+                    PictureBox[i].Source = main.Images[i-1].Source;
                 }
-                main.LabelBox[i].Value.Text = "";
+                LabelBox[i].Value.Text = "";
 
             }
         }
@@ -64,16 +112,16 @@ namespace DrinkWater
             {
                 if (i + 1 > main.Fluids.Count )
                 {
-                    main.LabelBox[i].Key.Content = main.Fluids[k].Name;
-                    main.PictureBox[i].Source = main.Images[k].Source;
+                    LabelBox[i].Key.Content = main.Fluids[k].Name;
+                    PictureBox[i].Source = main.Images[k].Source;
                     k--;
                 }
                 else
                 {
-                    main.LabelBox[i].Key.Content = main.Fluids[i + 1].Name;
-                    main.PictureBox[i].Source = main.Images[i+1].Source;
+                    LabelBox[i].Key.Content = main.Fluids[i + 1].Name;
+                    PictureBox[i].Source = main.Images[i+1].Source;
                 }
-                main.LabelBox[i].Value.Text = "";
+                LabelBox[i].Value.Text = "";
 
 
             }
@@ -81,23 +129,22 @@ namespace DrinkWater
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
-            SeriesCollection = new SeriesCollection();
-            main.LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid1, Amount1));
-            main.LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid2, Amount2));
-            main.LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid3, Amount3));
-            main.LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid4, Amount4));
+            LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid1, Amount1));
+            LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid2, Amount2));
+            LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid3, Amount3));
+            LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid4, Amount4));
 
-            main.PictureBox.Add(ImageBox1);
-            main.PictureBox.Add(ImageBox2);
-            main.PictureBox.Add(ImageBox3);
-            main.PictureBox.Add(ImageBox4);
+            PictureBox.Add(ImageBox1);
+            PictureBox.Add(ImageBox2);
+            PictureBox.Add(ImageBox3);
+            PictureBox.Add(ImageBox4);
 
+            SetChart();
             main.ListLiquids();
-            main.ShowStatistic(this.SeriesCollection);
             Row.Width = 100;
             DataContext = this;
 
-            BalanceLine.Value = main.balance;
+            BalanceLine.Value = (int)new UserData(main.GetUser()).GetDailyBalnace();
         }
 
         private void ProfileButton_Click(object sender, RoutedEventArgs e)

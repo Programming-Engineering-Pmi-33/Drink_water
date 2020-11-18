@@ -2,7 +2,7 @@
 {
     using System;
 
-    public partial class Weekstatistic
+    public partial class Totalweekstatistics
     {
         public int? UserIdRef { get; set; }
 

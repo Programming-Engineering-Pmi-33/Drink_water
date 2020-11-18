@@ -31,9 +31,9 @@
 
         public Func<double, string> Formatter { get; set; }
 
-        private List<Weekstatistic> weekstatistics;
-        private List<Monthstatistic> monthstatistics;
-        private List<Yearstatistic> yearstatistics;
+        private List<Totalweekstatistic> weekstatistics;
+        private List<Totalmonthstatistic> monthstatistics;
+        private List<Totalyearstatistic> yearstatistics;
         private List<DateTime> week;
         private List<DateTime> month;
         private List<DateTime> year;
@@ -41,7 +41,7 @@
         private List<double> weekWaterAmount = new List<double>();
         private List<double> monthWaterAmount = new List<double>();
         private List<double> yearWaterAmount = new List<double>();
-        private List<Fluids> fluids;
+        private List<Fluid> fluids;
         private List<BitmapImage> Images;
         private int[] fluidAmount;
         private int index;
