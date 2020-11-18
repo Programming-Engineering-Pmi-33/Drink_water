@@ -1,8 +1,11 @@
-﻿namespace DrinkWater
+﻿#nullable disable
+
+namespace DrinkWater
 {
     using System;
+    using System.Collections.Generic;
 
-    public partial class Statistics
+    public partial class Statistic
     {
         public int StatisticId { get; set; }
 
@@ -14,8 +17,8 @@
 
         public DateTime Date { get; set; }
 
-        public virtual Fluids FluidIdRefNavigation { get; set; }
+        public virtual Fluid FluidIdRefNavigation { get; set; }
 
-        public virtual Users UserIdRefNavigation { get; set; }
+        public virtual User UserIdRefNavigation { get; set; }
     }
 }

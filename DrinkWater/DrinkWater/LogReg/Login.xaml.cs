@@ -25,7 +25,7 @@
             this.Close();
         }
 
-        public bool isInDatabase(string item)
+        private bool isInDatabase(string item)
         {
             if (item == null)
             {
@@ -64,15 +64,15 @@
                 MessageBox.Show("it works.");
             }
 
-            //    else
+            // else
             //    {
             //        ValidationService.SetError(labelPassword, "Incorrect password");
             //    }
-            //}
-            //else
-            //{
+            // }
+            // else
+            // {
             //    ValidationService.SetError(labelUsername, "No such username in database");
-            //}
+            // }
         }
     }
 }

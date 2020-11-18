@@ -36,7 +36,7 @@
                     int salt = EncryptionService.CreateRandomSalt();
 
                     string hashedPassword = EncryptionService.ComputeSaltedHash(this.password, salt);
-                    Users user = new Users(username, email, hashedPassword, salt.ToString());
+                    User user = new User(username, email, hashedPassword, salt.ToString());
                     db.Users.Add(user);
                     db.SaveChanges();
                     Login login = new Login();

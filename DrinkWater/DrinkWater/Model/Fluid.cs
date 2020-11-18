@@ -1,12 +1,15 @@
-﻿namespace DrinkWater
+﻿#nullable disable
+
+namespace DrinkWater
 {
+    using System;
     using System.Collections.Generic;
 
-    public partial class Fluids
+    public partial class Fluid
     {
-        public Fluids()
+        public Fluid()
         {
-            Statistics = new HashSet<Statistics>();
+            Statistics = new HashSet<Statistic>();
         }
 
         public long FluidId { get; set; }
@@ -17,6 +20,6 @@
 
         public byte[] FliudImage { get; set; }
 
-        public virtual ICollection<Statistics> Statistics { get; set; }
+        public virtual ICollection<Statistic> Statistics { get; set; }
     }
 }

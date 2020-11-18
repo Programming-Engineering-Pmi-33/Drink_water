@@ -21,12 +21,12 @@
         public Func<string, string> Formatter { get; set; }
 
         public static List<Dailystatistic> Statistic = new List<Dailystatistic>();
-        public static List<Statistics> FullStatistics = new List<Statistics>();
+        public static List<Statistic> FullStatistics = new List<Statistic>();
         private static SessionUser sessionUser = new SessionUser();
         private static dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
-        private List<Fluids> Fluids = new List<Fluids>();
-        public List<KeyValuePair<Label, TextBox>> LabelBox = new List<KeyValuePair<Label, TextBox>>();
-        public List<Image> PictureBox = new List<Image>();
+        private List<Fluid> Fluids = new List<Fluid>();
+        private List<KeyValuePair<Label, TextBox>> LabelBox = new List<KeyValuePair<Label, TextBox>>();
+        private List<Image> PictureBox = new List<Image>();
         private List<Image> Images = new List<Image>();
 
         public MainWindow()
@@ -37,7 +37,7 @@
         public void GetSessionUser(SessionUser user)
         {
             sessionUser = user;
-            Statistic = (from US in db.Dailystatistic
+            Statistic = (from US in db.Dailystatistics
                          where US.UserIdRef == sessionUser.UserId
                          select US).ToList();
             FullStatistics = (from Fullstat in db.Statistics
@@ -81,7 +81,7 @@
             }
         }
 
-        public void ShowStatistic()
+        private void ShowStatistic()
         {
             SeriesCollection = new SeriesCollection();
             Row.Title = sessionUser.Username.ToString();
@@ -124,7 +124,7 @@
                                 select fl).First().FluidId;
                 if (!string.IsNullOrEmpty(item.Value.Text))
                 {
-                    Statistics find = FullStatistics.Find(s => (s.FluidIdRef == fluidId & s.UserIdRef == sessionUser.UserId & s.Date.Day == DateTime.Now.Day));
+                    Statistic find = FullStatistics.Find(s => (s.FluidIdRef == fluidId & s.UserIdRef == sessionUser.UserId & s.Date.Day == DateTime.Now.Day));
 
                     if (find != null)
                     {
@@ -133,7 +133,7 @@
                     }
                     else
                     {
-                        Statistics statistics = new Statistics
+                        Statistic statistics = new Statistic
                         {
                             UserIdRef = (int)sessionUser.UserId,
                             FluidIdRef = fluidId,
@@ -147,7 +147,7 @@
                     }
 
                     db.SaveChanges();
-                    List<Dailystatistic> temp = (from US in db.Dailystatistic
+                    List<Dailystatistic> temp = (from US in db.Dailystatistics
                                                  where US.UserIdRef == sessionUser.UserId
                                                  select US).ToList();
                     SeriesCollection.Clear();
