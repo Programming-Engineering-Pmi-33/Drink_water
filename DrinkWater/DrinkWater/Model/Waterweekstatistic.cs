@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace DrinkWater
 {
-    public partial class Dailystatistic
+    public partial class Waterweekstatistic
     {
         public int? UserIdRef { get; set; }
-        public long? FluidIdRef { get; set; }
-        public double? Sum { get; set; }
+        public double? Amount { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

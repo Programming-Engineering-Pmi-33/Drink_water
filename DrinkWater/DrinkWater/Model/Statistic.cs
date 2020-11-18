@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace DrinkWater
 {
-    public partial class Statistics
+    public partial class Statistic
     {
         public int StatisticId { get; set; }
         public int UserIdRef { get; set; }
@@ -11,7 +13,7 @@ namespace DrinkWater
         public long FluidAmount { get; set; }
         public DateTime Date { get; set; }
 
-        public virtual Fluids FluidIdRefNavigation { get; set; }
-        public virtual Users UserIdRefNavigation { get; set; }
+        public virtual Fluid FluidIdRefNavigation { get; set; }
+        public virtual User UserIdRefNavigation { get; set; }
     }
 }

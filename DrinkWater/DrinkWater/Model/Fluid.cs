@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace DrinkWater
 {
-    public partial class Fluids
+    public partial class Fluid
     {
-        public Fluids()
+        public Fluid()
         {
-            Statistics = new HashSet<Statistics>();
+            Statistics = new HashSet<Statistic>();
         }
 
         public long FluidId { get; set; }
@@ -15,6 +17,6 @@ namespace DrinkWater
         public double Koeficient { get; set; }
         public byte[] FliudImage { get; set; }
 
-        public virtual ICollection<Statistics> Statistics { get; set; }
+        public virtual ICollection<Statistic> Statistics { get; set; }
     }
 }

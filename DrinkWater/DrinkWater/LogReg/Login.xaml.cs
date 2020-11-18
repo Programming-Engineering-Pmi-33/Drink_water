@@ -65,5 +65,7 @@ namespace DrinkWater.LogReg
                 ValidationService.SetError(labelUsername, "No such username in database");
             }
         }
+
+       
     }
 }
