@@ -16,25 +16,25 @@ namespace DrinkWater.ProfileStatisticsServices
             UserId = userId;
         }
 
-        public List<Weekstatistic> GetWeekStatistic()
+        public void GetWeekStatistic()
         {
-            return (from weekQuery in db.Weekstatistic
-                    where UserId == weekQuery.UserIdRef
-                    select weekQuery).ToList();
+        //    return (from weekQuery in db.
+        //            where UserId == weekQuery.UserIdRef
+        //            select weekQuery).ToList();
         }
 
-        public List<Monthstatistic> GetMonthStatistics()
+        public void GetMonthStatistics()
         {
-            return (from monthQuery in db.Monthstatistic
-             where UserId == monthQuery.UserIdRef
-             select monthQuery).ToList();
+            //return (from monthQuery in db.Monthstatistic
+            // where UserId == monthQuery.UserIdRef
+            // select monthQuery).ToList();
         }
 
-        public List<Yearstatistic> GetYearStatistics()
+        public void GetYearStatistics()
         {
-            return (from yearQuery in db.Yearstatistic
-             where UserId == yearQuery.UserIdRef
-             select yearQuery).ToList();
+            //return (from yearQuery in db.Yearstatistic
+            // where UserId == yearQuery.UserIdRef
+            // select yearQuery).ToList();
         }
     }
 }

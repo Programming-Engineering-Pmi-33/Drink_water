@@ -8,7 +8,51 @@
         Title="Profile and Statistics" Height="900" Width="1600" Loaded="Window_Loaded"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.Resources>
-
+        <Style x:Key="Combobox" TargetType="{x:Type ComboBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Grid.Column="2" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
+                                <ToggleButton.Template>
+                                    <ControlTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="5*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="10"  Background="#6983D9" BorderBrush="Transparent" BorderThickness="1" />
+                                            <Border Grid.Column="0" CornerRadius="10,0,0,10"  Margin="1"  Background="#6983D9"  BorderBrush="Transparent" BorderThickness="0,0,1,0" />
+                                            <Path x:Name="Arrow" Grid.Column="1"  Fill="#F2F2F2" Data="M 0 0 L 4 4 L 8 0 Z" Height="6" Stretch="Fill" Width="13" Margin="8,12,9,12" />
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                                                <Setter TargetName="Border" Property="Background" Value="#6983D9" />
+                                            </Trigger>
+                                            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                                <Setter TargetName="Border" Property="Background" Value="#6983D9" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="15"  />
+                            <TextBox x:Name="PART_EditableTextBox" Visibility="Hidden"  IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True"  Focusable="False" PopupAnimation="Slide">
+                                <Grid  Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" Background="#E1EDFD" />
+                                    <ScrollViewer SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -349,16 +393,7 @@
         <Label x:Name="HeightInfo" Content="" HorizontalAlignment="Left" Margin="236,522,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
         <Label x:Name="WeightInfo" Content="" HorizontalAlignment="Left" Margin="237,561,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
         <Label x:Name="AgeInfo" Content="" HorizontalAlignment="Left" Margin="235,600,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
-        <ComboBox x:Name="Period" HorizontalAlignment="Left" Height="31" Margin="1028,158,0,0" VerticalAlignment="Top" Width="178" SelectionChanged="ComboBox_SelectionChanged" DropDownClosed="Period_DropDownClosed" SelectedIndex="0" Foreground="#FF200E0E" BorderBrush="#FF6983D9" FontSize="14" Background="#FF6983D9">
-            <ComboBox.ItemContainerStyle>
-
-                <Style TargetType="ComboBoxItem">
-                    <Setter Property="Background" Value="#E1EDFD"/>
-                    <Setter Property="BorderBrush" Value="#E1EDFD"/>
-                </Style>
-            </ComboBox.ItemContainerStyle>
-
-
+        <ComboBox x:Name="Period" HorizontalAlignment="Left" Height="31" Margin="1028,158,0,0" VerticalAlignment="Top" Width="178" SelectionChanged="ComboBox_SelectionChanged"  DropDownClosed="Period_DropDownClosed" SelectedIndex="0" Foreground="#F2F2F2" BorderBrush="#FF6983D9" FontSize="14" Background="#FF6983D9" Style="{StaticResource Combobox}">
             <ComboBoxItem x:Name="PeriodLable1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per week" Background="#E1EDFD" />
             <ComboBoxItem x:Name="PeriodLable2" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per month" Background="#E1EDFD"/>
             <ComboBoxItem x:Name="PeriodLable3" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per year" Background="#E1EDFD" />

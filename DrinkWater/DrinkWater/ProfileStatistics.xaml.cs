@@ -68,9 +68,9 @@
         private void GetStatistics()
         {
             StatisticInfo statisticInfo = new StatisticInfo(SessionUser.UserId);
-            weekstatistics = statisticInfo.GetWeekStatistic();
-            monthstatistics = statisticInfo.GetMonthStatistics();
-            yearstatistics = statisticInfo.GetYearStatistics();
+            ////weekstatistics = statisticInfo.GetWeekStatistic();
+            ////monthstatistics = statisticInfo.GetMonthStatistics();
+            ////yearstatistics = statisticInfo.GetYearStatistics();
         }
 
         private void GetFluids()
