@@ -25,6 +25,11 @@
 
         public BitmapImage GetImagefromDB(byte[] imageData)
         {
+            if (imageData == null)
+            {
+                return null;
+            }
+
             using (var memoryStream = new MemoryStream(imageData))
             {
                 var bitmap = new BitmapImage();

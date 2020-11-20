@@ -252,7 +252,7 @@
             </Grid>
 
             <ComboBox x:Name="NotificationsSettings" Padding="15" HorizontalAlignment="Left" Margin="107,657,0,0" VerticalAlignment="Top" Width="320" Height="64" SelectedIndex="0" FontSize="24" Visibility="Visible" SelectionChanged="NotificationsSettings_SelectionChanged" Style="{StaticResource Combobox}" BorderBrush="#FF562D2D" Foreground="#F2F2F2">
-                <ComboBoxItem Visibility="Collapsed" FontSize="24" Content="Notification schedule" Padding="15" Foreground="Black"/>
+                <ComboBoxItem Visibility="Collapsed" FontSize="24" Content="Notification schedule"  Foreground="Black"/>
                 <ComboBoxItem  Foreground="Black" Content="Every hour"/>
                 <ComboBoxItem>
                     <StackPanel Orientation="Horizontal">
