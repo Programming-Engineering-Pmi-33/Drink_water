@@ -7,3 +7,5 @@
 [assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1201", Justification = "<Pending>")]
 [assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1204", Justification = "<Pending>")]
 [assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1600", Justification = "<Pending>")]
+[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1601", Justification = "<Pending>")]
+[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1122", Justification = "<Pending>")]

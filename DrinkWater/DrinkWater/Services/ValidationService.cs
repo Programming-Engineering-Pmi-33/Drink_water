@@ -25,7 +25,7 @@
             string password)
         {
             bool isCorrectUsername = isValidUsername(labelUsername, username);
-            bool isCorrectEmail = isValidEmail(labelEmail, email);
+            bool isCorrectEmail = IsValidEmail(labelEmail, email);
             bool isCorrectPassword = isValidPassword(labelPassword, password);
 
             return isCorrectUsername && isCorrectEmail && isCorrectPassword;
@@ -66,7 +66,7 @@
             return isCorrect;
         }
 
-        private bool isValidEmail(Label labelEmail, string email)
+        private bool IsValidEmail(Label labelEmail, string email)
         {
             bool isCorrect = false;
             var resultEmail = (from data in _db.Users

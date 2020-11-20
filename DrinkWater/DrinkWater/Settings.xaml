@@ -282,6 +282,7 @@
                     <DropShadowEffect Color="DarkBlue" ShadowDepth="2" BlurRadius="10" />
                 </Button.Effect>
             </Button>
+            <Label Name="ErrorLabel" Content="" FontFamily="14" HorizontalAlignment="Left" Margin="701,824,0,0" VerticalAlignment="Top" Width="815" Height="100"/>
 
         </Grid>
     </Viewbox>
