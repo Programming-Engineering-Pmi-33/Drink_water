@@ -1,12 +1,11 @@
-﻿namespace DrinkWater.ProfileStatisticsServices
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Windows.Media.Imaging;
-    using DrinkWater.SettingServices;
+﻿using DrinkWater.SettingServices;
+using System;
+using System.Collections.Generic;
+using System.Windows.Media.Imaging;
 
-    class ScrollClass
+namespace DrinkWater.ProfileStatisticsServices
+{
+    public class ScrollClass
     {
         public List<Fluid> Fluids;
         public List<double> FluidsAmount;
@@ -29,7 +28,7 @@
             }
         }
 
-        private void GetTotalAmount(string period, int userId)
+        public void GetTotalAmount(string period, int userId)
         {
             StatisticInfo statisticInfo = new StatisticInfo(userId);
             FluidsAmount.Clear();
@@ -68,6 +67,7 @@
                 default:
                     throw new Exception("Period is invalid");
             }
+
         }
     }
 }

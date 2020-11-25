@@ -2,10 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Windows;
-    using System.Windows.Controls;
     using System.Windows.Media.Imaging;
     using DrinkWater.LogReg;
     using DrinkWater.ProfileStatisticsServices;
@@ -59,7 +57,7 @@
             Scroll();
         }
 
-        private void GetFluids()
+        private void GetFluids()  
         {
             ScrollClass scrollClass = new ScrollClass("week", userInformation.UserId);
             fluids = scrollClass.Fluids;
@@ -131,14 +129,15 @@
         }
 
         private void ShowUserInfo()
-        {
+        { 
             UserData userData = new UserData(sessionUser);
             userInformation = userData.GetData();
+            UserInfo uInfo = new UserInfo();
             UsernameInfo.Content = userInformation.Username;
             WeightInfo.Content = userInformation.Weight.ToString();
             HeightInfo.Content = userInformation.Height.ToString();
             AgeInfo.Content = userInformation.Age.ToString();
-            ActivityTimeInfo.Content = Math.Abs(userInformation.GoingToBed.Value.Hours - userInformation.WakeUp.Value.Hours).ToString();
+            ActivityTimeInfo.Content = uInfo.GetUserActivityTime(userInformation.GoingToBed.Value.Hours, userInformation.WakeUp.Value.Hours).ToString();
             ShowAvatar();
         }
 
@@ -158,22 +157,16 @@
             LowerElement4.Content = fluidAmount[index + 3];
         }
 
-        private void ShowScore(int m, int n, int koef, List<double> items)
+        public void ShowScore(int success, int total, int koef, List<double> items)
         {
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (userInformation.DailyBalance * koef <= items[i])
-                {
-                    m++;
-                }
-            }
+            ScoreInfo score = new ScoreInfo();
 
-            Score2.Content = m;
-            Score4.Content = n;
+            Score2.Content = score.Score(success, total, koef, items, (long)userInformation.DailyBalance);
+            Score4.Content = total;
         }
 
         private void ShowAvatar()
-        {
+        { 
             if (userInformation.Avatar != null)
             {
                 AvatarImage.Source = new ImageHandler().GetImagefromDB(userInformation.Avatar);

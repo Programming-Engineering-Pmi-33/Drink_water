@@ -177,5 +177,15 @@
         private void Main_Click(object sender, RoutedEventArgs e)
         {
         }
+
+        private void NotificationsSettings_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void GenderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

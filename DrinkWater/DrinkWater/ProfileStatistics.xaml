@@ -8,7 +8,51 @@
         Title="Profile and Statistics" Height="900" Width="1600" Loaded="Window_Loaded"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.Resources>
-
+        <Style x:Key="Combobox" TargetType="{x:Type ComboBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Grid.Column="2" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
+                                <ToggleButton.Template>
+                                    <ControlTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="5*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="10"  Background="#6983D9" BorderBrush="Transparent" BorderThickness="1" />
+                                            <Border Grid.Column="0" CornerRadius="10,0,0,10"  Margin="1"  Background="#6983D9"  BorderBrush="Transparent" BorderThickness="0,0,1,0" />
+                                            <Path x:Name="Arrow" Grid.Column="1"  Fill="#F2F2F2" Data="M 0 0 L 4 4 L 8 0 Z" Height="6" Stretch="Fill" Width="13" Margin="8,12,9,12" />
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                                                <Setter TargetName="Border" Property="Background" Value="#6983D9" />
+                                            </Trigger>
+                                            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                                <Setter TargetName="Border" Property="Background" Value="#6983D9" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="10, 6"  />
+                            <TextBox x:Name="PART_EditableTextBox" Visibility="Hidden"  IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True"  Focusable="False" PopupAnimation="Slide">
+                                <Grid  Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" Background="#E1EDFD" />
+                                    <ScrollViewer SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -322,7 +366,7 @@
                 <DropShadowEffect Color="LightSteelBlue" ShadowDepth="2" BlurRadius="10" />
             </Rectangle.Effect>
         </Rectangle>
-        <lvc:CartesianChart x:Name="WaterChart" Series="{Binding SeriesCollection}" LegendLocation="Bottom" Margin="444,158,394,203">
+        <lvc:CartesianChart x:Name="WaterChart" Series="{Binding SeriesCollection}" LegendLocation="Bottom" Margin="444,152,394,209">
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis x:Name="Axisx" Title="Period" Labels="{Binding Labels}"/>
             </lvc:CartesianChart.AxisX>
@@ -348,20 +392,11 @@
         <Label x:Name="ActivityTimeInfo" Content="" HorizontalAlignment="Left" Margin="237,482,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
         <Label x:Name="HeightInfo" Content="" HorizontalAlignment="Left" Margin="236,522,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
         <Label x:Name="WeightInfo" Content="" HorizontalAlignment="Left" Margin="237,561,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
-        <Label x:Name="AgeInfo" Content="" HorizontalAlignment="Left" Margin="235,600,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
-        <ComboBox x:Name="Period" HorizontalAlignment="Left" Height="31" Margin="1028,158,0,0" VerticalAlignment="Top" Width="178" DropDownClosed="Period_DropDownClosed" SelectedIndex="0" Foreground="#FF200E0E" BorderBrush="#FF6983D9" FontSize="14" Background="#FF6983D9">
-            <ComboBox.ItemContainerStyle>
-
-                <Style TargetType="ComboBoxItem">
-                    <Setter Property="Background" Value="#E1EDFD"/>
-                    <Setter Property="BorderBrush" Value="#E1EDFD"/>
-                </Style>
-            </ComboBox.ItemContainerStyle>
-
-
-            <ComboBoxItem x:Name="PeriodLable1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per week" Background="#E1EDFD" />
-            <ComboBoxItem x:Name="PeriodLable2" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per month" Background="#E1EDFD"/>
-            <ComboBoxItem x:Name="PeriodLable3" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per year" Background="#E1EDFD" />
+        <Label x:Name="AgeInfo" Content="" HorizontalAlignment="Left" Margin="237,600,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.526,2.23" FontSize="18" Foreground="#FF0A2140"/>
+        <ComboBox x:Name="Period" HorizontalAlignment="Left" SelectedIndex="0" Height="31" Margin="1028,158,0,0" VerticalAlignment="Top" Width="178"  DropDownClosed="Period_DropDownClosed" Style="{StaticResource Combobox}" BorderBrush="#FF562D2D" Foreground="#F2F2F2">
+            <ComboBoxItem x:Name="PeriodLable1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per week" Background="#E1EDFD" Foreground="Black" />
+            <ComboBoxItem x:Name="PeriodLable2" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per month" Background="#E1EDFD" Foreground="Black"/>
+            <ComboBoxItem x:Name="PeriodLable3" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="178" Content="Per year" Background="#E1EDFD" Foreground="Black"/>
         </ComboBox>
         <Button Style="{DynamicResource SettingsButton}" x:Name="SettingsButton" FontFamily="Segoe MDL2 Assets" Content="&#xE115;" HorizontalAlignment="Left" Margin="1414,22,0,0" VerticalAlignment="Top" Height="68" Click="Settings_Click" RenderTransformOrigin="0,0" UseLayoutRounding="True" Width="68" Background="#FF0A2140" BorderBrush="#FF0A2140" FontSize="30" FontWeight="Bold" Foreground="#FFD4D3D3">
             <Button.LayoutTransform>
@@ -382,7 +417,7 @@
         </Image>
         <Grid HorizontalAlignment="Left" Height="79" VerticalAlignment="Top" Width="133" Margin="1313,273,0,0">
             <Image  x:Name="ImageElement1" HorizontalAlignment="Left" Height="71" VerticalAlignment="Top" Width="72" Margin="0,6,0,0"/>
-            <Label x:Name="UpperElement1" Content="Label" HorizontalAlignment="Left" Margin="85,10,0,0" VerticalAlignment="Top" Width="48" FontSize="14"/>
+            <Label x:Name="UpperElement1" Content="Label" HorizontalAlignment="Left" Margin="85,10,0,0" VerticalAlignment="Top" Width="56" FontSize="14"/>
             <Label x:Name="LowerElement1" Content="Label" Margin="85,40,1,0" VerticalAlignment="Top" FontSize="14"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="88" VerticalAlignment="Top" Width="133" Margin="1313,380,0,0">
@@ -391,7 +426,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Image x:Name="ImageElement2" HorizontalAlignment="Left" Height="72" VerticalAlignment="Top" Width="72" Margin="0,5,0,0"/>
-            <Label x:Name="UpperElement2" Content="Label" HorizontalAlignment="Left" Margin="86,12,0,0" VerticalAlignment="Top" Width="46" FontSize="14" Grid.ColumnSpan="2"/>
+            <Label x:Name="UpperElement2" Content="Label" HorizontalAlignment="Left" Margin="86,12,0,0" VerticalAlignment="Top" Width="56" FontSize="14" Grid.ColumnSpan="2"/>
             <Label x:Name="LowerElement2" Content="Label" HorizontalAlignment="Left" Margin="86,42,0,0" VerticalAlignment="Top" Width="47" RenderTransformOrigin="1.555,5.943" FontSize="14" Height="26" Grid.ColumnSpan="2"/>
         </Grid>
         <Button Style="{DynamicResource ScrollButton}" x:Name="BackwardButton" Content="5" HorizontalAlignment="Left" Margin="1356,217,0,0" VerticalAlignment="Top" Click="BackwardButton_Click" RenderTransformOrigin="2.477,0.784" Foreground="#FF0A2140" FontSize="36"/>
@@ -409,7 +444,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Image x:Name="ImageElement3" HorizontalAlignment="Left" Height="72" VerticalAlignment="Top" Width="72" Margin="0,5,0,0"/>
-            <Label x:Name="UpperElement3" Content="Label" HorizontalAlignment="Left" Margin="86,12,0,0" VerticalAlignment="Top" Width="46" FontSize="14" Grid.ColumnSpan="2"/>
+            <Label x:Name="UpperElement3" Content="Label" HorizontalAlignment="Left" Margin="86,12,0,0" VerticalAlignment="Top" Width="56" FontSize="14" Grid.ColumnSpan="2"/>
             <Label x:Name="LowerElement3" Content="Label" HorizontalAlignment="Left" Margin="86,42,0,0" VerticalAlignment="Top" Width="47" RenderTransformOrigin="1.555,5.943" FontSize="14" Height="26" Grid.ColumnSpan="2"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="88" VerticalAlignment="Top" Width="133" Margin="1315,578,0,0">
@@ -418,7 +453,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Image x:Name="ImageElement4" HorizontalAlignment="Left" Height="72" VerticalAlignment="Top" Width="72" Margin="0,5,0,0"/>
-            <Label x:Name="UpperElement4" Content="Label" HorizontalAlignment="Left" Margin="86,12,0,0" VerticalAlignment="Top" Width="46" FontSize="14" Grid.ColumnSpan="2"/>
+            <Label x:Name="UpperElement4" Content="Label" HorizontalAlignment="Left" Margin="86,12,0,0" VerticalAlignment="Top" Width="56" FontSize="14" Grid.ColumnSpan="2"/>
             <Label x:Name="LowerElement4" Content="Label" HorizontalAlignment="Left" Margin="86,42,0,0" VerticalAlignment="Top" Width="47" RenderTransformOrigin="1.555,5.943" FontSize="14" Height="26" Grid.ColumnSpan="2"/>
         </Grid>
         <Label Content="Total" HorizontalAlignment="Left" Margin="1347,165,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#FF0A2140"/>
