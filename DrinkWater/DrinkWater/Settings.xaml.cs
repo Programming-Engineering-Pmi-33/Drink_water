@@ -31,6 +31,9 @@
 
         public void GetSessionUser(SessionUser userInfo)
         {
+            Logger.InitLogger();
+
+            Logger.Log.Info("Ура робе!");
             user = new UserData(userInfo);
             sessionUser = userInfo;
             userData = user.GetData();
