@@ -23,7 +23,7 @@ namespace DrinkWater
 
         public virtual DbSet<Statistic> Statistics { get; set; }
 
-        public virtual DbSet<Totalmonthstatistic> Totalmonthstatistics { get; set; }
+        public virtual DbSet<Totalmonthstatistiс> Totalmonthstatistics { get; set; }
 
         public virtual DbSet<Totalweekstatistic> Totalweekstatistics { get; set; }
 
@@ -80,7 +80,7 @@ namespace DrinkWater
                     .HasConstraintName("Statistics_UserIdRef_fkey");
             });
 
-            modelBuilder.Entity<Totalmonthstatistic>(entity =>
+            modelBuilder.Entity<Totalmonthstatistiс>(entity =>
             {
                 entity.HasNoKey();
 

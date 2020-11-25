@@ -1,7 +1,7 @@
-﻿using System.Linq;
-
-namespace DrinkWater.Services
+﻿namespace DrinkWater.Services
 {
+    using System.Linq;
+
     public class UsersService
     {
         private readonly dfkg9ojh16b4rdContext _db = null;
@@ -44,7 +44,7 @@ namespace DrinkWater.Services
             return resultEmail.Count > 0;
         }
 
-        public void RegisterUser(Users user)
+        public void RegisterUser(User user)
         {
             _db.Users.Add(user);
             _db.SaveChanges();

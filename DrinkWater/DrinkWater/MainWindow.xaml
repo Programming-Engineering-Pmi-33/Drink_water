@@ -323,22 +323,22 @@
             <Grid x:Name="LabelTextBox1" HorizontalAlignment="Left" Height="58" Margin="1066,239,0,0" VerticalAlignment="Top" Width="292" Grid.ColumnSpan="2">
                 <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid1"  Content="" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount1" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" VerticalAlignment="Top" />
-                <Image x:Name="ImageBox1" Width="54"  Margin="0,3,0,0"  Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" RenderTransformOrigin="0.533,0.181" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                <Image x:Name="ImageBox1" Width="54"  Margin="0,3,0,0"  RenderTransformOrigin="0.533,0.181" VerticalAlignment="Top" HorizontalAlignment="Left" />
             </Grid>
             <Grid x:Name="LabelTextBox2" HorizontalAlignment="Left"  Height="58" Margin="1066,334,0,0" VerticalAlignment="Top" Width="292" Grid.ColumnSpan="2">
                 <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid2"  Content="" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount2" HorizontalAlignment="Left"  Text="" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <Image x:Name="ImageBox2" Width="54" Margin="0,4,0,0" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" HorizontalAlignment="Left" />
+                <Image x:Name="ImageBox2" Width="54" Margin="0,4,0,0"  HorizontalAlignment="Left" />
             </Grid>
             <Grid x:Name="LabelTextBox3"  HorizontalAlignment="Left" Height="57" Margin="1066,434,0,0" VerticalAlignment="Top" Width="295" Grid.ColumnSpan="2">
                 <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid3" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount3" HorizontalAlignment="Left"  Text="" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <Image x:Name="ImageBox3" Width="54" Margin="0,3,0,0" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                <Image x:Name="ImageBox3" Width="54" Margin="0,3,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
             </Grid>
             <Grid x:Name="LabelTextBox4" HorizontalAlignment="Left" Height="57" Margin="1066,534,0,0" VerticalAlignment="Top" Width="292" Grid.ColumnSpan="2">
                 <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid4" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount4" HorizontalAlignment="Left"  Text="" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <Image x:Name="ImageBox4" Width="54" Margin="0,3,0,0" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                <Image x:Name="ImageBox4" Width="54" Margin="0,3,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
             </Grid>
             <Button Style="{DynamicResource ScrollButton}" Content="5" HorizontalAlignment="Left" Margin="1151,182,0,0" VerticalAlignment="Top" Click="Up_Click" Background="#FFE1EDFD" Grid.ColumnSpan="2" />
             <Button Style="{DynamicResource ScrollButton}" Content="6" HorizontalAlignment="Left" Margin="1151,630,0,0" VerticalAlignment="Top" Click="Down_Click" Background="#FFE1EDFD" Grid.ColumnSpan="2" />
@@ -347,9 +347,7 @@
             <Label Content="Statistics of drinking water per day" HorizontalAlignment="Left" Height="49" Margin="126,177,0,0" VerticalAlignment="Top" Width="594" FontSize="30" RenderTransformOrigin="0.532,0.535" Grid.ColumnSpan="2"/>
             <Image HorizontalAlignment="Left"  Height="68" Width="68" Margin="14,0,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
             <Ellipse HorizontalAlignment="Left" Opacity="0.6" VerticalAlignment="Top" Width="68" Height="68" Margin="94,10,0,0" Grid.ColumnSpan="2">
-                <Ellipse.Fill>
-                    <ImageBrush ImageSource="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\logo.png" />
-                </Ellipse.Fill>
+               
             </Ellipse>
         </Grid>
     </Viewbox>

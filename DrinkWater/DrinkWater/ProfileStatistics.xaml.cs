@@ -57,7 +57,7 @@
             Scroll();
         }
 
-        private void GetFluids()  
+        private void GetFluids()
         {
             ScrollClass scrollClass = new ScrollClass("week", userInformation.UserId);
             fluids = scrollClass.Fluids;
@@ -129,7 +129,7 @@
         }
 
         private void ShowUserInfo()
-        { 
+        {
             UserData userData = new UserData(sessionUser);
             userInformation = userData.GetData();
             UserInfo uInfo = new UserInfo();
@@ -166,7 +166,7 @@
         }
 
         private void ShowAvatar()
-        { 
+        {
             if (userInformation.Avatar != null)
             {
                 AvatarImage.Source = new ImageHandler().GetImagefromDB(userInformation.Avatar);

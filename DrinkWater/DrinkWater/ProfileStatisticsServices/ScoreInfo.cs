@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Windows.System.UserProfile;
-
-namespace DrinkWater.ProfileStatisticsServices
+﻿namespace DrinkWater.ProfileStatisticsServices
 {
+    using System;
+    using System.Collections.Generic;
+    using Windows.System.UserProfile;
+
     public class ScoreInfo
     {
-        public ScoreInfo() { }
-        public int Score(int success, int total, int koef, List<double> items, long dailyBalance) 
+        public ScoreInfo()
+        {
+        }
+
+        public int Score(int success, int total, int koef, List<double> items, long dailyBalance)
         {
             for (int i = 0; i < items.Count; i++)
             {
@@ -16,6 +19,7 @@ namespace DrinkWater.ProfileStatisticsServices
                     success++;
                 }
             }
+
             return success;
         }
     }

@@ -1,11 +1,11 @@
-﻿using System.Windows;
-using System.Linq;
-using DrinkWater.Services;
-
-namespace DrinkWater.LogReg
+﻿namespace DrinkWater.LogReg
 {
+    using System.Linq;
+    using System.Windows;
+    using DrinkWater.Services;
+
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for Login.xaml.
     /// </summary>
     public partial class Login : Window
     {
@@ -26,7 +26,7 @@ namespace DrinkWater.LogReg
             this.Close();
         }
 
-        public bool isInDatabase(string item)
+        public bool IsInDatabase(string item)
         {
             if (item == null)
             {
@@ -54,6 +54,10 @@ namespace DrinkWater.LogReg
                     labelPassword.Visibility = Visibility.Hidden;
 
                     SessionUser sessionUser = new SessionUser((long)userId, username);
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.GetSessionUser(sessionUser);
+                    mainWindow.Show();
+                    this.Close();
                 }
                 else
                 {

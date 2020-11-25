@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-
-namespace DrinkWater.ProfileStatisticsServices
+﻿namespace DrinkWater.ProfileStatisticsServices
 {
-    class StatisticInfo
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    public class StatisticInfo
     {
         private static dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
 
@@ -30,25 +30,46 @@ namespace DrinkWater.ProfileStatisticsServices
                     select dayQuery).ToList();
         }
 
-        public List<Totalweekstatistic> GetWeekStatistic()
+        public List<Totalweekstatistic> GetTotalWeekStatistics()
         {
-            return (from weekQuery in db.Totalweekstatistics
+            return (from totalWeekQuery in db.Totalweekstatistics
+                    where UserId == totalWeekQuery.UserIdRef
+                    select totalWeekQuery).ToList();
+        }
+
+        public List<Totalmonthstatistiс> GetTotalMonthStatistics()
+        {
+            return (from totalMonthQuery in db.Totalmonthstatistics
+                    where UserId == totalMonthQuery.UserIdRef
+                    select totalMonthQuery).ToList();
+        }
+
+        public List<Totalyearstatistic> GetTotalYearStatistics()
+        {
+            return (from totalYearQuery in db.Totalyearstatistics
+                    where UserId == totalYearQuery.UserIdRef
+                    select totalYearQuery).ToList();
+        }
+
+        public List<Waterweekstatistic> GetWeekStatistic()
+        {
+            return (from weekQuery in db.Waterweekstatistics
                     where UserId == weekQuery.UserIdRef
                     select weekQuery).ToList();
         }
 
-        public List<Totalmonthstatistic> GetMonthStatistics()
+        public List<Watermonthstatistic> GetMonthStatistics()
         {
-            return (from monthQuery in db.Totalmonthstatistics
+            return (from monthQuery in db.Watermonthstatistics
                     where UserId == monthQuery.UserIdRef
-             select monthQuery).ToList();
+                    select monthQuery).ToList();
         }
 
-        public List<Totalyearstatistic> GetYearStatistics()
+        public List<Wateryearstatistic> GetYearStatistics()
         {
-            return (from yearQuery in db.Totalyearstatistics
+            return (from yearQuery in db.Wateryearstatistics
                     where UserId == yearQuery.UserIdRef
-             select yearQuery).ToList();
+                    select yearQuery).ToList();
         }
     }
 }

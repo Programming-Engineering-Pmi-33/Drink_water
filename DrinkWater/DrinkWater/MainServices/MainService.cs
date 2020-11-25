@@ -1,21 +1,26 @@
-﻿using DrinkWater.LogReg;
-using DrinkWater.ProfileStatisticsServices;
-using DrinkWater.SettingServices;
-using LiveCharts;
-using LiveCharts.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-
-namespace DrinkWater
+﻿namespace DrinkWater
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using DrinkWater.LogReg;
+    using DrinkWater.ProfileStatisticsServices;
+    using DrinkWater.SettingServices;
+    using LiveCharts;
+    using LiveCharts.Wpf;
+
     public class MainService
     {
         static public SeriesCollection SeriesCollection { get; set; }
+
+        public static void Add(List<KeyValuePair<string, int>> liquidsAmount)
+        {
+            throw new NotImplementedException();
+        }
 
         static public List<Dailystatistic> Statistic = new List<Dailystatistic>();
         static public List<Statistic> FullStatistics = new List<Statistic>();
@@ -24,14 +29,16 @@ namespace DrinkWater
         public List<Fluid> Fluids = new List<Fluid>();
         public List<Image> Images = new List<Image>();
 
-        public MainService() { }
+        public MainService()
+        {
+        }
+
         public void GetSessionUser(SessionUser user)
         {
             sessionUser = user;
             StatisticInfo statisticInfo = new StatisticInfo(user.UserId);
             Statistic = statisticInfo.GetDailyStatistics();
             FullStatistics = statisticInfo.GetStatistics(DateTime.Now);
-
         }
 
         public SessionUser GetUser()
@@ -53,14 +60,12 @@ namespace DrinkWater
             long fluidId = (from fl in Fluids
                         where fl.Name == liquidName
                         select fl).First().FluidId;
-        
             Statistic find = FullStatistics.Find(s => (s.FluidIdRef == fluidId & s.UserIdRef == sessionUser.UserId & s.Date.Day == DateTime.Now.Day));
 
             if (find != null)
             {
                 FullStatistics.Find(s => s.StatisticId == find.StatisticId).FluidAmount += liquidAmount;
                 db.Statistics.Update(find);
-
             }
             else
             {
@@ -70,13 +75,12 @@ namespace DrinkWater
                     FluidIdRef = fluidId,
                     FluidAmount = liquidAmount,
                     Date = DateTime.Now,
-
                 };
                 FullStatistics.Add(statistics);
 
                 db.Statistics.Add(statistics);
-
             }
+
             db.SaveChanges();
         }
     }

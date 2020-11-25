@@ -1,10 +1,10 @@
-﻿using DrinkWater.SettingServices;
-using System;
-using System.Collections.Generic;
-using System.Windows.Media.Imaging;
-
-namespace DrinkWater.ProfileStatisticsServices
+﻿namespace DrinkWater.ProfileStatisticsServices
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Media.Imaging;
+    using DrinkWater.SettingServices;
+
     public class ScrollClass
     {
         public List<Fluid> Fluids;
@@ -67,7 +67,6 @@ namespace DrinkWater.ProfileStatisticsServices
                 default:
                     throw new Exception("Period is invalid");
             }
-
         }
     }
 }

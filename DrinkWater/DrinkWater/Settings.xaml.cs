@@ -176,16 +176,18 @@
 
         private void Main_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.GetSessionUser(sessionUser);
+            mainWindow.Show();
+            this.Close();
         }
 
         private void NotificationsSettings_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
 
         private void GenderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
     }
 }
