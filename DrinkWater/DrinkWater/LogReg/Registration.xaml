@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DrinkWater.LogReg"
         mc:Ignorable="d"
-        Title="Drink Water" Height="500" Width="800" Background="#E1EDFD">
+        Title="Drink Water" Height="500" Width="800" Background="#E1EDFD" WindowStartupLocation="CenterScreen">
     <Grid  HorizontalAlignment="Center" Width="800">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -25,16 +25,16 @@
 
         </TextBox>
         <TextBox   Style="{StaticResource LoginTextBox}" x:Name="textBoxConfirmPassword" HorizontalAlignment="Center" Margin="0,325,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="2"/>
-        <Button Style="{StaticResource LoginButton}" x:Name="buttonSignUp"  Background="#F18989" BorderBrush="Transparent"
-                BorderThickness="0" Content="Sign up" HorizontalAlignment="Left" Margin="410,399,0,0" VerticalAlignment="Top" Height="22" Width="120" Click="buttonSignUp_Click" Grid.Column="2" FontFamily="Bahnschrift SemiBold"/>
+        <Button Style="{StaticResource LoginButton}" x:Name="buttonSignUp"  Background="#2C3B58" BorderBrush="Transparent"
+                BorderThickness="0" Content="Sign up" HorizontalAlignment="Left" Margin="410,399,0,0" VerticalAlignment="Top" Height="22" Width="120" Click="buttonSignUp_Click" Grid.Column="2" FontFamily="Bahnschrift SemiBold" Foreground="White"/>
         <Label Content="Username:" HorizontalAlignment="Left" Margin="266,79,0,0"  Width="69" Grid.Column="2" FontFamily="Bahnschrift SemiBold" Height="26" VerticalAlignment="Top"/>
         <Label Content="Email:" HorizontalAlignment="Left" Margin="266,148,0,0"  Width="60" Grid.Column="2" FontFamily="Bahnschrift SemiBold" Height="26" VerticalAlignment="Top"/>
         <Label Content="Password:" Margin="266,223,0,0" Grid.Column="2" FontFamily="Bahnschrift SemiBold" HorizontalAlignment="Left" Width="86" Height="26" VerticalAlignment="Top"/>
         <Label Content="Confirm password:" Margin="266,300,0,0" Grid.Column="2" FontFamily="Bahnschrift SemiBold" HorizontalAlignment="Left" Height="26" Width="156" VerticalAlignment="Top"/>
-        <Label x:Name="labelUsername" Visibility="Hidden" Content="label" HorizontalAlignment="Left"  Margin="258,127,0,0" VerticalAlignment="Top" Background="White"  Grid.Column="2" Height="26" Width="377" />
-        <Label x:Name="labelEmail" Visibility="Hidden" Content="label" HorizontalAlignment="Left" Margin="258,197,0,0" VerticalAlignment="Top"  Grid.Column="2" Height="26" Width="377"   />
-        <Label x:Name="labelPassword" Visibility="Hidden"  Content="Label" HorizontalAlignment="Left"  Margin="258,273,0,0" VerticalAlignment="Top"   Grid.Column="2" Height="26" Width="377"/>
-        <Label x:Name="labelPasswordConfirm" Visibility="Hidden" Content="Label" Grid.Column="2" HorizontalAlignment="Left" Margin="258,347,0,0"    VerticalAlignment="Top" Width="377" Height="26"/>
+        <Label x:Name="labelUsername" Visibility="Hidden" Content="label" HorizontalAlignment="Left"  Margin="270,127,0,0" VerticalAlignment="Top" Grid.Column="2" Height="26" Width="365" />
+        <Label x:Name="labelEmail" Visibility="Hidden" Content="label" HorizontalAlignment="Left" Margin="270,197,0,0" VerticalAlignment="Top"  Grid.Column="2" Height="26" Width="365"   />
+        <Label x:Name="labelPassword" Visibility="Hidden" Content="Label" HorizontalAlignment="Left"  Margin="270,273,0,0" VerticalAlignment="Top"   Grid.Column="2" Height="26" Width="365"/>
+        <Label x:Name="labelPasswordConfirm" Visibility="Hidden" Content="Label" Grid.Column="2" HorizontalAlignment="Left" Margin="270,347,0,0"    VerticalAlignment="Top" Width="365" Height="26"/>
         <Label Content=" Sign up" Grid.Column="2" HorizontalAlignment="Left" Margin="362,32,0,0" VerticalAlignment="Top" Width="108" AutomationProperties.HelpText="" FontSize="16" FontFamily="Bahnschrift SemiBold" FontStyle="Italic" FontWeight="Normal" Opacity="0.985" Height="31"/>
     </Grid>
 </Window>

@@ -9,11 +9,11 @@
     public class ValidationService
     {
         private const string EMAIL_REGEX = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
-        private readonly dfkg9ojh16b4rdContext _db;
+        private readonly UsersService _usersService;
 
-        public ValidationService(dfkg9ojh16b4rdContext db)
+        public ValidationService(UsersService usersService)
         {
-            _db = db;
+            _usersService = usersService;
         }
 
         public bool IsValid(
@@ -41,9 +41,6 @@
         private bool isValidUsername(Label labelUsername, string username)
         {
             bool isCorrect = false;
-            var resultName = (from data in _db.Users
-                              where data.Username == username
-                              select data.Username).ToList();
 
             if (string.IsNullOrWhiteSpace((string)username) == true)
             {
@@ -53,7 +50,7 @@
             {
                 SetError(labelUsername, "Username must contain at least 2 letters");
             }
-            else if (resultName.Count() > 0)
+            else if (_usersService.UsernameExists(username))
             {
                 SetError(labelUsername, "Username is reserved");
             }
@@ -69,11 +66,8 @@
         private bool IsValidEmail(Label labelEmail, string email)
         {
             bool isCorrect = false;
-            var resultEmail = (from data in _db.Users
-                               where data.Email == email
-                               select data.Email).ToList();
 
-            if (string.IsNullOrWhiteSpace((string)email) == true)
+            if (string.IsNullOrWhiteSpace(email) == true)
             {
                 SetError(labelEmail, "Email is required");
             }
@@ -81,7 +75,7 @@
             {
                 SetError(labelEmail, "Wrong e-mail address");
             }
-            else if (resultEmail.Count() > 0)
+            else if (_usersService.EmailExists(email))
             {
                 SetError(labelEmail, "Email is reserved");
             }

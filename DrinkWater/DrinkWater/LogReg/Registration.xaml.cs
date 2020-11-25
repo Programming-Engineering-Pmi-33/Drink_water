@@ -1,29 +1,29 @@
-﻿namespace DrinkWater.LogReg
-{
-    using System.Windows;
-    using DrinkWater.Services;
+﻿using DrinkWater.Services;
+using System.Windows;
 
+namespace DrinkWater.LogReg
+{
     /// <summary>
-    /// Interaction logic for Registration.xaml.
+    /// Interaction logic for Registration.xaml
     /// </summary>
     public partial class Registration : Window
     {
-        public dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
-
         private string username;
         private string email;
         private string password;
+        private UsersService _usersService;
         private ValidationService _validationService;
 
         public Registration()
         {
             InitializeComponent();
-            _validationService = new ValidationService(db);
+            _usersService = UsersService.GetService;
+            _validationService = new ValidationService(_usersService);
         }
 
         private void buttonSignUp_Click(object sender, RoutedEventArgs e)
         {
-            // зробити дизайн під ваерфрейми.
+            //зробити дизайн під ваерфрейми.
             this.username = textBoxUsername.Text;
             this.email = textBoxEmail.Text;
             this.password = textBoxPassword.Text;
@@ -36,9 +36,10 @@
                     int salt = EncryptionService.CreateRandomSalt();
 
                     string hashedPassword = EncryptionService.ComputeSaltedHash(this.password, salt);
-                    User user = new User(username, email, hashedPassword, salt.ToString());
-                    db.Users.Add(user);
-                    db.SaveChanges();
+                    Users user = new Users(username, email, hashedPassword, salt.ToString());
+
+                    _usersService.RegisterUser(user);
+
                     Login login = new Login();
                     login.Show();
                     this.Close();
@@ -49,5 +50,6 @@
                 }
             }
         }
+
     }
 }

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Drink Water" Height="437.5" Width="700">
+        Title="Drink Water" Height="437.5" Width="700" WindowStartupLocation="CenterScreen">
     <Grid  HorizontalAlignment="Center" Width="700" Background="#E1EDFD">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -35,8 +35,8 @@
                 HorizontalAlignment="Left" Margin="370,320,0,0" 
                 VerticalAlignment="Top" Height="22" Width="110" 
                 Click="buttonLogIn_Click" Grid.Column="1"
-                Background="#F18989" BorderBrush="Transparent"
-                BorderThickness="0" RenderTransformOrigin="0.5,0.5" Foreground="Black" FontFamily="Bahnschrift SemiBold" Style="{StaticResource LoginButton}"/>
+                Background="#2C3B58" BorderBrush="Transparent"
+                BorderThickness="0" RenderTransformOrigin="0.5,0.5" Foreground="White" FontFamily="Bahnschrift SemiBold" Style="{StaticResource LoginButton}"/>
         <Label Content="Username:" HorizontalAlignment="Left" Margin="215,100,0,0" VerticalAlignment="Top" Height="24" Grid.Column="1" Width="75" FontFamily="Bahnschrift SemiBold" FontWeight="Normal" Foreground="Black"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="216,186,0,0" VerticalAlignment="Top" Height="24" Grid.Column="1" Width="75" FontFamily="Bahnschrift SemiBold" Foreground="Black"/>
         <Label Content="Log in" Grid.Column="1" HorizontalAlignment="Center" Margin="0,39,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift SemiBold" FontSize="16" Height="28" Width="56" FontWeight="Bold"/>
