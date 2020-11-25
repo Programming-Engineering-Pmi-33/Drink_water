@@ -57,7 +57,7 @@
                 labelPassword.Visibility = Visibility.Hidden;
 
                 SessionUser sessionUser = new SessionUser((long)userId, username);
-                Settings settings = new Settings();
+                MainWindow settings = new MainWindow();
                 settings.GetSessionUser(sessionUser);
                 settings.Show();
                 this.Close();
