@@ -27,6 +27,10 @@
         {
             return User;
         }
+        public long GetDailyBalnace() 
+        {
+            return User.DailyBalance.Value;
+        } 
 
         public void SetUserParameters(long weight, long height, long age, string sex, TimeSpan wakeUp, TimeSpan goingToBed)
         {

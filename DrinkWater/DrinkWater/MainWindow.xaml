@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:DrinkWater"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow"  Height="1080" Width="1920" Loaded="Window_Loaded_1" WindowStartupLocation="CenterScreen" WindowState="Minimized">
+        SizeToContent="WidthAndHeight"
+        Title="Drink Water"  Height="900" Width="1600" Loaded="Window_Loaded_1" WindowStartupLocation="CenterScreen" WindowState="Minimized">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -28,13 +29,17 @@
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
         <Style x:Key="ProfileButton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="Background" Value="#2C3B58"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Width" Value="68"/>
+            <Setter Property="Height" Value="68"/>
+            <Setter Property="FontSize" Value="30"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -69,7 +74,11 @@
             <Setter Property="Padding" Value="5"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Top"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Width" Value="98"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontFamily" Value="Montserra"/>
+            <Setter Property="Margin"  Value="100,0,0,0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Label}">
@@ -105,17 +114,20 @@
         <SolidColorBrush x:Key="Button.Disabled.Foreground1" Color="#FF838383"/>
         <Style x:Key="AddButton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual1}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background1}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border1}"/>
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontFamily" Value="Montserrat"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Background" Value="#2C3B58"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="1"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" CornerRadius="4" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                        <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -176,17 +188,23 @@
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
             <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
             <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="AllowDrop" Value="true"/>
             <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
             <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Width" Value="98"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="FontFamily" Value="Montserra"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="100,31,0,0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="15" SnapsToDevicePixels="True">
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -233,15 +251,17 @@
         <SolidColorBrush x:Key="Button.Disabled.Foreground3" Color="#FF838383"/>
         <Style x:Key="ScrollButton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual3}"/>
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background" Value="#336AA6F5"/>
             <Setter Property="BorderBrush" Value="White"/>
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="1"/>
             <Setter Property="FontFamily" Value="Marlett"/>
-            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Width" Value="42"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="FontSize" Value="30"/>
 
             <Setter Property="Template">
                 <Setter.Value>
@@ -272,47 +292,65 @@
             </Setter>
         </Style>
 
+
     </Window.Resources>
-    <Grid Height="810" Width="1440">
-        <Rectangle HorizontalAlignment="Left" Margin="61,210,0,10" Stroke="Black" Fill="#FFDDDDDD" Width="659"/>
-        <lvc:CartesianChart x:Name="Chart" Series="{Binding SeriesCollection}" LegendLocation="Right" Margin="94,296,752,45" Background="White">
-            <lvc:CartesianChart.AxisX >
-                <lvc:Axis x:Name="Row"  MinValue="0" MaxValue="1" MinWidth="206" Visibility="Hidden"/>
-            </lvc:CartesianChart.AxisX>
-            <lvc:CartesianChart.AxisY >
-                <lvc:Axis x:Name="Milliliters" Title="Milliliters" MinValue="0">
-                    <lvc:Axis.Sections>
-                        <lvc:AxisSection Name="BalanceLine" Value="2000" StrokeThickness="3" Stroke="#F9D648">
-                            <lvc:AxisSection.Fill>
-                                <SolidColorBrush Color="#A3A3FF" Opacity=".4"></SolidColorBrush>
-                            </lvc:AxisSection.Fill>
-                        </lvc:AxisSection>
-                    </lvc:Axis.Sections>
-                </lvc:Axis>
-            </lvc:CartesianChart.AxisY>
-        </lvc:CartesianChart>
+    <Viewbox>
+        <Grid Height="810" Width="1440">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Rectangle HorizontalAlignment="Left" Margin="986,159,0,61" Fill="#336AA6F5" RadiusX="20" RadiusY="20" Width="372" Panel.ZIndex="0" Grid.ColumnSpan="2"/>
+            <Rectangle HorizontalAlignment="Left" Margin="94,159,0,61" Fill="#336AA6F5"  RadiusX="20" RadiusY="20" Width="659" Grid.ColumnSpan="2"/>
+            <lvc:CartesianChart x:Name="Chart" Series="{Binding SeriesCollection}" LegendLocation="Right" Margin="127,245,719,96" Background="White" Grid.ColumnSpan="2">
+                <lvc:CartesianChart.AxisX  >
+                    <lvc:Axis x:Name="Row" MinWidth="206"/>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY >
+                    <lvc:Axis x:Name="Milliliters" Title="Milliliters" MinValue="0">
+                        <lvc:Axis.Sections>
+                            <lvc:AxisSection Name="BalanceLine" Value="2000" StrokeThickness="3" Stroke="#F9D648">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="#A3A3FF" Opacity=".4"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                        </lvc:Axis.Sections>
+                    </lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
 
-        <Button Style="{DynamicResource AddButton}" Content="Add" Height="46" Margin="0,0,29,10" VerticalAlignment="Bottom" Click="Add" FontSize="18" Visibility="Visible" HorizontalAlignment="Right" Width="113" />
-        <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid1"  Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Margin="1196,252,0,0" Height="26"/>
-        <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount1" HorizontalAlignment="Left" Margin="1196,283,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="242" Height="26"/>
-        <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid2"  Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Margin="1196,360,0,0" Height="26"/>
-        <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount2" HorizontalAlignment="Left" Margin="1196,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="242" Height="26"/>
-        <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid3" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Margin="1196,474,0,0" Height="27"/>
-        <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount3" HorizontalAlignment="Left" Margin="1196,505,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="242" Height="26"/>
-        <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid4" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="242" Margin="1196,582,0,0" Height="26"/>
-        <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount4" HorizontalAlignment="Left" Margin="1196,613,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="242" Height="26"/>
-        <Button Style="{DynamicResource ScrollButton}" Content="5" HorizontalAlignment="Left" Margin="1162,228,0,0" VerticalAlignment="Top" Height="25" Width="25" Click="Up_Click" />
-        <Button Style="{DynamicResource ScrollButton}" Content="6" HorizontalAlignment="Left" Margin="1162,646,0,0" VerticalAlignment="Top" Height="25" Width="25" Click="Down_Click" />
-        <Button Style="{DynamicResource ProfileButton}" Content="Profile" HorizontalAlignment="Right" Margin="0,10,112,0" VerticalAlignment="Top" Width="68" Height="68"/>
-        <Button Style="{DynamicResource ProfileButton}" Content="Settings" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="68" Height="68"/>
-
-
-        <Image x:Name="ImageBox1" Width="54"  Margin="1050,251,336,457"  Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" />
-        <Image x:Name="ImageBox2" Width="54" Margin="1050,353,336,357" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" />
-        <Image x:Name="ImageBox3" Width="54" Margin="1050,459,336,250" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" />
-        <Image x:Name="ImageBox4" Width="54" Margin="1050,560,336,149" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" />
-        <Label Content="Statistics of drinking water per day" HorizontalAlignment="Left" Height="49" Margin="93,228,0,0" VerticalAlignment="Top" Width="594" FontSize="28" RenderTransformOrigin="0.532,0.535"/>
-
-
-    </Grid>
+            <Button Style="{DynamicResource AddButton}" Content="Add" Height="46" Margin="0,0,211,83" VerticalAlignment="Bottom" Click="Add" FontSize="18" Visibility="Visible" HorizontalAlignment="Right" Width="114" Grid.ColumnSpan="2" />
+            <Grid x:Name="LabelTextBox1" HorizontalAlignment="Left" Height="58" Margin="1066,239,0,0" VerticalAlignment="Top" Width="292" Grid.ColumnSpan="2">
+                <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid1"  Content="" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount1" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" VerticalAlignment="Top" />
+                <Image x:Name="ImageBox1" Width="54"  Margin="0,3,0,0"  Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" RenderTransformOrigin="0.533,0.181" VerticalAlignment="Top" HorizontalAlignment="Left" />
+            </Grid>
+            <Grid x:Name="LabelTextBox2" HorizontalAlignment="Left"  Height="58" Margin="1066,334,0,0" VerticalAlignment="Top" Width="292" Grid.ColumnSpan="2">
+                <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid2"  Content="" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount2" HorizontalAlignment="Left"  Text="" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <Image x:Name="ImageBox2" Width="54" Margin="0,4,0,0" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" HorizontalAlignment="Left" />
+            </Grid>
+            <Grid x:Name="LabelTextBox3"  HorizontalAlignment="Left" Height="57" Margin="1066,434,0,0" VerticalAlignment="Top" Width="295" Grid.ColumnSpan="2">
+                <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid3" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount3" HorizontalAlignment="Left"  Text="" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <Image x:Name="ImageBox3" Width="54" Margin="0,3,0,0" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" VerticalAlignment="Top" HorizontalAlignment="Left" />
+            </Grid>
+            <Grid x:Name="LabelTextBox4" HorizontalAlignment="Left" Height="57" Margin="1066,534,0,0" VerticalAlignment="Top" Width="292" Grid.ColumnSpan="2">
+                <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid4" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount4" HorizontalAlignment="Left"  Text="" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <Image x:Name="ImageBox4" Width="54" Margin="0,3,0,0" Source="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\w128h1281385326600water.png" VerticalAlignment="Top" HorizontalAlignment="Left" />
+            </Grid>
+            <Button Style="{DynamicResource ScrollButton}" Content="5" HorizontalAlignment="Left" Margin="1151,182,0,0" VerticalAlignment="Top" Click="Up_Click" Background="#FFE1EDFD" Grid.ColumnSpan="2" />
+            <Button Style="{DynamicResource ScrollButton}" Content="6" HorizontalAlignment="Left" Margin="1151,630,0,0" VerticalAlignment="Top" Click="Down_Click" Background="#FFE1EDFD" Grid.ColumnSpan="2" />
+            <Button Style="{DynamicResource ProfileButton}" x:Name="ProfileButton" FontFamily="Segoe MDL2 Assets" Content="&#xE77B;" Margin="0,0,112,732" Click="ProfileButton_Click" Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
+            <Button Style="{DynamicResource ProfileButton}" x:Name="SettingButton" FontFamily="Segoe MDL2 Assets" Content="&#xE115;"  Margin="0,10,10,0" Click="Setting_Click" Grid.ColumnSpan="2"/>
+            <Label Content="Statistics of drinking water per day" HorizontalAlignment="Left" Height="49" Margin="126,177,0,0" VerticalAlignment="Top" Width="594" FontSize="30" RenderTransformOrigin="0.532,0.535" Grid.ColumnSpan="2"/>
+            <Image HorizontalAlignment="Left"  Height="68" Width="68" Margin="14,0,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+            <Ellipse HorizontalAlignment="Left" Opacity="0.6" VerticalAlignment="Top" Width="68" Height="68" Margin="94,10,0,0" Grid.ColumnSpan="2">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="C:\Users\olha0\OneDrive\Документи\GitHub\Drink_water\DrinkWater\DrinkWater\images\logo.png" />
+                </Ellipse.Fill>
+            </Ellipse>
+        </Grid>
+    </Viewbox>
 </Window>
