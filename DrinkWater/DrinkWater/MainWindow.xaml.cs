@@ -2,20 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
-    using System.Windows.Documents;
-    using System.Windows.Input;
     using System.Windows.Media;
-    using System.Windows.Media.Imaging;
-    using System.Windows.Navigation;
-    using System.Windows.Shapes;
     using DrinkWater.LogReg;
+    using DrinkWater.MainServices;
     using DrinkWater.ProfileStatisticsServices;
     using DrinkWater.SettingServices;
     using LiveCharts;
@@ -26,11 +18,12 @@
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static MainService Main = new MainService();
-        public static SeriesCollection SeriesCollection = new SeriesCollection();
+        private static MainService main = new MainService();
 
-        public List<KeyValuePair<Label, TextBox>> LabelBox = new List<KeyValuePair<Label, TextBox>>();
-        public List<Image> PictureBox = new List<Image>();
+        public SeriesCollection SeriesCollection { get; set; }
+
+        private List<KeyValuePair<Label, TextBox>> labelBox = new List<KeyValuePair<Label, TextBox>>();
+        private List<Image> pictureBox = new List<Image>();
 
         public MainWindow()
         {
@@ -39,32 +32,20 @@
 
         public void GetSessionUser(SessionUser user)
         {
-            Main.GetSessionUser(user);
-            SetChart();
-        }
-
-        public bool IsValidAmount(string text)
-        {
-            bool isValid = false;
-            long test;
-            if (long.TryParse(text, out test) && test > 0 && test < 6000)
-            {
-                isValid = true;
-            }
-
-            return isValid;
+            main.GetSessionUser(user);
         }
 
         public void SetChart()
         {
-            StatisticInfo statistic = new StatisticInfo(Main.GetUser().UserId);
+            StatisticInfo statistic = main.GetStatistic();
+
             if (statistic.GetDailyStatistics().Count != 0)
             {
                 foreach (var item in statistic.GetDailyStatistics())
                 {
                     SeriesCollection.Add(new StackedColumnSeries
                     {
-                        Title = (from f in Main.Fluids
+                        Title = (from f in main.GetFluids()
                                  where f.FluidId == item.FluidIdRef
                                  select f.Name).FirstOrDefault().ToString(),
                         Values = new ChartValues<double> { double.Parse(item.Sum.ToString()) },
@@ -78,11 +59,21 @@
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            foreach (var item in LabelBox)
+            foreach (var item in labelBox)
             {
-                if (!string.IsNullOrEmpty(item.Value.ToString()) & IsValidAmount(item.Value.ToString()))
+                if (!string.IsNullOrEmpty(item.Value.Text))
                 {
-                    Main.Add(item.Key.ToString(), int.Parse(item.Value.ToString()));
+                    item.Value.BorderBrush = Brushes.LightGray;
+                    ValidationLiquid validation = new ValidationLiquid(item.Key.Content.ToString(), item.Value.Text.ToString());
+                    if (validation != null)
+                    {
+                        main.Add(validation.GetName(), validation.GetAmount());
+                        item.Value.Clear();
+                    }
+                    else
+                    {
+                        item.Value.BorderBrush = Brushes.Red;
+                    }
                 }
             }
 
@@ -92,70 +83,78 @@
 
         private void Up_Click(object sender, RoutedEventArgs e)
         {
-            int k = Main.Fluids.Count - 1;
+            int k = main.GetFluids().Count - 1;
             for (int i = 3; i >= 0; i--)
             {
                 if (i - 1 < 0)
                 {
-                    LabelBox[i].Key.Content = Main.Fluids[k].Name;
-                    PictureBox[i].Source = Main.Images[k].Source;
+                    labelBox[i].Key.Content = main.GetFluids()[k].Name;
+                    pictureBox[i].Source = main.GetImages()[k].Source;
                     k--;
                 }
                 else
                 {
-                    LabelBox[i].Key.Content = Main.Fluids[i - 1].Name;
-                    PictureBox[i].Source = Main.Images[i - 1].Source;
+                    labelBox[i].Key.Content = main.GetFluids()[i - 1].Name;
+                    pictureBox[i].Source = main.GetImages()[i - 1].Source;
                 }
 
-                LabelBox[i].Value.Text = "";
+                labelBox[i].Value.Text = string.Empty;
             }
         }
 
         private void Down_Click(object sender, RoutedEventArgs e)
         {
-            int k = Main.Fluids.Count - 1;
+            int k = main.GetFluids().Count - 1;
             for (int i = 0; i < 4; i++)
             {
-                if (i + 1 > Main.Fluids.Count)
+                if (i + 1 > main.GetFluids().Count)
                 {
-                    LabelBox[i].Key.Content = Main.Fluids[k].Name;
-                    PictureBox[i].Source = Main.Images[k].Source;
+                    labelBox[i].Key.Content = main.GetFluids()[k].Name;
+                    pictureBox[i].Source = main.GetImages()[k].Source;
                     k--;
                 }
                 else
                 {
-                    LabelBox[i].Key.Content = Main.Fluids[i + 1].Name;
-                    PictureBox[i].Source = Main.Images[i + 1].Source;
+                    labelBox[i].Key.Content = main.GetFluids()[i + 1].Name;
+                    pictureBox[i].Source = main.GetImages()[i + 1].Source;
                 }
 
-                LabelBox[i].Value.Text = "";
+                labelBox[i].Value.Text = string.Empty;
             }
         }
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
-            LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid1, Amount1));
-            LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid2, Amount2));
-            LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid3, Amount3));
-            LabelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid4, Amount4));
+            main.ListLiquids();
+            SeriesCollection = new SeriesCollection();
 
-            PictureBox.Add(ImageBox1);
-            PictureBox.Add(ImageBox2);
-            PictureBox.Add(ImageBox3);
-            PictureBox.Add(ImageBox4);
+            labelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid1, Amount1));
+            labelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid2, Amount2));
+            labelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid3, Amount3));
+            labelBox.Add(new KeyValuePair<Label, TextBox>(TypeOfLiquid4, Amount4));
 
-            SetChart();
-            Main.ListLiquids();
+            pictureBox.Add(ImageBox1);
+            pictureBox.Add(ImageBox2);
+            pictureBox.Add(ImageBox3);
+            pictureBox.Add(ImageBox4);
+
+            for (int i = 0; i < 4; i++)
+            {
+                labelBox[i].Key.Content = main.GetFluids()[i].Name;
+                pictureBox[i].Source = main.GetImages()[i].Source;
+            }
+
             Row.Width = 100;
             DataContext = this;
 
-            BalanceLine.Value = (int)new UserData(Main.GetUser()).GetDailyBalnace();
+            BalanceLine.Value = (int)new UserData(main.GetUser()).GetDailyBalnace();
+            SetChart();
         }
 
         private void ProfileButton_Click(object sender, RoutedEventArgs e)
         {
             ProfileStatistics profile = new ProfileStatistics();
-            profile.GetSessionUser(Main.GetUser());
+            profile.GetSessionUser(main.GetUser());
             profile.Show();
             this.Close();
         }
@@ -163,7 +162,7 @@
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
             Settings settings = new Settings();
-            settings.GetSessionUser(Main.GetUser());
+            settings.GetSessionUser(main.GetUser());
             settings.Show();
             this.Close();
         }

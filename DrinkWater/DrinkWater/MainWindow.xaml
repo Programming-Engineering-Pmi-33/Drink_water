@@ -319,7 +319,7 @@
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
 
-            <Button Style="{DynamicResource AddButton}" Content="Add" Height="46" Margin="0,0,211,83" VerticalAlignment="Bottom" Click="Add" FontSize="18" Visibility="Visible" HorizontalAlignment="Right" Width="114" Grid.ColumnSpan="2" />
+            <Button Style="{DynamicResource AddButton}" Content="Add" Margin="0,681,211,83" Click="Add" FontSize="18" Visibility="Visible" HorizontalAlignment="Right" Width="114" Grid.ColumnSpan="2" />
             <Grid x:Name="LabelTextBox1" HorizontalAlignment="Left" Height="58" Margin="1066,239,0,0" VerticalAlignment="Top" Width="292" Grid.ColumnSpan="2">
                 <Label Style="{DynamicResource TypeOfLiquid}" x:Name="TypeOfLiquid1"  Content="" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <TextBox Style="{DynamicResource AmountStyle}" x:Name="Amount1" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" VerticalAlignment="Top" />
