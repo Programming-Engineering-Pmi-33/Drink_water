@@ -15,7 +15,7 @@
                             <ToggleButton Grid.Column="2" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
                                 <ToggleButton.Template>
                                     <ControlTemplate>
-                                        <Grid>
+                                        <Grid x:Name="ButtonGrid1">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="5*" />
                                                 <ColumnDefinition Width="*" />
@@ -23,10 +23,44 @@
                                             <Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="10"  Background="#6983D9" BorderBrush="Transparent" BorderThickness="1" />
                                             <Border Grid.Column="0" CornerRadius="10,0,0,10"  Margin="1"  Background="#6983D9"  BorderBrush="Transparent" BorderThickness="0,0,1,0" />
                                             <Path x:Name="Arrow" Grid.Column="1"  Fill="#F2F2F2" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z" Height="9" Stretch="Fill" Width="18" />
+                                            <Grid.RenderTransform>
+                                                <ScaleTransform />
+                                            </Grid.RenderTransform>
                                         </Grid>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="ToggleButton.IsMouseOver" Value="true">
-                                                <Setter TargetName="Border" Property="Background" Value="#6983D9" />
+                                                <Trigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid1"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                To="1.08"/>
+                                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid1"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                To="1.08"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.EnterActions>
+                                                <Trigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid1"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                To="0.95"/>
+                                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid1"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                To="0.95"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.ExitActions>
                                             </Trigger>
                                             <Trigger Property="ToggleButton.IsChecked" Value="true">
                                                 <Setter TargetName="Border" Property="Background" Value="#6983D9" />
@@ -67,12 +101,52 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}" >
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                        <Grid Name="ButtonGrid2" Background="Transparent">
+                            <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
                             <ContentPresenter  x:Name="contentPresenter" Focusable="False"  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
+                            <Grid.RenderTransform>
+                                <ScaleTransform />
+                            </Grid.RenderTransform>
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Transparent"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid2"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                To="1.08"/>
+                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid2"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                To="1.08"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid2"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                To="0.95"/>
+                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid2"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                To="0.95"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
                             </Trigger>
 
                         </ControlTemplate.Triggers>
@@ -216,7 +290,8 @@
             </Rectangle>
             <Button Style="{DynamicResource Buttons}" x:Name="UserSettingsButton" Content="User Settings" FontSize="24" HorizontalAlignment="Left" Margin="107,481,0,0" VerticalAlignment="Top" Click="UserSettings_Click" Width="320" Height="64" Grid.Column="0" Grid.Row="0" Background="#FFE1EDFD" BorderBrush="#FFE1EDFD" Foreground="#FF0A2140"/>
             <Button  Style="{DynamicResource Buttons}" x:Name="UserParametersButton" Content="User Parameters" FontSize="24" HorizontalAlignment="Left" Margin="107,569,0,0" VerticalAlignment="Top" Click="UserParameters_Click" Width="320" Height="64" Background="#FFE1EDFD" BorderBrush="#FFE1EDFD" Foreground="#FF0A2140"/>
-            <Button  x:Name="LogOutButton" Content="Log out" FontSize="24" HorizontalAlignment="Left" Margin="108,813,0,0" VerticalAlignment="Top" Click="LogOut_Click" Width="320" Height="64" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold" Foreground="#FF0A2140"/>
+            <Button  x:Name="LogOutButton" Content="Log out" FontSize="24" HorizontalAlignment="Left" Margin="108,813,0,0" VerticalAlignment="Top" Click="LogOut_Click" Width="320" Height="64" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold" Foreground="#FF0A2140">
+            </Button>
             <Image  x:Name="Avatar" HorizontalAlignment="Left" Height="230" Margin="170,162,0,0" VerticalAlignment="Top" Width="261">
                 <Image.Clip>
                     <EllipseGeometry
@@ -321,7 +396,20 @@
                 <Label x:Name="AgeLabel" Content="Age:" FontSize="28" HorizontalAlignment="Left" Margin="0,267,0,0" VerticalAlignment="Top" Width="96" Height="50" FontWeight="Bold"/>
                 <Label x:Name ="ActivityTimeLabel2" Content="Going to bed:" FontSize="28" HorizontalAlignment="Left" Margin="568,416,0,0" VerticalAlignment="Top" Width="198" Visibility="Visible" FontWeight="Bold"/>
             </Grid>
-            <Button x:Name="ChangeAvatar" Content="Change Avatar" FontSize="24" HorizontalAlignment="Left" Margin="178,412,0,0" VerticalAlignment="Top" Width="179" Height="45" Click="ChangeAvatar_Click" Background="Transparent" BorderBrush="Transparent" Foreground="#FF0A2140" FontWeight="Bold"/>
+            <Button x:Name="ChangeAvatar" Content="Change Avatar" FontSize="24" HorizontalAlignment="Left" Margin="178,412,0,0" VerticalAlignment="Top" Width="179" Height="45" Click="ChangeAvatar_Click" Background="Transparent" BorderBrush="Transparent" Foreground="#FF0A2140" FontWeight="Bold">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation 
+                  Storyboard.TargetName="myAnimatedBrush"
+                  Storyboard.TargetProperty="Color"
+                  From="Red" To="Blue" Duration="0:0:7" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
             <Button Style="{DynamicResource ProfileButton}"  FontFamily="Segoe MDL2 Assets" Content="&#xE77B;" x:Name="ProfileWindowButton" FontSize="36" HorizontalAlignment="Left" Margin="1715,44,0,0" VerticalAlignment="Top" Height="68" Width="68" Click="ProfileWindowButton_Click" FontWeight="Bold" BorderBrush="#FF0A2140" Background="#FF0A2140" Foreground="#FFC2B9B9"/>
             <Button Style="{DynamicResource ScrollButton}" x:Name="Main" FontFamily="Segoe MDL2 Assets" Content="&#xE76B;" HorizontalAlignment="Left" Height="45" Margin="45,33,0,0" VerticalAlignment="Top" Width="50" Click="Main_Click" RenderTransformOrigin="0.487,0.482" FontSize="36" Foreground="#FF0A2140"/>
             <ComboBox HorizontalAlignment="Left" Height="8" Margin="301,85,0,0" VerticalAlignment="Top" Width="0"/>
