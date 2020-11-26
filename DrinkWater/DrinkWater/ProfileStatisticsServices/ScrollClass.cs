@@ -1,29 +1,34 @@
 ﻿using DrinkWater.SettingServices;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Media.Imaging;
 
 namespace DrinkWater.ProfileStatisticsServices
 {
-    class ScrollClass
+    public class ScrollClass
     {
-        private List<Fluid> Fluids;
+        public List<Fluid> Fluids;
         public List<double> FluidsAmount;
-        private List<BitmapImage> Images;
+        public List<BitmapImage> Images;
 
         public ScrollClass(string period, int userId)
         {
             Fluids = new FliudInfo().GetFluids();
+            Images = new List<BitmapImage>();
+            FluidsAmount = new List<double>();
             foreach (var fluid in Fluids)
             {
                 Images.Add(new ImageHandler().GetImagefromDB(fluid.FliudImage));
             }
 
             GetTotalAmount(period, userId);
+            while (FluidsAmount.Count <= 5)
+            {
+                FluidsAmount.Add(0);
+            }
         }
 
-        private void GetTotalAmount(string period, int userId)
+        public void GetTotalAmount(string period, int userId)
         {
             StatisticInfo statisticInfo = new StatisticInfo(userId);
             FluidsAmount.Clear();

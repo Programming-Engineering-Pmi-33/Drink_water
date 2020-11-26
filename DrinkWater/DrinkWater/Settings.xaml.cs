@@ -164,5 +164,15 @@
             mainWindow.Show();
             this.Close();
         }
+
+        private void NotificationsSettings_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void GenderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
