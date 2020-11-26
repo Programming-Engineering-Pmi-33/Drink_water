@@ -27,7 +27,7 @@
             InitializeComponent();
         }
 
-        public void GetSessionUser(SessionUser userInfo)
+        public void SetSessionUser(SessionUser userInfo)
         {
             user = new UserData(userInfo);
             sessionUser = userInfo;
@@ -152,7 +152,7 @@
         private void ProfileWindowButton_Click(object sender, RoutedEventArgs e)
         {
             ProfileStatistics profileStatistics = new ProfileStatistics();
-            profileStatistics.GetSessionUser(sessionUser);
+            profileStatistics.SetSessionUser(sessionUser);
             profileStatistics.Show();
             this.Close();
         }
@@ -160,7 +160,7 @@
         private void Main_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
-            mainWindow.GetSessionUser(sessionUser);
+            mainWindow.SetSessionUser(sessionUser);
             mainWindow.Show();
             this.Close();
         }

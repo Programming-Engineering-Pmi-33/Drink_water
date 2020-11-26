@@ -43,7 +43,7 @@
             InitializeComponent();
         }
 
-        public void GetSessionUser(SessionUser sesUser)
+        public void SetSessionUser(SessionUser sesUser)
         {
             sessionUser = sesUser;
         }
@@ -192,7 +192,7 @@
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             Settings settings = new Settings();
-            settings.GetSessionUser(sessionUser);
+            settings.SetSessionUser(sessionUser);
             settings.Show();
             this.Close();
         }
@@ -281,7 +281,7 @@
         private void Main_Click(object sender, RoutedEventArgs e)
         {
             MainWindow main = new MainWindow();
-            main.GetSessionUser(sessionUser);
+            main.SetSessionUser(sessionUser);
             main.Show();
             this.Close();
         }

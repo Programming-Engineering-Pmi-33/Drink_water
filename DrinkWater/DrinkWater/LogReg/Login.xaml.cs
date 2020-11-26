@@ -58,7 +58,7 @@
 
                 SessionUser sessionUser = new SessionUser((long)userId, username);
                 MainWindow settings = new MainWindow();
-                settings.GetSessionUser(sessionUser);
+                settings.SetSessionUser(sessionUser);
                 settings.Show();
                 this.Close();
                 MessageBox.Show("it works.");

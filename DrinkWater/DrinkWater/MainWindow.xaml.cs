@@ -30,9 +30,9 @@
             InitializeComponent();
         }
 
-        public void GetSessionUser(SessionUser user)
+        public void SetSessionUser(SessionUser user)
         {
-            main.GetSessionUser(user);
+            main.SetSessionUser(user);
         }
 
         public void SetChart()
@@ -154,7 +154,7 @@
         private void ProfileButton_Click(object sender, RoutedEventArgs e)
         {
             ProfileStatistics profile = new ProfileStatistics();
-            profile.GetSessionUser(main.GetUser());
+            profile.SetSessionUser(main.GetUser());
             profile.Show();
             this.Close();
         }
@@ -162,7 +162,7 @@
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
             Settings settings = new Settings();
-            settings.GetSessionUser(main.GetUser());
+            settings.SetSessionUser(main.GetUser());
             settings.Show();
             this.Close();
         }

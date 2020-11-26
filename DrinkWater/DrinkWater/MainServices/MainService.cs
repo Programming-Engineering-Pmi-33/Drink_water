@@ -11,19 +11,33 @@
     using DrinkWater.ProfileStatisticsServices;
     using DrinkWater.SettingServices;
 
+    /// <summary>Class <c>MainService</c> model with the functionality of the main window.
+    /// </summary>
     public class MainService
     {
+        /// <summary>Instance variable <c>x</c> represents the infornation
+        ///    about statistic.</summary>
         private static StatisticInfo statisticInfo;
+
+        /// <summary>Instance variable <c>x</c> represents the infornation
+        ///    about session user.</summary>
         private static SessionUser sessionUser = new SessionUser();
+
+        /// <summary>Instance variable <c>x</c> represents the database.
+        /// </summary>
         private static dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
+
+        /// <summary>Instance variable <c>x</c> represents the list of fluids.
+        /// </summary>
         private static List<Fluid> fluids = new List<Fluid>();
+
         private static List<Image> images = new List<Image>();
 
         public MainService()
         {
         }
 
-        public void GetSessionUser(SessionUser user)
+        public void SetSessionUser(SessionUser user)
         {
             sessionUser = user;
             statisticInfo = new StatisticInfo(user.UserId);
@@ -58,6 +72,11 @@
             }
         }
 
+        /// <summary>This method add data about liquid in Statistic database, 
+        /// if fluid data already exists, the database is updated, otherwise 
+        /// a new Statistics item is created and added to the database.</summary>
+        /// <param name="liquidName">the name of added liquid.</param>
+        /// <param name="liquidAmount">the amount of this liquid.</param>
         public void Add(string liquidName, long liquidAmount)
         {
             List<Statistic> fullStatistic = statisticInfo.GetStatistics(DateTime.Now);
