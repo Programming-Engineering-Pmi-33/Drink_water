@@ -6,35 +6,37 @@ namespace DrinkWater.Services
 {
     public class EncryptionService
     {
+        //creation of random salt
         public static int CreateRandomSalt()
         {
-            Byte[] _saltBytes = new Byte[4];
+            Byte[] saltBytes = new Byte[4];
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            rng.GetBytes(_saltBytes);
+            rng.GetBytes(saltBytes);
 
-            return ((((int)_saltBytes[0]) << 24) + (((int)_saltBytes[1]) << 16) +
-              (((int)_saltBytes[2]) << 8) + ((int)_saltBytes[3]));
+            return ((((int)saltBytes[0]) << 24) + (((int)saltBytes[1]) << 16) +
+              (((int)saltBytes[2]) << 8) + ((int)saltBytes[3]));
         }
 
+        //computing of salted hash
         public static string ComputeSaltedHash(string password, int salt)
         {
             ASCIIEncoding encoder = new ASCIIEncoding();
-            Byte[] _secretBytes = encoder.GetBytes(password);
+            Byte[] secretBytes = encoder.GetBytes(password);
 
-            Byte[] _saltBytes = new Byte[4];
-            _saltBytes[0] = (byte)(salt >> 24);
-            _saltBytes[1] = (byte)(salt >> 16);
-            _saltBytes[2] = (byte)(salt >> 8);
-            _saltBytes[3] = (byte)(salt);
+            Byte[] saltBytes = new Byte[4];
+            saltBytes[0] = (byte)(salt >> 24);
+            saltBytes[1] = (byte)(salt >> 16);
+            saltBytes[2] = (byte)(salt >> 8);
+            saltBytes[3] = (byte)(salt);
 
-            Byte[] toHash = new Byte[_secretBytes.Length + _saltBytes.Length];
-            Array.Copy(_secretBytes, 0, toHash, 0, _secretBytes.Length);
-            Array.Copy(_saltBytes, 0, toHash, _secretBytes.Length, _saltBytes.Length);
+            Byte[] toHash = new Byte[secretBytes.Length + saltBytes.Length];
+            Array.Copy(secretBytes, 0, toHash, 0, secretBytes.Length);
+            Array.Copy(saltBytes, 0, toHash, secretBytes.Length, saltBytes.Length);
 
             SHA1 sha1 = SHA1.Create();
             Byte[] computedHash = sha1.ComputeHash(toHash);
 
-            return encoder.GetString(computedHash);
+            return Convert.ToBase64String(computedHash);
         }
     }
 }

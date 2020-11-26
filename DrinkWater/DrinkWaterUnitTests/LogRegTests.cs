@@ -1,45 +1,46 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DrinkWater.Services;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DrinkWaterUnitTests
 {
+
     [TestClass]
     public class LogRegTests
     {
         private UsersService us=UsersService.GetService;
-        
 
         [TestMethod]
-        public void ExceptionIfUsernameIsNotInDatabase()
+        public void NotExceptionIfUsernameIsInDatabase()
         {
             //arrange
-            string username = "Keylu";
+            string username = "Mishaq";
 
             //act
-          bool isInDatabase=  us.UsernameExists(username);
+          bool isInDatabase=us.UsernameExists(username);
 
             //assert
-            Assert.IsFalse(isInDatabase);
+            Assert.IsTrue(isInDatabase);
         }
 
         [TestMethod]
-        public void ExceptionIfEmailIsNotInDatabase()
+        public void NotExceptionIfEmailIsInDatabase()
         {
             //arrange
-            string email = "gren@gmail.com";
+            string email = "mishqa@gmail.com";
 
             //act
             bool isInDatabase = us.EmailExists(email);
 
             //assert
-            Assert.IsFalse(isInDatabase);
+            Assert.IsTrue(isInDatabase);
         }
 
         [TestMethod]
         public void SaltReceivedIfUsernameIsInDatabase()
         {
             //arrange
-            string username = "Katyau";
+            string username = "KatyaU";
+
 
             //act
             string salt = us.GetUserSalt(username);
@@ -52,9 +53,9 @@ namespace DrinkWaterUnitTests
         public void IdReceivedIfUsernameIsInDatabase()
         {
             //arrange
-            string username = "rekler";
-            string password = "~???5GI?(:?5???????=";
-            string salt = "304255195";
+            string username = "KatyaU";
+            string password = "vqcCyM9XGZvrxdSInyNoE0yRj1I=";
+            string salt = "1918332768";
 
             //act
             int id = us.GetUserId(username,password,salt);

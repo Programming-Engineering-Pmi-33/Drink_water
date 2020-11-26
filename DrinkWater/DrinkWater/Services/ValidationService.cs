@@ -9,13 +9,15 @@ namespace DrinkWater.Services
     public class ValidationService
     {
         private const string EMAIL_REGEX = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
-        private readonly UsersService _usersService;
+        private readonly UsersService usersService;
 
+        //constructor
         public ValidationService(UsersService usersService)
         {
-            _usersService = usersService;
+            this.usersService = usersService;
         }
 
+        //validation of username, email and password
         public bool IsValid(Label labelUsername, string username,
             Label labelEmail, string email,
             Label labelPassword, string password)
@@ -27,6 +29,7 @@ namespace DrinkWater.Services
             return isCorrectUsername && isCorrectEmail && isCorrectPassword;
         }
 
+        //displaying a message on the form
         public static void SetError(Label errorLabel, string message)
         {
             errorLabel.Visibility = Visibility.Visible;
@@ -34,6 +37,7 @@ namespace DrinkWater.Services
             errorLabel.Content = message;
         }
 
+        //checking correctness of username
         private bool isValidUsername(Label labelUsername, string username)
         {
             bool isCorrect = false;
@@ -46,7 +50,7 @@ namespace DrinkWater.Services
             {
                 SetError(labelUsername, "Username must contain at least 2 letters");
             }
-            else if (_usersService.UsernameExists(username))
+            else if (usersService.UsernameExists(username))
             {
                 SetError(labelUsername, "Username is reserved");
             }
@@ -59,6 +63,7 @@ namespace DrinkWater.Services
             return isCorrect;
         }
 
+        //checking correctness of email
         private bool isValidEmail(Label labelEmail, string email)
         {
             bool isCorrect = false;
@@ -71,7 +76,7 @@ namespace DrinkWater.Services
             {
                 SetError(labelEmail, "Wrong e-mail address");
             }
-            else if (_usersService.EmailExists(email))
+            else if (usersService.EmailExists(email))
             {
                 SetError(labelEmail, "Email is reserved");
             }
@@ -84,13 +89,14 @@ namespace DrinkWater.Services
             return isCorrect;
         }
 
+        //checking correctness of password
         private bool isValidPassword(Label labelPassword, string password)
         {
             bool isCorrect = false;
 
             if (string.IsNullOrWhiteSpace(password))
             {
-                SetError(labelPassword, "Password is required");//function void
+                SetError(labelPassword, "Password is required");
             }
             else if (password.ToString().Length < 8)
             {
