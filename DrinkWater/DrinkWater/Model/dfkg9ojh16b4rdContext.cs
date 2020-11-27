@@ -1,12 +1,8 @@
 ﻿#nullable disable
 
-#nullable disable
-
 namespace DrinkWater
 {
-    using System;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata;
 
     public partial class dfkg9ojh16b4rdContext : DbContext
     {
@@ -25,18 +21,18 @@ namespace DrinkWater
 
         public virtual DbSet<Statistic> Statistics { get; set; }
 
-        public virtual DbSet<Totalmonthstatistiс> Totalmonthstatistics { get; set; }
-
+        public virtual DbSet<Totalmonthstatistic> Totalmonthstatistics { get; set; }
+        
         public virtual DbSet<Totalweekstatistic> Totalweekstatistics { get; set; }
-
+        
         public virtual DbSet<Totalyearstatistic> Totalyearstatistics { get; set; }
-
+        
         public virtual DbSet<User> Users { get; set; }
-
+        
         public virtual DbSet<Watermonthstatistic> Watermonthstatistics { get; set; }
-
+        
         public virtual DbSet<Waterweekstatistic> Waterweekstatistics { get; set; }
-
+        
         public virtual DbSet<Wateryearstatistic> Wateryearstatistics { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -82,8 +78,7 @@ namespace DrinkWater
                     .HasConstraintName("Statistics_UserIdRef_fkey");
             });
 
-
-            modelBuilder.Entity<Totalmonthstatistiс>(entity =>
+            modelBuilder.Entity<Totalmonthstatistic>(entity =>
             {
                 entity.HasNoKey();
 
@@ -123,8 +118,6 @@ namespace DrinkWater
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasColumnType("character varying");
-
-                entity.Property(e => e.Salt).HasColumnType("character varying");
 
                 entity.Property(e => e.Sex).HasColumnType("character varying");
 

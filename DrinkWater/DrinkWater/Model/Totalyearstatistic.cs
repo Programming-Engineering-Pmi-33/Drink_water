@@ -1,12 +1,7 @@
 ﻿#nullable disable
 
-#nullable disable
-
 namespace DrinkWater
 {
-    using System;
-    using System.Collections.Generic;
-
     public partial class Totalyearstatistic
     {
         public int? UserIdRef { get; set; }

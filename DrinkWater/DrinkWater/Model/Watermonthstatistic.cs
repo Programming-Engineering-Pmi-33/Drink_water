@@ -1,7 +1,8 @@
+﻿#nullable disable
+
 namespace DrinkWater
 {
     using System;
-    using System.Collections.Generic;
 
     public partial class Watermonthstatistic
     {

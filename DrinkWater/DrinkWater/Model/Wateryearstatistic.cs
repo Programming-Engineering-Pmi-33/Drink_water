@@ -1,9 +1,8 @@
-#nullable disable
+﻿#nullable disable
 
 namespace DrinkWater
 {
     using System;
-    using System.Collections.Generic;
 
     public partial class Wateryearstatistic
     {
@@ -12,5 +11,6 @@ namespace DrinkWater
         public double? Amount { get; set; }
 
         public DateTime? Date { get; set; }
+
     }
 }

@@ -1,7 +1,5 @@
 ﻿#nullable disable
 
-#nullable disable
-
 namespace DrinkWater
 {
     using System;
@@ -42,16 +40,16 @@ namespace DrinkWater
 
         public byte[] Avatar { get; set; }
 
-        public string Salt { get; set; }
+        public long? Salt { get; set; }
 
-        public virtual ICollection<Statistic> Statistics { get; set; }
-
-        public User(string username, string email, string password, string salt)
+        public User(string username, string email, string password, long salt)
         {
             this.Username = username;
             this.Email = email;
             this.Password = password;
             this.Salt = salt;
         }
+
+        public virtual ICollection<Statistic> Statistics { get; set; }
     }
 }

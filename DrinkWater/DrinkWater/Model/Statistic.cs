@@ -1,11 +1,9 @@
 ﻿#nullable disable
 
-#nullable disable
-
 namespace DrinkWater
 {
     using System;
-    using System.Collections.Generic;
+
     public partial class Statistic
     {
         public int StatisticId { get; set; }

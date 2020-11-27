@@ -2,9 +2,6 @@
 
 namespace DrinkWater
 {
-    using System;
-    using System.Collections.Generic;
-
     public partial class Totalweekstatistic
     {
         public int? UserIdRef { get; set; }
