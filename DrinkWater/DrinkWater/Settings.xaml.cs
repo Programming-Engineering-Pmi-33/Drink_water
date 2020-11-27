@@ -39,12 +39,14 @@
         /// <param name="userInfo">Argument that contains user id and name.</param>
         public void GetSessionUser(SessionUser userInfo)
         {
-            Logger.InitLogger();
-
-            Logger.Log.Info("Ура робе!");
             user = new UserData(userInfo);
             sessionUser = userInfo;
             userData = user.GetData();
+            
+        }
+
+        public void SetTimer()
+        {
             timer = new System.Timers.Timer();
             if (userData.NotitficationsPeriod != null)
             {
@@ -58,7 +60,6 @@
             timer.Elapsed += TimerFunction;
             timer.Start();
         }
-
         /// <summary>
         /// This function makes user parameters grid active.
         /// </summary>
@@ -109,6 +110,8 @@
         /// <param name="e">Arguments.</param>
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
+            Logger.InitLogger();
+            Logger.Log.Info($"User {sessionUser.Username} logged out from system.");
             timer.Stop();
             timer.Dispose();
             Login loginWindow = new Login();
