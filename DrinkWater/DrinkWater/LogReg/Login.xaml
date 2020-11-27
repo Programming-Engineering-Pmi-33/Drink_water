@@ -29,14 +29,16 @@
                 BorderThickness="0" Background="Transparent" Foreground="Black"
                 Content="Create new account" HorizontalAlignment="Left" 
                 Margin="220,320,0,0" VerticalAlignment="Top" 
-                Height="22" Width="110" Click="buttonCreateNewAccount_Click" 
+                Height="22" Width="110" Click="ButtonCreateNewAccount_Click" 
                 Grid.ColumnSpan="2" FontFamily="Bahnschrift SemiBold"/>
-        <Button x:Name="buttonLogIn" Content="Log in" 
+        <Button x:Name="buttonLogIn" Style="{StaticResource LoginButton}" Content="Log in" 
                 HorizontalAlignment="Left" Margin="370,320,0,0" 
                 VerticalAlignment="Top" Height="22" Width="110" 
-                Click="buttonLogIn_Click" Grid.Column="1"
+                Click="ButtonLogIn_Click" Grid.Column="1"
                 Background="#2C3B58" BorderBrush="Transparent"
-                BorderThickness="0" RenderTransformOrigin="0.5,0.5" Foreground="White" FontFamily="Bahnschrift SemiBold" Style="{StaticResource LoginButton}"/>
+                BorderThickness="0" RenderTransformOrigin="0.5,0.5" Foreground="White" FontFamily="Bahnschrift SemiBold" >
+       
+        </Button>
         <Label Content="Username:" HorizontalAlignment="Left" Margin="215,100,0,0" VerticalAlignment="Top" Height="24" Grid.Column="1" Width="75" FontFamily="Bahnschrift SemiBold" FontWeight="Normal" Foreground="Black"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="216,186,0,0" VerticalAlignment="Top" Height="24" Grid.Column="1" Width="75" FontFamily="Bahnschrift SemiBold" Foreground="Black"/>
         <Label Content="Log in" Grid.Column="1" HorizontalAlignment="Center" Margin="0,39,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift SemiBold" FontSize="16" Height="28" Width="56" FontWeight="Bold"/>

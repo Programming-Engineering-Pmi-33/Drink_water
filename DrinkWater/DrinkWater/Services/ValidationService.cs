@@ -1,35 +1,33 @@
-﻿using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-
-namespace DrinkWater.Services
+﻿namespace DrinkWater.Services
 {
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+
     public class ValidationService
     {
-        private const string EMAIL_REGEX = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
+        private const string EMAILREGEX = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
         private readonly UsersService usersService;
 
-        //constructor
+        // constructor
         public ValidationService(UsersService usersService)
         {
             this.usersService = usersService;
         }
 
-        //validation of username, email and password
-        public bool IsValid(Label labelUsername, string username,
-            Label labelEmail, string email,
-            Label labelPassword, string password)
+        // validation of username, email and password
+        public bool IsValid(Label labelUsername, string username, Label labelEmail, string email, Label labelPassword, string password)
         {
-            bool isCorrectUsername = isValidUsername(labelUsername, username);
-            bool isCorrectEmail = isValidEmail(labelEmail, email);
-            bool isCorrectPassword = isValidPassword(labelPassword, password);
+            bool isCorrectUsername = IsValidUsername(labelUsername, username);
+            bool isCorrectEmail = IsValidEmail(labelEmail, email);
+            bool isCorrectPassword = IsValidPassword(labelPassword, password);
 
             return isCorrectUsername && isCorrectEmail && isCorrectPassword;
         }
 
-        //displaying a message on the form
+        // displaying a message on the form
         public static void SetError(Label errorLabel, string message)
         {
             errorLabel.Visibility = Visibility.Visible;
@@ -37,8 +35,8 @@ namespace DrinkWater.Services
             errorLabel.Content = message;
         }
 
-        //checking correctness of username
-        private bool isValidUsername(Label labelUsername, string username)
+        // checking correctness of username
+        private bool IsValidUsername(Label labelUsername, string username)
         {
             bool isCorrect = false;
 
@@ -63,8 +61,8 @@ namespace DrinkWater.Services
             return isCorrect;
         }
 
-        //checking correctness of email
-        private bool isValidEmail(Label labelEmail, string email)
+        // checking correctness of email
+        private bool IsValidEmail(Label labelEmail, string email)
         {
             bool isCorrect = false;
 
@@ -72,7 +70,7 @@ namespace DrinkWater.Services
             {
                 SetError(labelEmail, "Email is required");
             }
-            else if (!Regex.IsMatch(email, EMAIL_REGEX, RegexOptions.IgnoreCase))
+            else if (!Regex.IsMatch(email, EMAILREGEX, RegexOptions.IgnoreCase))
             {
                 SetError(labelEmail, "Wrong e-mail address");
             }
@@ -89,8 +87,8 @@ namespace DrinkWater.Services
             return isCorrect;
         }
 
-        //checking correctness of password
-        private bool isValidPassword(Label labelPassword, string password)
+        // checking correctness of password
+        private bool IsValidPassword(Label labelPassword, string password)
         {
             bool isCorrect = false;
 

@@ -1,11 +1,10 @@
-﻿using System.Windows;
-using System.Linq;
-using DrinkWater.Services;
-
-namespace DrinkWater.LogReg
+﻿namespace DrinkWater.LogReg
 {
+    using System.Windows;
+    using DrinkWater.Services;
+
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for Login.xaml.
     /// </summary>
     public partial class Login : Window
     {
@@ -19,15 +18,14 @@ namespace DrinkWater.LogReg
             usersService = UsersService.GetService;
         }
 
-        private void buttonCreateNewAccount_Click(object sender, RoutedEventArgs e)
+        private void ButtonCreateNewAccount_Click(object sender, RoutedEventArgs e)
         {
             Registration registration = new Registration();
             registration.Show();
             this.Close();
         }
 
-
-        private void buttonLogIn_Click(object sender, RoutedEventArgs e)
+        private void ButtonLogIn_Click(object sender, RoutedEventArgs e)
         {
             this.username = textBoxUsername.Text;
             this.password = textBoxPassword.Text;
@@ -45,6 +43,10 @@ namespace DrinkWater.LogReg
                     labelPassword.Visibility = Visibility.Hidden;
 
                     SessionUser sessionUser = new SessionUser((long)userId, username);
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.GetSessionUser(sessionUser);
+                    mainWindow.Show();
+                    this.Close();
                 }
                 else
                 {
@@ -56,7 +58,5 @@ namespace DrinkWater.LogReg
                 ValidationService.SetError(labelUsername, "No such username in database");
             }
         }
-
-       
     }
 }

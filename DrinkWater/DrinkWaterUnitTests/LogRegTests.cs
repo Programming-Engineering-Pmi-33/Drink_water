@@ -1,19 +1,30 @@
+using DrinkWater;
 using DrinkWater.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DrinkWaterUnitTests
 {
-
     [TestClass]
     public class LogRegTests
     {
-        private UsersService us=UsersService.GetService;
+        private static User user1;
+        private static User user2;
+        private static UsersService us=UsersService.GetService;
+
+        [ClassInitialize]
+        public static void TestsSetup(TestContext context)
+        {
+            user1 = new User("rekler", "rekler@gmail.com", "reklerRekleR", "3456789089");
+            us.RegisterUser(user1);
+            user2 = new User("lemig", "lemig@gmail.com", "lemigLemiG", "3456789024");
+            us.RegisterUser(user2);
+        }
 
         [TestMethod]
         public void NotExceptionIfUsernameIsInDatabase()
         {
             //arrange
-            string username = "Mishaq";
+            string username = user1.Username;
 
             //act
           bool isInDatabase=us.UsernameExists(username);
@@ -26,7 +37,7 @@ namespace DrinkWaterUnitTests
         public void NotExceptionIfEmailIsInDatabase()
         {
             //arrange
-            string email = "mishqa@gmail.com";
+            string email = user1.Email;
 
             //act
             bool isInDatabase = us.EmailExists(email);
@@ -36,14 +47,14 @@ namespace DrinkWaterUnitTests
         }
 
         [TestMethod]
-        public void SaltReceivedIfUsernameIsInDatabase()
+        public void SaltIsRecievedIfUsernameIsInDatabase()
         {
             //arrange
-            string username = "KatyaU";
+            string username = user1.Username;
 
 
             //act
-            string salt = us.GetUserSalt(username);
+           string salt = us.GetUserSalt(username);
 
             //assert
             Assert.IsNotNull(salt);
@@ -53,9 +64,9 @@ namespace DrinkWaterUnitTests
         public void IdReceivedIfUsernameIsInDatabase()
         {
             //arrange
-            string username = "KatyaU";
-            string password = "vqcCyM9XGZvrxdSInyNoE0yRj1I=";
-            string salt = "1918332768";
+            string username = user1.Username;
+            string password = EncryptionService.ComputeSaltedHash(user1.Password,int.Parse(user1.Salt));
+            string salt = user1.Salt;
 
             //act
             int id = us.GetUserId(username,password,salt);
@@ -68,26 +79,37 @@ namespace DrinkWaterUnitTests
         public void RandomSaltIsCreatedIfMethodIsCorrect()
         {
             //arrange
-            int salt;
+            int salt1;
+            int salt2;
 
             //act
-            salt = EncryptionService.CreateRandomSalt();
+            salt1 = EncryptionService.CreateRandomSalt();
+            salt2 = EncryptionService.CreateRandomSalt();
 
             //assert
-            Assert.IsNotNull(salt);
+            Assert.AreNotEqual(salt1,salt2);
         }
 
         [TestMethod]
         public void SaltedHashIsCreatedIfMethodIsCorrect()
         {
             //arrange
-            string saltedHash;
+            string saltedHash1;
+            string saltedHash2;
 
             //act
-            saltedHash = EncryptionService.ComputeSaltedHash("abcdek", 304255195);
+            saltedHash1 = EncryptionService.ComputeSaltedHash(user1.Password, int.Parse(user1.Salt));
+            saltedHash2 = EncryptionService.ComputeSaltedHash(user2.Password, int.Parse(user2.Salt));
 
             //assert
-            Assert.IsNotNull(saltedHash);
+            Assert.AreNotEqual(saltedHash1,saltedHash2);
+        }
+
+        [ClassCleanup]
+        public static void TestsTearDown()
+        {
+            us.DeleteUser(user1);
+            us.DeleteUser(user2);
         }
     }
 }

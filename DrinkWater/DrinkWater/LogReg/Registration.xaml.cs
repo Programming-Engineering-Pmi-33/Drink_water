@@ -1,10 +1,10 @@
-﻿using DrinkWater.Services;
-using System.Windows;
-
-namespace DrinkWater.LogReg
+﻿namespace DrinkWater.LogReg
 {
+    using System.Windows;
+    using DrinkWater.Services;
+
     /// <summary>
-    /// Interaction logic for Registration.xaml
+    /// Interaction logic for Registration.xaml.
     /// </summary>
     public partial class Registration : Window
     {
@@ -14,7 +14,6 @@ namespace DrinkWater.LogReg
         private UsersService usersService;
         private ValidationService validationService;
 
-        
         public Registration()
         {
             InitializeComponent();
@@ -22,9 +21,8 @@ namespace DrinkWater.LogReg
             validationService = new ValidationService(usersService);
         }
 
-        private void buttonSignUp_Click(object sender, RoutedEventArgs e)
+        private void ButtonSignUp_Click(object sender, RoutedEventArgs e)
         {
-            
             this.username = textBoxUsername.Text;
             this.email = textBoxEmail.Text;
             this.password = textBoxPassword.Text;
@@ -51,6 +49,5 @@ namespace DrinkWater.LogReg
                 }
             }
         }
-
     }
 }

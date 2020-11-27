@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#nullable disable
 
 #nullable disable
 
 namespace DrinkWater
 {
+    using System;
+    using System.Collections.Generic;
+
     public partial class User
     {
         public User()
@@ -13,19 +15,33 @@ namespace DrinkWater
         }
 
         public int UserId { get; set; }
+
         public string Username { get; set; }
+
         public string Email { get; set; }
+
         public string Password { get; set; }
+
         public long? Weight { get; set; }
+
         public long? Height { get; set; }
+
         public string Sex { get; set; }
+
         public long? Age { get; set; }
+
         public TimeSpan? WakeUp { get; set; }
+
         public TimeSpan? GoingToBed { get; set; }
+
         public TimeSpan? NotitficationsPeriod { get; set; }
+
         public bool? DisableNotifications { get; set; }
+
         public long? DailyBalance { get; set; }
+
         public byte[] Avatar { get; set; }
+
         public string Salt { get; set; }
 
         public virtual ICollection<Statistic> Statistics { get; set; }
