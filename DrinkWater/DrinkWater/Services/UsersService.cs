@@ -50,7 +50,7 @@
             _db.SaveChanges();
         }
 
-        public string GetUserSalt(string username)
+        public long? GetUserSalt(string username)
         {
             var salt = (from data in _db.Users
                         where data.Username != null && data.Username == username
@@ -59,9 +59,9 @@
             return salt;
         }
 
-        public int GetUserId(string username, string password,  string salt)
+        public int GetUserId(string username, string password,  long? salt)
         {
-            string hashedPassword = EncryptionService.ComputeSaltedHash(password, int.Parse(salt));
+            string hashedPassword = EncryptionService.ComputeSaltedHash(password, salt);
 
             var userId = (from data in _db.Users
                           where data.Username != null && data.Username == username && data.Password == hashedPassword

@@ -16,7 +16,7 @@
               (((int)_saltBytes[2]) << 8) + ((int)_saltBytes[3]);
         }
 
-        public static string ComputeSaltedHash(string password, int salt)
+        public static string ComputeSaltedHash(string password, long? salt)
         {
             ASCIIEncoding encoder = new ASCIIEncoding();
             byte[] _secretBytes = encoder.GetBytes(password);

@@ -23,7 +23,7 @@ namespace DrinkWater
 
         public virtual DbSet<Statistic> Statistics { get; set; }
 
-        public virtual DbSet<Totalmonthstatistiс> Totalmonthstatistics { get; set; }
+        public virtual DbSet<Totalmonthstatistic> Totalmonthstatistics { get; set; }
 
         public virtual DbSet<Totalweekstatistic> Totalweekstatistics { get; set; }
 
@@ -80,7 +80,7 @@ namespace DrinkWater
                     .HasConstraintName("Statistics_UserIdRef_fkey");
             });
 
-            modelBuilder.Entity<Totalmonthstatistiс>(entity =>
+            modelBuilder.Entity<Totalmonthstatistic>(entity =>
             {
                 entity.HasNoKey();
 
@@ -120,8 +120,6 @@ namespace DrinkWater
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasColumnType("character varying");
-
-                entity.Property(e => e.Salt).HasColumnType("character varying");
 
                 entity.Property(e => e.Sex).HasColumnType("character varying");
 
