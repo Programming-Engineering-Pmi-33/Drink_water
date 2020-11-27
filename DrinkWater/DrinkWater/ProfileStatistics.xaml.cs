@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows;
-    using System.Windows.Media.Animation;
     using System.Windows.Media.Imaging;
     using DrinkWater.LogReg;
     using DrinkWater.ProfileStatisticsServices;
@@ -37,16 +36,28 @@
         private List<double> fluidAmount = new List<double>();
         private int index;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProfileStatistics"/> class.
+        /// </summary>
         public ProfileStatistics()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Get session user id and name.
+        /// </summary>
+        /// <param name="sesUser"> Session user.</param>
         public void GetSessionUser(SessionUser sesUser)
         {
             sessionUser = sesUser;
         }
 
+        /// <summary>
+        /// Load vindow and show components on load.
+        /// </summary>
+        /// <param name="sender"> sender object.</param>
+        /// <param name="e"> Arguments.</param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SeriesCollection = new SeriesCollection();
@@ -58,7 +69,10 @@
             Scroll();
         }
 
-        private void GetFluids()  
+        /// <summary>
+        /// Get fluids list with their images and amount.
+        /// </summary>
+        private void GetFluids()
         {
             ScrollClass scrollClass = new ScrollClass("week", userInformation.UserId);
             fluids = scrollClass.Fluids;
@@ -66,6 +80,12 @@
             images = scrollClass.Images;
         }
 
+        /// <summary>
+        /// Draw chart for consumed water.
+        /// </summary>
+        /// <param name="waterAmount">Water consumed per certain period.</param>
+        /// <param name="period"> Certain period for showing statistics.</param>
+        /// <param name="userWaterBalance"> Normal water amount for user.</param>
         private void DrawChart(List<double> waterAmount, List<string> period, int userWaterBalance)
         {
             SeriesCollection.Add(
@@ -81,6 +101,9 @@
             DataContext = this;
         }
 
+        /// <summary>
+        /// Get user's consumed water per week.
+        /// </summary>
         private void GetConsumedWaterPerWeek()
         {
             List<Waterweekstatistic> weekstatistics = new StatisticInfo(sessionUser.UserId).GetWeekStatistic();
@@ -97,6 +120,9 @@
             }
         }
 
+        /// <summary>
+        /// Get user's consumed water per year.
+        /// </summary>
         private void GetConsumedWaterPerYear()
         {
             List<Wateryearstatistic> yearstatistics = new StatisticInfo(sessionUser.UserId).GetYearStatistics();
@@ -113,6 +139,9 @@
             }
         }
 
+        /// <summary>
+        /// Get user's consumed water per month.
+        /// </summary>
         private void GetConsumedWaterPerMonth()
         {
             List<Watermonthstatistic> monthstatistics = new StatisticInfo(sessionUser.UserId).GetMonthStatistics();
@@ -129,6 +158,9 @@
             }
         }
 
+        /// <summary>
+        /// Show user informaton and avatar.
+        /// </summary>
         private void ShowUserInfo()
         { 
             UserData userData = new UserData(sessionUser);
@@ -142,6 +174,9 @@
             ShowAvatar();
         }
 
+        /// <summary>
+        /// Scroll liquids list.
+        /// </summary>
         private void Scroll()
         {
             ImageElement1.Source = images[index];
@@ -158,14 +193,25 @@
             LowerElement4.Content = fluidAmount[index + 3];
         }
 
-        public void ShowScore(int success, int total, int koef, List<double> items)
+        /// <summary>
+        /// Show user's keeping water balance score.
+        /// </summary>
+        /// <param name="keepingBalanceDays">Number of days keeping daily balance.</param>
+        /// <param name="totalDayNumber">Total number of days in period.</param>
+        /// <param name="koef">Constant for identification of period.</param>
+        /// <param name="waterAmountPerPeriod">Array of water consumed per day for every period.</param>
+
+        public void ShowScore(int keepingBalanceDays, int totalDayNumber, int koef, List<double> waterAmountPerPeriod)
         {
             ScoreInfo score = new ScoreInfo();
 
-            Score2.Content = score.Score(success, total, koef, items, (long)userInformation.DailyBalance);
-            Score4.Content = total;
+            Score2.Content = score.Score(keepingBalanceDays, totalDayNumber, koef, waterAmountPerPeriod, (long)userInformation.DailyBalance);
+            Score4.Content = totalDayNumber;
         }
 
+        /// <summary>
+        /// Show user avatar.
+        /// </summary>
         private void ShowAvatar()
         { 
             if (userInformation.Avatar != null)
@@ -174,6 +220,11 @@
             }
         }
 
+        /// <summary>
+        /// Redirect to Settings Window.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             Settings settings = new Settings();
@@ -182,6 +233,11 @@
             this.Close();
         }
 
+        /// <summary>
+        /// Show chart according to chosen period.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void Period_DropDownClosed(object sender, EventArgs e)
         {
             weekWaterAmount.Clear();
@@ -219,6 +275,11 @@
             }
         }
 
+        /// <summary>
+        /// Scroll lquids list up.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void BackwardButton_Click(object sender, RoutedEventArgs e)
         {
             if (index <= 2 || index == 0)
@@ -241,6 +302,11 @@
             index--;
         }
 
+        /// <summary>
+        /// Scroll lquids list down.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void ForwardButton_Click(object sender, RoutedEventArgs e)
         {
             if (index >= 2)
@@ -263,6 +329,11 @@
             index++;
         }
 
+        /// <summary>
+        /// Redirect to Main Window.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void Main_Click(object sender, RoutedEventArgs e)
         {
             MainWindow main = new MainWindow();

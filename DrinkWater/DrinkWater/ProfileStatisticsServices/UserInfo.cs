@@ -7,10 +7,21 @@ namespace DrinkWater.ProfileStatisticsServices
     public class UserInfo
     {
         public UserInfo() { }
-        public int GetUserActivityTime(int goingtobed, int wakeup)
+
+        /// <summary>
+        /// Calculate user activity time.
+        /// </summary>
+        /// <param name="bedtime"> Time that user is going to bed.</param>
+        /// <param name="wakeupTime">Time that user wakes up.</param>
+        /// <returns>Time that user is active through daytime.</returns>
+        public int GetUserActivityTime(int bedtime, int wakeupTime)
         {
-            int time = Math.Abs(goingtobed - wakeup);
-            return time;
+            int time;
+            if (wakeupTime > bedtime)
+            {
+                return time = 24 - (wakeupTime - bedtime);
+            }
+            return time = bedtime - wakeupTime;
         }
     }
 }

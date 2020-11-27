@@ -10,22 +10,21 @@ namespace ProfileStatisticsUnitTests
 {
     public class ScoreTests
     {
+
+        
         [Theory]
         [InlineData(0, 7, 1, "4518_622_1720", 1, 3000)]
         [InlineData(0, 30, 1, "2356_4586_758_968_4254", 2, 4000)]
         [InlineData(0, 12, 12, "3625_2456_7845", 0, 1500)]
-        public void ScoreTestPositiveTestMethod(int success, int total, int koef, string array, int result, long dailyBalance)
+
+        public void ScoreTestPositiveTestMethod(int keepingBalanceDays, int totalDayNumber, int koef, string waterAmountPerPeriod, int result, long dailyBalance)
         {
             //Arrange
-            var items = array
-            .Split('_')
-            .Where(x => double.TryParse(x, out _))
-            .Select(double.Parse)
-            .ToList();
+            var waterAmount = waterAmountPerPeriod.Split('_').Where(x => double.TryParse(x, out _)).Select(double.Parse).ToList();
             ScoreInfo scoreInfo = new ScoreInfo();
 
             //Act
-            int actualResult = scoreInfo.Score(success, total, koef, items, dailyBalance);
+            int actualResult = scoreInfo.Score(keepingBalanceDays, totalDayNumber, koef, waterAmount, dailyBalance);
 
             //Assert
             Assert.Equal(actualResult, result);
@@ -36,25 +35,32 @@ namespace ProfileStatisticsUnitTests
         [InlineData(0, 7, 1, "4518_622_1720", 1, 600)]
         [InlineData(0, 30, 1, "2356_4586_758_968_4254", 2, 900)]
         [InlineData(0, 12, 12, "3625_2456_7845", 3, 1500)]
-        public void ScoreTestNegativeTestMethod(int success, int total, int koef, string array, int result, long dailyBalance)
+        public void ScoreTestNegativeTestMethod(int keepingBalanceDays, int totalDayNumber, int koef, string waterAmountPerPeriod, int result, long dailyBalance)
         {
             //Arrange
-            var items = array
-           .Split('_')
-           .Where(x => double.TryParse(x, out _))
-           .Select(double.Parse)
-           .ToList();
+            var waterAmount = waterAmountPerPeriod.Split('_').Where(x => double.TryParse(x, out _)).Select(double.Parse).ToList();
             ScoreInfo scoreInfo = new ScoreInfo();
 
             //Act
-            int actualResult = scoreInfo.Score(success, total, koef, items, dailyBalance);
+            int actualResult = scoreInfo.Score(keepingBalanceDays, totalDayNumber, koef, waterAmount, dailyBalance);
 
             //Assert
             Assert.NotEqual(actualResult, result);
         }
     }
-    public class UserInfoTests
+    public class UserInfoTests : IDisposable
     {
+        User user = new User();
+        public UserInfoTests()
+        {
+            user = new User();
+        }
+
+        public void Dispose()
+        {
+
+        }
+
         [Theory]
         [InlineData(1, "Mamonchik", 106, 106, "Male", 20)]
         [InlineData(7, "Misha", 107, 195, "Male", 20)]
@@ -129,13 +135,13 @@ namespace ProfileStatisticsUnitTests
         [InlineData(23, 8, 15)]
         [InlineData(24, 9, 15)]
         [InlineData(1, 9, 16)]
-        public void GetUserActivityTimePositiveTestMethod(int goingtobed, int wakeup, int result)
+        public void GetUserActivityTimePositiveTestMethod(int bedtime, int wakeuptime, int result)
         {
             //Arrange
             UserInfo uInfo = new UserInfo();
 
             //Act
-            int actual = uInfo.GetUserActivityTime(goingtobed, wakeup);
+            int actual = uInfo.GetUserActivityTime(bedtime, wakeuptime);
 
             //Assert
             Assert.Equal(result, actual);
@@ -145,13 +151,13 @@ namespace ProfileStatisticsUnitTests
         [InlineData(22, 8, 85)]
         [InlineData(23, 8, 35)]
         [InlineData(24, 9, 55)]
-        public void GetUserActivityTimeNegativeTestMethod(int goingtobed, int wakeup, int result)
+        public void GetUserActivityTimeNegativeTestMethod(int bedtime, int wakeuptime, int result)
         {
             //Arrange
             UserInfo uInfo = new UserInfo();
 
             //Act
-            int actual = uInfo.GetUserActivityTime(goingtobed, wakeup);
+            int actual = uInfo.GetUserActivityTime(bedtime, wakeuptime);
 
             //Assert
             Assert.NotEqual(result, actual);

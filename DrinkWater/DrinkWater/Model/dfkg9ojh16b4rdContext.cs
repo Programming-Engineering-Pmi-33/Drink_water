@@ -1,11 +1,11 @@
-﻿#nullable disable
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+
+#nullable disable
 
 namespace DrinkWater
 {
-    using System;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata;
-
     public partial class dfkg9ojh16b4rdContext : DbContext
     {
         public dfkg9ojh16b4rdContext()
@@ -18,29 +18,21 @@ namespace DrinkWater
         }
 
         public virtual DbSet<Dailystatistic> Dailystatistics { get; set; }
-
         public virtual DbSet<Fluid> Fluids { get; set; }
-
         public virtual DbSet<Statistic> Statistics { get; set; }
-
         public virtual DbSet<Totalmonthstatistic> Totalmonthstatistics { get; set; }
-
         public virtual DbSet<Totalweekstatistic> Totalweekstatistics { get; set; }
-
         public virtual DbSet<Totalyearstatistic> Totalyearstatistics { get; set; }
-
         public virtual DbSet<User> Users { get; set; }
-
         public virtual DbSet<Watermonthstatistic> Watermonthstatistics { get; set; }
-
         public virtual DbSet<Waterweekstatistic> Waterweekstatistics { get; set; }
-
         public virtual DbSet<Wateryearstatistic> Wateryearstatistics { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseNpgsql("Host=ec2-34-253-148-186.eu-west-1.compute.amazonaws.com;Port=5432;Port=5432;Username =txhfeaeowkmudw;Password=991081b5cc1b5a824880f029a9c44c0351a6406425e381c8013c501beca8c1a4;Database=dfkg9ojh16b4rd;SSL Mode=Require;TrustServerCertificate=True");
             }
         }
@@ -120,8 +112,6 @@ namespace DrinkWater
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasColumnType("character varying");
-
-                entity.Property(e => e.Salt).HasColumnType("character varying");
 
                 entity.Property(e => e.Sex).HasColumnType("character varying");
 

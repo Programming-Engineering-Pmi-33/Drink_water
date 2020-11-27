@@ -13,6 +13,10 @@
         {
         }
 
+        /// <summary>
+        /// Get fluids list.
+        /// </summary>
+        /// <returns>Flids list.</returns>
         public List<Fluid> GetFluids()
         {
             return (from fluid in db.Fluids
