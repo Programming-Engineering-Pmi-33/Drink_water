@@ -7,19 +7,19 @@
     public class EncryptionService
     {
         // creation of random salt
-        public static int CreateRandomSalt()
+        public static long CreateRandomSalt()
         {
             var saltBytes = new byte[4];
 
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             rng.GetBytes(saltBytes);
 
-            return (((int)saltBytes[0]) << 24) + (((int)saltBytes[1]) << 16) +
-              (((int)saltBytes[2]) << 8) + ((int)saltBytes[3]);
+            return (((long)saltBytes[0]) << 24) + (((long)saltBytes[1]) << 16) +
+              (((long)saltBytes[2]) << 8) + ((long)saltBytes[3]);
         }
 
         // computing of salted hash
-        public static string ComputeSaltedHash(string password, int salt)
+        public static string ComputeSaltedHash(string password, long salt)
         {
             ASCIIEncoding encoder = new ASCIIEncoding();
             var secretBytes = encoder.GetBytes(password);

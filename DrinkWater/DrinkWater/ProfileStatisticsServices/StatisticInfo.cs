@@ -37,7 +37,7 @@
                     select totalWeekQuery).ToList();
         }
 
-        public List<Totalmonthstatistiс> GetTotalMonthStatistics()
+        public List<Totalmonthstatistic> GetTotalMonthStatistics()
         {
             return (from totalMonthQuery in db.Totalmonthstatistics
                     where UserId == totalMonthQuery.UserIdRef

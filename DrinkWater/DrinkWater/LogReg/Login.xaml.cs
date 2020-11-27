@@ -32,7 +32,7 @@
 
             var salt = usersService.GetUserSalt(username);
 
-            if (salt != null)
+            if (salt != 0)
             {
                 labelUsername.Visibility = Visibility.Hidden;
 

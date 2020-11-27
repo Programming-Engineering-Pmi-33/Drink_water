@@ -9,14 +9,14 @@ namespace DrinkWaterUnitTests
     {
         private static User user1;
         private static User user2;
-        private static UsersService us=UsersService.GetService;
+        private static UsersService us = UsersService.GetService;
 
         [ClassInitialize]
         public static void TestsSetup(TestContext context)
         {
-            user1 = new User("rekler", "rekler@gmail.com", "reklerRekleR", "3456789089");
+            user1 = new User("rekler", "rekler@gmail.com", "reklerRekleR", 3456789089);
             us.RegisterUser(user1);
-            user2 = new User("lemig", "lemig@gmail.com", "lemigLemiG", "3456789024");
+            user2 = new User("lemig", "lemig@gmail.com", "lemigLemiG", 3456789024);
             us.RegisterUser(user2);
         }
 
@@ -54,7 +54,7 @@ namespace DrinkWaterUnitTests
 
 
             //act
-           string salt = us.GetUserSalt(username);
+           long salt = us.GetUserSalt(username);
 
             //assert
             Assert.IsNotNull(salt);
@@ -65,8 +65,8 @@ namespace DrinkWaterUnitTests
         {
             //arrange
             string username = user1.Username;
-            string password = EncryptionService.ComputeSaltedHash(user1.Password,int.Parse(user1.Salt));
-            string salt = user1.Salt;
+            long salt = us.GetUserSalt(user1.Username);
+            string password = EncryptionService.ComputeSaltedHash(user1.Password, salt);
 
             //act
             int id = us.GetUserId(username,password,salt);
@@ -79,8 +79,8 @@ namespace DrinkWaterUnitTests
         public void RandomSaltIsCreatedIfMethodIsCorrect()
         {
             //arrange
-            int salt1;
-            int salt2;
+            long salt1;
+            long salt2;
 
             //act
             salt1 = EncryptionService.CreateRandomSalt();
@@ -96,10 +96,12 @@ namespace DrinkWaterUnitTests
             //arrange
             string saltedHash1;
             string saltedHash2;
+            long salt1 = us.GetUserSalt(user1.Username);
+            long salt2 = us.GetUserSalt(user2.Username);
 
             //act
-            saltedHash1 = EncryptionService.ComputeSaltedHash(user1.Password, int.Parse(user1.Salt));
-            saltedHash2 = EncryptionService.ComputeSaltedHash(user2.Password, int.Parse(user2.Salt));
+            saltedHash1 = EncryptionService.ComputeSaltedHash(user1.Password, salt1);
+            saltedHash2 = EncryptionService.ComputeSaltedHash(user2.Password,salt2);
 
             //assert
             Assert.AreNotEqual(saltedHash1,saltedHash2);

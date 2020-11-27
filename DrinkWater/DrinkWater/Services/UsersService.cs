@@ -62,19 +62,23 @@
         }
 
         // getting user salt from database
-        public string GetUserSalt(string username)
+        public long GetUserSalt(string username)
         {
             var salt = (from data in db.Users
                         where data.Username != null && data.Username == username
                         select data.Salt).FirstOrDefault();
+            if (salt == null)
+            {
+                return 0;
+            }
 
-            return salt;
+            return (long)salt;
         }
 
         // getting user id from database
-        public int GetUserId(string username, string password,  string salt)
+        public int GetUserId(string username, string password,  long salt)
         {
-            string hashedPassword = EncryptionService.ComputeSaltedHash(password, int.Parse(salt));
+            string hashedPassword = EncryptionService.ComputeSaltedHash(password, salt);
 
             var userId = (from data in db.Users
                           where data.Username != null && data.Username == username && data.Password == hashedPassword
