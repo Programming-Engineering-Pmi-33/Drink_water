@@ -9,5 +9,5 @@
 [assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1600", Justification = "<Pending>")]
 [assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1601", Justification = "<Pending>")]
 [assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1122", Justification = "<Pending>")]
-[assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202:Elements should be ordered by access", Justification = "<Pending>")]
-[assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1206:Elements should be ordered by access", Justification = "<Pending>")]
+[assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202", Justification = "<Pending>")]
+[assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1206", Justification = "<Pending>")]

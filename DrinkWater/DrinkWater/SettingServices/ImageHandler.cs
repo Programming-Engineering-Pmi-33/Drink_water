@@ -18,11 +18,20 @@
         {
         }
 
+        /// <summary>
+        /// This function is getter for <c>ImageArray</c> property.
+        /// </summary>
+        /// <returns>image represented by bite array.</returns>
         public byte[] GetImage()
         {
             return ImageArray;
         }
 
+        /// <summary>
+        /// This method convert byte array image to BitmapImage.
+        /// </summary>
+        /// <param name="imageData">image represented as byte array.</param>
+        /// <returns>Image as optimized object that can be shown in XAML.</returns>
         public BitmapImage GetImagefromDB(byte[] imageData)
         {
             if (imageData == null)
@@ -42,6 +51,11 @@
             }
         }
 
+        /// <summary>
+        /// This function get image from path and convert it to BitmapImage class object 
+        /// </summary>
+        /// <param name="bitmap">Image get from choosen path.</param>
+        /// <returns>Image as optimized object that can be shown in XAML.</returns>
         public BitmapImage ConvertBitmap(Bitmap bitmap)
         {
             MemoryStream ms = new MemoryStream();
