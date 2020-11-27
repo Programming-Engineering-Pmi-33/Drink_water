@@ -8,114 +8,6 @@ using DrinkWater.ProfileStatisticsServices;
 
 namespace ProfileStatisticsUnitTests
 {
-    public class UserInfoTests
-    {
-
-
-        [Fact]
-        public void ShowAvatarPositiveTestMethod()
-        {
-            //Arrange
-            SessionUser sessionUser = new SessionUser(1, "Mamonchik");
-            UserData userData = new UserData(sessionUser);
-            User userInformation = userData.GetData();
-
-            //Act
-            BitmapImage image = new ImageHandler().GetImagefromDB(userInformation.Avatar);
-
-            //Assert
-            Assert.False(image == null);
-        }
-        [Fact]
-        public void ShowAvatarNegativeTestMethod()
-        {
-            //Arrange
-            SessionUser sessionUser = new SessionUser(17, "Misha");
-            UserData userData = new UserData(sessionUser);
-            User userInformation = userData.GetData();
-
-            //Act
-            BitmapImage image = new ImageHandler().GetImagefromDB(userInformation.Avatar);
-
-            //Assert
-            Assert.True(image == null);
-        }
-
-
-        [Theory]
-        [InlineData(1, "Mamonchik", 106, 106, "Male", 20)]
-        [InlineData(7, "Misha", 107, 195, "Male", 20)]
-        [InlineData(10, "Mish", 110, 195, "Male", 20)]
-        public void GetUserInfoPositiveTestMethod(int id, string expectedUsername, long expectedWeight, long expectedHeight, string expectedSex, long expectedAge)
-        {
-            //Arrange
-            SessionUser sessionUser = new SessionUser(id, expectedUsername);
-            UserData userData = new UserData(sessionUser);
-
-            //Act
-            User userInformation = userData.GetData();
-
-            //Assert
-            Assert.Equal(expectedWeight, userInformation.Weight);
-            Assert.Equal(expectedHeight, userInformation.Height);
-            Assert.Equal(expectedSex, userInformation.Sex);
-            Assert.Equal(expectedAge, userInformation.Age);
-        }
-
-        [Theory]
-        [InlineData(1, "Mamonchik", 14, 50, "Female", 10)]
-        [InlineData(7, "Misha", 17, 95, "Female", 10)]
-        [InlineData(10, "Mish", 10, 95, "Female", 10)]
-        public void GetUserInfoNegativeTestMethod(int id, string expectedUsername, long expectedWeight, long expectedHeight, string expectedSex, long expectedAge)
-        {
-            //Arrange
-            SessionUser sessionUser = new SessionUser(id, expectedUsername);
-            UserData userData = new UserData(sessionUser);
-
-            //Act
-            User userInformation = userData.GetData();
-
-            //Assert
-            Assert.NotEqual(expectedWeight, userInformation.Weight);
-            Assert.NotEqual(expectedHeight, userInformation.Height);
-            Assert.NotEqual(expectedSex, userInformation.Sex);
-            Assert.NotEqual(expectedAge, userInformation.Age);
-        }
-
-
-        [Theory]
-        [InlineData(22, 8, 14)]
-        [InlineData(23, 8, 15)]
-        [InlineData(24, 9, 15)]
-        public void GetUserActivityTimePositiveTestMethod(int goingtobed, int wakeup, int result)
-        {
-            //Arrange
-            UserInfo uInfo = new UserInfo();
-
-            //Act
-            int actual = uInfo.GetUserActivityTime(goingtobed, wakeup);
-
-            //Assert
-            Assert.Equal(result, actual);
-        }
-
-        [Theory]
-        [InlineData(22, 8, 85)]
-        [InlineData(23, 8, 35)]
-        [InlineData(24, 9, 55)]
-        public void GetUserActivityTimeNegativeTestMethod(int goingtobed, int wakeup, int result)
-        {
-            //Arrange
-            UserInfo uInfo = new UserInfo();
-
-            //Act
-            int actual = uInfo.GetUserActivityTime(goingtobed, wakeup);
-
-            //Assert
-            Assert.NotEqual(result, actual);
-        }
-
-    }
     public class ScoreTests
     {
         [Theory]
@@ -161,4 +53,110 @@ namespace ProfileStatisticsUnitTests
             Assert.NotEqual(actualResult, result);
         }
     }
+    public class UserInfoTests
+    {
+        [Theory]
+        [InlineData(1, "Mamonchik", 106, 106, "Male", 20)]
+        [InlineData(7, "Misha", 107, 195, "Male", 20)]
+        [InlineData(10, "Mish", 110, 195, "Male", 20)]
+        public void GetUserInfoPositiveTestMethod(int id, string expectedUsername, long expectedWeight, long expectedHeight, string expectedSex, long expectedAge)
+        {
+            //Arrange
+            SessionUser sessionUser = new SessionUser(id, expectedUsername);
+            UserData userData = new UserData(sessionUser);
+
+            //Act
+            User userInformation = userData.GetData();
+
+            //Assert
+            Assert.Equal(expectedWeight, userInformation.Weight);
+            Assert.Equal(expectedHeight, userInformation.Height);
+            Assert.Equal(expectedSex, userInformation.Sex);
+            Assert.Equal(expectedAge, userInformation.Age);
+        }
+
+        [Theory]
+        [InlineData(1, "Mamonchik", 14, 50, "Female", 10)]
+        [InlineData(7, "Misha", 17, 95, "Female", 10)]
+        [InlineData(10, "Mish", 10, 95, "Female", 10)]
+        public void GetUserInfoNegativeTestMethod(int id, string expectedUsername, long expectedWeight, long expectedHeight, string expectedSex, long expectedAge)
+        {
+            //Arrange
+            SessionUser sessionUser = new SessionUser(id, expectedUsername);
+            UserData userData = new UserData(sessionUser);
+
+            //Act
+            User userInformation = userData.GetData();
+
+            //Assert
+            Assert.NotEqual(expectedWeight, userInformation.Weight);
+            Assert.NotEqual(expectedHeight, userInformation.Height);
+            Assert.NotEqual(expectedSex, userInformation.Sex);
+            Assert.NotEqual(expectedAge, userInformation.Age);
+        }
+
+        [Fact]
+        public void ShowAvatarPositiveTestMethod()
+        {
+            //Arrange
+            SessionUser sessionUser = new SessionUser(1, "Mamonchik");
+            UserData userData = new UserData(sessionUser);
+            User userInformation = userData.GetData();
+
+            //Act
+            BitmapImage image = new ImageHandler().GetImagefromDB(userInformation.Avatar);
+
+            //Assert
+            Assert.False(image == null);
+        }
+        [Fact]
+        public void ShowAvatarNegativeTestMethod()
+        {
+            //Arrange
+            SessionUser sessionUser = new SessionUser(17, "Misha");
+            UserData userData = new UserData(sessionUser);
+            User userInformation = userData.GetData();
+
+            //Act
+            BitmapImage image = new ImageHandler().GetImagefromDB(userInformation.Avatar);
+
+            //Assert
+            Assert.True(image == null);
+        }
+
+        [Theory]
+        [InlineData(22, 8, 14)]
+        [InlineData(23, 8, 15)]
+        [InlineData(24, 9, 15)]
+        [InlineData(1, 9, 16)]
+        public void GetUserActivityTimePositiveTestMethod(int goingtobed, int wakeup, int result)
+        {
+            //Arrange
+            UserInfo uInfo = new UserInfo();
+
+            //Act
+            int actual = uInfo.GetUserActivityTime(goingtobed, wakeup);
+
+            //Assert
+            Assert.Equal(result, actual);
+        }
+
+        [Theory]
+        [InlineData(22, 8, 85)]
+        [InlineData(23, 8, 35)]
+        [InlineData(24, 9, 55)]
+        public void GetUserActivityTimeNegativeTestMethod(int goingtobed, int wakeup, int result)
+        {
+            //Arrange
+            UserInfo uInfo = new UserInfo();
+
+            //Act
+            int actual = uInfo.GetUserActivityTime(goingtobed, wakeup);
+
+            //Assert
+            Assert.NotEqual(result, actual);
+        }
+
+    }
+   
 }

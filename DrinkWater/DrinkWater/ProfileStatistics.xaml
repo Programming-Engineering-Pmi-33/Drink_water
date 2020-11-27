@@ -16,7 +16,7 @@
                             <ToggleButton Grid.Column="2" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
                                 <ToggleButton.Template>
                                     <ControlTemplate>
-                                        <Grid>
+                                        <Grid x:Name="ButtonGrid1">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="5*" />
                                                 <ColumnDefinition Width="*" />
@@ -24,10 +24,44 @@
                                             <Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="10"  Background="#6983D9" BorderBrush="Transparent" BorderThickness="1" />
                                             <Border Grid.Column="0" CornerRadius="10,0,0,10"  Margin="1"  Background="#6983D9"  BorderBrush="Transparent" BorderThickness="0,0,1,0" />
                                             <Path x:Name="Arrow" Grid.Column="1"  Fill="#F2F2F2" Data="M 0 0 L 4 4 L 8 0 Z" Height="6" Stretch="Fill" Width="13" Margin="8,12,9,12" />
+                                            <Grid.RenderTransform>
+                                                <ScaleTransform />
+                                            </Grid.RenderTransform>
                                         </Grid>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="ToggleButton.IsMouseOver" Value="true">
-                                                <Setter TargetName="Border" Property="Background" Value="#6983D9" />
+                                                <Trigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid1"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                To="1.08"/>
+                                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid1"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                To="1.08"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.EnterActions>
+                                                <Trigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid1"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                To="0.95"/>
+                                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid1"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                To="0.95"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.ExitActions>
                                             </Trigger>
                                             <Trigger Property="ToggleButton.IsChecked" Value="true">
                                                 <Setter TargetName="Border" Property="Background" Value="#6983D9" />
@@ -86,12 +120,52 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}" >
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                        <Grid Name="ButtonGrid2" Background="Transparent">
+                            <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
                             <ContentPresenter  x:Name="contentPresenter" Focusable="False"  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
+                            <Grid.RenderTransform>
+                                <ScaleTransform />
+                            </Grid.RenderTransform>
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Transparent"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid2"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                To="1.08"/>
+                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid2"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                To="1.08"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid2"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                To="0.95"/>
+                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid2"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                To="0.95"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
                             </Trigger>
 
                         </ControlTemplate.Triggers>
@@ -141,16 +215,52 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Name="ButtonGrid3" Background="Transparent">
                         <Border x:Name="border" CornerRadius="50" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
+                            <Grid.RenderTransform>
+                                <ScaleTransform />
+                            </Grid.RenderTransform>
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="Blue"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid3"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                To="1.08"/>
+                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid3"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                To="1.08"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid3"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                To="0.95"/>
+                                            <DoubleAnimation
+                                Duration="0:0:0.05"
+                                Storyboard.TargetName="ButtonGrid3"
+                                Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                To="0.95"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
@@ -351,20 +461,62 @@
         </ControlTemplate>
     </Window.Resources>
     <Grid Margin="0,0,0,-16" OpacityMask="Black">
-        <Rectangle HorizontalAlignment="Left" Height="601" Margin="1268,158,0,0" VerticalAlignment="Top" Width="208" Fill="#FFE1EDFD" RadiusX="10" RadiusY="10">
+        <Rectangle x:Name="Rectangle3" HorizontalAlignment="Left" Height="601" Margin="1268,158,0,0" VerticalAlignment="Top" Width="208" Fill="#FFE1EDFD" RadiusX="10" RadiusY="10">
             <Rectangle.Effect>
                 <DropShadowEffect Color="LightSteelBlue" ShadowDepth="2" BlurRadius="10" />
             </Rectangle.Effect>
+            <Rectangle.Triggers>
+
+                <!-- Animates the rectangle's opacity. -->
+                <EventTrigger RoutedEvent="Rectangle.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+            Storyboard.TargetName="Rectangle3" 
+            Storyboard.TargetProperty="Width"
+                  From="50" To="208" Duration="0:0:4" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Rectangle.Triggers>
         </Rectangle>
-        <Rectangle HorizontalAlignment="Left" Height="600" Margin="71,159,0,0" VerticalAlignment="Top" Width="300" Fill="#FFE1EDFD" RadiusX="20" RadiusY="20">
+        <Rectangle Name="Rectangle1" HorizontalAlignment="Left" Height="600" Margin="71,159,0,0" VerticalAlignment="Top" Width="300" Fill="#FFE1EDFD" RadiusX="20" RadiusY="20">
             <Rectangle.Effect>
                 <DropShadowEffect Color="LightSteelBlue" ShadowDepth="2" BlurRadius="10" />
             </Rectangle.Effect>
+            <Rectangle.Triggers>
+
+                <!-- Animates the rectangle's opacity. -->
+                <EventTrigger RoutedEvent="Rectangle.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+            Storyboard.TargetName="Rectangle1" 
+            Storyboard.TargetProperty="Width"
+                  From="75" To="300" Duration="0:0:4" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Rectangle.Triggers>
         </Rectangle>
-        <Rectangle HorizontalAlignment="Left" Height="61" Margin="444,696,0,0" VerticalAlignment="Top" Width="762" RadiusX="10" RadiusY="10" OpacityMask="{DynamicResource Button.Static.Background}" StrokeLineJoin="Miter" Fill="#FFE1EDFD">
+        <Rectangle x:Name="Rectangle2" HorizontalAlignment="Left" Height="61" Margin="444,696,0,0" VerticalAlignment="Top" Width="762" RadiusX="10" RadiusY="10" OpacityMask="{DynamicResource Button.Static.Background}" StrokeLineJoin="Miter" Fill="#FFE1EDFD">
             <Rectangle.Effect>
                 <DropShadowEffect Color="LightSteelBlue" ShadowDepth="2" BlurRadius="10" />
             </Rectangle.Effect>
+            <Rectangle.Triggers>
+
+                <!-- Animates the rectangle's opacity. -->
+                <EventTrigger RoutedEvent="Rectangle.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+            Storyboard.TargetName="Rectangle2" 
+            Storyboard.TargetProperty="Width"
+                  From="200" To="762" Duration="0:0:4" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Rectangle.Triggers>
         </Rectangle>
         <lvc:CartesianChart x:Name="WaterChart" Series="{Binding SeriesCollection}" LegendLocation="Bottom" Margin="444,152,394,209">
             <lvc:CartesianChart.AxisX>
