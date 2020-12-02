@@ -6,18 +6,33 @@
     using System.Windows.Controls;
     using System.Windows.Media;
 
+    /// <summary>
+    /// Announces ValidationService сlass.
+    /// </summary>
     public class ValidationService
     {
         private const string EMAILREGEX = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
         private readonly UsersService usersService;
 
-        // constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValidationService"/> class.
+        /// </summary>
+        /// <param name="usersService">user service instance.</param>
         public ValidationService(UsersService usersService)
         {
             this.usersService = usersService;
         }
 
-        // validation of username, email and password
+        /// <summary>
+        /// Validates of username, email and password.
+        /// </summary>
+        /// <param name="labelUsername">username label.</param>
+        /// <param name="username">username value.</param>
+        /// <param name="labelEmail">email label.</param>
+        /// <param name="email">email value.</param>
+        /// <param name="labelPassword">password label.</param>
+        /// <param name="password">password value.</param>
+        /// <returns>bool value.</returns>
         public bool IsValid(Label labelUsername, string username, Label labelEmail, string email, Label labelPassword, string password)
         {
             bool isCorrectUsername = IsValidUsername(labelUsername, username);
@@ -27,7 +42,11 @@
             return isCorrectUsername && isCorrectEmail && isCorrectPassword;
         }
 
-        // displaying a message on the form
+        /// <summary>
+        /// Displayes a message on the form.
+        /// </summary>
+        /// <param name="errorLabel">label.</param>
+        /// <param name="message">text.</param>
         public static void SetError(Label errorLabel, string message)
         {
             errorLabel.Visibility = Visibility.Visible;
@@ -35,7 +54,12 @@
             errorLabel.Content = message;
         }
 
-        // checking correctness of username
+        /// <summary>
+        ///  Checks correctness of username.
+        /// </summary>
+        /// <param name="labelUsername">username label.</param>
+        /// <param name="username">username value.</param>
+        /// <returns>bool value.</returns>
         private bool IsValidUsername(Label labelUsername, string username)
         {
             bool isCorrect = false;
@@ -61,7 +85,12 @@
             return isCorrect;
         }
 
-        // checking correctness of email
+        /// <summary>
+        /// Checks correctness of email.
+        /// </summary>
+        /// <param name="labelEmail">email label.</param>
+        /// <param name="email">email value.</param>
+        /// <returns>bool value.</returns>
         private bool IsValidEmail(Label labelEmail, string email)
         {
             bool isCorrect = false;
@@ -87,7 +116,12 @@
             return isCorrect;
         }
 
-        // checking correctness of password
+        /// <summary>
+        /// Checks correctness of password.
+        /// </summary>
+        /// <param name="labelPassword">password label.</param>
+        /// <param name="password">password value.</param>
+        /// <returns>bool value.</returns>
         private bool IsValidPassword(Label labelPassword, string password)
         {
             bool isCorrect = false;

@@ -4,9 +4,15 @@
     using System.Security.Cryptography;
     using System.Text;
 
+    /// <summary>
+    /// Announces EncryptionService сlass.
+    /// </summary>
     public class EncryptionService
     {
-        // creation of random salt
+        /// <summary>
+        /// Creates of random salt.
+        /// </summary>
+        /// <returns>salt.</returns>
         public static long CreateRandomSalt()
         {
             var saltBytes = new byte[4];
@@ -18,7 +24,12 @@
               (((long)saltBytes[2]) << 8) + ((long)saltBytes[3]);
         }
 
-        // computing of salted hash
+        /// <summary>
+        /// Computes of salted hash.
+        /// </summary>
+        /// <param name="password">password value.</param>
+        /// <param name="salt">salt value.</param>
+        /// <returns>salted hash.</returns>
         public static string ComputeSaltedHash(string password, long salt)
         {
             ASCIIEncoding encoder = new ASCIIEncoding();

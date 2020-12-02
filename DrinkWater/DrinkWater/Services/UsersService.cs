@@ -2,19 +2,23 @@
 {
     using System.Linq;
 
+    /// <summary>
+    /// Announces UserService сlass.
+    /// </summary>
     public class UsersService
     {
         private readonly dfkg9ojh16b4rdContext db = null;
 
         private static UsersService instance = null;
 
-        // constructor
         private UsersService()
         {
             db = new dfkg9ojh16b4rdContext();
         }
 
-        // getting only one instance of user service
+        /// <summary>
+        ///  Gets only one instance of user service.
+        /// </summary>
         public static UsersService GetService
         {
             get
@@ -28,7 +32,11 @@
             }
         }
 
-        // checking if username is in database
+        /// <summary>
+        /// Checks if username is in database.
+        /// </summary>
+        /// <param name="username">username value.</param>
+        /// <returns>bool value.</returns>
         public bool UsernameExists(string username)
         {
             var resultName = (from data in db.Users
@@ -38,7 +46,11 @@
             return resultName.Count > 0;
         }
 
-        // checking if email is in database
+        /// <summary>
+        /// Checks if email is in database.
+        /// </summary>
+        /// <param name="email">email value.</param>
+        /// <returns>bool value.</returns>
         public bool EmailExists(string email)
         {
             var resultEmail = (from data in db.Users
@@ -48,20 +60,31 @@
             return resultEmail.Count > 0;
         }
 
-        // registration of user
+        /// <summary>
+        /// Registers user.
+        /// </summary>
+        /// <param name="user">user instance.</param>
         public void RegisterUser(User user)
         {
             db.Users.Add(user);
             db.SaveChanges();
         }
 
+        /// <summary>
+        /// Deletes user from database.
+        /// </summary>
+        /// <param name="user">user instance.</param>
         public void DeleteUser(User user)
         {
             db.Users.Remove(user);
             db.SaveChanges();
         }
 
-        // getting user salt from database
+        /// <summary>
+        /// Gets user salt from database.
+        /// </summary>
+        /// <param name="username"> username value.</param>
+        /// <returns>salt.</returns>
         public long GetUserSalt(string username)
         {
             var salt = (from data in db.Users
@@ -75,7 +98,13 @@
             return (long)salt;
         }
 
-        // getting user id from database
+        /// <summary>
+        /// Gets user id from database.
+        /// </summary>
+        /// <param name="username">username value.</param>
+        /// <param name="password">password value.</param>
+        /// <param name="salt">salt value.</param>
+        /// <returns>id.</returns>
         public int GetUserId(string username, string password,  long salt)
         {
             string hashedPassword = EncryptionService.ComputeSaltedHash(password, salt);
