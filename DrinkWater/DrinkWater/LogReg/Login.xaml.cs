@@ -23,6 +23,7 @@ namespace DrinkWater.LogReg
         {
             Registration registration = new Registration();
             registration.Show();
+			
             this.Close();
         }
 
