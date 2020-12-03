@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Windows;
     using DrinkWater.Services;
+    using Windows.ApplicationModel.Activation;
 
     /// <summary>
     /// Interaction logic for Login.xaml.

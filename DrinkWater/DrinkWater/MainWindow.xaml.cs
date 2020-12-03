@@ -6,6 +6,7 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
+    using System.Windows.Media.Animation;
     using DrinkWater.LogReg;
     using DrinkWater.MainServices;
     using DrinkWater.ProfileStatisticsServices;
@@ -14,7 +15,7 @@
     using LiveCharts.Wpf;
 
     /// <summary>
-    /// Interaction logic for Main.xaml.
+    /// Interaction logic for MainWindow.xaml.
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -30,11 +31,18 @@
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Set session user.
+        /// </summary>
+        /// <param name="user"> Session user.</param>
         public void SetSessionUser(SessionUser user)
         {
             main.SetSessionUser(user);
         }
 
+        /// <summary>
+        /// The method fills the chart with data.
+        /// </summary>
         public void SetChart()
         {
             StatisticInfo statistic = main.GetStatistic();
@@ -57,6 +65,13 @@
             }
         }
 
+        /// <summary>
+        /// This method calls the add function for each label if it is not empty
+        /// if amount not valid, text box border changes color to red.
+        /// The chart data is deleted and rewritten.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void Add(object sender, RoutedEventArgs e)
         {
             foreach (var item in labelBox)
@@ -64,8 +79,8 @@
                 if (!string.IsNullOrEmpty(item.Value.Text))
                 {
                     item.Value.BorderBrush = Brushes.LightGray;
-                    ValidationLiquid validation = new ValidationLiquid(item.Key.Content.ToString(), item.Value.Text.ToString());
-                    if (validation != null)
+                    ValidationLiquid validation = new ValidationLiquid(item.Key.Content.ToString(), item.Value.Text);
+                    if (validation.IsValidAmount(item.Value.Text))
                     {
                         main.Add(validation.GetName(), validation.GetAmount());
                         item.Value.Clear();
@@ -81,6 +96,11 @@
             SetChart();
         }
 
+        /// <summary>
+        /// Scroll lquids list up.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void Up_Click(object sender, RoutedEventArgs e)
         {
             int k = main.GetFluids().Count - 1;
@@ -102,6 +122,11 @@
             }
         }
 
+        /// <summary>
+        /// Scroll lquids list down.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void Down_Click(object sender, RoutedEventArgs e)
         {
             int k = main.GetFluids().Count - 1;
@@ -123,6 +148,11 @@
             }
         }
 
+        /// <summary>
+        /// Load vindow and show components on load.
+        /// </summary>
+        /// <param name="sender"> sender object.</param>
+        /// <param name="e"> Arguments.</param>
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
             main.ListLiquids();
