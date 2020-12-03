@@ -21,7 +21,7 @@
 
         public string[] Labels { get; set; }
 
-        public Func<double, string> Formatter { get; set; }
+        private Func<double, string> Formatter { get; set; }
 
         private SessionUser sessionUser = new SessionUser();
         private static User userInformation;
@@ -45,10 +45,10 @@
         }
 
         /// <summary>
-        /// Get session user id and name.
+        /// Set session user id and name.
         /// </summary>
         /// <param name="sesUser"> Session user.</param>
-        public void GetSessionUser(SessionUser sesUser)
+        public void SetSessionUser(SessionUser sesUser)
         {
             sessionUser = sesUser;
         }
@@ -89,11 +89,11 @@
         private void DrawChart(List<double> waterAmount, List<string> period, int userWaterBalance)
         {
             SeriesCollection.Add(
-          new ColumnSeries
-          {
-              Title = "Water",
-              Values = new ChartValues<double>(waterAmount),
-          });
+              new ColumnSeries
+              {
+                  Title = "Water",
+                  Values = new ChartValues<double>(waterAmount),
+              });
             BalanceLine.Value = userWaterBalance;
             Axisx.Labels = period;
             Formatter = value => value.ToString("N");
@@ -179,18 +179,7 @@
         /// </summary>
         private void Scroll()
         {
-            ImageElement1.Source = images[index];
-            UpperElement1.Content = fluids[index].Name;
-            LowerElement1.Content = fluidAmount[index];
-            ImageElement2.Source = images[index + 1];
-            UpperElement2.Content = fluids[index + 1].Name;
-            LowerElement2.Content = fluidAmount[index + 1];
-            ImageElement3.Source = images[index + 2];
-            UpperElement3.Content = fluids[index + 2].Name;
-            LowerElement3.Content = fluidAmount[index + 2];
-            ImageElement4.Source = images[index + 3];
-            UpperElement4.Content = fluids[index + 3].Name;
-            LowerElement4.Content = fluidAmount[index + 3];
+            InitFluidsVisuals(index);          
         }
 
         /// <summary>
@@ -287,19 +276,24 @@
                 index = fluids.Count() - 1;
             }
 
-            ImageElement1.Source = images[index - 3];
-            UpperElement1.Content = fluids[index - 3].Name;
-            LowerElement1.Content = fluidAmount[index - 3];
-            ImageElement2.Source = images[index - 2];
-            UpperElement2.Content = fluids[index - 2].Name;
-            LowerElement2.Content = fluidAmount[index - 2];
-            ImageElement3.Source = images[index - 1];
-            UpperElement3.Content = fluids[index - 1].Name;
-            LowerElement3.Content = fluidAmount[index - 1];
-            ImageElement4.Source = images[index];
-            UpperElement4.Content = fluids[index].Name;
-            LowerElement4.Content = fluidAmount[index];
+            InitFluidsVisuals(index - 3);
             index--;
+        }
+
+        private void InitFluidsVisuals(int index)
+        {
+            ImageElement1.Source = images[index];
+            UpperElement1.Content = fluids[index].Name;
+            LowerElement1.Content = fluidAmount[index];
+            ImageElement2.Source = images[index + 1];
+            UpperElement2.Content = fluids[index + 1].Name;
+            LowerElement2.Content = fluidAmount[index + 1];
+            ImageElement3.Source = images[index + 2];
+            UpperElement3.Content = fluids[index + 2].Name;
+            LowerElement3.Content = fluidAmount[index + 2];
+            ImageElement4.Source = images[index + 3];
+            UpperElement4.Content = fluids[index + 3].Name;
+            LowerElement4.Content = fluidAmount[index + 3];
         }
 
         /// <summary>
@@ -314,18 +308,7 @@
                 index = 0;
             }
 
-            ImageElement1.Source = images[index];
-            UpperElement1.Content = fluids[index].Name;
-            LowerElement1.Content = fluidAmount[index];
-            ImageElement2.Source = images[index + 1];
-            UpperElement2.Content = fluids[index + 1].Name;
-            LowerElement2.Content = fluidAmount[index + 1];
-            ImageElement3.Source = images[index + 2];
-            UpperElement3.Content = fluids[index + 2].Name;
-            LowerElement3.Content = fluidAmount[index + 2];
-            ImageElement4.Source = images[index + 3];
-            UpperElement4.Content = fluids[index + 3].Name;
-            LowerElement4.Content = fluidAmount[index + 3];
+            InitFluidsVisuals(index);
             index++;
         }
 

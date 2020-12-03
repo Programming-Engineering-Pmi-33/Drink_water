@@ -152,7 +152,7 @@
         private void ProfileWindowButton_Click(object sender, RoutedEventArgs e)
         {
             ProfileStatistics profileStatistics = new ProfileStatistics();
-            profileStatistics.GetSessionUser(sessionUser);
+            profileStatistics.SetSessionUser(sessionUser);
             profileStatistics.Show();
             this.Close();
         }
