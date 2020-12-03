@@ -22,8 +22,8 @@
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="textBoxUsername" Style="{StaticResource LoginTextBox}" HorizontalAlignment="Center" Margin="0,124,0,0" Text="Mamonchik" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="1" FontFamily="Segoe UI" Foreground="#FF424141"/>
-        <TextBox x:Name="textBoxPassword" Style="{StaticResource LoginTextBox}" HorizontalAlignment="Center" Margin="0,210,0,0" Text="qwerty123456" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="1" Foreground="#FF424141"/>
+        <TextBox x:Name="textBoxUsername" Style="{StaticResource LoginTextBox}" HorizontalAlignment="Center" Margin="0,124,0,0" Text="Alex" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="1" FontFamily="Segoe UI" Foreground="#FF424141"/>
+        <TextBox x:Name="textBoxPassword" Style="{StaticResource LoginTextBox}" HorizontalAlignment="Center" Margin="0,210,0,0" Text="SS2011200" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="1" Foreground="#FF424141"/>
 
         <Button x:Name="buttonCreateNewAccount"   BorderBrush="Transparent"
                 BorderThickness="0" Background="Transparent" Foreground="Black"

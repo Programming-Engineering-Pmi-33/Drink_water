@@ -162,7 +162,7 @@
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
             Settings settings = new Settings();
-            settings.GetSessionUser(main.GetUser());
+            settings.SetSessionUser(main.GetUser());
             settings.Show();
             this.Close();
         }

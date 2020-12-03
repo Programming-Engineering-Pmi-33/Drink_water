@@ -52,7 +52,9 @@
                 if (userId > 0)
                 {
                     labelPassword.Visibility = Visibility.Hidden;
+                    Logger.InitLogger();
 
+                    Logger.Log.Info($"User {username} logged into system.");
                     SessionUser sessionUser = new SessionUser((long)userId, username);
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.GetSessionUser(sessionUser);

@@ -52,7 +52,7 @@
         }
 
         /// <summary>
-        /// This function get image from path and convert it to BitmapImage class object 
+        /// This function get image from path and convert it to BitmapImage class object.
         /// </summary>
         /// <param name="bitmap">Image get from choosen path.</param>
         /// <returns>Image as optimized object that can be shown in XAML.</returns>

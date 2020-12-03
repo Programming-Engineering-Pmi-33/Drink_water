@@ -34,15 +34,18 @@
         }
 
         /// <summary>
-        /// This function gets user id and namethen starts background thread for toasts. 
+        /// This function sets user id and namethen starts background thread for toasts.
         /// </summary>
         /// <param name="userInfo">Argument that contains user id and name.</param>
-        public void GetSessionUser(SessionUser userInfo)
+        public void SetSessionUser(SessionUser userInfo)
         {
             user = new UserData(userInfo);
             sessionUser = userInfo;
             userData = user.GetData();
-            
+            if (userData.DisableNotifications == false)
+            {
+                SetTimer();
+            }
         }
 
         public void SetTimer()
@@ -50,16 +53,17 @@
             timer = new System.Timers.Timer();
             if (userData.NotitficationsPeriod != null)
             {
-                timer.Interval = 100000;
+                timer.Interval = userData.NotitficationsPeriod.Value.TotalMilliseconds;
             }
             else
             {
-                timer.Interval = 5000;
+                timer.Interval = 100000;
             }
 
             timer.Elapsed += TimerFunction;
             timer.Start();
         }
+
         /// <summary>
         /// This function makes user parameters grid active.
         /// </summary>
@@ -144,7 +148,7 @@
         }
 
         /// <summary>
-        /// This function save parameters of active grid and notifications settings. 
+        /// This function save parameters of active grid and notifications settings.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Arguments.</param>

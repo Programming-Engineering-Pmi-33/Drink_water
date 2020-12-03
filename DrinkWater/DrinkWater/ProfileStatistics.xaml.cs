@@ -177,7 +177,7 @@
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             Settings settings = new Settings();
-            settings.GetSessionUser(sessionUser);
+            settings.SetSessionUser(sessionUser);
             settings.Show();
             this.Close();
         }

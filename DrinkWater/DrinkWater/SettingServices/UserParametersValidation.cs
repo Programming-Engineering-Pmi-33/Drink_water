@@ -126,7 +126,6 @@
 
             return string.Empty;
         }
-        
 
         private string TimeValidation(string wakeUp, string goingToBed)
         {
