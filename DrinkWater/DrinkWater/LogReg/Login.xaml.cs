@@ -12,6 +12,9 @@
         private string password;
         private UsersService usersService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Login"/> class.
+        /// </summary>
         public Login()
         {
             InitializeComponent();
@@ -22,7 +25,6 @@
         {
             Registration registration = new Registration();
             registration.Show();
-			
             this.Close();
         }
 

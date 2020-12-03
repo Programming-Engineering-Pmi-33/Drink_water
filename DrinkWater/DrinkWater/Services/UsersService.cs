@@ -95,7 +95,7 @@
                 return 0;
             }
 
-            return (long)salt;
+            return salt;
         }
 
         /// <summary>
