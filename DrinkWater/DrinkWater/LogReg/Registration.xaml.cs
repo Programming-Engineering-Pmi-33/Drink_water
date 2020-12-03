@@ -8,37 +8,37 @@
     /// </summary>
     public partial class Registration : Window
     {
-        public dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
-
         private string username;
         private string email;
         private string password;
-        private ValidationService _validationService;
+        private UsersService usersService;
+        private ValidationService validationService;
 
         public Registration()
         {
             InitializeComponent();
-            _validationService = new ValidationService(db);
+            usersService = UsersService.GetService;
+            validationService = new ValidationService(usersService);
         }
 
-        private void buttonSignUp_Click(object sender, RoutedEventArgs e)
+        private void ButtonSignUp_Click(object sender, RoutedEventArgs e)
         {
-            // зробити дизайн під ваерфрейми.
             this.username = textBoxUsername.Text;
             this.email = textBoxEmail.Text;
             this.password = textBoxPassword.Text;
 
-            if (_validationService.IsValid(labelUsername, username, labelEmail, email, labelPassword, password))
+            if (validationService.IsValid(labelUsername, username, labelEmail, email, labelPassword, password))
             {
                 if (password == textBoxConfirmPassword.Text)
                 {
                     labelPasswordConfirm.Visibility = Visibility.Hidden;
-                    int salt = EncryptionService.CreateRandomSalt();
+                    long salt = EncryptionService.CreateRandomSalt();
 
                     string hashedPassword = EncryptionService.ComputeSaltedHash(this.password, salt);
                     User user = new User(username, email, hashedPassword, salt);
-                    db.Users.Add(user);
-                    db.SaveChanges();
+
+                    usersService.RegisterUser(user);
+
                     Login login = new Login();
                     login.Show();
                     this.Close();
