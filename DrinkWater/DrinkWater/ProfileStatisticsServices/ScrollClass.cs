@@ -7,10 +7,18 @@
 
     public class ScrollClass
     {
+
+        public const int LIQUIDS = 5;
         public List<Fluid> Fluids;
         public List<double> FluidsAmount;
         public List<BitmapImage> Images;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ScrollClass"/> class.
+        /// Get list of consumed fluids per period.
+        /// </summary>
+        /// <param name="period">Period of consuming fluids.</param>
+        /// <param name="userId">User's id.</param>
         public ScrollClass(string period, int userId)
         {
             Fluids = new FliudInfo().GetFluids();
@@ -22,12 +30,17 @@
             }
 
             GetTotalAmount(period, userId);
-            while (FluidsAmount.Count <= 5)
+            while (FluidsAmount.Count <= LIQUIDS)
             {
                 FluidsAmount.Add(0);
             }
         }
 
+        /// <summary>
+        /// Get total amount of fluids per certain period.
+        /// </summary>
+        /// <param name="period">Period of consuming fluids.</param>
+        /// <param name="userId">User's id.</param>
         public void GetTotalAmount(string period, int userId)
         {
             StatisticInfo statisticInfo = new StatisticInfo(userId);

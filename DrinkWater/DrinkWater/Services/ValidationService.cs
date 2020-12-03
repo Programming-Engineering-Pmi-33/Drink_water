@@ -6,31 +6,47 @@
     using System.Windows.Controls;
     using System.Windows.Media;
 
+    /// <summary>
+    /// Announces ValidationService сlass.
+    /// </summary>
     public class ValidationService
     {
-        private const string EMAIL_REGEX = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
-        private readonly UsersService _usersService;
+        private const string EMAILREGEX = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
+        private readonly UsersService usersService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValidationService"/> class.
+        /// </summary>
+        /// <param name="usersService">user service instance.</param>
         public ValidationService(UsersService usersService)
         {
-            _usersService = usersService;
+            this.usersService = usersService;
         }
 
-        public bool IsValid(
-            Label labelUsername,
-            string username,
-            Label labelEmail,
-            string email,
-            Label labelPassword,
-            string password)
+        /// <summary>
+        /// Validates of username, email and password.
+        /// </summary>
+        /// <param name="labelUsername">username label.</param>
+        /// <param name="username">username value.</param>
+        /// <param name="labelEmail">email label.</param>
+        /// <param name="email">email value.</param>
+        /// <param name="labelPassword">password label.</param>
+        /// <param name="password">password value.</param>
+        /// <returns>bool value.</returns>
+        public bool IsValid(Label labelUsername, string username, Label labelEmail, string email, Label labelPassword, string password)
         {
-            bool isCorrectUsername = isValidUsername(labelUsername, username);
+            bool isCorrectUsername = IsValidUsername(labelUsername, username);
             bool isCorrectEmail = IsValidEmail(labelEmail, email);
-            bool isCorrectPassword = isValidPassword(labelPassword, password);
+            bool isCorrectPassword = IsValidPassword(labelPassword, password);
 
             return isCorrectUsername && isCorrectEmail && isCorrectPassword;
         }
 
+        /// <summary>
+        /// Displayes a message on the form.
+        /// </summary>
+        /// <param name="errorLabel">label.</param>
+        /// <param name="message">text.</param>
         public static void SetError(Label errorLabel, string message)
         {
             errorLabel.Visibility = Visibility.Visible;
@@ -38,7 +54,13 @@
             errorLabel.Content = message;
         }
 
-        private bool isValidUsername(Label labelUsername, string username)
+        /// <summary>
+        ///  Checks correctness of username.
+        /// </summary>
+        /// <param name="labelUsername">username label.</param>
+        /// <param name="username">username value.</param>
+        /// <returns>bool value.</returns>
+        private bool IsValidUsername(Label labelUsername, string username)
         {
             bool isCorrect = false;
 
@@ -50,7 +72,7 @@
             {
                 SetError(labelUsername, "Username must contain at least 2 letters");
             }
-            else if (_usersService.UsernameExists(username))
+            else if (usersService.UsernameExists(username))
             {
                 SetError(labelUsername, "Username is reserved");
             }
@@ -63,6 +85,12 @@
             return isCorrect;
         }
 
+        /// <summary>
+        /// Checks correctness of email.
+        /// </summary>
+        /// <param name="labelEmail">email label.</param>
+        /// <param name="email">email value.</param>
+        /// <returns>bool value.</returns>
         private bool IsValidEmail(Label labelEmail, string email)
         {
             bool isCorrect = false;
@@ -71,11 +99,11 @@
             {
                 SetError(labelEmail, "Email is required");
             }
-            else if (!Regex.IsMatch(email, EMAIL_REGEX, RegexOptions.IgnoreCase))
+            else if (!Regex.IsMatch(email, EMAILREGEX, RegexOptions.IgnoreCase))
             {
                 SetError(labelEmail, "Wrong e-mail address");
             }
-            else if (_usersService.EmailExists(email))
+            else if (usersService.EmailExists(email))
             {
                 SetError(labelEmail, "Email is reserved");
             }
@@ -88,13 +116,19 @@
             return isCorrect;
         }
 
-        private bool isValidPassword(Label labelPassword, string password)
+        /// <summary>
+        /// Checks correctness of password.
+        /// </summary>
+        /// <param name="labelPassword">password label.</param>
+        /// <param name="password">password value.</param>
+        /// <returns>bool value.</returns>
+        private bool IsValidPassword(Label labelPassword, string password)
         {
             bool isCorrect = false;
 
             if (string.IsNullOrWhiteSpace(password))
             {
-                SetError(labelPassword, "Password is required"); // function void
+                SetError(labelPassword, "Password is required");
             }
             else if (password.ToString().Length < 8)
             {

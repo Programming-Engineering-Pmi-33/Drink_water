@@ -2,17 +2,23 @@
 {
     using System.Linq;
 
+    /// <summary>
+    /// Announces UserService сlass.
+    /// </summary>
     public class UsersService
     {
-        private readonly dfkg9ojh16b4rdContext _db = null;
+        private readonly dfkg9ojh16b4rdContext db = null;
 
         private static UsersService instance = null;
 
         private UsersService()
         {
-            _db = new dfkg9ojh16b4rdContext();
+            db = new dfkg9ojh16b4rdContext();
         }
 
+        /// <summary>
+        ///  Gets only one instance of user service.
+        /// </summary>
         public static UsersService GetService
         {
             get
@@ -26,44 +32,84 @@
             }
         }
 
+        /// <summary>
+        /// Checks if username is in database.
+        /// </summary>
+        /// <param name="username">username value.</param>
+        /// <returns>bool value.</returns>
         public bool UsernameExists(string username)
         {
-            var resultName = (from data in _db.Users
+            var resultName = (from data in db.Users
                               where data.Username == username
                               select data.Username).ToList();
 
             return resultName.Count > 0;
         }
 
+        /// <summary>
+        /// Checks if email is in database.
+        /// </summary>
+        /// <param name="email">email value.</param>
+        /// <returns>bool value.</returns>
         public bool EmailExists(string email)
         {
-            var resultEmail = (from data in _db.Users
+            var resultEmail = (from data in db.Users
                                where data.Email == email
                                select data.Email).ToList();
 
             return resultEmail.Count > 0;
         }
 
+        /// <summary>
+        /// Registers user.
+        /// </summary>
+        /// <param name="user">user instance.</param>
         public void RegisterUser(User user)
         {
-            _db.Users.Add(user);
-            _db.SaveChanges();
+            db.Users.Add(user);
+            db.SaveChanges();
         }
 
-        public long? GetUserSalt(string username)
+        /// <summary>
+        /// Deletes user from database.
+        /// </summary>
+        /// <param name="user">user instance.</param>
+        public void DeleteUser(User user)
         {
-            var salt = (from data in _db.Users
+            db.Users.Remove(user);
+            db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Gets user salt from database.
+        /// </summary>
+        /// <param name="username"> username value.</param>
+        /// <returns>salt.</returns>
+        public long GetUserSalt(string username)
+        {
+            var salt = (from data in db.Users
                         where data.Username != null && data.Username == username
                         select data.Salt).FirstOrDefault();
+            if (salt == null)
+            {
+                return 0;
+            }
 
-            return salt;
+            return (long)salt;
         }
 
-        public int GetUserId(string username, string password,  long? salt)
+        /// <summary>
+        /// Gets user id from database.
+        /// </summary>
+        /// <param name="username">username value.</param>
+        /// <param name="password">password value.</param>
+        /// <param name="salt">salt value.</param>
+        /// <returns>id.</returns>
+        public int GetUserId(string username, string password,  long salt)
         {
             string hashedPassword = EncryptionService.ComputeSaltedHash(password, salt);
 
-            var userId = (from data in _db.Users
+            var userId = (from data in db.Users
                           where data.Username != null && data.Username == username && data.Password == hashedPassword
                           select data.UserId).FirstOrDefault();
 
