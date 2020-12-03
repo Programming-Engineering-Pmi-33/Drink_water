@@ -27,10 +27,18 @@
         {
             return User;
         }
-        public long GetDailyBalnace() 
+
+        public long? GetDailyBalnace()
         {
-            return User.DailyBalance.Value;
-        } 
+            if (User.DailyBalance == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return User.DailyBalance.Value;
+            }
+        }
 
         public void SetUserParameters(long weight, long height, long age, string sex, TimeSpan wakeUp, TimeSpan goingToBed)
         {

@@ -31,27 +31,6 @@
             return z;
         }
 
-        public List<Waterweekstatistic> GetWeekStatistic()
-        {
-            return (from weekQuery in db.Waterweekstatistics
-                    where UserId == weekQuery.UserIdRef
-                    select weekQuery).ToList();
-        }
-
-        public List<Watermonthstatistic> GetMonthStatistics()
-        {
-            return (from monthQuery in db.Watermonthstatistics
-                    where UserId == monthQuery.UserIdRef
-                    select monthQuery).ToList();
-        }
-
-        public List<Wateryearstatistic> GetYearStatistics()
-        {
-            return (from yearQuery in db.Wateryearstatistics
-                    where UserId == yearQuery.UserIdRef
-                    select yearQuery).ToList();
-        }
-
         public List<Totalweekstatistic> GetTotalWeekStatistics()
         {
             return (from totalWeekQuery in db.Totalweekstatistics
@@ -71,6 +50,27 @@
             return (from totalYearQuery in db.Totalyearstatistics
                     where UserId == totalYearQuery.UserIdRef
                     select totalYearQuery).ToList();
+        }
+
+        public List<Waterweekstatistic> GetWeekStatistic()
+        {
+            return (from weekQuery in db.Waterweekstatistics
+                    where UserId == weekQuery.UserIdRef
+                    select weekQuery).ToList();
+        }
+
+        public List<Watermonthstatistic> GetMonthStatistics()
+        {
+            return (from monthQuery in db.Watermonthstatistics
+                    where UserId == monthQuery.UserIdRef
+                    select monthQuery).ToList();
+        }
+
+        public List<Wateryearstatistic> GetYearStatistics()
+        {
+            return (from yearQuery in db.Wateryearstatistics
+                    where UserId == yearQuery.UserIdRef
+                    select yearQuery).ToList();
         }
     }
 }

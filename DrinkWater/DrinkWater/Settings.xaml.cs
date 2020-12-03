@@ -18,6 +18,8 @@
     {
         private static SessionUser sessionUser = new SessionUser();
         private static ImageHandler image = new ImageHandler();
+        private static UserParametersValidation parametersValidation = new UserParametersValidation();
+        private static UserSettingsValidation settingsValidation = new UserSettingsValidation();
         private static User userData;
         private static UserData user;
         private System.Timers.Timer timer;
@@ -29,6 +31,9 @@
 
         public void SetSessionUser(SessionUser userInfo)
         {
+            Logger.InitLogger();
+
+            Logger.Log.Info("Ура робе!");
             user = new UserData(userInfo);
             sessionUser = userInfo;
             userData = user.GetData();
@@ -49,6 +54,7 @@
         private void UserParameters_Click(object sender, RoutedEventArgs e)
         {
             SetUserParametersVisibility();
+
             WeightTextBox.Text = userData.Weight.ToString();
             HeightTextBox.Text = userData.Height.ToString();
             AgeTextBox.Text = userData.Age.ToString();
@@ -109,15 +115,23 @@
         {
             if (UserParametersGrid.Visibility == Visibility.Visible)
             {
+                ErrorLabel.Content = parametersValidation.GetUserParameterValidation(WeightTextBox.Text, WeightTextBox.Text, AgeTextBox.Text, WakeUpTextBox.Text, GoingToBedTextBox.Text);
                 long weight = Convert.ToInt32(WeightTextBox.Text);
-                long height = Convert.ToInt32(HeightTextBox.Text);
+                long height = Convert.ToInt32(WeightTextBox.Text);
                 long age = Convert.ToInt32(AgeTextBox.Text);
                 string sex = GenderList.Text;
                 var wakeUpString = WakeUpTextBox.Text.Split(":");
                 TimeSpan wakeUp = new TimeSpan(Convert.ToInt32(wakeUpString[0]), Convert.ToInt32(wakeUpString[1]), Convert.ToInt32(wakeUpString[2]));
                 var goingToBedString = GoingToBedTextBox.Text.Split(":");
                 TimeSpan goingToBed = new TimeSpan(Convert.ToInt32(goingToBedString[0]), Convert.ToInt32(goingToBedString[1]), Convert.ToInt32(goingToBedString[2]));
-                user.SetUserParameters(weight, height, age, sex, wakeUp, goingToBed);
+                if (ErrorLabel.Content == "")
+                {
+                    user.SetUserParameters(weight, height, age, sex, wakeUp, goingToBed);
+                }
+                else
+                {
+                    MessageBox.Show("Error");
+                }
             }
 
             if (UserSettingsGrid.Visibility == Visibility.Visible)
@@ -128,7 +142,10 @@
             string choosenParameter = NotificationsSettings.Text;
             int customPeriod = Convert.ToInt32(CustomPeriodTextBox.Text);
             bool disableNotifications = Convert.ToBoolean(IsDisabled.Content);
-            user.SetUserNotitfications(choosenParameter, customPeriod, disableNotifications);
+            if (ErrorLabel.Content == "")
+            {
+                user.SetUserNotitfications(choosenParameter, customPeriod, disableNotifications);
+            }
         }
 
         private void ChangeAvatar_Click(object sender, RoutedEventArgs e)
@@ -167,12 +184,10 @@
 
         private void NotificationsSettings_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
 
         private void GenderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
     }
 }
