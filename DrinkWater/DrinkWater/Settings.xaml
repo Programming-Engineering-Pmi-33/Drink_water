@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DrinkWater"
         mc:Ignorable="d"
-        Title="Settings" Height="1050" Width="1876">
-    
+        Title="Settings" Height="1050" Width="1876"
+        WindowState="Maximized"
+        WindowStyle="None">
+
     <Window.Resources>
         <Style x:Key="Combobox" TargetType="{x:Type ComboBox}">
             <Setter Property="Template">

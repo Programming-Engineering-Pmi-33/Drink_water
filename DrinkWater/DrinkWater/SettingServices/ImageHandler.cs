@@ -1,5 +1,6 @@
 ﻿namespace DrinkWater.SettingServices
 {
+    using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
     using System.Drawing;
@@ -7,6 +8,9 @@
     using System.Text;
     using System.Windows.Media.Imaging;
 
+    /// <summary>
+    /// Class for working with images.
+    /// </summary>
     public class ImageHandler
     {
         private static byte[] ImageArray { get; set; }
@@ -68,6 +72,24 @@
             image.EndInit();
 
             return image;
+        }
+
+        /// <summary>
+        /// This function choose path for image onject.
+        /// </summary>
+        /// <returns>Iamge object.</returns>
+        public BitmapImage ChooseAvatar()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Title = "Open Image";
+
+            if (dlg.ShowDialog() == true)
+            {
+                Bitmap bitmap = new Bitmap(dlg.FileName);
+                return ConvertBitmap(bitmap);
+            }
+
+            return null;
         }
     }
 }

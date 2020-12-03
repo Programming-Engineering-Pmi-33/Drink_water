@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     using System.Text;
 
+    /// <summary>
+    /// Class for user parameters validation.
+    /// </summary>
     public class UserParametersValidation
     {
         private List<string> errorList = new List<string>();

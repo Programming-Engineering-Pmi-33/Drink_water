@@ -5,7 +5,11 @@
     using System.Linq;
     using System.Text;
     using DrinkWater.LogReg;
+    using DrinkWater.Services;
 
+    /// <summary>
+    /// Calss for working with user information.
+    /// </summary>
     public class UserData
     {
         private static dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
@@ -86,8 +90,10 @@
         public void SetUserInformation(string username, string password, string email, byte[] imageArray)
         {
             User.Username = username;
-            User.Password = password;
+            long salt = EncryptionService.CreateRandomSalt();
+            User.Password = EncryptionService.ComputeSaltedHash(password, salt);
             User.Email = email;
+            User.Salt = salt;
             if (imageArray != null)
             {
                 User.Avatar = imageArray;

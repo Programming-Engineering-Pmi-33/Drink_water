@@ -48,6 +48,9 @@
             }
         }
 
+        /// <summary>
+        /// This function set timer as background thread.
+        /// </summary>
         public void SetTimer()
         {
             timer = new System.Timers.Timer();
@@ -165,25 +168,25 @@
                 TimeSpan wakeUp = new TimeSpan(Convert.ToInt32(wakeUpString[0]), Convert.ToInt32(wakeUpString[1]), Convert.ToInt32(wakeUpString[2]));
                 var goingToBedString = GoingToBedTextBox.Text.Split(":");
                 TimeSpan goingToBed = new TimeSpan(Convert.ToInt32(goingToBedString[0]), Convert.ToInt32(goingToBedString[1]), Convert.ToInt32(goingToBedString[2]));
-                if (ErrorLabel.Content == "")
+                if (!string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
                 {
                     user.SetUserParameters(weight, height, age, sex, wakeUp, goingToBed);
-                }
-                else
-                {
-                    MessageBox.Show("Error");
                 }
             }
 
             if (UserSettingsGrid.Visibility == Visibility.Visible)
             {
-                user.SetUserInformation(UsernameTextBox.Text, PasswordTextBox.Text, EmailTextBox.Text, image.GetImage());
+                ErrorLabel.Content = settingsValidation.GetUserSettingsValidation(UsernameTextBox.Text, PasswordTextBox.Text, EmailTextBox.Text);
+                if (!string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
+                {
+                    user.SetUserInformation(UsernameTextBox.Text, PasswordTextBox.Text, EmailTextBox.Text, image.GetImage());
+                }
             }
 
             string choosenParameter = NotificationsSettings.Text;
             int customPeriod = Convert.ToInt32(CustomPeriodTextBox.Text);
             bool disableNotifications = Convert.ToBoolean(IsDisabled.Content);
-            if (ErrorLabel.Content == "")
+            if (!string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
             {
                 user.SetUserNotitfications(choosenParameter, customPeriod, disableNotifications);
             }
@@ -196,14 +199,7 @@
         /// <param name="e">Arguments.</param>
         private void ChangeAvatar_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "Open Image";
-
-            if (dlg.ShowDialog() == true)
-            {
-                Bitmap bitmap = new Bitmap(dlg.FileName);
-                Avatar.Source = image.ConvertBitmap(bitmap);
-            }
+            Avatar.Source = image.ChooseAvatar();
         }
 
         /// <summary>

@@ -6,6 +6,9 @@
     using System.Linq;
     using System.Text;
 
+    /// <summary>
+    /// Class for user settings validation.
+    /// </summary>
     public class UserSettingsValidation
     {
         private List<string> errorList = new List<string>();
