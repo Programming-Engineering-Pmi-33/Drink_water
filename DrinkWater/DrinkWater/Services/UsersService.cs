@@ -90,10 +90,6 @@
             var salt = (from data in db.Users
                         where data.Username != null && data.Username == username
                         select data.Salt).FirstOrDefault();
-            if (salt == null)
-            {
-                return 0;
-            }
 
             return salt;
         }

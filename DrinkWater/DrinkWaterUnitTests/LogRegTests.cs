@@ -76,9 +76,6 @@ namespace DrinkWaterUnitTests
         public void SaltIsRecievedIfUsernameIsInDatabase()
         {
             // arrange
-            string username = user1.Username;
-
-            // act
             long salt = user1.Salt;
 
             // assert
