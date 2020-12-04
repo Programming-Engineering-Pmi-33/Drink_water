@@ -22,7 +22,6 @@
         {
             Registration registration = new Registration();
             registration.Show();
-			
             this.Close();
         }
 
@@ -47,7 +46,7 @@
                     Logger.Log.Info($"User {username} logged into system.");
                     SessionUser sessionUser = new SessionUser((long)userId, username);
                     MainWindow mainWindow = new MainWindow();
-                    mainWindow.GetSessionUser(sessionUser);
+                    mainWindow.SetSessionUser(sessionUser);
                     mainWindow.Show();
                     this.Close();
                 }

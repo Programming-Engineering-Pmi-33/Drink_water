@@ -233,7 +233,7 @@
         private void Main_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
-            mainWindow.GetSessionUser(sessionUser);
+            mainWindow.SetSessionUser(sessionUser);
             mainWindow.Show();
             this.Close();
         }

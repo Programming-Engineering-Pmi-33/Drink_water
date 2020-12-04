@@ -320,7 +320,7 @@
         private void Main_Click(object sender, RoutedEventArgs e)
         {
             MainWindow main = new MainWindow();
-            main.GetSessionUser(sessionUser);
+            main.SetSessionUser(sessionUser);
             main.Show();
             this.Close();
         }
