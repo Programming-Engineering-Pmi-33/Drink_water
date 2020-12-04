@@ -10,3 +10,5 @@
 [assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1122", Justification = "<Pending>")]
 [assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202", Justification = "<Pending>")]
 [assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1206", Justification = "<Pending>")]
+[assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1200", Justification = "<Pending>")]
+[assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA0001", Justification = "<Pending>")]

@@ -5,17 +5,29 @@
     using System.Linq;
     using System.Text;
 
+    /// <summary>
+    /// Class for getting different statistic from database.
+    /// </summary>
     public class StatisticInfo
     {
         private static dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
 
         private long UserId { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StatisticInfo"/> class.
+        /// </summary>
+        /// <param name="userId">Id of user.</param>
         public StatisticInfo(long userId)
         {
             UserId = userId;
         }
 
+        /// <summary>
+        /// Gets statistic of current day for user.
+        /// </summary>
+        /// <param name="today">Current day.</param>
+        /// <returns>List of statistic records.</returns>
         public List<Statistic> GetStatistics(DateTime today)
         {
             return (from statQuery in db.Statistics
@@ -23,6 +35,10 @@
                     select statQuery).ToList();
         }
 
+        /// <summary>
+        /// Get statistic of current day converted as water amount.
+        /// </summary>
+        /// <returns>List of water amount records.</returns>
         public List<Dailystatistic> GetDailyStatistics()
         {
             List<Dailystatistic> z = (from dayQuery in db.Dailystatistics
@@ -31,6 +47,10 @@
             return z;
         }
 
+        /// <summary>
+        /// Get how much water user has drunk during a week.
+        /// </summary>
+        /// <returns>List of week statistic records.</returns>
         public List<Totalweekstatistic> GetTotalWeekStatistics()
         {
             return (from totalWeekQuery in db.Totalweekstatistics
@@ -38,6 +58,10 @@
                     select totalWeekQuery).ToList();
         }
 
+        /// <summary>
+        /// Get how much water user has drunk during a month.
+        /// </summary>
+        /// <returns>List of month statistic records.</returns>
         public List<Totalmonthstatistic> GetTotalMonthStatistics()
         {
             return (from totalMonthQuery in db.Totalmonthstatistics
@@ -45,6 +69,10 @@
                     select totalMonthQuery).ToList();
         }
 
+        /// <summary>
+        /// Get how much water user has drunk during a year.
+        /// </summary>
+        /// <returns>List of week statistic year.</returns>
         public List<Totalyearstatistic> GetTotalYearStatistics()
         {
             return (from totalYearQuery in db.Totalyearstatistics
@@ -52,6 +80,10 @@
                     select totalYearQuery).ToList();
         }
 
+        /// <summary>
+        /// Get what luquids and in what amounts user has drunk during a week.
+        /// </summary>
+        /// <returns>List of week statistic records.</returns>
         public List<Waterweekstatistic> GetWeekStatistic()
         {
             return (from weekQuery in db.Waterweekstatistics
@@ -59,6 +91,10 @@
                     select weekQuery).ToList();
         }
 
+        /// <summary>
+        /// Get what luquids and in what amounts user has drunk during a month.
+        /// </summary>
+        /// <returns>List of month statistic records.</returns>
         public List<Watermonthstatistic> GetMonthStatistics()
         {
             return (from monthQuery in db.Watermonthstatistics
@@ -66,6 +102,10 @@
                     select monthQuery).ToList();
         }
 
+        /// <summary>
+        /// Get what luquids and in what amounts user has drunk during a year.
+        /// </summary>
+        /// <returns>List of year statistic records.</returns>
         public List<Wateryearstatistic> GetYearStatistics()
         {
             return (from yearQuery in db.Wateryearstatistics

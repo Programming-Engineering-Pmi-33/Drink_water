@@ -33,7 +33,7 @@ namespace NUnitTest_MainWindow
         [Test]
         public void Add_Pass()
         {
-            using (var transaction =main.db.Database.BeginTransaction())
+            using (var transaction =main.Db.Database.BeginTransaction())
             {
                 main.SetSessionUser(new SessionUser(1, "Mamonchik"));
                 double amount_before = 0;
@@ -43,7 +43,7 @@ namespace NUnitTest_MainWindow
                     ValidationLiquid validation = new ValidationLiquid("Water", "100");
                     transaction.CreateSavepoint("SavePoint");
                     main.Add(validation.GetName(), validation.GetAmount());
-                    double amount_after = (from water in main.db.Statistics
+                    double amount_after = (from water in main.Db.Statistics
                                            where water.UserIdRef == 1 && water.Date == DateTime.Now.Date && water.FluidIdRef == 1
                                            select water.FluidAmount).FirstOrDefault();
                     transaction.RollbackToSavepoint("SavePoint");

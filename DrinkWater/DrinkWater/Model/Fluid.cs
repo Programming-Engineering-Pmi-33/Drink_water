@@ -13,8 +13,11 @@ namespace DrinkWater
         }
 
         public long FluidId { get; set; }
+
         public string Name { get; set; }
+
         public double Koeficient { get; set; }
+
         public byte[] FliudImage { get; set; }
 
         public virtual ICollection<Statistic> Statistics { get; set; }

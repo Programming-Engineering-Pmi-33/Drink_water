@@ -14,6 +14,9 @@
         private UsersService usersService;
         private ValidationService validationService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Registration"/> class.
+        /// </summary>
         public Registration()
         {
             InitializeComponent();

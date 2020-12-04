@@ -12,10 +12,15 @@
         private string password;
         private UsersService usersService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Login"/> class.
+        /// </summary>
         public Login()
         {
             InitializeComponent();
             usersService = UsersService.GetService;
+            Logger.InitLogger();
+
         }
 
         private void ButtonCreateNewAccount_Click(object sender, RoutedEventArgs e)
@@ -41,8 +46,7 @@
                 if (userId > 0)
                 {
                     labelPassword.Visibility = Visibility.Hidden;
-                    Logger.InitLogger();
-
+                    ExceptionHandler.UnhadledExceprionHandler();
                     Logger.Log.Info($"User {username} logged into system.");
                     SessionUser sessionUser = new SessionUser((long)userId, username);
                     MainWindow mainWindow = new MainWindow();
@@ -53,6 +57,7 @@
                 else
                 {
                     ValidationService.SetError(labelPassword, "Incorrect password");
+                    Logger.Log.Info($"Inputed wrong password for user {username}");
                 }
             }
             else

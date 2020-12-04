@@ -5,12 +5,29 @@
     using System.Windows.Media.Imaging;
     using DrinkWater.SettingServices;
 
+    /// <summary>
+    /// Class for scrolling.
+    /// </summary>
     public class ScrollClass
     {
-
+        /// <summary>
+        /// Amount of liquids in db.
+        /// </summary>
         public const int LIQUIDS = 5;
+
+        /// <summary>
+        /// List of Fluids instances.
+        /// </summary>
         public List<Fluid> Fluids;
+
+        /// <summary>
+        /// List of fluid amount values.
+        /// </summary>
         public List<double> FluidsAmount;
+
+        /// <summary>
+        /// List of liquids images.
+        /// </summary>
         public List<BitmapImage> Images;
 
         /// <summary>

@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DrinkWater.ProfileStatisticsServices
+﻿namespace DrinkWater.ProfileStatisticsServices
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    /// <summary>
+    /// Class fot activity time calculation.
+    /// </summary>
     public class UserInfo
     {
-        public UserInfo() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserInfo"/> class.
+        /// </summary>
+        public UserInfo()
+        {
+        }
 
         /// <summary>
         /// Calculate user activity time.
