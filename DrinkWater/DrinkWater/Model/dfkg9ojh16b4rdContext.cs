@@ -6,7 +6,9 @@ namespace DrinkWater
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata;
 
+#pragma warning disable SA1300 // Element should begin with upper-case letter
     public partial class dfkg9ojh16b4rdContext : DbContext
+#pragma warning restore SA1300 // Element should begin with upper-case letter
     {
         public dfkg9ojh16b4rdContext()
         {

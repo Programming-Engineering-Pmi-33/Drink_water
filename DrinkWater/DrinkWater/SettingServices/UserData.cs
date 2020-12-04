@@ -90,10 +90,14 @@
         public void SetUserInformation(string username, string password, string email, byte[] imageArray)
         {
             User.Username = username;
-            long salt = EncryptionService.CreateRandomSalt();
-            User.Password = EncryptionService.ComputeSaltedHash(password, salt);
+            if (User.Password != password)
+            {
+                long salt = EncryptionService.CreateRandomSalt();
+                User.Password = EncryptionService.ComputeSaltedHash(password, salt);
+                User.Salt = salt;
+            }
+
             User.Email = email;
-            User.Salt = salt;
             if (imageArray != null)
             {
                 User.Avatar = imageArray;

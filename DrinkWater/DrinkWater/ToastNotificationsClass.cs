@@ -4,12 +4,16 @@
     using Windows.Data.Xml.Dom;
     using Windows.UI.Notifications;
 
+    /// <summary>
+    /// Class for toast notifications.
+    /// </summary>
     public class ToastNotificationsClass
     {
         private ToastContent toastContent;
 
-        public int Timer { get; set; }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToastNotificationsClass"/> class.
+        /// </summary>
         public ToastNotificationsClass()
         {
             toastContent = new ToastContent()
@@ -34,6 +38,9 @@
             };
         }
 
+        /// <summary>
+        /// Load content inside toasts.
+        /// </summary>
         public void ShowNot()
         {
             XmlDocument xmlDoc = new XmlDocument();

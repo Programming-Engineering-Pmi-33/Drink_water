@@ -1,13 +1,13 @@
-﻿namespace DrinkWater.SettingServices
-{
-    using Microsoft.Win32;
-    using System;
-    using System.Collections.Generic;
-    using System.Drawing;
-    using System.IO;
-    using System.Text;
-    using System.Windows.Media.Imaging;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Text;
+using System.Windows.Media.Imaging;
+using Microsoft.Win32;
 
+namespace DrinkWater.SettingServices
+{
     /// <summary>
     /// Class for working with images.
     /// </summary>

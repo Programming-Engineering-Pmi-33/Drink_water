@@ -4,9 +4,17 @@ using Windows.System.UserProfile;
 
 namespace DrinkWater.ProfileStatisticsServices
 {
+    /// <summary>
+    /// Class that calculate number of days that user has achieved his water balance.
+    /// </summary>
     public class ScoreInfo
     {
-        public ScoreInfo() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ScoreInfo"/> class.
+        /// </summary>
+        public ScoreInfo()
+        {
+        }
 
         /// <summary>
         /// Calculate keeping daily balance score for certain period.
@@ -26,6 +34,7 @@ namespace DrinkWater.ProfileStatisticsServices
                     keepingBalanceDays++;
                 }
             }
+
             return keepingBalanceDays;
         }
     }

@@ -46,6 +46,8 @@
             {
                 SetTimer();
             }
+
+            throw new Exception("1");
         }
 
         /// <summary>

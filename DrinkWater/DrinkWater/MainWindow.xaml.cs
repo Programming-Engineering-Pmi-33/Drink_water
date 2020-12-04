@@ -21,11 +21,18 @@
     {
         private static MainService main = new MainService();
 
+        /// <summary>
+        /// Gets or sets values in chart.
+        /// </summary>
         public SeriesCollection SeriesCollection { get; set; }
 
         private List<KeyValuePair<Label, TextBox>> labelBox = new List<KeyValuePair<Label, TextBox>>();
         private List<Image> pictureBox = new List<Image>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// Initialize main window.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();

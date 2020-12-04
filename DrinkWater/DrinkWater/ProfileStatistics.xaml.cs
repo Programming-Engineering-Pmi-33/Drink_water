@@ -17,8 +17,14 @@
     ///
     public partial class ProfileStatistics : Window
     {
+        /// <summary>
+        /// Gets or sets chart values.
+        /// </summary>
         public SeriesCollection SeriesCollection { get; set; }
 
+        /// <summary>
+        /// Gets or sets chart labels.
+        /// </summary>
         public string[] Labels { get; set; }
 
         private Func<double, string> Formatter { get; set; }
@@ -162,7 +168,7 @@
         /// Show user informaton and avatar.
         /// </summary>
         private void ShowUserInfo()
-        { 
+        {
             UserData userData = new UserData(sessionUser);
             userInformation = userData.GetData();
             UserInfo uInfo = new UserInfo();
@@ -179,7 +185,7 @@
         /// </summary>
         private void Scroll()
         {
-            InitFluidsVisuals(index);          
+            InitFluidsVisuals(index);
         }
 
         /// <summary>
@@ -189,7 +195,6 @@
         /// <param name="totalDayNumber">Total number of days in period.</param>
         /// <param name="koef">Constant for identification of period.</param>
         /// <param name="waterAmountPerPeriod">Array of water consumed per day for every period.</param>
-
         public void ShowScore(int keepingBalanceDays, int totalDayNumber, int koef, List<double> waterAmountPerPeriod)
         {
             ScoreInfo score = new ScoreInfo();
@@ -202,7 +207,7 @@
         /// Show user avatar.
         /// </summary>
         private void ShowAvatar()
-        { 
+        {
             if (userInformation.Avatar != null)
             {
                 AvatarImage.Source = new ImageHandler().GetImagefromDB(userInformation.Avatar);
