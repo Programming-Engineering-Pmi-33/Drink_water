@@ -25,9 +25,10 @@
 
         public List<Dailystatistic> GetDailyStatistics()
         {
-            return (from dayQuery in db.Dailystatistics
-                    where UserId == dayQuery.UserIdRef
-                    select dayQuery).ToList();
+            List<Dailystatistic> z = (from dayQuery in db.Dailystatistics
+                                      where UserId == dayQuery.UserIdRef
+                                      select dayQuery).ToList();
+            return z;
         }
 
         public List<Totalweekstatistic> GetTotalWeekStatistics()

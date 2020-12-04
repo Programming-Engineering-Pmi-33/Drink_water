@@ -15,7 +15,7 @@
     {
         private static StatisticInfo statisticInfo;
         private static SessionUser sessionUser = new SessionUser();
-        private static dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
+        public dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
         private static List<Fluid> fluids = new List<Fluid>();
         private static List<Image> images = new List<Image>();
 
@@ -23,33 +23,50 @@
         {
         }
 
-        public void GetSessionUser(SessionUser user)
+        /// <summary>This method changes the session user and get data about statistic and fluids.
+        /// </summary>
+        /// <param name="user">is the current user.</param>
+        public void SetSessionUser(SessionUser user)
         {
             sessionUser = user;
             statisticInfo = new StatisticInfo(user.UserId);
             fluids = new FliudInfo().GetFluids();
         }
 
+        /// <summary>Property <c>GetUser</c> represents the session user.
+        /// </summary>
+        /// <returns>Session user.</returns>
         public SessionUser GetUser()
         {
             return sessionUser;
         }
 
+        /// <summary>Property <c>GetFluids</c> represents the data list about fluids.
+        /// </summary>
+        /// <returns>List of Fluid.</returns>
         public List<Fluid> GetFluids()
         {
             return fluids;
         }
 
+        /// <summary>Property <c>GetImages</c> represents the data list about images.
+        /// </summary>
+        /// <returns>List of images.</returns>
         public List<Image> GetImages()
         {
             return images;
         }
 
+        /// <summary>Property <c>GetStatistic</c> represents all statistic of session user.
+        /// </summary>
+        /// <returns>StatisticInfo.</returns>
         public StatisticInfo GetStatistic()
         {
             return statisticInfo;
         }
 
+        /// <summary>This method gets data about images
+        ///  from the database.</summary>
         public void ListLiquids()
         {
             for (int i = 0; i < fluids.Count; i++)
@@ -58,6 +75,13 @@
             }
         }
 
+        /// <summary>
+        /// This method add data about liquid in Statistic database ,
+        /// if fluid data already exists, the database is updated, otherwise
+        /// a new Statistics item is created and added to the database.
+        /// </summary>
+        /// <param name="liquidName">The name of added liquid.</param>
+        /// <param name="liquidAmount">The amount of this liquid.</param>
         public void Add(string liquidName, long liquidAmount)
         {
             List<Statistic> fullStatistic = statisticInfo.GetStatistics(DateTime.Now);
@@ -88,7 +112,11 @@
                 }
 
                 db.SaveChanges();
-            }
         }
+            else
+            {
+                MessageBox.Show("There is no such liquid", "Data error", MessageBoxButton.OK);
+            }
+}
     }
 }

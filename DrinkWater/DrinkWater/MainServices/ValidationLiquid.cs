@@ -2,6 +2,8 @@
 {
     using System.Linq;
 
+    /// <summary>Class <c>ValidationLiquid</c>the model checks the correctness of the fluid data .
+    /// </summary>
     public class ValidationLiquid
     {
         private static string LiquidName { get; set; }
@@ -27,6 +29,11 @@
             return LiquidName;
         }
 
+        /// <summary>This method determines whether text data about
+        /// the amount of liquid can be parsed to long type.</summary>
+        /// <returns>True, if the text is correct for parsing 
+        /// and in the range from 0 to 6000 milliliters, otherwise false.</returns>
+        /// <param name="text">is the data from textbox about the amount of liquid.</param>
         public bool IsValidAmount(string text)
         {
             bool isValid = false;
