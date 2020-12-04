@@ -117,7 +117,6 @@
         /// <param name="e">Arguments.</param>
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            Logger.InitLogger();
             Logger.Log.Info($"User {sessionUser.Username} logged out from system.");
             timer.Stop();
             timer.Dispose();
@@ -168,7 +167,7 @@
                 TimeSpan wakeUp = new TimeSpan(Convert.ToInt32(wakeUpString[0]), Convert.ToInt32(wakeUpString[1]), Convert.ToInt32(wakeUpString[2]));
                 var goingToBedString = GoingToBedTextBox.Text.Split(":");
                 TimeSpan goingToBed = new TimeSpan(Convert.ToInt32(goingToBedString[0]), Convert.ToInt32(goingToBedString[1]), Convert.ToInt32(goingToBedString[2]));
-                if (!string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
+                if (string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
                 {
                     user.SetUserParameters(weight, height, age, sex, wakeUp, goingToBed);
                 }
@@ -177,7 +176,7 @@
             if (UserSettingsGrid.Visibility == Visibility.Visible)
             {
                 ErrorLabel.Content = settingsValidation.GetUserSettingsValidation(UsernameTextBox.Text, PasswordTextBox.Text, EmailTextBox.Text);
-                if (!string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
+                if (string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
                 {
                     user.SetUserInformation(UsernameTextBox.Text, PasswordTextBox.Text, EmailTextBox.Text, image.GetImage());
                 }
@@ -186,7 +185,7 @@
             string choosenParameter = NotificationsSettings.Text;
             int customPeriod = Convert.ToInt32(CustomPeriodTextBox.Text);
             bool disableNotifications = Convert.ToBoolean(IsDisabled.Content);
-            if (!string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
+            if (string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
             {
                 user.SetUserNotitfications(choosenParameter, customPeriod, disableNotifications);
             }
@@ -245,6 +244,11 @@
 
         private void GenderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            UserSettings_Click(sender, e);
         }
     }
 }
