@@ -162,7 +162,7 @@
         /// Show user informaton and avatar.
         /// </summary>
         private void ShowUserInfo()
-        { 
+        {
             UserData userData = new UserData(sessionUser);
             userInformation = userData.GetData();
             UserInfo uInfo = new UserInfo();

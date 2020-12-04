@@ -11,6 +11,20 @@
 
         private long UserId { get; set; }
 
+        public List<Statistic> GetStatistics(DateTime today)
+        {
+            return (from statQuery in db.Statistics
+                    where UserId == statQuery.UserIdRef && statQuery.Date == today
+                    select statQuery).ToList();
+        }
+
+        public List<Dailystatistic> GetDailyStatistics()
+        {
+            return (from dayQuery in db.Dailystatistics
+                    where UserId == dayQuery.UserIdRef
+                    select dayQuery).ToList();
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StatisticInfo"/> class.
         /// </summary>
