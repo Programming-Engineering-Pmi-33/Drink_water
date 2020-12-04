@@ -21,6 +21,7 @@ namespace DrinkWater.ProfileStatisticsServices
             {
                 return time = 24 - (wakeupTime - bedtime);
             }
+
             return time = bedtime - wakeupTime;
         }
     }

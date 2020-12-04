@@ -4,19 +4,38 @@
     using System.Collections.Generic;
     using System.Text;
 
+    /// <summary>
+    /// Class for user parameters validation.
+    /// </summary>
     public class UserParametersValidation
     {
         private List<string> errorList = new List<string>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserParametersValidation"/> class.
+        /// </summary>
         public UserParametersValidation()
         {
         }
 
+        /// <summary>
+        /// Getter for <c>errorList</c> property.
+        /// </summary>
+        /// <returns>List in which column data was not valid.</returns>
         public List<string> GetErrorList()
         {
             return errorList;
         }
 
+        /// <summary>
+        ///  This function validate parameters inputed by user.
+        /// </summary>
+        /// <param name="weight">User weight value.</param>
+        /// <param name="height">User height value.</param>
+        /// <param name="age">User age value.</param>
+        /// <param name="wakeUp">Value when user wakes up.</param>
+        /// <param name="goingToBed">Value of time whe user goes to bed.</param>
+        /// <returns>String of errors.</returns>
         public string GetUserParameterValidation(string weight, string height, string age, string wakeUp, string goingToBed)
         {
             string parametersValidations = string.Empty;

@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace DrinkWater
 {
+    using System;
+    using System.Collections.Generic;
+
     public partial class Totalmonthstatistic
     {
         public int? UserIdRef { get; set; }
