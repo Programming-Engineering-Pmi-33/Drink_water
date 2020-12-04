@@ -12,25 +12,35 @@ using System.Drawing;
 
 namespace ProfileStatisticsUnitTests
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ScoreTests
     {
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keepingBalanceDays"></param>
+        /// <param name="totalDayNumber"></param>
+        /// <param name="koef"></param>
+        /// <param name="waterAmountPerPeriod"></param>
+        /// <param name="result"></param>
+        /// <param name="dailyBalance"></param>
         [Theory]
         [InlineData(0, 7, 1, "4518_622_1720", 1, 3000)]
         [InlineData(0, 30, 1, "2356_4586_758_968_4254", 2, 4000)]
         [InlineData(0, 12, 12, "3625_2456_7845", 0, 1500)]
-
         public void ScoreTestPositiveTestMethod(int keepingBalanceDays, int totalDayNumber, int koef, string waterAmountPerPeriod, int result, long dailyBalance)
         {
-            //Arrange
+            // Arrange
             var waterAmount = waterAmountPerPeriod.Split('_').Where(x => double.TryParse(x, out _)).Select(double.Parse).ToList();
             ScoreInfo scoreInfo = new ScoreInfo();
 
-            //Act
+            // Act
             int actualResult = scoreInfo.Score(keepingBalanceDays, totalDayNumber, koef, waterAmount, dailyBalance);
 
-            //Assert
+            // Assert
             Assert.Equal(actualResult, result);
         }
 
