@@ -123,3 +123,21 @@ ehthumbs.db
 
 # Folder config file
 Desktop.ini
+*.ide
+DrinkWater/.vs/DrinkWater/v16/Server/sqlite3/db.lock
+DrinkWater/.vs/DrinkWater/v16/Server/sqlite3/storage.ide-shm
+DrinkWater/.vs/DrinkWater/v16/Server/sqlite3/storage.ide-wal
+DrinkWater/.vs/DrinkWater/DesignTimeBuild/.dtbcache
+DrinkWater/.vs/DrinkWater/DesignTimeBuild/.dtbcache
+DrinkWater/.vs/DrinkWater/DesignTimeBuild/.dtbcache
+DrinkWater/.vs/DrinkWater/DesignTimeBuild/.dtbcache
+DrinkWater/.vs/DrinkWater/DesignTimeBuild/.dtbcache
+DrinkWater/.vs/DrinkWater/DesignTimeBuild/.dtbcache
+DrinkWater/.vs/DrinkWater/DesignTimeBuild/.dtbcache
+DrinkWater/.vs/DrinkWater/DesignTimeBuild/.dtbcache.v2
+DrinkWater/.vs/DrinkWater/DesignTimeBuild/.dtbcache
+DrinkWater/.vs/DrinkWater/DesignTimeBuild/.dtbcache.v2
+DrinkWater/.vs/DrinkWater/v16/TestStore/0/007.testlog
+DrinkWater/.vs/DrinkWater/DesignTimeBuild/.dtbcache
+*.v2
+DrinkWater/.vs/DrinkWater/DesignTimeBuild/.dtbcache.v2

@@ -1,39 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#nullable disable
 
 namespace DrinkWater
 {
-    public partial class Users
+    using System;
+    using System.Collections.Generic;
+
+    public partial class User
     {
-        public Users()
+        public User()
         {
-            Statistics = new HashSet<Statistics>();
+            Statistics = new HashSet<Statistic>();
         }
 
         public int UserId { get; set; }
+
         public string Username { get; set; }
+
         public string Email { get; set; }
+
         public string Password { get; set; }
+
         public long? Weight { get; set; }
+
         public long? Height { get; set; }
+
         public string Sex { get; set; }
+
         public long? Age { get; set; }
+
         public TimeSpan? WakeUp { get; set; }
+
         public TimeSpan? GoingToBed { get; set; }
+
         public TimeSpan? NotitficationsPeriod { get; set; }
+
         public bool? DisableNotifications { get; set; }
+
         public long? DailyBalance { get; set; }
+
         public byte[] Avatar { get; set; }
-        public string Salt { get; set; }
 
-        public virtual ICollection<Statistics> Statistics { get; set; }
+        public long? Salt { get; set; }
 
-        public Users(string username,string email, string password,string salt)
+        public User(string username, string email, string password, long salt)
         {
             this.Username = username;
             this.Email = email;
             this.Password = password;
             this.Salt = salt;
         }
+
+        public virtual ICollection<Statistic> Statistics { get; set; }
     }
 }

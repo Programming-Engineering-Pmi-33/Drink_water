@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿#nullable disable
 
 namespace DrinkWater
 {
+    using Microsoft.EntityFrameworkCore;
+
     public partial class dfkg9ojh16b4rdContext : DbContext
     {
         public dfkg9ojh16b4rdContext()
@@ -15,19 +15,30 @@ namespace DrinkWater
         {
         }
 
-        public virtual DbSet<Dailystatistic> Dailystatistic { get; set; }
-        public virtual DbSet<Fluids> Fluids { get; set; }
-        public virtual DbSet<Monthstatistic> Monthstatistic { get; set; }
-        public virtual DbSet<Statistics> Statistics { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<Weekstatistic> Weekstatistic { get; set; }
-        public virtual DbSet<Yearstatistic> Yearstatistic { get; set; }
+        public virtual DbSet<Dailystatistic> Dailystatistics { get; set; }
+
+        public virtual DbSet<Fluid> Fluids { get; set; }
+
+        public virtual DbSet<Statistic> Statistics { get; set; }
+
+        public virtual DbSet<Totalmonthstatistic> Totalmonthstatistics { get; set; }
+        
+        public virtual DbSet<Totalweekstatistic> Totalweekstatistics { get; set; }
+        
+        public virtual DbSet<Totalyearstatistic> Totalyearstatistics { get; set; }
+        
+        public virtual DbSet<User> Users { get; set; }
+        
+        public virtual DbSet<Watermonthstatistic> Watermonthstatistics { get; set; }
+        
+        public virtual DbSet<Waterweekstatistic> Waterweekstatistics { get; set; }
+        
+        public virtual DbSet<Wateryearstatistic> Wateryearstatistics { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseNpgsql("Host=ec2-34-253-148-186.eu-west-1.compute.amazonaws.com;Port=5432;Port=5432;Username =txhfeaeowkmudw;Password=991081b5cc1b5a824880f029a9c44c0351a6406425e381c8013c501beca8c1a4;Database=dfkg9ojh16b4rd;SSL Mode=Require;TrustServerCertificate=True");
             }
         }
@@ -40,39 +51,18 @@ namespace DrinkWater
 
                 entity.ToTable("dailystatistic");
 
-                entity.Property(e => e.Sum)
-                    .HasColumnName("sum")
-                    .HasColumnType("numeric");
+                entity.Property(e => e.Sum).HasColumnName("sum");
             });
 
-            modelBuilder.Entity<Fluids>(entity =>
+            modelBuilder.Entity<Fluid>(entity =>
             {
-                entity.HasKey(e => e.FluidId)
-                    .HasName("Fluids_pkey");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnType("character varying");
             });
 
-            modelBuilder.Entity<Monthstatistic>(entity =>
+            modelBuilder.Entity<Statistic>(entity =>
             {
-                entity.HasNoKey();
-
-                entity.ToTable("monthstatistic");
-
-                entity.Property(e => e.Date).HasColumnType("date");
-
-                entity.Property(e => e.Sum)
-                    .HasColumnName("sum")
-                    .HasColumnType("numeric");
-            });
-
-            modelBuilder.Entity<Statistics>(entity =>
-            {
-                entity.HasKey(e => e.StatisticId)
-                    .HasName("Statistics_pkey");
-
                 entity.Property(e => e.Date).HasColumnType("date");
 
                 entity.HasOne(d => d.FluidIdRefNavigation)
@@ -88,11 +78,35 @@ namespace DrinkWater
                     .HasConstraintName("Statistics_UserIdRef_fkey");
             });
 
-            modelBuilder.Entity<Users>(entity =>
+            modelBuilder.Entity<Totalmonthstatistic>(entity =>
             {
-                entity.HasKey(e => e.UserId)
-                    .HasName("Users_pkey");
+                entity.HasNoKey();
 
+                entity.ToTable("totalmonthstatistic");
+
+                entity.Property(e => e.Sum).HasColumnName("sum");
+            });
+
+            modelBuilder.Entity<Totalweekstatistic>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("totalweekstatistic");
+
+                entity.Property(e => e.Sum).HasColumnName("sum");
+            });
+
+            modelBuilder.Entity<Totalyearstatistic>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("totalyearstatistic");
+
+                entity.Property(e => e.Sum).HasColumnName("sum");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasColumnType("character varying");
@@ -105,8 +119,6 @@ namespace DrinkWater
                     .IsRequired()
                     .HasColumnType("character varying");
 
-                entity.Property(e => e.Salt).HasColumnType("character varying");
-
                 entity.Property(e => e.Sex).HasColumnType("character varying");
 
                 entity.Property(e => e.Username)
@@ -116,30 +128,37 @@ namespace DrinkWater
                 entity.Property(e => e.WakeUp).HasColumnType("time without time zone");
             });
 
-            modelBuilder.Entity<Weekstatistic>(entity =>
+            modelBuilder.Entity<Watermonthstatistic>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToTable("weekstatistic");
+                entity.ToTable("watermonthstatistic");
+
+                entity.Property(e => e.Amount).HasColumnName("amount");
 
                 entity.Property(e => e.Date).HasColumnType("date");
-
-                entity.Property(e => e.Sum)
-                    .HasColumnName("sum")
-                    .HasColumnType("numeric");
             });
 
-            modelBuilder.Entity<Yearstatistic>(entity =>
+            modelBuilder.Entity<Waterweekstatistic>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToTable("yearstatistic");
+                entity.ToTable("waterweekstatistic");
+
+                entity.Property(e => e.Amount).HasColumnName("amount");
 
                 entity.Property(e => e.Date).HasColumnType("date");
+            });
 
-                entity.Property(e => e.Sum)
-                    .HasColumnName("sum")
-                    .HasColumnType("numeric");
+            modelBuilder.Entity<Wateryearstatistic>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("wateryearstatistic");
+
+                entity.Property(e => e.Amount).HasColumnName("amount");
+
+                entity.Property(e => e.Date).HasColumnType("date");
             });
 
             OnModelCreatingPartial(modelBuilder);

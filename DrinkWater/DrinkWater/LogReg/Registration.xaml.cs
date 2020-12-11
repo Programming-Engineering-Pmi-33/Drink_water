@@ -1,44 +1,43 @@
-﻿using DrinkWater.Services;
-using System.Windows;
-
-namespace DrinkWater.LogReg
+﻿namespace DrinkWater.LogReg
 {
+    using System.Windows;
+    using DrinkWater.Services;
+
     /// <summary>
-    /// Interaction logic for Registration.xaml
+    /// Interaction logic for Registration.xaml.
     /// </summary>
     public partial class Registration : Window
     {
         private string username;
         private string email;
         private string password;
-        private UsersService _usersService;
-        private ValidationService _validationService;
+        private UsersService usersService;
+        private ValidationService validationService;
 
         public Registration()
         {
             InitializeComponent();
-            _usersService = UsersService.GetService;
-            _validationService = new ValidationService(_usersService);
+            usersService = UsersService.GetService;
+            validationService = new ValidationService(usersService);
         }
 
-        private void buttonSignUp_Click(object sender, RoutedEventArgs e)
+        private void ButtonSignUp_Click(object sender, RoutedEventArgs e)
         {
-            //зробити дизайн під ваерфрейми.
             this.username = textBoxUsername.Text;
             this.email = textBoxEmail.Text;
             this.password = textBoxPassword.Text;
 
-            if (_validationService.IsValid(labelUsername, username, labelEmail, email, labelPassword, password))
+            if (validationService.IsValid(labelUsername, username, labelEmail, email, labelPassword, password))
             {
                 if (password == textBoxConfirmPassword.Text)
                 {
                     labelPasswordConfirm.Visibility = Visibility.Hidden;
-                    int salt = EncryptionService.CreateRandomSalt();
+                    long salt = EncryptionService.CreateRandomSalt();
 
                     string hashedPassword = EncryptionService.ComputeSaltedHash(this.password, salt);
-                    Users user = new Users(username, email, hashedPassword, salt.ToString());
+                    User user = new User(username, email, hashedPassword, salt);
 
-                    _usersService.RegisterUser(user);
+                    usersService.RegisterUser(user);
 
                     Login login = new Login();
                     login.Show();
@@ -50,6 +49,5 @@ namespace DrinkWater.LogReg
                 }
             }
         }
-
     }
 }

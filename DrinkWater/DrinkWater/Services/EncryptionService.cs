@@ -1,40 +1,54 @@
-﻿using System;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace DrinkWater.Services
+﻿namespace DrinkWater.Services
 {
+    using System;
+    using System.Security.Cryptography;
+    using System.Text;
+
+    /// <summary>
+    /// Announces EncryptionService сlass.
+    /// </summary>
     public class EncryptionService
     {
-        public static int CreateRandomSalt()
+        /// <summary>
+        /// Creates of random salt.
+        /// </summary>
+        /// <returns>salt.</returns>
+        public static long CreateRandomSalt()
         {
-            Byte[] _saltBytes = new Byte[4];
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            rng.GetBytes(_saltBytes);
+            var saltBytes = new byte[4];
 
-            return ((((int)_saltBytes[0]) << 24) + (((int)_saltBytes[1]) << 16) +
-              (((int)_saltBytes[2]) << 8) + ((int)_saltBytes[3]));
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            rng.GetBytes(saltBytes);
+
+            return (((long)saltBytes[0]) << 24) + (((long)saltBytes[1]) << 16) +
+              (((long)saltBytes[2]) << 8) + ((long)saltBytes[3]);
         }
 
-        public static string ComputeSaltedHash(string password, int salt)
+        /// <summary>
+        /// Computes of salted hash.
+        /// </summary>
+        /// <param name="password">password value.</param>
+        /// <param name="salt">salt value.</param>
+        /// <returns>salted hash.</returns>
+        public static string ComputeSaltedHash(string password, long salt)
         {
             ASCIIEncoding encoder = new ASCIIEncoding();
-            Byte[] _secretBytes = encoder.GetBytes(password);
+            var secretBytes = encoder.GetBytes(password);
 
-            Byte[] _saltBytes = new Byte[4];
-            _saltBytes[0] = (byte)(salt >> 24);
-            _saltBytes[1] = (byte)(salt >> 16);
-            _saltBytes[2] = (byte)(salt >> 8);
-            _saltBytes[3] = (byte)(salt);
+            var saltBytes = new byte[4];
+            saltBytes[0] = (byte)(salt >> 24);
+            saltBytes[1] = (byte)(salt >> 16);
+            saltBytes[2] = (byte)(salt >> 8);
+            saltBytes[3] = (byte)salt;
 
-            Byte[] toHash = new Byte[_secretBytes.Length + _saltBytes.Length];
-            Array.Copy(_secretBytes, 0, toHash, 0, _secretBytes.Length);
-            Array.Copy(_saltBytes, 0, toHash, _secretBytes.Length, _saltBytes.Length);
+            var toHash = new byte[secretBytes.Length + saltBytes.Length];
+            Array.Copy(secretBytes, 0, toHash, 0, secretBytes.Length);
+            Array.Copy(saltBytes, 0, toHash, secretBytes.Length, saltBytes.Length);
 
             SHA1 sha1 = SHA1.Create();
-            Byte[] computedHash = sha1.ComputeHash(toHash);
+            byte[] computedHash = sha1.ComputeHash(toHash);
 
-            return encoder.GetString(computedHash);
+            return Convert.ToBase64String(computedHash);
         }
     }
 }
