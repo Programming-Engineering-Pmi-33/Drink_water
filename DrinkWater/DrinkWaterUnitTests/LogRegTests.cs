@@ -38,7 +38,7 @@ namespace DrinkWaterUnitTests
         }
 
         /// <summary>
-        /// Checks if exception isn`t if username is in database.
+        /// Checks that no exception if username is in database.
         /// </summary>
         [TestMethod]
         public void NoExceptionIfUsernameIsInDatabase()
@@ -54,7 +54,7 @@ namespace DrinkWaterUnitTests
         }
 
         /// <summary>
-        /// Checks if exception isn`t if email is in database.
+        /// Checks that no exception if email is in database.
         /// </summary>
         [TestMethod]
         public void NoExceptionIfEmailIsInDatabase()
@@ -70,10 +70,10 @@ namespace DrinkWaterUnitTests
         }
 
         /// <summary>
-        /// Checks if salt is recieved if username is in database.
+        /// Checks if salt is received if username is in database.
         /// </summary>
         [TestMethod]
-        public void SaltIsRecievedIfUsernameIsInDatabase()
+        public void SaltIsReceivedIfUsernameIsInDatabase()
         {
             // arrange
             long salt = user1.Salt;
@@ -83,7 +83,7 @@ namespace DrinkWaterUnitTests
         }
 
         /// <summary>
-        /// Checks if id is recieved if username is in database.
+        /// Checks if id is received if username is in database.
         /// </summary>
         [TestMethod]
         public void IdReceivedIfUsernameIsInDatabase()

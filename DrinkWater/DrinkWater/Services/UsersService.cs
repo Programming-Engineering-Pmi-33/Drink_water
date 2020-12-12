@@ -84,7 +84,7 @@
         /// Gets user salt from database.
         /// </summary>
         /// <param name="username"> username value.</param>
-        /// <returns>salt.</returns>
+        /// <returns>salt or 0 if username is not found.</returns>
         public long GetUserSalt(string username)
         {
             var salt = (from data in db.Users
@@ -100,8 +100,8 @@
         /// <param name="username">username value.</param>
         /// <param name="password">password value.</param>
         /// <param name="salt">salt value.</param>
-        /// <returns>id.</returns>
-        public int GetUserId(string username, string password,  long salt)
+        /// <returns>id or 0 if username is not found.</returns>
+        public int GetUserId(string username, string password, long salt)
         {
             string hashedPassword = EncryptionService.ComputeSaltedHash(password, salt);
 

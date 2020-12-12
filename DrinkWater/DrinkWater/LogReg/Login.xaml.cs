@@ -21,6 +21,11 @@
             usersService = UsersService.GetService;
         }
 
+        /// <summary>
+        /// Opens registration window and closes login window.
+        /// </summary>
+        /// <param name="sender">object instance.</param>
+        /// <param name="e">RoutedEventArgs instance.</param>
         private void ButtonCreateNewAccount_Click(object sender, RoutedEventArgs e)
         {
             Registration registration = new Registration();
@@ -28,6 +33,11 @@
             this.Close();
         }
 
+        /// <summary>
+        /// Performs logging in and creates session user.
+        /// </summary>
+        /// <param name="sender">object instance.</param>
+        /// <param name="e">RoutedEventArgs instance.</param>
         private void ButtonLogIn_Click(object sender, RoutedEventArgs e)
         {
             this.username = textBoxUsername.Text;

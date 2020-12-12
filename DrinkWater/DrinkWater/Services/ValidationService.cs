@@ -24,13 +24,13 @@
         }
 
         /// <summary>
-        /// Validates of username, email and password.
+        /// Validates username, email and password and sets errors to labels if any.
         /// </summary>
-        /// <param name="labelUsername">username label.</param>
+        /// <param name="labelUsername">error label for username.</param>
         /// <param name="username">username value.</param>
-        /// <param name="labelEmail">email label.</param>
+        /// <param name="labelEmail">error label for email.</param>
         /// <param name="email">email value.</param>
-        /// <param name="labelPassword">password label.</param>
+        /// <param name="labelPassword">error label for password.</param>
         /// <param name="password">password value.</param>
         /// <returns>bool value.</returns>
         public bool IsValid(Label labelUsername, string username, Label labelEmail, string email, Label labelPassword, string password)
@@ -43,7 +43,7 @@
         }
 
         /// <summary>
-        /// Displayes a message on the form.
+        /// Displayes a message on the label.
         /// </summary>
         /// <param name="errorLabel">label.</param>
         /// <param name="message">text.</param>
