@@ -34,7 +34,7 @@
         }
 
         /// <summary>
-        /// This function sets user id and namethen starts background thread for toasts.
+        /// This function sets user id and name, then starts background thread for toasts.
         /// </summary>
         /// <param name="userInfo">Argument that contains user id and name.</param>
         public void SetSessionUser(SessionUser userInfo)
@@ -46,8 +46,6 @@
             {
                 SetTimer();
             }
-
-            throw new Exception("1");
         }
 
         /// <summary>
@@ -62,6 +60,7 @@
             }
             else
             {
+                // 100 seconds
                 timer.Interval = 100000;
             }
 

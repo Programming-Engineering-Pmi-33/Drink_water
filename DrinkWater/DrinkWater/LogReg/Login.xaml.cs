@@ -20,7 +20,6 @@
             InitializeComponent();
             usersService = UsersService.GetService;
             Logger.InitLogger();
-
         }
 
         private void ButtonCreateNewAccount_Click(object sender, RoutedEventArgs e)
