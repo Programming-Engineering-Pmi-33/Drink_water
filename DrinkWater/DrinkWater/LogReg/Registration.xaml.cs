@@ -24,6 +24,11 @@
             validationService = new ValidationService(usersService);
         }
 
+        /// <summary>
+        /// Performs signing up and opens login window.
+        /// </summary>
+        /// <param name="sender">object instance.</param>
+        /// <param name="e">RoutedEventArgs instance.</param>
         private void ButtonSignUp_Click(object sender, RoutedEventArgs e)
         {
             this.username = textBoxUsername.Text;

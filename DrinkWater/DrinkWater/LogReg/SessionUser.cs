@@ -1,7 +1,7 @@
 ﻿namespace DrinkWater.LogReg
 {
     /// <summary>
-    /// Class for passing a user id through app.
+    /// Announces SessionUser сlass.
     /// </summary>
     public class SessionUser
     {
@@ -18,8 +18,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="SessionUser"/> class.
         /// </summary>
-        /// <param name="userId">Id of logged in user.</param>
-        /// <param name="username"> Name of logged ib User.</param>
+        /// <param name="userId">user id value.</param>
+        /// <param name="username">username value.</param>
         public SessionUser(long userId, string username)
         {
             UserId = userId;
@@ -27,12 +27,12 @@
         }
 
         /// <summary>
-        /// Gets or sets user id.
+        /// Gets or sets user id property.
         /// </summary>
         public long UserId { get => userId; set => userId = value; }
 
         /// <summary>
-        /// Gets or sets user id.
+        /// Gets or sets username property.
         /// </summary>
         public string Username { get => username; set => username = value; }
     }

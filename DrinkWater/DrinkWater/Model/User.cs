@@ -40,7 +40,7 @@ namespace DrinkWater
 
         public byte[] Avatar { get; set; }
 
-        public long? Salt { get; set; }
+        public long Salt { get; set; }
 
         public virtual ICollection<Statistic> Statistics { get; set; }
 

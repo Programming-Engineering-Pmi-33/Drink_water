@@ -10,7 +10,7 @@
     public class EncryptionService
     {
         /// <summary>
-        /// Creates of random salt.
+        /// Creates random salt.
         /// </summary>
         /// <returns>salt.</returns>
         public static long CreateRandomSalt()
@@ -25,7 +25,7 @@
         }
 
         /// <summary>
-        /// Computes of salted hash.
+        /// Computes salted hash.
         /// </summary>
         /// <param name="password">password value.</param>
         /// <param name="salt">salt value.</param>
