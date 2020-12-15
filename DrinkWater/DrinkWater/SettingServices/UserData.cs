@@ -50,13 +50,16 @@
         /// <returns>User daily balance as long.</returns>
         public long? GetDailyBalnace()
         {
+            var userDailyBalance = (from searchingUser in db.Users
+                    where searchingUser.UserId == User.UserId
+                    select searchingUser.DailyBalance).FirstOrDefault();
             if (User.DailyBalance == null)
             {
                 return 0;
             }
             else
             {
-                return User.DailyBalance.Value;
+                return userDailyBalance;
             }
         }
 

@@ -14,7 +14,7 @@ namespace DrinkWater
         /// This function initialize event handler for unhandled exceptions.
         /// </summary>
         [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.ControlAppDomain)]
-        public static void UnhadledExceprionHandler()
+        public static void UnhadledExceptionHandler()
         {
             AppDomain currentDomain = AppDomain.CurrentDomain;
             currentDomain.UnhandledException += new UnhandledExceptionEventHandler(Handler);

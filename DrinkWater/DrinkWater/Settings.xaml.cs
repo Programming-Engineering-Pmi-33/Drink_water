@@ -159,7 +159,7 @@
         {
             if (UserParametersGrid.Visibility == Visibility.Visible)
             {
-                ErrorLabel.Content = parametersValidation.GetUserParameterValidation(WeightTextBox.Text, WeightTextBox.Text, AgeTextBox.Text, WakeUpTextBox.Text, GoingToBedTextBox.Text);
+                ErrorLabel.Content = parametersValidation.GetUserParameterValidation(WeightTextBox.Text, HeightTextBox.Text, AgeTextBox.Text, WakeUpTextBox.Text, GoingToBedTextBox.Text);
                 long weight = Convert.ToInt32(WeightTextBox.Text);
                 long height = Convert.ToInt32(HeightTextBox.Text);
                 long age = Convert.ToInt32(AgeTextBox.Text);

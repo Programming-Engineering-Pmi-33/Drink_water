@@ -176,6 +176,7 @@
             WeightInfo.Content = userInformation.Weight.ToString();
             HeightInfo.Content = userInformation.Height.ToString();
             AgeInfo.Content = userInformation.Age.ToString();
+            userInformation.DailyBalance = userData.GetDailyBalnace();
             ActivityTimeInfo.Content = uInfo.GetUserActivityTime(userInformation.GoingToBed.Value.Hours, userInformation.WakeUp.Value.Hours).ToString();
             ShowAvatar();
         }

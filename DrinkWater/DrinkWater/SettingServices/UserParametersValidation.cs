@@ -82,7 +82,7 @@
                 return "Invalid input. Must be a number.";
             }
 
-            if (Convert.ToInt32(weight) < 0)
+            if (Convert.ToInt32(weight) <= 0)
             {
                 return "Weight must be non-negative";
             }
@@ -102,9 +102,9 @@
                 return "Invalid input. Must be a number.";
             }
 
-            if (Convert.ToInt32(height) < 0)
+            if (Convert.ToInt32(height) <= 0)
             {
-                return "Height must be non-negative";
+                return "Height must be non-negative or zero";
             }
 
             return string.Empty;
@@ -119,12 +119,12 @@
 
             if (!int.TryParse(age, out int res))
             {
-                return "Invalid input. Must be a number.";
+                return "Invalid input. Must be a number";
             }
 
-            if (Convert.ToInt32(age) < 0)
+            if (Convert.ToInt32(age) <= 0)
             {
-                return "Age must be non-negative";
+                return "Age must be non-negative or zero";
             }
 
             return string.Empty;
