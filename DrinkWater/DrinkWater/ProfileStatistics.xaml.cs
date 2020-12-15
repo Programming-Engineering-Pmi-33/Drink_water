@@ -51,7 +51,7 @@
         }
 
         /// <summary>
-        /// Set session user id and name.
+        /// Set session user.
         /// </summary>
         /// <param name="sesUser"> Session user.</param>
         public void SetSessionUser(SessionUser sesUser)

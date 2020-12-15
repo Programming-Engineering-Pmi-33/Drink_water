@@ -1,17 +1,14 @@
-using DrinkWater;
-using DrinkWater.LogReg;
-using DrinkWater.MainServices;
-using DrinkWater.ProfileStatisticsServices;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Npgsql;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace NUnitTest_MainWindow
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using DrinkWater;
+    using DrinkWater.LogReg;
+    using DrinkWater.MainServices;
+    using DrinkWater.ProfileStatisticsServices;
+    using NUnit.Framework;
+
     public class Tests
     {
         private MainService main = new MainService();
@@ -69,7 +66,7 @@ namespace NUnitTest_MainWindow
         [Test]
         public void GetStatistic_Pass()
         {
-            main.SetSessionUser(new SessionUser(1, "Mamonchik"));
+            main.SetSessionUser(new SessionUser(151, "Mamonchik"));
             StatisticInfo statisticInfo = main.GetStatistic();
             Assert.IsTrue(statisticInfo.GetDailyStatistics().Count != 0);
         }

@@ -1,14 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿// This file is used by Code Analysis to maintain SuppressMessage
+// attributes that are applied to this project.
+// Project-level suppressions either have no target or are given
+// a specific target and scoped to a namespace, type, member, etc.
 
-[assembly: SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101:Prefix local calls with this", Justification = "<Pending>")]
-[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1404", Justification = "<Pending>")]
-[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1633:File should have header", Justification = "<Pending>")]
-[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1201", Justification = "<Pending>")]
-[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1115:Parameter should follow comma", Justification = "<Pending>")]
-[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1204", Justification = "<Pending>")]
-[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1601", Justification = "<Pending>")]
-[assembly: SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1122", Justification = "<Pending>")]
-[assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202", Justification = "<Pending>")]
-[assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1206", Justification = "<Pending>")]
-[assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1200", Justification = "<Pending>")]
-[assembly: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA0001", Justification = "<Pending>")]
+using System.Diagnostics.CodeAnalysis;
+
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1633:File should have header", Justification = "<Pending>", Scope = "namespace", Target = "~N:ScoreTests")]
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1633:File should have header", Justification = "<Pending>", Scope = "namespace", Target = "~N:DrinkWaterProfileStatisticsUnitTests")]
