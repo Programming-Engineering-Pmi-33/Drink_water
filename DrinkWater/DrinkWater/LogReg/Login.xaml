@@ -3,15 +3,47 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DrinkWater.LogReg"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="800">
-    <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="21,310,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="679,310,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
-        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="57,202,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="10,69,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="10,35,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        Title="Drink Water" Height="437.5" Width="700" WindowStartupLocation="CenterScreen">
+    <Grid  HorizontalAlignment="Center" Width="700" Background="#E1EDFD">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox x:Name="textBoxUsername" Style="{StaticResource LoginTextBox}" HorizontalAlignment="Center" Margin="0,124,0,0" Text="Kycjuxa" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="1" FontFamily="Segoe UI" Foreground="#FF424141"/>
+        <TextBox x:Name="textBoxPassword" Style="{StaticResource LoginTextBox}" HorizontalAlignment="Center" Margin="0,210,0,0" Text="SS20112000" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="1" Foreground="#FF424141"/>
+
+        <Button x:Name="buttonCreateNewAccount"   BorderBrush="Transparent"
+                BorderThickness="0" Background="Transparent" Foreground="Black"
+                Content="Create new account" HorizontalAlignment="Left" 
+                Margin="220,320,0,0" VerticalAlignment="Top" 
+                Height="22" Width="110" Click="ButtonCreateNewAccount_Click" 
+                Grid.ColumnSpan="2" FontFamily="Bahnschrift SemiBold"/>
+        <Button x:Name="buttonLogIn" Style="{StaticResource LoginButton}" Content="Log in" 
+                HorizontalAlignment="Left" Margin="370,320,0,0" 
+                VerticalAlignment="Top" Height="22" Width="110" 
+                Click="ButtonLogIn_Click" Grid.Column="1"
+                Background="#2C3B58" BorderBrush="Transparent"
+                BorderThickness="0" RenderTransformOrigin="0.5,0.5" Foreground="White" FontFamily="Bahnschrift SemiBold" >
+       
+        </Button>
+        <Label Content="Username:" HorizontalAlignment="Left" Margin="215,100,0,0" VerticalAlignment="Top" Height="24" Grid.Column="1" Width="75" FontFamily="Bahnschrift SemiBold" FontWeight="Normal" Foreground="Black"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="216,186,0,0" VerticalAlignment="Top" Height="24" Grid.Column="1" Width="75" FontFamily="Bahnschrift SemiBold" Foreground="Black"/>
+        <Label Content="Log in" Grid.Column="1" HorizontalAlignment="Center" Margin="0,39,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift SemiBold" FontSize="16" Height="28" Width="56" FontWeight="Bold"/>
+        <Label x:Name="labelUsername" Visibility="Hidden" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="215,146,0,0" VerticalAlignment="Top" Height="26" Width="260"/>
+        <Label x:Name="labelPassword"  Visibility="Hidden" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="215,232,0,0" VerticalAlignment="Top" Height="26" Width="260"/>
 
     </Grid>
 </Window>
