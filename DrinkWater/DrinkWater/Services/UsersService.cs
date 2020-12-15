@@ -1,6 +1,7 @@
 ﻿namespace DrinkWater.Services
 {
     using System.Linq;
+    using System.Runtime.InteropServices.ComTypes;
 
     /// <summary>
     /// Announces UserService сlass.
@@ -111,5 +112,6 @@
 
             return userId;
         }
+
     }
 }

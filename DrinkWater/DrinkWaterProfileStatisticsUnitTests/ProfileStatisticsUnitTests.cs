@@ -5,28 +5,42 @@ using System.Linq;
 using System.Windows.Media.Imaging;
 using Xunit;
 using DrinkWater.ProfileStatisticsServices;
+using DrinkWater.Services;
+using System;
+using System.IO;
+using System.Drawing;
 
 namespace ProfileStatisticsUnitTests
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ScoreTests
     {
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keepingBalanceDays"></param>
+        /// <param name="totalDayNumber"></param>
+        /// <param name="koef"></param>
+        /// <param name="waterAmountPerPeriod"></param>
+        /// <param name="result"></param>
+        /// <param name="dailyBalance"></param>
         [Theory]
         [InlineData(0, 7, 1, "4518_622_1720", 1, 3000)]
         [InlineData(0, 30, 1, "2356_4586_758_968_4254", 2, 4000)]
         [InlineData(0, 12, 12, "3625_2456_7845", 0, 1500)]
-
         public void ScoreTestPositiveTestMethod(int keepingBalanceDays, int totalDayNumber, int koef, string waterAmountPerPeriod, int result, long dailyBalance)
         {
-            //Arrange
+            // Arrange
             var waterAmount = waterAmountPerPeriod.Split('_').Where(x => double.TryParse(x, out _)).Select(double.Parse).ToList();
             ScoreInfo scoreInfo = new ScoreInfo();
 
-            //Act
+            // Act
             int actualResult = scoreInfo.Score(keepingBalanceDays, totalDayNumber, koef, waterAmount, dailyBalance);
 
-            //Assert
+            // Assert
             Assert.Equal(actualResult, result);
         }
 
@@ -50,21 +64,35 @@ namespace ProfileStatisticsUnitTests
     }
     public class UserInfoTests : IDisposable
     {
-        User user = new User();
+        private UsersService usersService = UsersService.GetService;
+        User user1 = new User();
+        User user2 = new User();
+        User user3 = new User();
         public UserInfoTests()
         {
-            user = new User();
+            Bitmap bitmap = new Bitmap(@"C:\Users\Anastasiia\Pictures\272498.png");
+            MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            var imageArray = ms.ToArray();
+            user1 = new User("mamonchik@gmail.com", "qwerty123456", 1000000, "Mamonchik", 106, 106, "Male", 20, imageArray);
+            usersService.RegisterUser(user1);
+            user2 = new User("misha@gmail.com", "qwerty123456", 1000001, "Misha", 107, 195, "Male", 20, null);
+            usersService.RegisterUser(user2);
+            user3 = new User("mish@gmail.com", "qwerty123456", 1000002, "Mish", 110, 195, "Male", 20, null);
+            usersService.RegisterUser(user3);
         }
 
         public void Dispose()
         {
-
+            usersService.DeleteUser(user1);
+            usersService.DeleteUser(user2);
+            usersService.DeleteUser(user3);
         }
 
         [Theory]
-        [InlineData(1, "Mamonchik", 106, 106, "Male", 20)]
-        [InlineData(7, "Misha", 107, 195, "Male", 20)]
-        [InlineData(10, "Mish", 110, 195, "Male", 20)]
+        [InlineData(1000000, "Mamonchik", 106, 106, "Male", 20)]
+        [InlineData(1000001, "Misha", 107, 195, "Male", 20)]
+        [InlineData(1000002, "Mish", 110, 195, "Male", 20)]
         public void GetUserInfoPositiveTestMethod(int id, string expectedUsername, long expectedWeight, long expectedHeight, string expectedSex, long expectedAge)
         {
             //Arrange
@@ -82,9 +110,9 @@ namespace ProfileStatisticsUnitTests
         }
 
         [Theory]
-        [InlineData(1, "Mamonchik", 14, 50, "Female", 10)]
-        [InlineData(7, "Misha", 17, 95, "Female", 10)]
-        [InlineData(10, "Mish", 10, 95, "Female", 10)]
+        [InlineData(1000000, "Mamonchik", 14, 50, "Female", 10)]
+        [InlineData(1000001, "Misha", 17, 95, "Female", 10)]
+        [InlineData(1000002, "Mish", 10, 95, "Female", 10)]
         public void GetUserInfoNegativeTestMethod(int id, string expectedUsername, long expectedWeight, long expectedHeight, string expectedSex, long expectedAge)
         {
             //Arrange
@@ -105,7 +133,7 @@ namespace ProfileStatisticsUnitTests
         public void ShowAvatarPositiveTestMethod()
         {
             //Arrange
-            SessionUser sessionUser = new SessionUser(1, "Mamonchik");
+            SessionUser sessionUser = new SessionUser(user1.UserId, user1.Username);
             UserData userData = new UserData(sessionUser);
             User userInformation = userData.GetData();
 
@@ -119,7 +147,7 @@ namespace ProfileStatisticsUnitTests
         public void ShowAvatarNegativeTestMethod()
         {
             //Arrange
-            SessionUser sessionUser = new SessionUser(17, "Misha");
+            SessionUser sessionUser = new SessionUser(user2.UserId, user2.Username);
             UserData userData = new UserData(sessionUser);
             User userInformation = userData.GetData();
 
