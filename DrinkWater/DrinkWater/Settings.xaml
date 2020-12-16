@@ -422,7 +422,7 @@
             </Rectangle>
             <Button Style="{DynamicResource Buttons}" x:Name="UserSettingsButton" Content="User settings" FontSize="24" HorizontalAlignment="Left" Margin="107,481,0,0" VerticalAlignment="Top" Click="UserSettings_Click" Width="320" Height="64" Grid.Column="0" Grid.Row="0" Background="#FFE1EDFD" BorderBrush="#FFE1EDFD" Foreground="#FF0A2140"/>
             <Button  Style="{DynamicResource Buttons}" x:Name="UserParametersButton" Content="User parameters" FontSize="24" HorizontalAlignment="Left" Margin="107,569,0,0" VerticalAlignment="Top" Click="UserParameters_Click" Width="320" Height="64" Background="#FFE1EDFD" BorderBrush="#FFE1EDFD" Foreground="#FF0A2140"/>
-            <Button Style="{DynamicResource TransparentButtons}"  x:Name="LogOutButton" Content="Log out" FontSize="24" HorizontalAlignment="Left" Margin="108,813,0,0" VerticalAlignment="Top" Click="LogOut_Click" Width="320" Height="64" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold"/>
+            <Button Style="{DynamicResource Buttons}"  x:Name="LogOutButton" Content="Log out" FontSize="24" HorizontalAlignment="Left" Margin="108,813,0,0" VerticalAlignment="Top" Click="LogOut_Click" Width="320" Height="64"  Background="#FFE1EDFD" BorderBrush="#FFE1EDFD" Foreground="#FF0A2140"/>
             <Image  x:Name="Avatar" HorizontalAlignment="Left" Height="230" Margin="170,162,0,0" VerticalAlignment="Top" Width="261">
                 <Image.Clip>
                     <EllipseGeometry
@@ -430,13 +430,9 @@
                 </Image.Clip>
             </Image>
             <Grid x:Name="UserSettingsGrid" HorizontalAlignment="Left" Height="455" Margin="701,270,0,0" VerticalAlignment="Top" Visibility="Visible">
-                <TextBox x:Name ="PasswordTextBox" Text="********" Padding="10" FontSize="28" TextWrapping="Wrap" Width="1053" Height="68" Visibility="Visible" BorderThickness="2" VerticalAlignment="Top" Margin="0,204,0,0" HorizontalAlignment="Center" BorderBrush="#FF3C3D3F" Foreground="#FF6E6C6C">
-                    <TextBox.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="10"/>
-                        </Style>
-                    </TextBox.Resources>
-                </TextBox>
+                <PasswordBox Style="{StaticResource SettingsPasswordBox}" x:Name ="PasswordTextBox" Password="********" Padding="10" FontSize="28" Width="1053" Height="68" Visibility="Visible" BorderThickness="2" VerticalAlignment="Top" Margin="0,204,0,0" HorizontalAlignment="Center" BorderBrush="#FF3C3D3F" Foreground="#FF6E6C6C">
+                    
+                </PasswordBox>
                 <TextBox x:Name ="UsernameTextBox" Text="Username" Padding="10" FontSize="28" TextWrapping="Wrap" Width="1053" Height="68" Visibility="Visible" BorderThickness="2" VerticalAlignment="Top" Margin="0,57,0,0" HorizontalAlignment="Center" BorderBrush="#FF3C3D3F" Foreground="#FF6E6C6C">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -527,13 +523,13 @@
                 <Label x:Name="AgeLabel" Content="Age:" FontSize="28" HorizontalAlignment="Left" Margin="0,267,0,0" VerticalAlignment="Top" Width="96" Height="50" FontWeight="Bold"/>
                 <Label x:Name ="ActivityTimeLabel2" Content="Going to bed:" FontSize="28" HorizontalAlignment="Left" Margin="568,416,0,0" VerticalAlignment="Top" Width="198" Visibility="Visible" FontWeight="Bold"/>
             </Grid>
-            <Button x:Name="ChangeAvatar" Style="{DynamicResource TransparentButtons}" Content="Change avatar" FontSize="24" HorizontalAlignment="Left" Margin="178,412,0,0" VerticalAlignment="Top" Width="179" Height="45" Click="ChangeAvatar_Click" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold"/>
+            <Button x:Name="ChangeAvatar" Style="{DynamicResource Buttons}" Content="Change avatar" FontSize="24" HorizontalAlignment="Left" Margin="178,412,0,0" VerticalAlignment="Top" Width="179" Height="45" Click="ChangeAvatar_Click"  Background="#FFE1EDFD" BorderBrush="#FFE1EDFD" Foreground="#FF0A2140"/>
             <Button Style="{DynamicResource ProfileButton}"  FontFamily="Segoe MDL2 Assets" Content="&#xE77B;" x:Name="ProfileWindowButton" FontSize="36" HorizontalAlignment="Left" Margin="1715,44,0,0" VerticalAlignment="Top" Height="68" Width="68" Click="ProfileWindowButton_Click" FontWeight="Bold" BorderBrush="#FF0A2140" Background="#FF0A2140" Foreground="#FFC2B9B9"/>
             <Button Style="{DynamicResource ScrollButton}" x:Name="Main" FontFamily="Segoe MDL2 Assets" Content="&#xE76B;" HorizontalAlignment="Left" Height="45" Margin="45,33,0,0" VerticalAlignment="Top" Width="50" Click="Main_Click" RenderTransformOrigin="0.487,0.482" FontSize="36" Foreground="#FF0A2140"/>
             <ComboBox HorizontalAlignment="Left" Height="8" Margin="301,85,0,0" VerticalAlignment="Top" Width="0"/>
             <Label Content="Settings" HorizontalAlignment="Left" Height="47" Margin="104,31,0,0" VerticalAlignment="Top" Width="102" FontSize="24" Foreground="#FF0A2140"/>
             <Label Content="Parameters" HorizontalAlignment="Left" Margin="701,177,0,0" VerticalAlignment="Top" FontSize="48" Foreground="#FF0A2140"/>
-            <Button  Style="{DynamicResource Buttons}" x:Name="SaveChangesButton" Content="Save" FontSize="24" FontFamily="Roboto" HorizontalAlignment="Left" Margin="1537,818,0,0" VerticalAlignment="Top" Width="202" Height="74" Click="SaveChangesButton_Click" Background="#FF0A2140" BorderBrush="#FF0A2140" Foreground="#FFEAECF0" FontWeight="Bold">
+            <Button  Style="{DynamicResource Buttons}" x:Name="SaveChangesButton" Content="Save" FontSize="24" FontFamily="Roboto" HorizontalAlignment="Left" Margin="1537,818,0,0" VerticalAlignment="Top" Width="202" Height="74" Click="SaveChangesButton_Click" Background="#FF0A2140" BorderBrush="#FF0A2140" Foreground="#FFEAECF0">
                 <Button.Effect>
                     <DropShadowEffect Color="DarkBlue" ShadowDepth="2" BlurRadius="10" />
                 </Button.Effect>

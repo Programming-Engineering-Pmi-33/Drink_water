@@ -13,10 +13,11 @@
         </Style>
         <Style x:Key="PasswordBox" TargetType="{x:Type PasswordBox}">
             <Setter Property="Height" Value="30" />
+            <Setter Property="Foreground" Value="#FF424141"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Control}">
-                        <Border Name="Border" BorderBrush="#FF3C3D3F" Background="White" BorderThickness="2" CornerRadius="5">
+                        <Border Name="Border" Background="White" BorderBrush="#FFABADB3" BorderThickness="1" CornerRadius="5">
                             <ScrollViewer x:Name="PART_ContentHost" />
                         </Border>
                     </ControlTemplate>

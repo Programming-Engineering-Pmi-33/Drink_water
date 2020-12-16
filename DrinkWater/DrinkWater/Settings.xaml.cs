@@ -103,7 +103,7 @@
         {
             SetUserSettingsVisibility();
             UsernameTextBox.Text = userData.Username;
-            PasswordTextBox.Text = userData.Password;
+            PasswordTextBox.Password = userData.Password;
             EmailTextBox.Text = userData.Email;
             if (userData.Avatar != null)
             {
@@ -176,10 +176,10 @@
 
             if (UserSettingsGrid.Visibility == Visibility.Visible)
             {
-                ErrorLabel.Content = settingsValidation.GetUserSettingsValidation(UsernameTextBox.Text, PasswordTextBox.Text, EmailTextBox.Text);
+                ErrorLabel.Content = settingsValidation.GetUserSettingsValidation(UsernameTextBox.Text, PasswordTextBox.Password, EmailTextBox.Text);
                 if (string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
                 {
-                    user.SetUserInformation(UsernameTextBox.Text, PasswordTextBox.Text, EmailTextBox.Text, image.GetImage());
+                    user.SetUserInformation(UsernameTextBox.Text, PasswordTextBox.Password, EmailTextBox.Text, image.GetImage());
                 }
             }
 

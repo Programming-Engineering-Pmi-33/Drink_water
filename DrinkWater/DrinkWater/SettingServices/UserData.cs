@@ -53,7 +53,7 @@
             var userDailyBalance = (from searchingUser in db.Users
                     where searchingUser.UserId == User.UserId
                     select searchingUser.DailyBalance).FirstOrDefault();
-            if (User.DailyBalance == null)
+            if (User.DailyBalance == null || User.DailyBalance == 0)
             {
                 return 0;
             }
