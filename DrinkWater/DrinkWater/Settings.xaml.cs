@@ -119,8 +119,12 @@
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
             Logger.Log.Info($"User {sessionUser.Username} logged out from system.");
-            timer.Stop();
-            timer.Dispose();
+            if (timer != null)
+            {
+                timer.Stop();
+                timer.Dispose();
+            }
+
             Login loginWindow = new Login();
             loginWindow.Show();
             this.Close();
