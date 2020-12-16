@@ -344,6 +344,9 @@
                 </lvc:CartesianChart.AxisX>
                 <lvc:CartesianChart.AxisY >
                     <lvc:Axis x:Name="Milliliters" Title="Milliliters" MinValue="0">
+                        <lvc:Axis.Separator >
+                            <lvc:Separator IsEnabled="True" Step="100"></lvc:Separator>
+                        </lvc:Axis.Separator>
                         <lvc:Axis.Sections>
                             <lvc:AxisSection Name="BalanceLine" Value="2000" StrokeThickness="3" Stroke="#F9D648">
                                 <lvc:AxisSection.Fill>
