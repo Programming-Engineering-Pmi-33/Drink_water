@@ -33,11 +33,11 @@
         {
             this.username = textBoxUsername.Text;
             this.email = textBoxEmail.Text;
-            this.password = textBoxPassword.Text;
+            this.password = textBoxPassword.Password;
 
             if (validationService.IsValid(labelUsername, username, labelEmail, email, labelPassword, password))
             {
-                if (password == textBoxConfirmPassword.Text)
+                if (password == textBoxConfirmPassword.Password)
                 {
                     labelPasswordConfirm.Visibility = Visibility.Hidden;
                     long salt = EncryptionService.CreateRandomSalt();

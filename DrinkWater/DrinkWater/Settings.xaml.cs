@@ -160,16 +160,16 @@
             if (UserParametersGrid.Visibility == Visibility.Visible)
             {
                 ErrorLabel.Content = parametersValidation.GetUserParameterValidation(WeightTextBox.Text, HeightTextBox.Text, AgeTextBox.Text, WakeUpTextBox.Text, GoingToBedTextBox.Text);
-                long weight = Convert.ToInt32(WeightTextBox.Text);
-                long height = Convert.ToInt32(HeightTextBox.Text);
-                long age = Convert.ToInt32(AgeTextBox.Text);
-                string sex = GenderList.Text;
-                var wakeUpString = WakeUpTextBox.Text.Split(":");
-                TimeSpan wakeUp = new TimeSpan(Convert.ToInt32(wakeUpString[0]), Convert.ToInt32(wakeUpString[1]), Convert.ToInt32(wakeUpString[2]));
-                var goingToBedString = GoingToBedTextBox.Text.Split(":");
-                TimeSpan goingToBed = new TimeSpan(Convert.ToInt32(goingToBedString[0]), Convert.ToInt32(goingToBedString[1]), Convert.ToInt32(goingToBedString[2]));
                 if (string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
                 {
+                    long weight = Convert.ToInt32(WeightTextBox.Text);
+                    long height = Convert.ToInt32(HeightTextBox.Text);
+                    long age = Convert.ToInt32(AgeTextBox.Text);
+                    string sex = GenderList.Text;
+                    var wakeUpString = WakeUpTextBox.Text.Split(":");
+                    TimeSpan wakeUp = new TimeSpan(Convert.ToInt32(wakeUpString[0]), Convert.ToInt32(wakeUpString[1]), Convert.ToInt32(wakeUpString[2]));
+                    var goingToBedString = GoingToBedTextBox.Text.Split(":");
+                    TimeSpan goingToBed = new TimeSpan(Convert.ToInt32(goingToBedString[0]), Convert.ToInt32(goingToBedString[1]), Convert.ToInt32(goingToBedString[2]));
                     user.SetUserParameters(weight, height, age, sex, wakeUp, goingToBed);
                 }
             }
