@@ -44,7 +44,7 @@ namespace DrinkWater
 
         public virtual ICollection<Statistic> Statistics { get; set; }
 
-        public User(string username, string email, string password, long? salt)
+        public User(string username, string email, string password, long salt)
         {
             this.Username = username;
             this.Email = email;
