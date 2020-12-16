@@ -1,6 +1,7 @@
 ﻿namespace DrinkWater.Services
 {
     using System.Linq;
+    using System.Runtime.InteropServices.ComTypes;
 
     /// <summary>
     /// Announces UserService сlass.
@@ -88,7 +89,7 @@
         public long GetUserSalt(string username)
         {
             var salt = (from data in db.Users
-                        where data.Username != null && data.Username == username
+                        where data.Username == username
                         select data.Salt).FirstOrDefault();
 
             return salt;

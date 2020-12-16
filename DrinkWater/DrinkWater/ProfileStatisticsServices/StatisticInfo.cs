@@ -41,10 +41,9 @@
         /// <returns>List of water amount records.</returns>
         public List<Dailystatistic> GetDailyStatistics()
         {
-            List<Dailystatistic> z = (from dayQuery in db.Dailystatistics
+            return (from dayQuery in db.Dailystatistics
                                       where UserId == dayQuery.UserIdRef
                                       select dayQuery).ToList();
-            return z;
         }
 
         /// <summary>

@@ -51,5 +51,18 @@ namespace DrinkWater
             this.Password = password;
             this.Salt = salt;
         }
+
+        public User(string email, string password, int userId, string username, long weight, long height, string sex, long age, byte[]? avatar)
+        {
+            this.Email = email;
+            this.Password = password;
+            this.UserId = userId;
+            this.Username = username;
+            this.Weight = weight;
+            this.Height = height;
+            this.Sex = sex;
+            this.Age = age;
+            this.Avatar = avatar;
+        }
     }
 }

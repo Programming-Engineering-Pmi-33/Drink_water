@@ -51,7 +51,7 @@
         }
 
         /// <summary>
-        /// Set session user id and name.
+        /// Set session user.
         /// </summary>
         /// <param name="sesUser"> Session user.</param>
         public void SetSessionUser(SessionUser sesUser)
@@ -176,7 +176,16 @@
             WeightInfo.Content = userInformation.Weight.ToString();
             HeightInfo.Content = userInformation.Height.ToString();
             AgeInfo.Content = userInformation.Age.ToString();
-            ActivityTimeInfo.Content = uInfo.GetUserActivityTime(userInformation.GoingToBed.Value.Hours, userInformation.WakeUp.Value.Hours).ToString();
+            userInformation.DailyBalance = userData.GetDailyBalnace();
+            if (userInformation.GoingToBed == null || userInformation.WakeUp == null)
+            {
+                ActivityTimeInfo.Content = "";
+            }
+            else
+            {
+                ActivityTimeInfo.Content = uInfo.GetUserActivityTime(userInformation.GoingToBed.Value.Hours, userInformation.WakeUp.Value.Hours).ToString();
+            }
+
             ShowAvatar();
         }
 

@@ -42,7 +42,7 @@
         private void ButtonLogIn_Click(object sender, RoutedEventArgs e)
         {
             this.username = textBoxUsername.Text;
-            this.password = textBoxPassword.Text;
+            this.password = textBoxPassword.Password;
 
             var salt = usersService.GetUserSalt(username);
 
@@ -55,7 +55,7 @@
                 if (userId > 0)
                 {
                     labelPassword.Visibility = Visibility.Hidden;
-                    ExceptionHandler.UnhadledExceprionHandler();
+                    ExceptionHandler.UnhadledExceptionHandler();
                     Logger.Log.Info($"User {username} logged into system.");
                     SessionUser sessionUser = new SessionUser((long)userId, username);
                     MainWindow mainWindow = new MainWindow();
