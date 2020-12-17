@@ -5,12 +5,37 @@
     using System.Windows.Media.Imaging;
     using DrinkWater.SettingServices;
 
+    /// <summary>
+    /// Class for scrolling.
+    /// </summary>
     public class ScrollClass
     {
+        /// <summary>
+        /// Amount of liquids in db.
+        /// </summary>
+        public const int LIQUIDS = 5;
+
+        /// <summary>
+        /// List of Fluids instances.
+        /// </summary>
         public List<Fluid> Fluids;
+
+        /// <summary>
+        /// List of fluid amount values.
+        /// </summary>
         public List<double> FluidsAmount;
+
+        /// <summary>
+        /// List of liquids images.
+        /// </summary>
         public List<BitmapImage> Images;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ScrollClass"/> class.
+        /// Get list of consumed fluids per period.
+        /// </summary>
+        /// <param name="period">Period of consuming fluids.</param>
+        /// <param name="userId">User's id.</param>
         public ScrollClass(string period, int userId)
         {
             Fluids = new FliudInfo().GetFluids();
@@ -22,12 +47,17 @@
             }
 
             GetTotalAmount(period, userId);
-            while (FluidsAmount.Count <= 5)
+            while (FluidsAmount.Count <= LIQUIDS)
             {
                 FluidsAmount.Add(0);
             }
         }
 
+        /// <summary>
+        /// Get total amount of fluids per certain period.
+        /// </summary>
+        /// <param name="period">Period of consuming fluids.</param>
+        /// <param name="userId">User's id.</param>
         public void GetTotalAmount(string period, int userId)
         {
             StatisticInfo statisticInfo = new StatisticInfo(userId);

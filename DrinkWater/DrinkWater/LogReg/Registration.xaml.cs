@@ -14,6 +14,9 @@
         private UsersService usersService;
         private ValidationService validationService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Registration"/> class.
+        /// </summary>
         public Registration()
         {
             InitializeComponent();
@@ -21,15 +24,20 @@
             validationService = new ValidationService(usersService);
         }
 
+        /// <summary>
+        /// Performs signing up and opens login window.
+        /// </summary>
+        /// <param name="sender">object instance.</param>
+        /// <param name="e">RoutedEventArgs instance.</param>
         private void ButtonSignUp_Click(object sender, RoutedEventArgs e)
         {
             this.username = textBoxUsername.Text;
             this.email = textBoxEmail.Text;
-            this.password = textBoxPassword.Text;
+            this.password = textBoxPassword.Password;
 
             if (validationService.IsValid(labelUsername, username, labelEmail, email, labelPassword, password))
             {
-                if (password == textBoxConfirmPassword.Text)
+                if (password == textBoxConfirmPassword.Password)
                 {
                     labelPasswordConfirm.Visibility = Visibility.Hidden;
                     long salt = EncryptionService.CreateRandomSalt();

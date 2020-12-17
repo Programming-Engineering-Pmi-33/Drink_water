@@ -6,19 +6,36 @@
     using System.Linq;
     using System.Text;
 
+    /// <summary>
+    /// Class for user settings validation.
+    /// </summary>
     public class UserSettingsValidation
     {
         private List<string> errorList = new List<string>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserSettingsValidation"/> class.
+        /// </summary>
         public UserSettingsValidation()
         {
         }
 
+        /// <summary>
+        /// Getter for errorList property.
+        /// </summary>
+        /// <returns>List of labels where data was not valid.</returns>
         public List<string> GetErrorList()
         {
             return errorList;
         }
 
+        /// <summary>
+        /// This function checks inputed data and show where it was not valid.
+        /// </summary>
+        /// <param name="username">User name value.</param>
+        /// <param name="password">User password value.</param>
+        /// <param name="email">User email value.</param>
+        /// <returns>String of errors.</returns>
         public string GetUserSettingsValidation(string username, string password, string email)
         {
             string validationResult = string.Empty;

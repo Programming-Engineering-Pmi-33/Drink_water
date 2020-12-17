@@ -38,7 +38,7 @@ namespace DrinkWaterUnitTests
         }
 
         /// <summary>
-        /// Checks if exception isn`t if username is in database.
+        /// Checks that no exception if username is in database.
         /// </summary>
         [TestMethod]
         public void NoExceptionIfUsernameIsInDatabase()
@@ -54,7 +54,7 @@ namespace DrinkWaterUnitTests
         }
 
         /// <summary>
-        /// Checks if exception isn`t if email is in database.
+        /// Checks that no exception if email is in database.
         /// </summary>
         [TestMethod]
         public void NoExceptionIfEmailIsInDatabase()
@@ -70,30 +70,27 @@ namespace DrinkWaterUnitTests
         }
 
         /// <summary>
-        /// Checks if salt is recieved if username is in database.
+        /// Checks if salt is received if username is in database.
         /// </summary>
         [TestMethod]
-        public void SaltIsRecievedIfUsernameIsInDatabase()
+        public void SaltIsReceivedIfUsernameIsInDatabase()
         {
             // arrange
-            string username = user1.Username;
-
-            // act
-            long salt = userService.GetUserSalt(username);
+            long salt = user1.Salt;
 
             // assert
             Assert.IsNotNull(salt);
         }
 
         /// <summary>
-        /// Checks if id is recieved if username is in database.
+        /// Checks if id is received if username is in database.
         /// </summary>
         [TestMethod]
         public void IdReceivedIfUsernameIsInDatabase()
         {
             // arrange
             string username = user1.Username;
-            long salt = userService.GetUserSalt(user1.Username);
+            long salt = user1.Salt;
             string password = EncryptionService.ComputeSaltedHash(user1.Password, salt);
 
             // act
@@ -114,8 +111,8 @@ namespace DrinkWaterUnitTests
             long salt2;
 
             // act
-            salt1 = EncryptionService.CreateRandomSalt();
-            salt2 = EncryptionService.CreateRandomSalt();
+            salt1 = user1.Salt;
+            salt2 = user2.Salt;
 
             // assert
             Assert.AreNotEqual(salt1, salt2);
@@ -130,8 +127,8 @@ namespace DrinkWaterUnitTests
             // arrange
             string saltedHash1;
             string saltedHash2;
-            long salt1 = userService.GetUserSalt(user1.Username);
-            long salt2 = userService.GetUserSalt(user2.Username);
+            long salt1 = user1.Salt;
+            long salt2 = user2.Salt;
 
             // act
             saltedHash1 = EncryptionService.ComputeSaltedHash(user1.Password, salt1);

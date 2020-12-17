@@ -1,9 +1,10 @@
-﻿#nullable disable
+﻿using System;
+using System.Collections.Generic;
+
+#nullable disable
 
 namespace DrinkWater
 {
-    using System;
-
     public partial class Waterweekstatistic
     {
         public int? UserIdRef { get; set; }

@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows;
-    using System.Windows.Media.Animation;
     using System.Windows.Media.Imaging;
     using DrinkWater.LogReg;
     using DrinkWater.ProfileStatisticsServices;
@@ -18,11 +17,17 @@
     ///
     public partial class ProfileStatistics : Window
     {
+        /// <summary>
+        /// Gets or sets chart values.
+        /// </summary>
         public SeriesCollection SeriesCollection { get; set; }
 
+        /// <summary>
+        /// Gets or sets chart labels.
+        /// </summary>
         public string[] Labels { get; set; }
 
-        public Func<double, string> Formatter { get; set; }
+        private Func<double, string> Formatter { get; set; }
 
         private SessionUser sessionUser = new SessionUser();
         private static User userInformation;
@@ -37,16 +42,28 @@
         private List<double> fluidAmount = new List<double>();
         private int index;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProfileStatistics"/> class.
+        /// </summary>
         public ProfileStatistics()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Set session user.
+        /// </summary>
+        /// <param name="sesUser"> Session user.</param>
         public void SetSessionUser(SessionUser sesUser)
         {
             sessionUser = sesUser;
         }
 
+        /// <summary>
+        /// Load vindow and show components on load.
+        /// </summary>
+        /// <param name="sender"> sender object.</param>
+        /// <param name="e"> Arguments.</param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SeriesCollection = new SeriesCollection();
@@ -58,6 +75,9 @@
             Scroll();
         }
 
+        /// <summary>
+        /// Get fluids list with their images and amount.
+        /// </summary>
         private void GetFluids()
         {
             ScrollClass scrollClass = new ScrollClass("week", userInformation.UserId);
@@ -66,14 +86,20 @@
             images = scrollClass.Images;
         }
 
+        /// <summary>
+        /// Draw chart for consumed water.
+        /// </summary>
+        /// <param name="waterAmount">Water consumed per certain period.</param>
+        /// <param name="period"> Certain period for showing statistics.</param>
+        /// <param name="userWaterBalance"> Normal water amount for user.</param>
         private void DrawChart(List<double> waterAmount, List<string> period, int userWaterBalance)
         {
             SeriesCollection.Add(
-          new ColumnSeries
-          {
-              Title = "Water",
-              Values = new ChartValues<double>(waterAmount),
-          });
+              new ColumnSeries
+              {
+                  Title = "Water",
+                  Values = new ChartValues<double>(waterAmount),
+              });
             BalanceLine.Value = userWaterBalance;
             Axisx.Labels = period;
             Formatter = value => value.ToString("N");
@@ -81,6 +107,9 @@
             DataContext = this;
         }
 
+        /// <summary>
+        /// Get user's consumed water per week.
+        /// </summary>
         private void GetConsumedWaterPerWeek()
         {
             List<Waterweekstatistic> weekstatistics = new StatisticInfo(sessionUser.UserId).GetWeekStatistic();
@@ -97,6 +126,9 @@
             }
         }
 
+        /// <summary>
+        /// Get user's consumed water per year.
+        /// </summary>
         private void GetConsumedWaterPerYear()
         {
             List<Wateryearstatistic> yearstatistics = new StatisticInfo(sessionUser.UserId).GetYearStatistics();
@@ -113,6 +145,9 @@
             }
         }
 
+        /// <summary>
+        /// Get user's consumed water per month.
+        /// </summary>
         private void GetConsumedWaterPerMonth()
         {
             List<Watermonthstatistic> monthstatistics = new StatisticInfo(sessionUser.UserId).GetMonthStatistics();
@@ -129,6 +164,9 @@
             }
         }
 
+        /// <summary>
+        /// Show user informaton and avatar.
+        /// </summary>
         private void ShowUserInfo()
         {
             UserData userData = new UserData(sessionUser);
@@ -138,34 +176,45 @@
             WeightInfo.Content = userInformation.Weight.ToString();
             HeightInfo.Content = userInformation.Height.ToString();
             AgeInfo.Content = userInformation.Age.ToString();
-            ActivityTimeInfo.Content = uInfo.GetUserActivityTime(userInformation.GoingToBed.Value.Hours, userInformation.WakeUp.Value.Hours).ToString();
+            userInformation.DailyBalance = userData.GetDailyBalnace();
+            if (userInformation.GoingToBed == null || userInformation.WakeUp == null)
+            {
+                ActivityTimeInfo.Content = "";
+            }
+            else
+            {
+                ActivityTimeInfo.Content = uInfo.GetUserActivityTime(userInformation.GoingToBed.Value.Hours, userInformation.WakeUp.Value.Hours).ToString();
+            }
+
             ShowAvatar();
         }
 
+        /// <summary>
+        /// Scroll liquids list.
+        /// </summary>
         private void Scroll()
         {
-            ImageElement1.Source = images[index];
-            UpperElement1.Content = fluids[index].Name;
-            LowerElement1.Content = fluidAmount[index];
-            ImageElement2.Source = images[index + 1];
-            UpperElement2.Content = fluids[index + 1].Name;
-            LowerElement2.Content = fluidAmount[index + 1];
-            ImageElement3.Source = images[index + 2];
-            UpperElement3.Content = fluids[index + 2].Name;
-            LowerElement3.Content = fluidAmount[index + 2];
-            ImageElement4.Source = images[index + 3];
-            UpperElement4.Content = fluids[index + 3].Name;
-            LowerElement4.Content = fluidAmount[index + 3];
+            InitFluidsVisuals(index);
         }
 
-        public void ShowScore(int success, int total, int koef, List<double> items)
+        /// <summary>
+        /// Show user's keeping water balance score.
+        /// </summary>
+        /// <param name="keepingBalanceDays">Number of days keeping daily balance.</param>
+        /// <param name="totalDayNumber">Total number of days in period.</param>
+        /// <param name="koef">Constant for identification of period.</param>
+        /// <param name="waterAmountPerPeriod">Array of water consumed per day for every period.</param>
+        public void ShowScore(int keepingBalanceDays, int totalDayNumber, int koef, List<double> waterAmountPerPeriod)
         {
             ScoreInfo score = new ScoreInfo();
 
-            Score2.Content = score.Score(success, total, koef, items, (long)userInformation.DailyBalance);
-            Score4.Content = total;
+            Score2.Content = score.Score(keepingBalanceDays, totalDayNumber, koef, waterAmountPerPeriod, (long)userInformation.DailyBalance);
+            Score4.Content = totalDayNumber;
         }
 
+        /// <summary>
+        /// Show user avatar.
+        /// </summary>
         private void ShowAvatar()
         {
             if (userInformation.Avatar != null)
@@ -174,6 +223,11 @@
             }
         }
 
+        /// <summary>
+        /// Redirect to Settings Window.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             Settings settings = new Settings();
@@ -182,6 +236,11 @@
             this.Close();
         }
 
+        /// <summary>
+        /// Show chart according to chosen period.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void Period_DropDownClosed(object sender, EventArgs e)
         {
             weekWaterAmount.Clear();
@@ -219,6 +278,11 @@
             }
         }
 
+        /// <summary>
+        /// Scroll lquids list up.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void BackwardButton_Click(object sender, RoutedEventArgs e)
         {
             if (index <= 2 || index == 0)
@@ -226,28 +290,12 @@
                 index = fluids.Count() - 1;
             }
 
-            ImageElement1.Source = images[index - 3];
-            UpperElement1.Content = fluids[index - 3].Name;
-            LowerElement1.Content = fluidAmount[index - 3];
-            ImageElement2.Source = images[index - 2];
-            UpperElement2.Content = fluids[index - 2].Name;
-            LowerElement2.Content = fluidAmount[index - 2];
-            ImageElement3.Source = images[index - 1];
-            UpperElement3.Content = fluids[index - 1].Name;
-            LowerElement3.Content = fluidAmount[index - 1];
-            ImageElement4.Source = images[index];
-            UpperElement4.Content = fluids[index].Name;
-            LowerElement4.Content = fluidAmount[index];
+            InitFluidsVisuals(index - 3);
             index--;
         }
 
-        private void ForwardButton_Click(object sender, RoutedEventArgs e)
+        private void InitFluidsVisuals(int index)
         {
-            if (index >= 2)
-            {
-                index = 0;
-            }
-
             ImageElement1.Source = images[index];
             UpperElement1.Content = fluids[index].Name;
             LowerElement1.Content = fluidAmount[index];
@@ -260,9 +308,29 @@
             ImageElement4.Source = images[index + 3];
             UpperElement4.Content = fluids[index + 3].Name;
             LowerElement4.Content = fluidAmount[index + 3];
+        }
+
+        /// <summary>
+        /// Scroll lquids list down.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
+        private void ForwardButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (index >= 2)
+            {
+                index = 0;
+            }
+
+            InitFluidsVisuals(index);
             index++;
         }
 
+        /// <summary>
+        /// Redirect to Main Window.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void Main_Click(object sender, RoutedEventArgs e)
         {
             MainWindow main = new MainWindow();

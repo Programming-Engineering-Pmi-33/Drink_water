@@ -1,6 +1,7 @@
 ﻿namespace DrinkWater.Services
 {
     using System.Linq;
+    using System.Runtime.InteropServices.ComTypes;
 
     /// <summary>
     /// Announces UserService сlass.
@@ -84,18 +85,14 @@
         /// Gets user salt from database.
         /// </summary>
         /// <param name="username"> username value.</param>
-        /// <returns>salt.</returns>
+        /// <returns>salt or 0 if username is not found.</returns>
         public long GetUserSalt(string username)
         {
             var salt = (from data in db.Users
                         where data.Username == username
                         select data.Salt).FirstOrDefault();
-            if (salt == null)
-            {
-                return 0;
-            }
 
-            return (long)salt;
+            return salt;
         }
 
         /// <summary>
@@ -104,8 +101,8 @@
         /// <param name="username">username value.</param>
         /// <param name="password">password value.</param>
         /// <param name="salt">salt value.</param>
-        /// <returns>id.</returns>
-        public int GetUserId(string username, string password,  long salt)
+        /// <returns>id or 0 if username is not found.</returns>
+        public int GetUserId(string username, string password, long salt)
         {
             string hashedPassword = EncryptionService.ComputeSaltedHash(password, salt);
 

@@ -1,9 +1,10 @@
-﻿#nullable disable
+﻿using System;
+using System.Collections.Generic;
+
+#nullable disable
 
 namespace DrinkWater
 {
-    using System.Collections.Generic;
-
     public partial class Fluid
     {
         public Fluid()

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Drink Water" Height="437.5" Width="700" WindowStartupLocation="CenterScreen">
+        Title="Drink Water" Height="437.5" Width="700" WindowStartupLocation="CenterScreen" Background="#E1EDFD">
     <Grid  HorizontalAlignment="Center" Width="700" Background="#E1EDFD">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -22,8 +22,8 @@
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="textBoxUsername" Style="{StaticResource LoginTextBox}" HorizontalAlignment="Center" Margin="0,124,0,0" Text="Mamonchik" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="1" FontFamily="Segoe UI" Foreground="#FF424141"/>
-        <TextBox x:Name="textBoxPassword" Style="{StaticResource LoginTextBox}" HorizontalAlignment="Center" Margin="0,210,0,0" Text="SS2011200" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="1" Foreground="#FF424141"/>
+        <TextBox x:Name="textBoxUsername" Style="{StaticResource LoginTextBox}" HorizontalAlignment="Center" Margin="0,124,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="1" FontFamily="Segoe UI" BorderThickness="1" Foreground="#FF424141"/>
+        <PasswordBox x:Name="textBoxPassword" Style="{StaticResource PasswordBox}" HorizontalAlignment="Center" Margin="0,210,0,0" Password="" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="1" Foreground="#FF424141" />
 
         <Button x:Name="buttonCreateNewAccount"   BorderBrush="Transparent"
                 BorderThickness="0" Background="Transparent" Foreground="Black"

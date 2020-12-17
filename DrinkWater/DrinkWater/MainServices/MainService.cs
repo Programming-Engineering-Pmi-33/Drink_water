@@ -11,14 +11,24 @@
     using DrinkWater.ProfileStatisticsServices;
     using DrinkWater.SettingServices;
 
+    /// <summary>
+    /// Main window UI handlers.
+    /// </summary>
     public class MainService
     {
         private static StatisticInfo statisticInfo;
         private static SessionUser sessionUser = new SessionUser();
-        public dfkg9ojh16b4rdContext db = new dfkg9ojh16b4rdContext();
+
+        /// <summary>
+        /// Instance of db context object.
+        /// </summary>
+        public dfkg9ojh16b4rdContext Db = new dfkg9ojh16b4rdContext();
         private static List<Fluid> fluids = new List<Fluid>();
         private static List<Image> images = new List<Image>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainService"/> class.
+        /// </summary>
         public MainService()
         {
         }
@@ -95,7 +105,7 @@
                 if (find != null)
                 {
                     statisticInfo.GetStatistics(DateTime.Now).Find(s => s.StatisticId == find.StatisticId).FluidAmount += liquidAmount;
-                    db.Statistics.Update(find);
+                    Db.Statistics.Update(find);
                 }
                 else
                 {
@@ -108,10 +118,10 @@
                     };
                     fullStatistic.Add(statistics);
 
-                    db.Statistics.Add(statistics);
+                    Db.Statistics.Add(statistics);
                 }
 
-                db.SaveChanges();
+                Db.SaveChanges();
         }
             else
             {

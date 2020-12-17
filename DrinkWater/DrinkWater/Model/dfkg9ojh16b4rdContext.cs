@@ -2,9 +2,13 @@
 
 namespace DrinkWater
 {
+    using System;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata;
 
+#pragma warning disable SA1300 // Element should begin with upper-case letter
     public partial class dfkg9ojh16b4rdContext : DbContext
+#pragma warning restore SA1300 // Element should begin with upper-case letter
     {
         public dfkg9ojh16b4rdContext()
         {
@@ -22,17 +26,17 @@ namespace DrinkWater
         public virtual DbSet<Statistic> Statistics { get; set; }
 
         public virtual DbSet<Totalmonthstatistic> Totalmonthstatistics { get; set; }
-        
+
         public virtual DbSet<Totalweekstatistic> Totalweekstatistics { get; set; }
-        
+
         public virtual DbSet<Totalyearstatistic> Totalyearstatistics { get; set; }
-        
+
         public virtual DbSet<User> Users { get; set; }
-        
+
         public virtual DbSet<Watermonthstatistic> Watermonthstatistics { get; set; }
-        
+
         public virtual DbSet<Waterweekstatistic> Waterweekstatistics { get; set; }
-        
+
         public virtual DbSet<Wateryearstatistic> Wateryearstatistics { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

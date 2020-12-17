@@ -24,33 +24,55 @@
         private static UserData user;
         private System.Timers.Timer timer;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Settings"/> class.
+        /// This function initialize this window.
+        /// </summary>
         public Settings()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// This function sets user id and name, then starts background thread for toasts.
+        /// </summary>
+        /// <param name="userInfo">Argument that contains user id and name.</param>
         public void SetSessionUser(SessionUser userInfo)
         {
-            Logger.InitLogger();
-
-            Logger.Log.Info("Ура робе!");
             user = new UserData(userInfo);
             sessionUser = userInfo;
             userData = user.GetData();
+            if (userData.DisableNotifications == false)
+            {
+                SetTimer();
+            }
+        }
+
+        /// <summary>
+        /// This function set timer as background thread.
+        /// </summary>
+        public void SetTimer()
+        {
             timer = new System.Timers.Timer();
             if (userData.NotitficationsPeriod != null)
             {
-                timer.Interval = 100000;
+                timer.Interval = userData.NotitficationsPeriod.Value.TotalMilliseconds;
             }
             else
             {
-                timer.Interval = 5000;
+                // 100 seconds
+                timer.Interval = 100000;
             }
 
             timer.Elapsed += TimerFunction;
             timer.Start();
         }
 
+        /// <summary>
+        /// This function makes user parameters grid active.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void UserParameters_Click(object sender, RoutedEventArgs e)
         {
             SetUserParametersVisibility();
@@ -72,11 +94,16 @@
             GoingToBedTextBox.Text = userData.GoingToBed.ToString();
         }
 
+        /// <summary>
+        /// This function makes user settings grid active.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void UserSettings_Click(object sender, RoutedEventArgs e)
         {
             SetUserSettingsVisibility();
             UsernameTextBox.Text = userData.Username;
-            PasswordTextBox.Text = userData.Password;
+            PasswordTextBox.Password = userData.Password;
             EmailTextBox.Text = userData.Email;
             if (userData.Avatar != null)
             {
@@ -84,15 +111,28 @@
             }
         }
 
+        /// <summary>
+        /// This function redirect user to login window.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            timer.Stop();
-            timer.Dispose();
+            Logger.Log.Info($"User {sessionUser.Username} logged out from system.");
+            if (timer != null)
+            {
+                timer.Stop();
+                timer.Dispose();
+            }
+
             Login loginWindow = new Login();
             loginWindow.Show();
             this.Close();
         }
 
+        /// <summary>
+        /// Function that displays user settings grid.
+        /// </summary>
         private void SetUserSettingsVisibility()
         {
             UserSettingsGrid.Visibility = Visibility.Visible;
@@ -102,6 +142,9 @@
             }
         }
 
+        /// <summary>
+        /// Function that displays user parameters grid.
+        /// </summary>
         private void SetUserParametersVisibility()
         {
             UserParametersGrid.Visibility = Visibility.Visible;
@@ -111,61 +154,74 @@
             }
         }
 
+        /// <summary>
+        /// This function save parameters of active grid and notifications settings.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
             if (UserParametersGrid.Visibility == Visibility.Visible)
             {
-                ErrorLabel.Content = parametersValidation.GetUserParameterValidation(WeightTextBox.Text, WeightTextBox.Text, AgeTextBox.Text, WakeUpTextBox.Text, GoingToBedTextBox.Text);
-                long weight = Convert.ToInt32(WeightTextBox.Text);
-                long height = Convert.ToInt32(WeightTextBox.Text);
-                long age = Convert.ToInt32(AgeTextBox.Text);
-                string sex = GenderList.Text;
-                var wakeUpString = WakeUpTextBox.Text.Split(":");
-                TimeSpan wakeUp = new TimeSpan(Convert.ToInt32(wakeUpString[0]), Convert.ToInt32(wakeUpString[1]), Convert.ToInt32(wakeUpString[2]));
-                var goingToBedString = GoingToBedTextBox.Text.Split(":");
-                TimeSpan goingToBed = new TimeSpan(Convert.ToInt32(goingToBedString[0]), Convert.ToInt32(goingToBedString[1]), Convert.ToInt32(goingToBedString[2]));
-                if (ErrorLabel.Content == "")
+                ErrorLabel.Content = parametersValidation.GetUserParameterValidation(WeightTextBox.Text, HeightTextBox.Text, AgeTextBox.Text, WakeUpTextBox.Text, GoingToBedTextBox.Text);
+                if (string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
                 {
+                    long weight = Convert.ToInt32(WeightTextBox.Text);
+                    long height = Convert.ToInt32(HeightTextBox.Text);
+                    long age = Convert.ToInt32(AgeTextBox.Text);
+                    string sex = GenderList.Text;
+                    var wakeUpString = WakeUpTextBox.Text.Split(":");
+                    TimeSpan wakeUp = new TimeSpan(Convert.ToInt32(wakeUpString[0]), Convert.ToInt32(wakeUpString[1]), Convert.ToInt32(wakeUpString[2]));
+                    var goingToBedString = GoingToBedTextBox.Text.Split(":");
+                    TimeSpan goingToBed = new TimeSpan(Convert.ToInt32(goingToBedString[0]), Convert.ToInt32(goingToBedString[1]), Convert.ToInt32(goingToBedString[2]));
                     user.SetUserParameters(weight, height, age, sex, wakeUp, goingToBed);
-                }
-                else
-                {
-                    MessageBox.Show("Error");
                 }
             }
 
             if (UserSettingsGrid.Visibility == Visibility.Visible)
             {
-                user.SetUserInformation(UsernameTextBox.Text, PasswordTextBox.Text, EmailTextBox.Text, image.GetImage());
+                ErrorLabel.Content = settingsValidation.GetUserSettingsValidation(UsernameTextBox.Text, PasswordTextBox.Password, EmailTextBox.Text);
+                if (string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
+                {
+                    user.SetUserInformation(UsernameTextBox.Text, PasswordTextBox.Password, EmailTextBox.Text, image.GetImage());
+                }
             }
 
             string choosenParameter = NotificationsSettings.Text;
             int customPeriod = Convert.ToInt32(CustomPeriodTextBox.Text);
             bool disableNotifications = Convert.ToBoolean(IsDisabled.Content);
-            if (ErrorLabel.Content == "")
+            if (string.IsNullOrEmpty(ErrorLabel.Content.ToString()))
             {
                 user.SetUserNotitfications(choosenParameter, customPeriod, disableNotifications);
             }
         }
 
+        /// <summary>
+        /// Function that allow user to choose photo for avatar.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void ChangeAvatar_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "Open Image";
-
-            if (dlg.ShowDialog() == true)
-            {
-                Bitmap bitmap = new Bitmap(dlg.FileName);
-                Avatar.Source = image.ConvertBitmap(bitmap);
-            }
+            Avatar.Source = image.ChooseAvatar();
         }
 
+        /// <summary>
+        /// Function for initializing toast notifications.
+        /// </summary>
+        /// <param name="e">sender object.</param>
+        /// <param name="x">Arguments.</param>
         private void TimerFunction(object e, EventArgs x)
         {
             ToastNotificationsClass toast = new ToastNotificationsClass();
             toast.ShowNot();
         }
 
+        /// <summary>
+        /// Redirect to profile window.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void ProfileWindowButton_Click(object sender, RoutedEventArgs e)
         {
             ProfileStatistics profileStatistics = new ProfileStatistics();
@@ -174,6 +230,11 @@
             this.Close();
         }
 
+        /// <summary>
+        /// Redirect to main window.
+        /// </summary>
+        /// <param name="sender">sender object.</param>
+        /// <param name="e">Arguments.</param>
         private void Main_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
@@ -188,6 +249,11 @@
 
         private void GenderList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            UserSettings_Click(sender, e);
         }
     }
 }

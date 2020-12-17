@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:DrinkWater" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="Profile and Statistics" Height="900" Width="1600" Loaded="Window_Loaded"
+        WindowState="Maximized"
+        WindowStyle="None"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.Resources>
         <Style x:Key="Combobox" TargetType="{x:Type ComboBox}">
