@@ -4,46 +4,61 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Drink Water" Height="437.5" Width="700" WindowStartupLocation="CenterScreen">
-    <Grid  HorizontalAlignment="Center" Width="700" Background="#E1EDFD">
+        Title="Drink Water" MinHeight="400" MinWidth="500" Height="500" Width="700" WindowStartupLocation="CenterScreen">
+    <Grid Width="{Binding ActualWidth, 
+              RelativeSource = {RelativeSource AncestorType = {x:Type Window}}}" 
+      Height="{Binding ActualHeight, 
+              RelativeSource ={RelativeSource AncestorType = {x:Type Window}}}" Background="#E1EDFD">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="0*"/>
-            <RowDefinition Height="0*"/>
+            <RowDefinition Height="0.07*"/>
+            <RowDefinition Height="30 px"/>
+            <RowDefinition Height="20 px"/>
+            <RowDefinition Height="30 px"/>
+            <RowDefinition Height="30 px"/>
+            <RowDefinition Height="30 px"/>
+            <RowDefinition Height="20 px"/>
+            <RowDefinition Height="30 px"/>
+            <RowDefinition Height="30 px"/>
+            <RowDefinition Height="30 px"/>
+            <RowDefinition Height="20 px"/>
+            <RowDefinition Height="30 px"/>
+            <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.25*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="textBoxUsername" Style="{StaticResource LoginTextBox}" HorizontalAlignment="Center" Margin="0,124,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="1" FontFamily="Segoe UI" BorderThickness="1" Foreground="#FF424141"/>
-        <PasswordBox x:Name="textBoxPassword" Style="{StaticResource PasswordBox}" HorizontalAlignment="Center" Margin="0,210,0,0" Password="" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="1" Foreground="#FF424141" />
+        <Label Grid.Column="1" Grid.Row="1" Content="Log in" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift SemiBold" FontSize="16" Height="28" Width="56" FontWeight="Bold"/>
 
-        <Button x:Name="buttonCreateNewAccount"   BorderBrush="Transparent"
+        <Label Grid.Column="1" Grid.Row="3" Content="Username:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="Auto" FontFamily="Bahnschrift SemiBold" FontWeight="Normal" Foreground="Black"/>
+        <TextBox Grid.Column="1" Grid.Row="4" x:Name="textBoxUsername" Style="{StaticResource LoginTextBox}" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Margin="3 0 0 0" HorizontalAlignment="Stretch" Height="22" FontFamily="Segoe UI" BorderThickness="1" Foreground="#FF424141"/>
+        <Label Grid.Column="1" Grid.Row="5" x:Name="labelUsername" Visibility="Hidden" Content="Label" VerticalAlignment="Top" Height="26" HorizontalAlignment="Stretch" />
+
+        <Label Grid.Column="1" Grid.Row="7" Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="75" FontFamily="Bahnschrift SemiBold" Foreground="Black"/>
+        <PasswordBox Grid.Column="1" Grid.Row="8" x:Name="textBoxPassword" Style="{StaticResource PasswordBox}" HorizontalAlignment="Stretch" Password="" Margin="3 0 0 0" VerticalAlignment="Top" Height="22" Foreground="#FF424141" />
+        <Label Grid.Column="1" Grid.Row="9" x:Name="labelPassword" Visibility="Hidden" Content="Label" VerticalAlignment="Top" Height="26" HorizontalAlignment="Stretch"/>
+
+
+        <DockPanel Grid.Column="1" Grid.Row="11" HorizontalAlignment="Stretch">
+            <Button 
+                x:Name="buttonCreateNewAccount"   BorderBrush="Transparent"
                 BorderThickness="0" Background="Transparent" Foreground="Black"
                 Content="Create new account" HorizontalAlignment="Left" 
-                Margin="220,320,0,0" VerticalAlignment="Top" 
+                VerticalAlignment="Top" 
                 Height="22" Width="110" Click="ButtonCreateNewAccount_Click" 
                 Grid.ColumnSpan="2" FontFamily="Bahnschrift SemiBold"/>
-        <Button x:Name="buttonLogIn" Style="{StaticResource LoginButton}" Content="Log in" 
-                HorizontalAlignment="Left" Margin="370,320,0,0" 
+            <Button Grid.Column="1" Grid.Row="11"
+                x:Name="buttonLogIn" Style="{StaticResource LoginButton}" Content="Log in" 
+                HorizontalAlignment="Right" 
                 VerticalAlignment="Top" Height="22" Width="110" 
-                Click="ButtonLogIn_Click" Grid.Column="1"
                 Background="#2C3B58" BorderBrush="Transparent"
-                BorderThickness="0" RenderTransformOrigin="0.5,0.5" Foreground="White" FontFamily="Bahnschrift SemiBold" >
-       
-        </Button>
-        <Label Content="Username:" HorizontalAlignment="Left" Margin="215,100,0,0" VerticalAlignment="Top" Height="24" Grid.Column="1" Width="75" FontFamily="Bahnschrift SemiBold" FontWeight="Normal" Foreground="Black"/>
-        <Label Content="Password:" HorizontalAlignment="Left" Margin="216,186,0,0" VerticalAlignment="Top" Height="24" Grid.Column="1" Width="75" FontFamily="Bahnschrift SemiBold" Foreground="Black"/>
-        <Label Content="Log in" Grid.Column="1" HorizontalAlignment="Center" Margin="0,39,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift SemiBold" FontSize="16" Height="28" Width="56" FontWeight="Bold"/>
-        <Label x:Name="labelUsername" Visibility="Hidden" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="215,146,0,0" VerticalAlignment="Top" Height="26" Width="260"/>
-        <Label x:Name="labelPassword"  Visibility="Hidden" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="215,232,0,0" VerticalAlignment="Top" Height="26" Width="260"/>
-
+                BorderThickness="0"
+                RenderTransformOrigin="0.5,0.5"
+                Foreground="White"
+                FontFamily="Bahnschrift SemiBold"
+                Click="ButtonLogIn_Click"/>
+        </DockPanel>
     </Grid>
 </Window>
