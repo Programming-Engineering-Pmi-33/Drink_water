@@ -21,10 +21,10 @@
         </Grid.ColumnDefinitions>
         <TextBox  Style="{StaticResource LoginTextBox}" x:Name="textBoxUsername" HorizontalAlignment="Center" Margin="0,105,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="2"/>
         <TextBox  Style="{StaticResource LoginTextBox}" x:Name="textBoxEmail" HorizontalAlignment="Center" Margin="0,175,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22"  Grid.Column="2"/>
-        <TextBox  Style="{StaticResource LoginTextBox}" x:Name="textBoxPassword" HorizontalAlignment="Center" Margin="0,250,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="2">
+        <PasswordBox  Style="{StaticResource PasswordBox}" x:Name="textBoxPassword" HorizontalAlignment="Center" Margin="0,250,0,0" Password="" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="2">
 
-        </TextBox>
-        <TextBox   Style="{StaticResource LoginTextBox}" x:Name="textBoxConfirmPassword" HorizontalAlignment="Center" Margin="0,325,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="2"/>
+        </PasswordBox>
+        <PasswordBox   Style="{StaticResource PasswordBox}" x:Name="textBoxConfirmPassword" HorizontalAlignment="Center" Margin="0,325,0,0" Password="" VerticalAlignment="Top" Width="260" Height="22" Grid.Column="2"/>
         <Button Style="{StaticResource LoginButton}" x:Name="buttonSignUp"  Background="#2C3B58" BorderBrush="Transparent"
                 BorderThickness="0" Content="Sign up" HorizontalAlignment="Left" Margin="410,399,0,0" VerticalAlignment="Top" Height="22" Width="120" Click="ButtonSignUp_Click" Grid.Column="2" FontFamily="Bahnschrift SemiBold" Foreground="White"/>
         <Label Content="Username:" HorizontalAlignment="Left" Margin="266,79,0,0"  Width="69" Grid.Column="2" FontFamily="Bahnschrift SemiBold" Height="26" VerticalAlignment="Top"/>
