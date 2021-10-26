@@ -42,7 +42,7 @@
         private void ButtonLogIn_Click(object sender, RoutedEventArgs e)
         {
             this.username = textBoxUsername.Text;
-            this.password = textBoxPassword.Password;
+            this.password = textBoxPassword.Text;
 
             var salt = usersService.GetUserSalt(username);
 

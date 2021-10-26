@@ -177,15 +177,7 @@
             HeightInfo.Content = userInformation.Height.ToString();
             AgeInfo.Content = userInformation.Age.ToString();
             userInformation.DailyBalance = userData.GetDailyBalnace();
-            if (userInformation.GoingToBed == null || userInformation.WakeUp == null)
-            {
-                ActivityTimeInfo.Content = "";
-            }
-            else
-            {
-                ActivityTimeInfo.Content = uInfo.GetUserActivityTime(userInformation.GoingToBed.Value.Hours, userInformation.WakeUp.Value.Hours).ToString();
-            }
-
+            ActivityTimeInfo.Content = uInfo.GetUserActivityTime(userInformation.GoingToBed.Value.Hours, userInformation.WakeUp.Value.Hours).ToString();
             ShowAvatar();
         }
 
