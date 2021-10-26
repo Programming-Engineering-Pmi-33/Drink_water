@@ -74,17 +74,17 @@
         {
             if (string.IsNullOrEmpty(weight))
             {
-                return "Field cannot be empty ";
+                return "Field cannot be empty";
             }
 
             if (!int.TryParse(weight, out int res))
             {
-                return "Invalid input. Must be a number ";
+                return "Invalid input. Must be a number.";
             }
 
             if (Convert.ToInt32(weight) <= 0)
             {
-                return "Weight must be non-negative ";
+                return "Weight must be non-negative";
             }
 
             return string.Empty;
@@ -94,17 +94,17 @@
         {
             if (string.IsNullOrEmpty(height))
             {
-                return "Field cannot be empty ";
+                return "Field cannot be empty";
             }
 
             if (!int.TryParse(height, out int res))
             {
-                return "Invalid input. Must be a number ";
+                return "Invalid input. Must be a number.";
             }
 
             if (Convert.ToInt32(height) <= 0)
             {
-                return "Height must be non-negative or zero ";
+                return "Height must be non-negative or zero";
             }
 
             return string.Empty;
@@ -114,17 +114,17 @@
         {
             if (string.IsNullOrEmpty(age))
             {
-                return "Field cannot be empty ";
+                return "Field cannot be empty";
             }
 
             if (!int.TryParse(age, out int res))
             {
-                return "Invalid input. Must be a number ";
+                return "Invalid input. Must be a number";
             }
 
             if (Convert.ToInt32(age) <= 0)
             {
-                return "Age must be non-negative or zero ";
+                return "Age must be non-negative or zero";
             }
 
             return string.Empty;
@@ -135,19 +135,20 @@
             string validationResult = string.Empty;
             if (string.IsNullOrWhiteSpace(wakeUp) || string.IsNullOrWhiteSpace(goingToBed))
             {
-                return "Fields cannot be empty ";
+                validationResult += "Fields cannot be empty";
+                return validationResult;
             }
 
             var wake = wakeUp.Split(':');
             var bed = goingToBed.Split(':');
             if (wake.Length < 3 || bed.Length < 3)
             {
-                return "Invalid input.\n Input must be like '00:00:00' ";
+                validationResult += "Invalid input.\n Input must be like '00:00:00'";
             }
 
             if (Convert.ToInt32(wake[0]) > 24 || Convert.ToInt32(bed[0]) > 24 || Convert.ToInt32(wake[0]) < 0 || Convert.ToInt32(bed[0]) < 0)
             {
-                return "Inputed hours are invalid ";
+                validationResult += "Inputed hours are invalid.";
             }
 
             for (int i = 1; i <= 2; i++)
@@ -156,12 +157,12 @@
                 {
                     if (i == 1)
                     {
-                        return "Inputed minutes are invalid ";
+                        validationResult += "Inputed minutes are invalid";
                     }
 
                     if (i == 2)
                     {
-                        return "Inputed seconds are invalid ";
+                        validationResult += "Inputed seconds are invalid";
                     }
                 }
             }
